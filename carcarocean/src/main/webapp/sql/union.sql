@@ -85,7 +85,7 @@ CREATE TABLE CAR(
 	CONSTRAINT car_fk FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
 );
 CREATE SEQUENCE CAR_SEQ;
-
+ 
 -- 관심 차량 테이블
 CREATE TABLE FAVORITE_CAR (
 	fav_num NUMBER NOT NULL,

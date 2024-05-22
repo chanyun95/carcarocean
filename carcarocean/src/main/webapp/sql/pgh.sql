@@ -1,11 +1,11 @@
-//회원
+--회원
 CREATE TABLE member (
      mem_num number NOT NULL,
      mem_id VARCHAR2(12) unique NOT NULL,
      mem_auth number(1) DEFAULT 2 NOT NULL, --회원 등급:0탈퇴회원,1정지회원,2일반회원,9관리자
      CONSTRAINT member_pk PRIMARY KEY (mem_num)
 );
-//회원상세
+--회원상세
 CREATE TABLE member_detail(
  mem_num number NOT NULL,
  mem_name VARCHAR2(30) NOT NULL,
