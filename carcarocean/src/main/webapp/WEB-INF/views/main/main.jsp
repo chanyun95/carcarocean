@@ -99,7 +99,7 @@
 						adipisicing elit. Aut optio velit inventore, expedita quo
 						laboriosam possimus ea consequatur vitae, doloribus consequuntur
 						ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
-				</div>
+				</div>   
 			</div>
 		</div>
 	</section>
@@ -130,4 +130,8 @@
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> branch 'main' of https://github.com/Kimseungyeon98/carcarocean.git
