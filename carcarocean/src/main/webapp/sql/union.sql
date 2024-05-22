@@ -43,7 +43,7 @@ CREATE TABLE SELL (
 	constraint sell_pk primary key (sell_num),
 	constraint sell_fk foreign key (mem_num) references member (mem_num)
 );
-
+ 
 -- 검수자 테이블
 CREATE TABLE CHECKER(
 	checker_num NUMBER NOT NULL,
