@@ -10,14 +10,26 @@ CREATE TABLE SELL (
 	sell_place1 VARCHAR2(100)NOT NULL,
 	sell_place2 VARCHAR2(100) NOT NULL,
 	sell_date NUMBER NOT NULL,
-	sell_check NUMBER(1) NOT NULL DEFAULT 0,
-	sell_reg DATE NOT NULL DEFAULT SYSDATE,
+	sell_check NUMBER(1) DEFAULT 0 NOT NULL ,
+	sell_reg DATE DEFAULT SYSDATE NOT NULL ,
 	sell_modify DATE,
 	mem_num NUMBER NOT NULL,
 	constraint sell_pk primary key (sell_num),
 	constraint sell_fk foreign key (mem_num) references member (mem_num)
 );
 CREATE SEQUENCE SELL_SEQ;
+
+-- 구매 정보 테이블
+CREATE TABLE BUY (
+	buy_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	car_num NUMBER NOT NULL,
+	buy_reg DATE DEFAULT SYSDATE NOT NULL,
+	constraint buy_pk primary key (buy_num),
+	constraint buy_fk1 foreign key (mem_num) references member (mem_num),
+	constraint buy_fk2 foreign key (car_num) references car (car_num)
+);
+CREATE SEQUENCE BUY_SEQ;
 
 -- 검수자 테이블
 CREATE TABLE CHECKER(
@@ -43,7 +55,7 @@ CREATE TABLE CAR(
 	car_price NUMBER NOT NULL,
 	car_color VARCHAR2(20) NOT NULL,
 	car_photo VARCHAR2(400) NOT NULL,
-	car_auto NUMBER(1),
+	car_auto NUMBER(1) NOT NULL,
 	car_fuel_efficiency NUMBER NOT NULL,
 	car_use NUMBER NOT NULL,
 	car_cc NUMBER NOT NULL,
@@ -63,6 +75,7 @@ CREATE TABLE FAVORITE_CAR (
 	fav_num NUMBER NOT NULL,
 	car_num NUMBER NOT NULL,
 	mem_num NUMBER NOT NULL,
+	CONSTRAINT favorite_car_pk PRIMARY KEY (fav_num),
 	CONSTRAINT favorite_car_fk1 FOREIGN KEY (car_num) REFERENCES car (car_num),
 	CONSTRAINT favorite_car_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 )
