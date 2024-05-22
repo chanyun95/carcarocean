@@ -5,7 +5,7 @@ CREATE TABLE member (
      mem_auth number(1) DEFAULT 2 NOT NULL, --회원 등급:0탈퇴회원,1정지회원,2일반회원,9관리자
      CONSTRAINT member_pk PRIMARY KEY (mem_num)
 );
---회원상세 
+--회원상세
 CREATE TABLE member_detail(
  mem_num number NOT NULL,
  mem_name VARCHAR2(30) NOT NULL,
@@ -24,6 +24,8 @@ CREATE TABLE member_detail(
  CONSTRAINT member_detail_pk PRIMARY KEY (mem_num),
  CONSTRAINT member_detail_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE member_seq;
+
 -- 판매 정보 테이블
 CREATE TABLE SELL (
 	sell_num NUMBER NOT NULL,
@@ -43,7 +45,8 @@ CREATE TABLE SELL (
 	constraint sell_pk primary key (sell_num),
 	constraint sell_fk foreign key (mem_num) references member (mem_num)
 );
- 
+CREATE SEQUENCE SELL_SEQ;
+
 -- 검수자 테이블
 CREATE TABLE CHECKER(
 	checker_num NUMBER NOT NULL,
@@ -54,6 +57,7 @@ CREATE TABLE CHECKER(
 	checker_opinion VARCHAR2(150) NOT NULL,
 	CONSTRAINT checker_pk PRIMARY KEY (checker_num)
 );
+CREATE SEQUENCE CHECKER_SEQ;
 
 -- 차량 테이블
 CREATE TABLE CAR(
@@ -80,6 +84,7 @@ CREATE TABLE CAR(
 	CONSTRAINT car_pk PRIMARY KEY (car_num),
 	CONSTRAINT car_fk FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
 );
+CREATE SEQUENCE CAR_SEQ;
 
 -- 관심 차량 테이블
 CREATE TABLE FAVORITE_CAR (
@@ -90,6 +95,7 @@ CREATE TABLE FAVORITE_CAR (
 	CONSTRAINT favorite_car_fk1 FOREIGN KEY (car_num) REFERENCES car (car_num),
 	CONSTRAINT favorite_car_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE FAVORITE_CAR_SEQ;
 
 --이벤트 게시판
 CREATE TABLE event(
@@ -102,6 +108,7 @@ event_modify DATE,
 CONSTRAINT event_pk PRIMARY KEY (event_num)
 );
 
+CREATE SEQUENCE event_seq;
 
 --Q&A 게시판
 CREATE TABLE qa(
@@ -116,7 +123,7 @@ qa_modify DATE,
 CONSTRAINT qa_pk PRIMARY KEY (qa_num),
 CONSTRAINT qa_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
-
+CREATE SEQUENCE qa_seq;
 
 --Q&A 게시판 답변
 CREATE TABLE qa_comment(
@@ -128,6 +135,7 @@ qa_comm_modify DATE,
 CONSTRAINT qa_comment_pk PRIMARY KEY (qa_comm_num),
 CONSTRAINT qa_comment_fk FOREIGN KEY (qa_num) REFERENCES qa (qa_num)
 );
+CREATE SEQUENCE qa_comment_seq;
 
 --판매 후기 게시판
 CREATE TABLE s_re(
@@ -142,6 +150,7 @@ CONSTRAINT s_re_pk PRIMARY KEY (s_re_num),
 CONSTRAINT s_re_fk1 FOREIGN KEY (car_num) REFERENCES car (car_num),
 CONSTRAINT s_re_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE s_re_seq;
 
 --판매 후기 게시판 댓글
 CREATE TABLE s_re_comment(
@@ -155,6 +164,7 @@ CONSTRAINT s_re_comment_pk PRIMARY KEY (s_re_comm_num),
 CONSTRAINT s_re_comment_fk1 FOREIGN KEY (s_re_num) REFERENCES s_re (s_re_num),
 CONSTRAINT s_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE s_re_comment_seq;
 
 --공지사항
 CREATE TABLE notice (
@@ -168,6 +178,7 @@ CREATE TABLE notice (
     notice_modify DATE,
     CONSTRAINT notice_pk PRIMARY KEY (notice_num)
 );
+CREATE SEQUENCE notice_seq;
 
 --자유게시판
 CREATE TABLE board(
@@ -183,6 +194,7 @@ CREATE TABLE board(
    CONSTRAINT board_pk PRIMARY KEY (board_num),
    CONSTRAINT board_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE board_seq;
 
 --자유게시판 댓글
 CREATE TABLE board_comment(
@@ -196,6 +208,7 @@ CREATE TABLE board_comment(
     CONSTRAINT board_comment_fk1 FOREIGN KEY (board_num) REFERENCES board (board_num),
     CONSTRAINT board_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE board_comment_seq;
 
 -- 구매 정보 테이블
 CREATE TABLE BUY (
@@ -207,6 +220,7 @@ CREATE TABLE BUY (
 	constraint buy_fk1 foreign key (mem_num) references member (mem_num),
 	constraint buy_fk2 foreign key (car_num) references car (car_num)
 );
+CREATE SEQUENCE BUY_SEQ;
 
 --구매 후기 게시판
 CREATE TABLE b_re(
@@ -222,6 +236,7 @@ CREATE TABLE b_re(
    CONSTRAINT b_re_pk PRIMARY KEY (b_re_num),
     CONSTRAINT b_re_fk1 FOREIGN KEY (buy_num) REFERENCES buy (buy_num)
 );
+CREATE SEQUENCE b_re_seq;
 
 --구매 후기 게시판 댓글
 CREATE TABLE b_re_comment(
@@ -235,3 +250,4 @@ CREATE TABLE b_re_comment(
     CONSTRAINT b_re_comment_fk1 FOREIGN KEY (b_re_num) REFERENCES b_re (b_re_num),
     CONSTRAINT b_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
+CREATE SEQUENCE b_re_comment_seq;
