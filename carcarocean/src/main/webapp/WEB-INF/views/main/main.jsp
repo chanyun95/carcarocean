@@ -61,7 +61,7 @@
 	<!-- 모델검색 -->
 	<section id="about">
 		<div class="container px-4">
-			<h2>모델검색</h2>fdd
+			<h2>모델검색</h2>
 			<div class="row gx-4 justify-content-left" style="border: 2px solid #000; padding: 50px; margin: 50px 0;">
 				<div class="col-lg-8" >
 					<div class="input-group mb-3">
