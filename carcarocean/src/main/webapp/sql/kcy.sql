@@ -11,7 +11,7 @@ CREATE TABLE notice (
     CONSTRAINT notice_pk PRIMARY KEY (notice_num)
 );
 CREATE SEQUENCE notice_seq;
-
+ 
 --자유게시판
 CREATE TABLE board(
 	board_num NUMBER NOT NULL,
@@ -22,9 +22,9 @@ CREATE TABLE board(
 	board_hit NUMBER DEFAULT 0 NOT NULL,
 	board_report NUMBER DEFAULT 0 NOT NULL,
 	board_reg DATE DEFAULT SYSDATE NOT NULL,
-	board_modify DATE DEFAULT,
+	board_modify DATE,
 	CONSTRAINT board_pk PRIMARY KEY (board_num),
- 	CONSTRAINT member_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+ 	CONSTRAINT board_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE board_seq;
 
@@ -37,8 +37,8 @@ CREATE TABLE board_comment(
 	bor_comm_report NUMBER DEFAULT 0 NOT NULL,
 	bor_comm_reg DATE DEFAULT SYSDATE NOT NULL,
 	CONSTRAINT board_comment_pk PRIMARY KEY (bor_comm_num),
- 	CONSTRAINT board_fk1 FOREIGN KEY (board_num) REFERENCES board (board_num),
- 	CONSTRAINT member_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+ 	CONSTRAINT board_comment_fk1 FOREIGN KEY (board_num) REFERENCES board (board_num),
+ 	CONSTRAINT board_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE board_comment_seq;
 
@@ -55,10 +55,10 @@ CREATE TABLE b_re(
 	b_re_reg DATE DEFAULT SYSDATE NOT NULL,
 	b_re_modify DATE,
 	CONSTRAINT b_re_pk PRIMARY KEY (b_re_num),
- 	CONSTRAINT buy_fk1 FOREIGN KEY (buy_num) REFERENCES buy (buy_num),
- 	CONSTRAINT member_fk2 FOREIGN KEY (mem_num) REFERENCES buy (mem_num),
- 	CONSTRAINT car_fk3 FOREIGN KEY (car_num) REFERENCES buy (car_num),
- 	CONSTRAINT checker_fk4 FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
+ 	CONSTRAINT b_re_fk1 FOREIGN KEY (buy_num) REFERENCES buy (buy_num),
+ 	CONSTRAINT b_re_fk2 FOREIGN KEY (mem_num) REFERENCES buy (mem_num),
+ 	CONSTRAINT b_re_fk3 FOREIGN KEY (car_num) REFERENCES buy (car_num),
+ 	CONSTRAINT b_re_fk4 FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
 );
 CREATE SEQUENCE b_re_seq;
 
@@ -69,13 +69,9 @@ CREATE TABLE b_re_comment(
 	mem_num NUMBER NOT NULL,
 	b_re_comm_content CLOB NOT NULL,
 	b_re_comm_report NUMBER DEFAULT 0 NOT NULL,
-	b_re_comm_reg DATE NOT NULL,
+	b_re_comm_reg DATE DEFAULT SYSDATE NOT NULL,
 	CONSTRAINT b_re_comment_pk PRIMARY KEY (b_re_comm_num),
- 	CONSTRAINT b_re_fk1 FOREIGN KEY (b_re_num) REFERENCES b_re (b_re_num),
- 	CONSTRAINT member_fk2 FOREIGN KEY (mem_num) REFERENCES b_re (mem_num)
+ 	CONSTRAINT b_re_comment_fk1 FOREIGN KEY (b_re_num) REFERENCES b_re (b_re_num),
+ 	CONSTRAINT b_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE b_re_comment_seq;
-
-
-
-
