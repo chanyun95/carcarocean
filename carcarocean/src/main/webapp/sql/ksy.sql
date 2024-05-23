@@ -18,7 +18,7 @@ CREATE TABLE SELL (
 	constraint sell_fk foreign key (mem_num) references member (mem_num)
 );
 CREATE SEQUENCE SELL_SEQ;
-
+ 
 -- 구매 정보 테이블
 CREATE TABLE BUY (
 	buy_num NUMBER NOT NULL,
