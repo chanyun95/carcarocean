@@ -7,7 +7,7 @@
 <title>내 차 팔기 메인</title>
 	<script>
     	function openPopup() {
-    		window.open("insertSellForm.do", "판매 신청서", "width=600,height=400,scrollbars=yes");
+    		window.open("insertSellForm.do", "판매 신청서", "width=950,height=650,scrollbars=no,resizable=yes");
     	}
 	</script>
 </head>
