@@ -16,7 +16,7 @@ public class InsertSellFormAction implements Action{
 		 */
 		
 		//로그인이 되어 있을 때
-		return "/WEB-INF/sell/insertSellForm.jsp";
+		return "/WEB-INF/views/sell/insertSellForm.jsp";
 	}
 	
 }

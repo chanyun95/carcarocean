@@ -6,12 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>판매 신청서 팝업창</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
+	<div class="container text-center">
 		<h1>내 차 팔기 신청서</h1>
-		<div class="text-center">
+		<div class="main-page">
 			<form id="form_box" action="insertSell.do" method="post">
 				<input type="hidden" value="${user_num}">
 				<ul class="list-unstyled">
@@ -107,7 +108,7 @@
 						  <label class="form-check-label" for="inlineRadio2">7일 이내</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2" disabled>
+						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2">
 						  <label class="form-check-label" for="inlineRadio3">30일 이내</label>
 						</div>
 					</li>
