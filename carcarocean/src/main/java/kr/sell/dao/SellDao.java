@@ -24,8 +24,8 @@ public class SellDao {
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "INSETR INTO sell (sell_num, sell_mile, sell_cnumber, sell_maker, sell_cname, sell_name, sell_phone,"
-					+ " sell_place1, sell_place2, sell_date,mem_num) "
+			sql = "INSERT INTO sell (sell_num, sell_mile, sell_cnumber, sell_maker, sell_cname, sell_name, sell_phone,"
+					+ " sell_place1, sell_place2, sell_date, mem_num) "
 					+ "VALUES (sell_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			

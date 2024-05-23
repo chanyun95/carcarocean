@@ -8,6 +8,16 @@
 <title>판매 신청서 팝업창</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script>
+	function submitForm() {
+	    document.getElementById("form_box").submit();
+	    window.close();
+	}
+	
+	function closePopup() {
+	    window.close();
+	}
+</script>
 </head>
 <body>
 	<div class="container text-center">
@@ -18,7 +28,7 @@
 				<ul class="list-unstyled">
 					<li>
 						<label for="sell_cnumber">차량번호</label>
-						<input type="text" id="sell_cnmuber" name="sell_cnumber" class="sell-data" placeholder="예) 123가 1234">
+						<input type="text" id="sell_cnumber" name="sell_cnumber" class="sell-data" placeholder="예) 123가 1234">
 					</li>
 					<li>
 						<label for="sell_maker">제조사</label>
@@ -30,7 +40,7 @@
 					</li>
 					<li>
 						<label for="sell_mile">주행거리</label>
-						<input type="text" id="sell_mile" name="sell_mile" class="sell-data" placeholder="예) 14,000">
+						<input type="text" id="sell_mile" name="sell_mile" class="sell-data" placeholder="예) 14000">
 					</li>
 					<li>
 						<label for="sell_name">신청자명</label>
@@ -100,22 +110,22 @@
 					</li>
 					<li>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
-						  <label class="form-check-label" for="inlineRadio1">즉시</label>
+						  <input class="form-check-input" type="radio" name="sell_date" id="sell_date0" value="0">
+						  <label class="form-check-label" for="sell_date0">즉시</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
-						  <label class="form-check-label" for="inlineRadio2">7일 이내</label>
+						  <input class="form-check-input" type="radio" name="sell_date" id="sell_date1" value="1">
+						  <label class="form-check-label" for="sell_date1">7일 이내</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2">
-						  <label class="form-check-label" for="inlineRadio3">30일 이내</label>
+						  <input class="form-check-input" type="radio" name="sell_date" id="sell_date2" value="2">
+						  <label class="form-check-label" for="sell_date2">30일 이내</label>
 						</div>
 					</li>
 				</ul>
 				<div class="bg-color-gray">
-					<input type="submit" class="btn btn-primary" value="제출">
-					<input type="button" class="btn btn-secondary" onclick="#" value="취소">
+					<input type="button" class="btn btn-primary" value="제출" onclick="submitForm()">
+					<input type="button" class="btn btn-secondary" value="취소" onclick="closePopup()">
 				</div>
 			</form>
 		</div>
