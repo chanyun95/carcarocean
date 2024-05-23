@@ -64,8 +64,6 @@ s_re_comm_report NUMBER DEFAULT 0 NOT NULL,
 s_re_comm_reg DATE DEFAULT SYSDATE NOT NULL,
 CONSTRAINT s_re_comment_pk PRIMARY KEY (s_re_comm_num),
 CONSTRAINT s_re_comment_fk1 FOREIGN KEY (s_re_num) REFERENCES s_re (s_re_num),
-CONSTRAINT s_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES 
-
-(mem_num)
+CONSTRAINT s_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE s_re_comment_seq;
