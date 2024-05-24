@@ -10,14 +10,14 @@ import kr.notice.vo.NoticeVo;
 public class ModifyFormAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
 		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
-        
+	
 		NoticeDao dao = NoticeDao.getDao();
-        NoticeVo notice = dao.getNotice(notice_num);
-        
+		NoticeVo notice = dao.getNotice(notice_num);
+		
 		request.setAttribute("notice", notice);
-		//관리자로 로그인한 경우
+		
 		return "/WEB-INF/views/notice/modifyForm.jsp";
 	}
 

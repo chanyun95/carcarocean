@@ -185,7 +185,7 @@ public class NoticeDao {
 	     }
 	}
 	//글 수정
-	public void updateNotice(NoticeVo vo)throws Exception{
+	public void updateNotice(NoticeVo notice)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -195,19 +195,19 @@ public class NoticeDao {
          //커넥션풀로부터 커넥션 할당
          conn = DBUtil.getConnection();
          //SQL문 작성
-         if(vo.getNotice_photo()!=null && !"".equals(vo.getNotice_photo())) {
+         if(notice.getNotice_photo()!=null && !"".equals(notice.getNotice_photo())) {
         	 sub_sql += ",notice_photo=?";
          }
          sql="UPDATE notice SET notice_title=?,notice_content=?,notice_modify=SYSDATE"+ sub_sql +" WHERE notice_num=?";
          
          //PreparedStatment 객체 생성
          pstmt = conn.prepareStatement(sql);
-         pstmt.setString(++cnt, vo.getNotice_title());
-         pstmt.setString(++cnt, vo.getNotice_content());
-         if(vo.getNotice_photo()!=null && !"".equals(vo.getNotice_photo())) {
-        	 pstmt.setString(++cnt, vo.getNotice_photo());
+         pstmt.setString(++cnt, notice.getNotice_title());
+         pstmt.setString(++cnt, notice.getNotice_content());
+         if(notice.getNotice_photo()!=null && !"".equals(notice.getNotice_photo())) {
+        	 pstmt.setString(++cnt, notice.getNotice_photo());
          }
-         pstmt.setInt(++cnt, vo.getNotice_num());
+         pstmt.setInt(++cnt, notice.getNotice_num());
          
          pstmt.executeUpdate();
          

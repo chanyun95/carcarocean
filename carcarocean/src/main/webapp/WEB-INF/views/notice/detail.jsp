@@ -29,7 +29,7 @@
 		</p>
 		<input type="button" value="목록" onclick="location.href='list.do'">
 		<c:if test="${user_auth == 9 }">
-			<input type="button" value="수정" onclick="location.href='modifyForm.do'">
+			<input type="button" value="수정" onclick="location.href='modifyForm.do?notice_num=${notice.notice_num}'">
 		</c:if>
 		
 	</div>

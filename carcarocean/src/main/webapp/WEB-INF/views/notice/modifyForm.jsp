@@ -83,8 +83,11 @@
 									});
 								});
 							</script>
-						</c:if></li>
-					<li><label for="notice_impt">중요</label> <input type="checkbox" name="notice_impt" id="notice_impt" value="1"></li>
+						</c:if>
+					</li>
+					<li>
+						<label for="notice_impt">중요</label> <input type="checkbox" name="notice_impt" id="notice_impt" value="1">
+					</li>
 				</ul>
 				<div>
 					<input type="submit" value="글 쓰기">
