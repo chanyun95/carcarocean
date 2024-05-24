@@ -19,7 +19,7 @@ public class QaDao {
 	
 	//글 등록
 	public void insertQa(QaVo qa)throws Exception{
-		
+		Connection conn = null;
 	}
 	
 	//총 글의 개수, 검색 개수
