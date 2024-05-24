@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>Header</title>
 <!-- bootstrap css cdn 링크 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -17,7 +18,16 @@
     display: block;
     margin-top: 0;
 }
+/* nav-item 간격 조정 */
+.nav-item {
+    margin-right: 90px;
+}
+/* 로고 크기 및 위치 조정 */
+.navbar-brand img {
+    max-height: 150px;
+}
 </style>
+
 
 </head>
 <body>
@@ -42,7 +52,7 @@
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">차량 판매</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="#">차량 판매 후기</a>
                      </div>
                   </li>
@@ -53,11 +63,19 @@
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">고객 센터</a>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">공지사항</a>
-                        <a class="dropdown-item" href="#">이벤트</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/event/writeForm.do">이벤트</a>
                         <a class="dropdown-item" href="#">고객 문의</a>
                      </div>
                   </li>
+                  <c:if test="${!empty user_num && user_auth ==9}">
+                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">관리자</a>
+                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/carBoard/carWriteForm.do">차량등록</a>
+                        <a class="dropdown-item" href="#">고객 문의</a>
+                     </div>
+                  </li>
+                  </c:if>
                </ul>
                <!-- 로그인 및 회원가입 시작 -->
                <c:if test="${empty user_num}">
