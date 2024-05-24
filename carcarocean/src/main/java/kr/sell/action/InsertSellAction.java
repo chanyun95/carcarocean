@@ -22,10 +22,10 @@ public class InsertSellAction implements Action{
 		sell.setSell_place1(request.getParameter("sell_place1"));
 		sell.setSell_place2(request.getParameter("sell_place2"));
 		sell.setSell_date(Integer.parseInt(request.getParameter("sell_date")));
-		sell.setMem_num(Integer.parseInt(request.getParameter("user_num")));
-
-		SellDao dao = SellDao.getDao();
+		/* sell.setMem_num(Integer.parseInt(request.getParameter("user_num"))); */
+		sell.setMem_num(5);
 		
+		SellDao dao = SellDao.getDao();
 		dao.insertSell(sell);
 		
 		return null;

@@ -6,24 +6,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>판매 신청서 팝업창</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script>
 	/* 제출 버튼 */
 	function submitForm() {
-	    const my_form = document.getElementById("my_form");
+	    const myForm = document.getElementById("my_form");
 		const data = document.querySelectorAll(".sell-data");
 		for(let i=0; i<data.length; i++){
+			const label = document.querySelector('label[for="'+data[i].id+'"]');
 			if(data[i].value.trim()==''){
-				const label = document.querySelector('label[for="'+data[i].id+'"]');
 				alert(label.textContent+' 항목을 입력해주세요!');
 				data[i].value = '';
 				data[i].focus();
 				return;
 			}
+			
+			/* 차량 번호는 9자리(띄어쓰기 포함) */
+			if(data[i].id=='sell_cnumber'){
+				if(data[i].value.length!=9){
+					alert('차량번호는 000가 0000 형식으로 적어주세요!');
+					data[i].value = '';
+					data[i].focus();
+					return;
+				}
+			}
+			/* 신청자명은 3자에서 4자까지 인정 */
+			if(data[i].id=='sell_name'){
+				if(data[i].value.length<3 || data[i].value.length>5){
+					alert('신청자명은 본명으로 입력해주세요! (3~4자)');
+					data[i].value = '';
+					data[i].focus();
+					return;
+				}
+			}
+			/* 주행거리 숫자만 인정 */
+			if(data[i].id=='sell_mile'){
+				if(isNaN(data[i].value)){
+					alert('주행거리는 숫자로 입력해주세요!');
+					data[i].value = '';
+					data[i].focus();
+					return;
+				}
+			}
+			/* 휴대폰번호는 11자로 된 숫자만 인정 */
+			if(data[i].id=='sell_phone'){
+				if(isNaN(data[i].value)){
+					alert('핸드폰 번호는 숫자로 입력해주세요!');
+					data[i].value = '';
+					data[i].focus();
+					return;
+				}
+				if(data[i].value.length!=11){
+					alert("휴대폰 번호는 '-'없이 11자로 입력해주세요!")
+					data[i].value = '';
+					data[i].focus();
+					return;
+				}
+			}
 		}
-		my_form.submit();
-	    window.close();
+		alert('신청이 완료되었습니다!');
+		myForm.submit();
+		setTimeout(() => {
+            window.close();
+        }, 1000);
 	}
 	/* 취소 버튼 */
 	function closePopup() {
@@ -36,11 +81,11 @@
 	<div class="container text-center">
 		<h1>내 차 팔기 신청서</h1>
 		<form id="my_form" action="insertSell.do" method="post">
-			<input type="hidden" value="${user_num}">
+			<%-- <input type="hidden" name="mem_num" value="${user_num}"> --%>
 			<ul class="list-unstyled">
 				<li>
 					<label for="sell_cnumber">차량번호</label>
-					<input type="text" id="sell_cnumber" name="sell_cnumber" class="sell-data form-control" placeholder="예) 123가 1234">
+					<input type="text" id="sell_cnumber" name="sell_cnumber" class="sell-data form-control" maxlength="9" placeholder="예) 123가 1234">
 				</li>
 				<li>
 					<label for="sell_maker">제조사</label>
@@ -48,19 +93,19 @@
 				</li>
 				<li>
 					<label for="sell_cname">차량명</label>
-					<input type="text" id="sell_cname" name="sell_cname" class="sell-data form-control" placeholder="예) 셀토스 시그니처">
+					<input type="text" id="sell_cname" name="sell_cname" class="sell-data form-control" placeholder="예) 셀토스">
 				</li>
 				<li>
 					<label for="sell_mile">주행거리</label>
-					<input type="text" id="sell_mile" name="sell_mile" class="sell-data form-control" placeholder="예) 14000">
+					<input type="text" id="sell_mile" name="sell_mile" class="sell-data form-control" min="0" placeholder="예) 14000">
 				</li>
 				<li>
 					<label for="sell_name">신청자명</label>
-					<input type="text" id="sell_name" name="sell_name" class="sell-data form-control" placeholder="예) 홍길동">
+					<input type="text" id="sell_name" name="sell_name" class="sell-data form-control" maxlength="4" placeholder="예) 홍길동">
 				</li>
 				<li>
 					<label for="sell_phone">휴대폰번호</label>
-					<input type="text" id="sell_phone" name="sell_phone" class="sell-data form-control" placeholder="예) '-'없이 숫자만 입력. 예)01012345678">
+					<input type="text" id="sell_phone" name="sell_phone" class="sell-data form-control" maxlength="11" placeholder="예) '-'없이 숫자만 입력. 예)01012345678">
 				</li>
 			</ul>
 			<ul class="list-unstyled">
