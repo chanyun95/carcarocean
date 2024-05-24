@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이벤트 게시판 글쓰기</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
 <script type="text/javascript">
 window.onload = function(){
 	const myForm = document.getElementById('write_form');
