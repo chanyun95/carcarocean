@@ -7,23 +7,23 @@ public class CarVO {
 	private String car_maker;			//제조사
 	private String car_name;			//차명
 	private int car_size;					//차종
-	private Date car_birth;				//연식
+	private String car_birth;				//연식
+	private int car_cc;						//배기량
 	private int car_fuel_type;			//연료타입
+	private int car_fuel_efficiency;	//연비
 	private int car_mile;					//주행거리
 	private int car_price;					//가격
 	private String car_color;				//색상
 	private String car_photo;			//사진URL
 	private int car_auto;					//변속기
-	private int car_fuel_efficiency;	//연비
 	private int car_use;					//사용기간
-	private int car_cc;						//배기량
 	private String car_accident;		//사고이력
 	private int car_owner_change;	//소유자 변경 횟수
 	private String car_design_op;	//디자인옵션
 	private String car_con_op;			//편의옵션
 	private String car_drive_op;		//주행옵션
 	private int checker_num;			//검수자 식별 번호
-	
+	private int car_status;				//차량 판매 가능 여부 0:판매중, 1:판매완료
 	public int getCar_num() {
 		return car_num;
 	}
@@ -48,17 +48,29 @@ public class CarVO {
 	public void setCar_size(int car_size) {
 		this.car_size = car_size;
 	}
-	public Date getCar_birth() {
+	public String getCar_birth() {
 		return car_birth;
 	}
-	public void setCar_birth(Date car_birth) {
+	public void setCar_birth(String car_birth) {
 		this.car_birth = car_birth;
+	}
+	public int getCar_cc() {
+		return car_cc;
+	}
+	public void setCar_cc(int car_cc) {
+		this.car_cc = car_cc;
 	}
 	public int getCar_fuel_type() {
 		return car_fuel_type;
 	}
 	public void setCar_fuel_type(int car_fuel_type) {
 		this.car_fuel_type = car_fuel_type;
+	}
+	public int getCar_fuel_efficiency() {
+		return car_fuel_efficiency;
+	}
+	public void setCar_fuel_efficiency(int car_fuel_efficiency) {
+		this.car_fuel_efficiency = car_fuel_efficiency;
 	}
 	public int getCar_mile() {
 		return car_mile;
@@ -90,23 +102,11 @@ public class CarVO {
 	public void setCar_auto(int car_auto) {
 		this.car_auto = car_auto;
 	}
-	public int getCar_fuel_efficiency() {
-		return car_fuel_efficiency;
-	}
-	public void setCar_fuel_efficiency(int car_fuel_efficiency) {
-		this.car_fuel_efficiency = car_fuel_efficiency;
-	}
 	public int getCar_use() {
 		return car_use;
 	}
 	public void setCar_use(int car_use) {
 		this.car_use = car_use;
-	}
-	public int getCar_cc() {
-		return car_cc;
-	}
-	public void setCar_cc(int car_cc) {
-		this.car_cc = car_cc;
 	}
 	public String getCar_accident() {
 		return car_accident;
@@ -143,5 +143,11 @@ public class CarVO {
 	}
 	public void setChecker_num(int checker_num) {
 		this.checker_num = checker_num;
+	}
+	public int getCar_status() {
+		return car_status;
+	}
+	public void setCar_status(int car_status) {
+		this.car_status = car_status;
 	}
 }
