@@ -108,7 +108,7 @@ public class SellDao {
 		}
 		return list;
 	}
-	// 전체 판매 목록 (검수 대기 중) - 관리자가 보는 목록
+		// 전체 판매 목록 갯수(검수 대기 중) - 관리자가 보는 목록
 		public int getSellListCount(String keyfield, String keyword, String sell_check) throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -179,7 +179,7 @@ public class SellDao {
 				sell.setSell_place2(rs.getString("sell_place2"));
 				sell.setSell_date(rs.getInt("sell_date"));
 				sell.setSell_check(rs.getInt("sell_check"));
-				sell.setSell_reg(rs.getString("sel_reg"));
+				sell.setSell_reg(rs.getString("sell_reg"));
 				sell.setSell_modify(rs.getString("sell_modify"));
 				sell.setMem_num(rs.getInt("mem_num"));
 			}
@@ -193,10 +193,28 @@ public class SellDao {
 	
 	
 	
-	//판매 수정
+	//판매 정보 수정
+	
+	//판매 상태 수정(sell_check) : 검수 상태 변경하는 메서드
 		
 	//판매 삭제
-	
+	public void deleteSell(int sell_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM sell WHERE sell_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	//판매 갯수
 
 }

@@ -20,6 +20,7 @@ public class AdminSellListAction implements Action{
 		 * HttpSession session = request.getSession(); Integer user_num =
 		 * (Integer)session.getAttribute("user_num");
 		 */
+		request.setCharacterEncoding("utf-8");
 		
 		// 확인 끝
 		String pageNum = request.getParameter("pageNum");
@@ -49,6 +50,8 @@ public class AdminSellListAction implements Action{
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
+		request.setAttribute("keyfield", keyfield);
+		request.setAttribute("sell_check", sell_check);
 		
 		return "/WEB-INF/views/sell/adminSellList.jsp";
 	}
