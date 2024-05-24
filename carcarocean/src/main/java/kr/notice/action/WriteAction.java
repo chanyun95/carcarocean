@@ -21,7 +21,13 @@ public class WriteAction implements Action{
 		notice.setNotice_title(request.getParameter("notice_title"));
 		notice.setNotice_content(request.getParameter("notice_content"));
 		notice.setNotice_photo(FileUtil.createFile(request, "notice_photo"));
-		notice.setNotice_impt(Integer.parseInt(request.getParameter("notice_impt")));
+		String noticeImptParam = request.getParameter("notice_impt");
+	    int noticeImpt = 0; // 기본값 설정
+	    
+	    if (noticeImptParam != null && !noticeImptParam.isEmpty()) {
+	        noticeImpt = Integer.parseInt(noticeImptParam);
+	    }
+	    notice.setNotice_impt(noticeImpt);
 		
 		NoticeDao dao = NoticeDao.getDao();
 		dao.insertNotice(notice);
