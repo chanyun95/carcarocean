@@ -23,10 +23,11 @@ $(function(){
 	});
 });
 </script>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 </head>
 <body>
 <div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 	<div class="content-main">
 		<h2>로그인</h2>
 		<form id="login_form" action="login.do" method="post">
