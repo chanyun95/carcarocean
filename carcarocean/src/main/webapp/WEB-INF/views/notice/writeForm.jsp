@@ -24,13 +24,20 @@
 				return false;
 			}
 		};
+		/*
 		const impt = document.getElementById('notice_impt');
-		/* if(impt.value=='on'){
+		 if(impt.value=='on'){
 			impt.value=1;
 		}else if(impt.value==''){
 			impt.value=0;
-		} */
-		
+		}
+	    let check = false;
+	    if (!impt.checked) {
+	        impt.value = 0;
+	    } else {
+	        impt.value = 1;
+	    }
+		*/
 	};
 </script>
 </head>
@@ -54,9 +61,7 @@
 					<li>
 						<label for="notice_photo">파일첨부(선택)</label>
 						<br>
-						<input type="file" name="notice_photo" id="notice_photo" accept="image/gif,image/png,image/jpeg">
-						<input type="file" name="notice_photo" id="notice_photo" accept="image/gif,image/png,image/jpeg">
-						<input type="file" name="notice_photo" id="notice_photo" accept="image/gif,image/png,image/jpeg">
+						<input type="file" name="notice_photo" accept="image/gif,image/png,image/jpeg" multiple>
 					</li>
 					<li>
 						<label for="notice_impt">중요</label>

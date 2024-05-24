@@ -30,9 +30,33 @@
 				</li>
 			</ul>
 		</form>
-		<div class="list-space align-right">
-			<input type="button" value="">
+		<div class="align-right">
+			<ul>
+				<li>
+					<select name="keyfield">
+						<option value="4" <c:if test="${param.keyfield == 4"}>selected</c:if>>기본 정렬</option>
+						<option value="5" <c:if test="${param.keyfield == 5"}>selected</c:if>>가격순</option>
+						<option value="6" <c:if test="${param.keyfield == 6"}>selected</c:if>>등록일순</option>
+					</select>
+				</li>
+			</ul>
 		</div>
+		<c:if test="${count ==0}">
+		<div class="result-display">
+			등록된 차량이 없습니다.
+		</div>
+		</c:if>
+		<c:if test="${count > 0}">
+		<table>
+			<tr>
+				<td>사진</td>
+				<td>차량이름</td>
+				<td>가격</td>
+				<td>연식,주행거리</td>
+				<td>연료타입</td>
+			</tr>
+		</table>
+		</c:if>
 	</div>
 </div>
 </body>
