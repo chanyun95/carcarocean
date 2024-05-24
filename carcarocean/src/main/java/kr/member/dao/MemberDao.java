@@ -95,7 +95,7 @@ public class MemberDao {
 	      ResultSet rs = null;
 	      MemberVo member = null;
 	      String sql = null;
-	      
+	      int cnt = 0;
 	      try {
 	         //커넥션풀로부터 커넥션 할당
 	         conn = DBUtil.getConnection();
@@ -128,29 +128,140 @@ public class MemberDao {
 	   }
 
 	//회원상세 정보
-	public MemberVo getMember(int mem_num)throws Exception{
-		MemberVo member = null;
-		return member;
-	}
+	   public MemberVo getMember(int mem_num)throws Exception{
+		   MemberVo member = null;
+		   Connection conn = null;
+		   PreparedStatement pstmt = null;
+		   String sql =null;
+		   ResultSet rs = null;
+		   int cnt = 0;
+		   try {
+			   //커넥션풀로부터 커넥션 할당
+			   conn = DBUtil.getConnection();
+
+			   //SQL문 작성
+			   sql="SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_num=?";
+
+			   //PreparedStatment 객체 생성
+			   pstmt = conn.prepareStatement(sql);
+
+			   //?에 데이터 바인딩
+			   pstmt.setInt(++cnt, mem_num);
+
+			   rs = pstmt.executeQuery();
+
+			   if(rs.next()) {
+				   member = new MemberVo();
+				   member.setMem_num(rs.getInt("mem_num"));
+				   member.setMem_name(rs.getString("mem_name"));
+				   member.setMem_id(rs.getString("mem_id"));
+				   member.setMem_email(rs.getString("mem_email"));
+				   member.setMem_auth(rs.getInt("mem_auth"));
+				   member.setMem_name(rs.getString("mem_name"));
+				   member.setMem_phone(rs.getString("mem_phone"));
+				   member.setMem_zipcode(rs.getString("mem_zipcode"));
+				   member.setMem_address1(rs.getString("mem_address1"));
+				   member.setMem_address2(rs.getString("mem_address2"));
+				   member.setMem_photo(rs.getString("mem_photo"));
+				   member.setMem_reg(rs.getString("mem_reg"));//가입일
+				   member.setMem_modify(rs.getString("mem_modify"));//수정일
+			   }
+
+		   }catch(Exception e) {
+			   throw new Exception(e);
+		   }finally {
+			   DBUtil.executeClose(rs, pstmt, conn);
+		   }
+		   return member;
+
+	   }
 
 	//회원정보 수정
 	public void updateMember(MemberVo member)throws Exception{
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 	}
 
 	//비밀번호 수정
 	public void updatePassword(String mem_passwd, int mem_num) throws Exception{
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 	}
 
 	//프로필 사진 수정
 	public void updateMyPhoto(String mem_photo,int mem_num) throws Exception{
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 	}
 
 	//회원 탈퇴(회원정보 삭제)
 	public void deleteMember(int mem_num) throws Exception{
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 	}
 
 
@@ -158,20 +269,71 @@ public class MemberDao {
 	//전체 내용 개수, 검색 내용 개수
 	public int getMemberCountByAdmin(String keyfield, String keyword) throws Exception{
 		int count = 0;
-
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    String sql =null;
+	    int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 		return count;
 	}
 
 	//목록, 검색 목록
 	public List<MemberVo> getListMemberbyAdmin(int start, int end, String keyfield, String keyword) throws Exception{
 		List<MemberVo> list = null;
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 		return list;
 	}
 
 	//회원등급 수정 
 	public void updateMemberByAdmin(int mem_auth, int mem_num) throws Exception{
-
+		Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      String sql =null;
+	      int cnt = 0;
+	      try {
+	         //커넥션풀로부터 커넥션 할당
+	         conn = DBUtil.getConnection();
+	         
+	         //SQL문 작성
+	         sql="";
+	         
+	         //PreparedStatment 객체 생성
+	         pstmt = conn.prepareStatement(sql);
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
 	}
 
 
