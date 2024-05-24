@@ -64,6 +64,7 @@ CREATE TABLE CAR(
 	car_design_op VARCHAR2(400) NOT NULL,
 	car_con_op VARCHAR2(400) NOT NULL,
 	car_drive_op VARCHAR2(400) NOT NULL,
+	car_status NUMBER(1) DEFAULT 0 NOT NULL,
 	checker_num NUMBER NOT NULL,
 	CONSTRAINT car_pk PRIMARY KEY (car_num),
 	CONSTRAINT car_fk FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
