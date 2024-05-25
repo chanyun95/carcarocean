@@ -72,17 +72,30 @@
 		</div>
 		<hr size="1" width="100%" noshade>
 		<div class="d-felx justify-content-between m-3">
-			<form action="updateSellCheck.do" method="post" class="float-start">
-				<div class="d-flex">
+			<div class="d-flex flex-row justify-content-middle align-items-center float-start">
+				<!-- sell_detail 에서는 검수 상태를 미검수와 검수중으로 밖에 변경하지 못하고 만약 검수중으로 변경 시 차량 정보 등록 버튼이 뜬다. -->
+				<!-- 검수 완료된 차량은 검수 상태 변경 폼이 사라진다. -->
+				<c:if test="${sell.sell_check<2}">
+				<form action="updateSellCheck.do" method="post" class="d-flex">
+
+						<input type="hidden" name="sell_num" value="${sell.sell_num}">
+						<select class="form-select" name="sell_check" style="width:auto;">
+							<option value="0" <c:if test="${sell.sell_check==0}">selected</c:if>>미검수</option>
+							<option value="1" <c:if test="${sell.sell_check==1}">selected</c:if>>검수중</option>
+						</select>
+						<input type="submit" class="btn btn-success" value="검수 상태 변경">
+
+				</form>
+				</c:if>
+				<!-- 누르면 차량 정보 등록 폼이 뜨고 등록하게 되면 sell_check는 2로 업데이트 되면서 car에 정보들이 등록된다.-->
+				<c:if test="${sell.sell_check==1}">
+				<form action="${pageContext.request.contextPath}/car/carWriteForm.do" method="post" class="ms-5">
+					<input type="hidden" name="sell_check" value="2">
 					<input type="hidden" name="sell_num" value="${sell.sell_num}">
-					<select class="form-select" name="sell_check" style="width:auto;">
-						<option value="0" <c:if test="${sell.sell_check==0}">selected</c:if>>미검수</option>
-						<option value="1" <c:if test="${sell.sell_check==1}">selected</c:if>>검수중</option>
-						<option value="2" <c:if test="${sell.sell_check==2}">selected</c:if>>검수 완료</option>
-					</select>
-					<input type="submit" class="btn btn-success" value="검수 상태 변경">
-				</div>
-			</form>
+					<input type="submit" class="btn btn-primary" value="검수 완료 차량 등록 폼">
+				</form>
+				</c:if>
+			</div>
 			<div class="float-end">
 				<input type="button" class="btn btn-warning" value="목록" onclick="location.href='adminSellList.do'">
 				<input type="button" class="btn btn-danger" value="삭제" onclick="delete_btn()">

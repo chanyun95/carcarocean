@@ -10,7 +10,7 @@ public class CarVO {
 	private String car_birth;				//연식
 	private int car_cc;						//배기량
 	private int car_fuel_type;			//연료타입
-	private int car_fuel_efficiency;	//연비
+	private float car_fuel_efficiency;	//연비
 	private int car_mile;					//주행거리
 	private int car_price;					//가격
 	private String car_color;				//색상
@@ -24,6 +24,8 @@ public class CarVO {
 	private String car_drive_op;		//주행옵션
 	private int checker_num;			//검수자 식별 번호
 	private int car_status;				//차량 판매 가능 여부 0:판매중, 1:판매완료
+	private String car_checker_opinion;
+	
 	public int getCar_num() {
 		return car_num;
 	}
@@ -66,10 +68,10 @@ public class CarVO {
 	public void setCar_fuel_type(int car_fuel_type) {
 		this.car_fuel_type = car_fuel_type;
 	}
-	public int getCar_fuel_efficiency() {
+	public float getCar_fuel_efficiency() {
 		return car_fuel_efficiency;
 	}
-	public void setCar_fuel_efficiency(int car_fuel_efficiency) {
+	public void setCar_fuel_efficiency(float car_fuel_efficiency) {
 		this.car_fuel_efficiency = car_fuel_efficiency;
 	}
 	public int getCar_mile() {
@@ -149,5 +151,11 @@ public class CarVO {
 	}
 	public void setCar_status(int car_status) {
 		this.car_status = car_status;
+	}
+	public String getCar_checker_opinion() {
+		return car_checker_opinion;
+	}
+	public void setCar_checker_opinion(String car_checker_opinion) {
+		this.car_checker_opinion = car_checker_opinion;
 	}
 }

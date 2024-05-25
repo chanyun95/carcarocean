@@ -27,7 +27,7 @@ public class CarDao {
 			sql = "INSERT INTO car (car_num, car_maker, car_name, car_size, car_birth, "
 					+ "car_fuel_type, car_mile, car_price, car_color, car_photo, car_auto, "
 					+ "car_fuel_efficiency, car_use, car_cc, car_accident, car_owner_change, "
-					+ "car_design_op, car_con_op, car_drive_op, checker_num, car_status) "
+					+ "car_design_op, car_con_op, car_drive_op, checker_num, car_checker_opinion) "
 					+ "VALUES (car_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(++cnt, car.getCar_maker());
@@ -40,7 +40,7 @@ public class CarDao {
 			pstmt.setString(++cnt, car.getCar_color());
 			pstmt.setString(++cnt, car.getCar_photo());
 			pstmt.setInt(++cnt, car.getCar_auto());
-			pstmt.setInt(++cnt, car.getCar_fuel_efficiency());
+			pstmt.setFloat(++cnt, car.getCar_fuel_efficiency());
 			pstmt.setInt(++cnt, car.getCar_use());
 			pstmt.setInt(++cnt, car.getCar_cc());
 			pstmt.setString(++cnt, car.getCar_accident());
@@ -48,8 +48,8 @@ public class CarDao {
 			pstmt.setString(++cnt, car.getCar_design_op());
 			pstmt.setString(++cnt, car.getCar_con_op());
 			pstmt.setString(++cnt, car.getCar_drive_op());
-			pstmt.setInt(++cnt, 1);
-			pstmt.setInt(++cnt, car.getCar_status());
+			pstmt.setInt(++cnt, car.getChecker_num());
+			pstmt.setString(++cnt, car.getCar_checker_opinion());
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new Exception(e);

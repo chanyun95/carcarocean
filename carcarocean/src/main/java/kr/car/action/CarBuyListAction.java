@@ -19,7 +19,7 @@ public class CarBuyListAction implements Action{
 		
 		request.setAttribute("carList", carList);
 		
-		return "/WEB-INF/views/carBoard/carBuyList.jsp";
+		return "/WEB-INF/views/car/carBuyList.jsp";
 	}
 
 }
