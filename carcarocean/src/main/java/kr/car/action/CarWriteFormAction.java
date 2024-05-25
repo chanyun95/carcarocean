@@ -1,15 +1,19 @@
 package kr.car.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import kr.checker.dao.CheckerDao;
+import kr.checker.vo.CheckerVo;
 import kr.controller.Action;
 
 public class CarWriteFormAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		/*
 		HttpSession session = request.getSession();
 		Integer user_num = 
 				(Integer)session.getAttribute("user_num");
@@ -24,7 +28,21 @@ public class CarWriteFormAction implements Action{
 		request.setAttribute("user_num", user_num);
 		request.setAttribute("user_auth", user_auth);
 		//관리자로 로그인한 경우
-		return "/WEB-INF/views/carBoard/carWriteForm.jsp";
+		 */
+		
+		int sell_check = Integer.parseInt(request.getParameter("sell_check"));
+		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
+		
+		//검수자 정보 보내야함
+		CheckerDao cDao = CheckerDao.getDao();
+		List<CheckerVo>checkerList = cDao.getCheckerAllList();
+		
+		request.setAttribute("checkerList", checkerList);
+		request.setAttribute("sell_check", sell_check);
+		request.setAttribute("sell_num", sell_num);
+
+		
+		return "/WEB-INF/views/car/carWriteForm.jsp";
 	}
 
 }

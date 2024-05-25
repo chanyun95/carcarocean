@@ -232,6 +232,5 @@ public class SellDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//판매 갯수
 
 }
