@@ -39,6 +39,7 @@ CREATE TABLE SELL (
 	sell_place2 VARCHAR2(100) NOT NULL,
 	sell_date NUMBER NOT NULL,
 	sell_check NUMBER(1) DEFAULT 0 NOT NULL ,
+	sell_modify_check DATE,
 	sell_reg DATE DEFAULT SYSDATE NOT NULL ,
 	sell_modify DATE,
 	mem_num NUMBER NOT NULL,

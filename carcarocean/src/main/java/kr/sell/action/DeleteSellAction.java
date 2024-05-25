@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.controller.Action;
 import kr.sell.dao.SellDao;
 
-public class deleteSellAction implements Action{
+public class DeleteSellAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
@@ -15,7 +15,7 @@ public class deleteSellAction implements Action{
 		SellDao dao = SellDao.getDao();
 		
 		dao.deleteSell(sell_num);
-		
+		 
 		return "redirect:/sell/adminSellList.do";
 	}
 }

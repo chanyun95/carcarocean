@@ -30,9 +30,9 @@
 					return;
 				}
 			}
-			/* 신청자명은 3자에서 4자까지 인정 */
+			/* 신청자명은 2자에서 4자까지 인정 */
 			if(data[i].id=='sell_name'){
-				if(data[i].value.length<3 || data[i].value.length>5){
+				if(data[i].value.length<2 || data[i].value.length>5){
 					alert('신청자명은 본명으로 입력해주세요! (3~4자)');
 					data[i].value = '';
 					data[i].focus();
@@ -78,7 +78,7 @@
 </script>
 </head>
 <body>
-	<div class="container text-center">
+	<div class="container text-center p-5">
 		<h1>내 차 팔기 신청서</h1>
 		<form id="my_form" action="insertSell.do" method="post">
 			<%-- <input type="hidden" name="mem_num" value="${user_num}"> --%>
