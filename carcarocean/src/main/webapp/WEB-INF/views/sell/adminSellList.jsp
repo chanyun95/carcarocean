@@ -22,11 +22,10 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<hr size="1" width="100%" noshade> 
-		<h1>차량 검수 신청 목록</h1>
-		<div class="d-flex justify-content-between">
+		<h1 class="text-center mt-3">차량 검수 신청 목록</h1>
+		<div class="d-flex flex-row justify-content-between">
 			<div class="d-flex">
 				<form id="check_form" action="adminSellList.do" method="get">
-					<label for="sell_check">구분</label>
 					<select id="sell_check" name="sell_check" class="form-select">
 						<option value="0" <c:if test="${sell_check == 0}">selected</c:if>>미검수</option>
 						<option value="1" <c:if test="${sell_check == 1}">selected</c:if>>검수중</option>
@@ -35,8 +34,8 @@
 				</form>
 			</div>
 			<div class="d-flex">
-				<form id="search_form" action="adminSellList.do" method="get">
-					<select id="keyfield" name="keyfield" class="form-select">
+				<form id="search_form" action="adminSellList.do" method="get" class="d-flex flex-row justify-cotent-between">
+					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
 						<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>신청자명</option>
 						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
 						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
@@ -44,10 +43,9 @@
 					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
 					<input type="submit" class="btn btn-primary" value="검색">
 				</form>
-				
 			</div>
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover mt-3">
 			<thead class="table-light">
 				<tr>
 					<th>#</th>

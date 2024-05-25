@@ -12,6 +12,7 @@ public class SellVo {
 	private String sell_place2;		// 검수 희망 장소(군/구)
 	private int sell_date;			// 검수 희망일(0:즉시, 1:7일이내, 2:30일이내)
 	private int sell_check;			// 검수 완료여부(0:미완료, 1:진행중, 2:완료) Default 0
+	private String sell_modify_check;
 	private String sell_reg;		// 판매 정보 등록일 Default SYSDATE
 	private String sell_modify;		// 판매 정보 수정일  
 	private int mem_num;			// 회원 식별자	
@@ -87,6 +88,12 @@ public class SellVo {
 	}
 	public void setSell_check(int sell_check) {
 		this.sell_check = sell_check;
+	}
+	public String getSell_modify_check() {
+		return sell_modify_check;
+	}
+	public void setSell_modify_check(String sell_modify_check) {
+		this.sell_modify_check = sell_modify_check;
 	}
 	public String getSell_reg() {
 		return sell_reg;
