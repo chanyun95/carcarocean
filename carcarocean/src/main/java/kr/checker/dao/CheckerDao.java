@@ -16,6 +16,29 @@ public class CheckerDao {
 	}
 	private CheckerDao() {};
 	
+	public void insertChecker(CheckerVo checker) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+
+		try {
+			conn = DBUtil.getConnection();
+			sql = "INSERT INTO checker (checker_num, checker_name, checker_photo, checker_company, checker_phone) VALUES (checker_seq.nextval, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(++cnt, checker.getChecker_name());
+			pstmt.setString(++cnt, checker.getChecker_photo());
+			pstmt.setString(++cnt, checker.getChecker_company());
+			pstmt.setString(++cnt, checker.getChecker_phone());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	//검수자 목록
 	public List<CheckerVo>getCheckerAllList() throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
