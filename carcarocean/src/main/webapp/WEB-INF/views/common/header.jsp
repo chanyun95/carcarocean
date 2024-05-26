@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>Header</title>
 <!-- bootstrap css cdn 링크 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap 아이콘 cdn 링크 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
@@ -72,6 +72,7 @@
                    <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">관리자</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 목록</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/checker/adminCheckerList.do">검수자 정보 목록</a>
                         <a class="dropdown-item" href="#">고객 문의</a>
                      </div>
                   </li>
