@@ -57,22 +57,8 @@ public class CarWriteAction implements Action{
 		car.setCar_mile(Integer.parseInt(request.getParameter("car_mile")));
 		car.setCar_price(Integer.parseInt(request.getParameter("car_price")));
 		car.setCar_color(request.getParameter("car_color"));
-		
-		/* 파일 , 구분으로 넣기 */
-		// 1. 업로드된 다중 파일을 배열로 받기
-		String[] photoArr = request.getParameterValues("car_photo");
-		// 2. 다중 파일명 처리를 위해 빈 문자열 정의
-		String photos = "";
-		// 3. 파일명을 ,로 구분하여 디비에 저장
-		for (int i = 0; i < photoArr.length; i++) {
-			photos += FileUtil.createFile(request, photoArr[i]);
-			//마지막 쉼표 빼기
-			if(i!=photoArr.length-1) {
-				photos += ",";
-			}
-		}
-		car.setCar_photo(photos);
-		
+		// 다중 파일 처리
+		car.setCar_photo(FileUtil.createFiles(request));
 		car.setCar_auto(Integer.parseInt(request.getParameter("car_auto")));
 		car.setCar_use(Integer.parseInt(request.getParameter("car_use")));
 		car.setCar_accident(request.getParameter("car_accident"));

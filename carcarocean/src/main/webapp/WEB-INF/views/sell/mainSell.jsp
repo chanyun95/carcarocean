@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,6 +125,29 @@
 						<span>6단계에서는 이런식으로 진행됩니다.</span>
 					</div>
 				</div>
+			</div>
+			<!-- 최근 올라온 차량 3개만 보여주기 -->
+			<div class="container mb-5">
+				<h2 class="text-center">최근 등록된 차량</h2>
+				<c:if test="${carList==null}">
+						등록된 차량이 없습니다!
+				</c:if>
+				<c:if test="${carList!=null}">
+				<div class="d-flex flex-row justify-content-center align-items-center">
+					<div class="row">
+					<c:forEach var="car" items="${carList}">
+					<div class="col d-flex flex-column justify-content-center align-items-between border p-3 m-4">
+						<c:set var="carPhotoList" value="${fn:split(car.car_photo, ',')}" />
+						<c:set var="firstCarPhoto" value="${carPhotoList[0]}" />
+						<div><a href="#"><img src="${pageContext.request.contextPath}/upload/${firstCarPhoto}" width="300" height="300"></a></div>
+						<h3 class="text-center">${car.car_maker} / ${car.car_name}</h3>
+						<h4 class="text-center"><b>${car.car_price}</b>원</h4>
+						<h5 class="text-center"><b>${car.car_mile}</b>km</h5>
+					</div>
+					</c:forEach>
+					</div>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

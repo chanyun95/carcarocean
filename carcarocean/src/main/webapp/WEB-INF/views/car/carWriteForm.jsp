@@ -13,11 +13,6 @@ window.onload = function(){
 	const myForm = document.getElementById('write_form');
 	//이벤트 연결
 	myForm.onsubmit = function(){
-		const radio = document.querySelectorAll('input[type=radio]:checked');
-		if(radio.length < 0){
-			alert('상품판매여부를 지정하세요');
-			return false;
-		}
 		const items = document.querySelectorAll('.input-check');
 		for(let i=0; i<items.length; i++){
 			if(items[i].value.trim()==''){
@@ -31,6 +26,12 @@ window.onload = function(){
 		}
 	};
 };
+function submit_btn (){
+	if(!confirm('정말 제출하시겠습니까?')){
+		return false;
+	}
+	alert('등록되었습니다!');
+}
 </script>
 </head>
 <body>
@@ -70,11 +71,11 @@ window.onload = function(){
 			 -->
 			<li>
 				<label for="car_maker">제조사</label>
-				<input type="text" name="car_maker" id="car_maker" class="input-check form-control" placeholder="예) 제네시스">
+				<input type="text" name="car_maker" id="car_maker" class="input-check form-control" placeholder="예) 제네시스" value="${sell.sell_maker}">
 			</li>
 			<li>
 				<label for="car_name">차량명</label>
-				<input type="text" name="car_name" id="car_name" class="input-check form-control" placeholder="예) gv80">
+				<input type="text" name="car_name" id="car_name" class="input-check form-control" placeholder="예) gv80" value="${sell.sell_cname}">
 			</li>
 			<li>
 				<label for="car_size">차종</label>
@@ -110,7 +111,7 @@ window.onload = function(){
 			</li>
 			<li>
 				<label for="car_mile">주행거리</label>
-				<input type="number" name="car_mile" id="car_mile" class="input-check form-control" placeholder="예) 14000">
+				<input type="number" name="car_mile" id="car_mile" class="input-check form-control" placeholder="예) 14000" value="${sell.sell_mile}">
 			</li>
 			<li>
 				<label for="car_price">차량 가격(만원)</label>
@@ -172,12 +173,12 @@ window.onload = function(){
 		</ul>
 		<hr size="1" width="100%" noshade>
 		<c:if test="${empty checkerList }">
-			<p class="ft-4">검수자 정보를 먼저 입력해주세요!!</p>
+			<p class="ft-4">검수자 정보를 먼저 등록해주세요!!</p>
 		</c:if>
 		<c:if test="${!empty checkerList }">
 		<div class="text-center">
 			<input type="button" value="뒤로가기" onclick="history.back()" class="btn btn-secondary btn-lg">
-			<input type="submit" value="등록" class="btn btn-primary btn-lg">
+			<input type="submit" value="등록" class="btn btn-primary btn-lg" onclick="submit_btn()">
 		</div>
 		</c:if>
 	</form>

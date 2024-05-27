@@ -3,6 +3,7 @@ package kr.car.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.car.vo.CarVO;
@@ -86,6 +87,7 @@ public class CarDao {
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
 			rs = pstmt.executeQuery();
+			list = new ArrayList<>();
 			while(rs.next()) {
 				CarVO car = new CarVO();
 				car.setCar_num(rs.getInt("car_num"));

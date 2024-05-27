@@ -28,7 +28,7 @@ public class InsertSellAction implements Action{
 		SellDao dao = SellDao.getDao();
 		dao.insertSell(sell);
 		
-		return null;
+		return "/WEB-INF/views/sell/sellResult.jsp";
 	}
 
 }
