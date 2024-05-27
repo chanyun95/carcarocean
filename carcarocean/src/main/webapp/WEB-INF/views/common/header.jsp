@@ -36,7 +36,7 @@
          <div class="container-fluid">
             <!-- 로고 시작 -->
             <a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img class="fa-2x" src="${pageContext.request.contextPath}/images/mainlogo.png" width="150" height="150"></a>
-            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>
+            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>  
             <!-- 로고 끝 -->
             <!-- 메뉴 시작 -->
             <div class="collapse navbar-collapse justify-content-between" id="nav">
@@ -52,7 +52,7 @@
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
-                        <a class="dropdown-item" href="#">차량 판매 후기</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/s_re>list.do">차량 판매 후기</a>
                      </div>
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">커뮤니티</a>

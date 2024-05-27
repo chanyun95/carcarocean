@@ -1,55 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="kr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>로그인</title>
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$('#login_form').submit(function() {
-			if ($('#mem_id').val().trim() == '') {
-				alert('아이디를 입력하세요');
-				$('#mem_id').val('').focus();
-				return false;
-			}
-			if ($('#mem_passwd').val().trim() == '') {
-				alert('비밀번호를 입력하세요');
-				$('#mem_passwd').val('').focus();
-				return false;
-			}
-		});
-	});
-</script>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    li {
+    list-style:none;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- 카카오 SDK 로드 -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+      integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Kakao.init('3b68b2e61ad2013cf3f1403f5226af96'); // 여기에 실제 인증키를 넣으세요
+            displayToken();
+        });
+
+        // 로그인 함수
+        function loginWithKakao() {
+            Kakao.Auth.authorize({
+               /*  redirectUri: 'http://localhost:8080/carcarocean/member/loginForm.do', // 실제 리다이렉트 URI를 입력하세요. */
+                state: 'userme',
+            });
+        }
+
+        function requestUserInfo() {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(response) {
+                    alert(JSON.stringify(response));
+                    document.getElementById('token-result').innerText = 'login success, user: ' + JSON.stringify(response);
+                },
+                fail: function(error) {
+                    alert('failed to request user information: ' + JSON.stringify(error));
+                }
+            });
+        }
+
+        // 데모를 위한 UI 코드
+        function displayToken() {
+            var token = getCookie('authorize-access-token');
+            if(token) {
+                Kakao.Auth.setAccessToken(token);
+                document.querySelector('#token-result').innerText = 'login success, ready to request API';
+                document.querySelector('button.api-btn').style.visibility = 'visible';
+            }
+        }
+
+        // 쿠키에서 토큰을 가져오는 함수
+        function getCookie(name) {
+            var parts = document.cookie.split(name + '=');
+            if (parts.length === 2) { return parts[1].split(';')[0]; }
+        }
+    </script>
 </head>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-	<div class="page-main">
-		<div class="content-main">
-			<h2 class = "w-50 mx-auto">로그인</h2>
-			<form id="login_form" action="login.do" method="post" class="border border-warning p-3 bg-right w-50 mx-auto">
-                	<div class="w-50 p-3">
-					<label for="mem_id" class="form-label" >아이디</label> 
-					<input type="text" class="form-control" name = "mem_id" id="mem_id" maxlength = "12">
-					<label for="mem_passwd" class="form-label">비밀번호</label> 
-					<input type="password" class="form-control" name = "mem_passwd" id="mem_passwd">
-					<br>
-				<button type="submit" class="btn btn-warning">로그인</button>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mt-5 mb-3">로그인</h2>
+                <!-- 로그인 폼 -->
+                <form id="login_form" action="login.do" method="post" class="border border-warning p-3">
+                    <div class="form-group">
+                        <label for="mem_id">아이디</label>
+                        <input type="text" class="form-control" name="mem_id" id="mem_id" maxlength="12">
+                    </div>
+                    <div class="form-group">
+                        <label for="mem_passwd">비밀번호</label>
+                        <input type="password" class="form-control" name="mem_passwd" id="mem_passwd">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-block">로그인</button>
+                </form>
+                <!-- 카카오 로그인 버튼 -->
+                <ul class="mt-3">
+                    <li>
+                        <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-block" >
+                            <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" />
+                        </a>
+                    </li>
+                </ul>
+                <!-- 토큰 결과를 표시할 곳 -->
+                <p id="token-result" class="mt-3"></p>
+                <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-
-
-
-
-
-
