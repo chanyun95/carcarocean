@@ -63,12 +63,12 @@
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">고객 센터</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/event/writeForm.do">이벤트</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/event/list.do">이벤트</a>
                         <a class="dropdown-item" href="#">고객 문의</a>
                      </div>
                   </li>
-                  <%-- <c:if test="${!empty user_num && user_auth ==9}"> --%>
-                  <c:if test="${true}">
+                  <c:if test="${!empty user_num && user_auth ==9}">
+                  
                    <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">관리자</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 목록</a>
