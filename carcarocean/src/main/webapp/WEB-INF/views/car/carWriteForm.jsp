@@ -13,11 +13,7 @@ window.onload = function(){
 	const myForm = document.getElementById('write_form');
 	//이벤트 연결
 	myForm.onsubmit = function(){
-		const radio = document.querySelectorAll('input[type=radio]:checked');
-		if(radio.length < 0){
-			alert('상품판매여부를 지정하세요');
-			return false;
-		}
+		
 		const items = document.querySelectorAll('.input-check');
 		for(let i=0; i<items.length; i++){
 			if(items[i].value.trim()==''){
@@ -28,6 +24,151 @@ window.onload = function(){
 				items[i].focus();
 				return false;
 			}
+			
+			
+			/* 제조사는 2자에서 7자 (띄어쓰기 포함) */
+			if (items[i].id == 'car_maker') {
+  			  	var koreanRegex = /^[가-힣]+$/; // 한글만 허용하는 정규표현식
+   			 	if (!koreanRegex.test(items[i].value) || items[i].value.length < 2 || items[i].value.length > 7) {
+    		   		alert('제조사는 한글로 입력해주세요. (2~7자)');
+   			 		items[i].value = '';
+        			items[i].focus();
+        			return false;
+   				}
+			}
+			
+			/* 차명은 2자에서 12자 (띄어쓰기 포함) */
+			if(items[i].id == 'car_name'){
+				if(items[i].value.length<1 || items[i].value.length>13){
+					alert('차량명을 입력해주세요. (2~12자)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+	
+			/* 배기량은 4자로 된 숫자 */
+			if(items[i].id == 'car_cc'){
+				if(isNaN(items[i].value)){
+					alert('숫자로만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+				if(items[i].value.length!=4){
+					alert('배기량은 4자로 입력해주세요. 예)1999')
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			/* 연비 */
+			
+			
+			/* 주행거리는 숫자만 입력 */
+			if(items[i].id == 'car_mile'){
+				var regex = /^\d+(\.\d+)?$/; //소수점을 허용하는 정규표현식
+				if(isNaN(items[i].value)){
+					alert('주행거리는 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 차량가격은 숫자만 입력 */
+			if(items[i].id == 'car_price'){
+				if(isNaN(items[i].value)){
+					alert('차량가격은 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			/* 차량 색상은 한글만 입력 */
+			if (items[i].id == 'car_color') {
+    			var koreanRegex = /^[가-힣]+$/; // 한글만 허용하는 정규표현식
+   				 if (!koreanRegex.test(items[i].value)) {
+       			 alert('한글로만 입력해주세요.');
+       			 items[i].value = '';
+       			 items[i].focus();
+      			  return false;
+  			  }
+			}
+
+			/* 사용기간은 1자에서 3자까지 숫자만 입력 (개월) */
+			if(items[i].id == 'car_use'){
+				if(isNaN(items[i].value)){
+					alert('사용기간은 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+				if(items[i].value.length < 1 || items[i].value.length > 3){
+					alert('사용기간은 개월수로 입력해주세요. 예)30');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 사고이력은 최대 30자 */
+			if(items[i].id == 'car_accident'){
+				if(items[i].value.length < 0 || items[i].value.length > 30){
+					alert('사고이력은 최대 30자까지 적어주세요. (해당 없으면 없음)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 소유주 변경 이력(회) */
+			if(items[i].id == 'car_owner_change'){
+				if(isNaN(items[i].value)){
+					alert('숫자만 입력해주세요. (없으면 0)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			/* 디자인 옵션 */
+			if(items[i].id == 'car_design_op'){
+				if(items[i].value.length < 0 || items[i].value.length > 100){
+					alert('필수 입력 (해당 없으면 없음)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 편의 옵션 */
+			if(items[i].id == 'car_con_op'){
+				if(items[i].value.length < 0 || items[i].value.length > 100){
+					alert('필수 입력 (해당 없으면 없음)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 주행 옵션 */
+			if(items[i].id == 'car_drive_op'){
+				if(items[i].value.length < 0 || items[i].value.length > 100){
+					alert('필수 입력 (해당 없으면 없음)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+
+			/* 검수자 의견 */
+			if(items[i].id == 'car_checker_opinion')
+				if(items[i].value.length < 0 || items[i].value.length > 300){
+					alert('필수 입력');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
 		}
 	};
 };
