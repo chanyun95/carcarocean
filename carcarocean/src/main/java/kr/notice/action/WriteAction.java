@@ -20,7 +20,7 @@ public class WriteAction implements Action{
 		NoticeVo notice = new NoticeVo();
 		notice.setNotice_title(request.getParameter("notice_title"));
 		notice.setNotice_content(request.getParameter("notice_content"));
-		notice.setNotice_photo(FileUtil.createFile(request, "notice_photo"));
+		notice.setNotice_photo(FileUtil.createFiles(request));
 		
 		//중요도 체크
 		String noticeImptParam = request.getParameter("notice_impt");

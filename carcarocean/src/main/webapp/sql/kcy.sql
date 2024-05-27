@@ -58,8 +58,6 @@ CREATE SEQUENCE BUY_SEQ;
 CREATE TABLE b_re(
    b_re_num NUMBER NOT NULL,
    buy_num NUMBER NOT NULL,
-   mem_num NUMBER NOT NULL,
-   car_num NUMBER NOT NULL,
    b_re_title VARCHAR2(150) NOT NULL,
    b_re_content CLOB NOT NULL,
    b_re_photo VARCHAR2(400) NOT NULL,

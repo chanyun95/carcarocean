@@ -98,7 +98,7 @@ public class NoticeDao {
 				else if(keyfield.equals("2")) sub_sql += "WHERE notice_content LIKE '%' || ? || '%'";
 			}
 			sql="SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM notice " + sub_sql +" ORDER BY "
-					+ "notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
+					+ "notice_impt DESC,notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
 
 			pstmt = conn.prepareStatement(sql);
 			if(keyword!=null && !"".equals(keyword)) {
@@ -114,7 +114,7 @@ public class NoticeDao {
 				notice.setNotice_num(rs.getInt("notice_num"));
 				notice.setNotice_title(StringUtil.useNoHTML(rs.getString("notice_title")));
 				notice.setNotice_reg(rs.getString("notice_reg"));
-
+				notice.setNotice_impt(rs.getInt("notice_impt"));
 				list.add(notice);
 			}
 		}catch(Exception e) {
