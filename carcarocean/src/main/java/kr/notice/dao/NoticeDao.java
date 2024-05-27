@@ -17,7 +17,7 @@ public class NoticeDao {
 	}
 	private NoticeDao() {};
 
-	//글 등록
+	//공지사항 글 등록
 	public void insertNotice(NoticeVo vo)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -44,7 +44,7 @@ public class NoticeDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//총 글의 개수,검색 개수
+	//공지사항 총 글의 개수,검색 개수
 	public int getNoticeCount(String keyfield,String keyword)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -81,7 +81,7 @@ public class NoticeDao {
 		}
 		return count;
 	}
-	//글 목록, 검색 글 목록
+	//공지사항 글 목록, 검색 글 목록
 	public List<NoticeVo> getListNotice(int start,int end,String keyfield,String keyword)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -124,7 +124,7 @@ public class NoticeDao {
 		}
 		return list;
 	}
-	//글 상세
+	//공지사항 글 상세
 	public NoticeVo getNotice(int notice_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -184,7 +184,7 @@ public class NoticeDao {
 	        DBUtil.executeClose(null, pstmt, conn);
 	     }
 	}
-	//글 수정
+	//공지사항 글 수정
 	public void updateNotice(NoticeVo notice)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -198,7 +198,7 @@ public class NoticeDao {
          if(notice.getNotice_photo()!=null && !"".equals(notice.getNotice_photo())) {
         	 sub_sql += ",notice_photo=?";
          }
-         sql="UPDATE notice SET notice_title=?,notice_content=?,notice_modify=SYSDATE"+ sub_sql +" WHERE notice_num=?";
+         sql="UPDATE notice SET notice_title=?,notice_content=?,notice_modify=SYSDATE"+ sub_sql +",notice_impt=? WHERE notice_num=?";
          
          //PreparedStatment 객체 생성
          pstmt = conn.prepareStatement(sql);
@@ -207,6 +207,7 @@ public class NoticeDao {
          if(notice.getNotice_photo()!=null && !"".equals(notice.getNotice_photo())) {
         	 pstmt.setString(++cnt, notice.getNotice_photo());
          }
+         pstmt.setInt(++cnt, notice.getNotice_impt());
          pstmt.setInt(++cnt, notice.getNotice_num());
          
          pstmt.executeUpdate();

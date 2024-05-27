@@ -43,6 +43,7 @@
 					</li>
 					<li>
 						<input type="submit" value="검색">
+						<input type="button" value="검색초기화" onclick="location.href='list.do'">
 					</li>
 				</ul>
 			</form>
@@ -58,6 +59,15 @@
 						<th>제목</th>
 						<th>등록일</th>
 					</tr>
+					<c:if test="${notice.notice_impt == 1}">
+					<c:forEach var="notice" items="${list}">
+							<tr>
+								<td>${notice.notice_num}</td>
+								<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+								<td>${notice.notice_reg}</td>
+							</tr>				
+					</c:forEach>
+					</c:if>
 					<c:forEach var="notice" items="${list}">
 						<tr>
 							<td>${notice.notice_num}</td>

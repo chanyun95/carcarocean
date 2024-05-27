@@ -90,7 +90,7 @@
 					</li>
 				</ul>
 				<div>
-					<input type="submit" value="글 쓰기">
+					<input type="submit" value="글 수정">
 					<input type="button" value="목록" onclick="location.href='list.do'">
 				</div>
 			</form>
