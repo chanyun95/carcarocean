@@ -47,9 +47,9 @@ public class FileUtil {
 		for(Part part : parts) {
 			if(part.getSubmittedFileName()!=null) {
 				String filename = part.getSubmittedFileName();
-				if(!filename.isEmpty()) {
+				if(filename!=null&&!filename.isEmpty()) {
 					//파일 중복 방지를 위해 임의의 값_원래 파일명 형식으로 변경
-					filename = UUID.randomUUID()+"_"+filename;
+					filename = UUID.randomUUID()+""+filename.substring(filename.lastIndexOf("."));
 					part.write(upload+"/"+filename);
 				}
 				totalFileName.append(filename).append(",");

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.checker.dao.CheckerDao;
 import kr.checker.vo.CheckerVo;
 import kr.controller.Action;
+import kr.sell.dao.SellDao;
+import kr.sell.vo.SellVo;
 
 public class CarWriteFormAction implements Action{
 
@@ -32,6 +34,8 @@ public class CarWriteFormAction implements Action{
 		
 		int sell_check = Integer.parseInt(request.getParameter("sell_check"));
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
+		SellDao sDao = SellDao.getDao();
+		SellVo sell = sDao.getSell(sell_num);
 		
 		//검수자 정보 보내야함
 		CheckerDao cDao = CheckerDao.getDao();
@@ -40,7 +44,7 @@ public class CarWriteFormAction implements Action{
 		request.setAttribute("checkerList", checkerList);
 		request.setAttribute("sell_check", sell_check);
 		request.setAttribute("sell_num", sell_num);
-
+		request.setAttribute("sell", sell);
 		
 		return "/WEB-INF/views/car/carWriteForm.jsp";
 	}

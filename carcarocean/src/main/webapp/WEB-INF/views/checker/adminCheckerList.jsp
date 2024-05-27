@@ -20,16 +20,14 @@
 					<th>#</th>
 					<th>이름</th>
 					<th>회사</th>
-					<th>전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="checker" items="${list}">
 				<tr>
 					<td>${checker.checker_num}</td>
-					<td><a href="#">${checker.checker_name}</a></td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}">${checker.checker_name}</a></td>
 					<td>${checker.checker_company}</td>
-					<td>${checker.checker_phone}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
