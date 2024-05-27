@@ -19,7 +19,12 @@ public class DetailAction implements Action{
 		
 		NoticeDao dao = NoticeDao.getDao();
 		NoticeVo notice = dao.getNotice(notice_num);
+		/*
+		 // notice_photo가 쉼표로 구분된 문자열이라면 배열로 변환
+		String[] photo = notice.getNotice_photo().split(",");
+		*/
 		
+		request.setAttribute("notice_photo", notice.getNotice_photo());
 		request.setAttribute("notice", notice);
 		request.setAttribute("user_num", user_num);
 		

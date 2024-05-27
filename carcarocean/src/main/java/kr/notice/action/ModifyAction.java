@@ -19,7 +19,7 @@ public class ModifyAction implements Action{
 		notice.setNotice_num(Integer.parseInt(request.getParameter("notice_num")));
 		notice.setNotice_title(request.getParameter("notice_title"));
 		notice.setNotice_content(request.getParameter("notice_content"));
-		notice.setNotice_photo(FileUtil.createFile(request, "notice_photo"));
+		notice.setNotice_photo(FileUtil.createFiles(request));
 		String noticeImptParam = request.getParameter("notice_impt");
 	    int noticeImpt = 0; // 기본값 설정
 	    
