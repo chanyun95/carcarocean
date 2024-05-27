@@ -11,10 +11,10 @@
 <script>
 	function delete_btn() {
 		if(confirm("정말 삭제하시겠습니까?")){
-			location.href= "deleteSell.do?sell_num=${sell.sell_num}";
 			alert("삭제되었습니다.");
+			location.href= "deleteSell.do?sell_num=${sell.sell_num}";
 		}
-	}
+	};
 
 </script>
 </head>
@@ -90,7 +90,6 @@
 				<!-- 누르면 차량 정보 등록 폼이 뜨고 등록하게 되면 sell_check는 2로 업데이트 되면서 car에 정보들이 등록된다.-->
 				<c:if test="${sell.sell_check==1}">
 				<form action="${pageContext.request.contextPath}/car/carWriteForm.do" method="post" class="ms-5">
-					<input type="hidden" name="sell_check" value="2">
 					<input type="hidden" name="sell_num" value="${sell.sell_num}">
 					<input type="submit" class="btn btn-primary" value="검수 완료 차량 등록 폼">
 				</form>

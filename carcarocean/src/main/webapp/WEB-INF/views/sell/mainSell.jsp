@@ -141,8 +141,8 @@
 						<c:set var="firstCarPhoto" value="${carPhotoList[0]}" />
 						<div><a href="#"><img src="${pageContext.request.contextPath}/upload/${firstCarPhoto}" width="300" height="300"></a></div>
 						<h3 class="text-center">${car.car_maker} / ${car.car_name}</h3>
-						<h4 class="text-center"><b>${car.car_price}</b>원</h4>
-						<h5 class="text-center"><b>${car.car_mile}</b>km</h5>
+						<h4 class="text-center"><b>${car.car_price}</b>만원</h4>
+						<h5 class="text-center"><b>${car.car_mile}</b>KM</h5>
 					</div>
 					</c:forEach>
 					</div>
@@ -150,6 +150,7 @@
 				</c:if>
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>
