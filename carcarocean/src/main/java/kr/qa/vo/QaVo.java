@@ -10,6 +10,9 @@ public class QaVo {
 	private String qa_reg;
 	private String qa_modify;
 	
+	private String mem_id;			
+	private String photo;
+	
 	public int getQa_num() {
 		return qa_num;
 	}
@@ -58,6 +61,17 @@ public class QaVo {
 	public void setQa_modify(String qa_modify) {
 		this.qa_modify = qa_modify;
 	}
-	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	
 }
