@@ -1,0 +1,30 @@
+package kr.qa.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.controller.Action;
+import kr.qa.dao.QaDao;
+import kr.qa.vo.QaVo;
+import kr.util.StringUtil;
+
+public class DetailAction implements Action{
+
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//글번호 반환
+		int qa_num = Integer.parseInt(request.getParameter("qa_num"));
+		QaDao dao = QaDao.getDao();
+		
+		QaVo qa = dao.detailQa(qa_num);
+		
+		//HTML를 허용하지 않음
+		qa.setQa_title(StringUtil.useNoHTML(qa.getQa_title()));
+		//HTML를 허용하지 않음
+		qa.setQa_content(StringUtil.useBrNoHTML(qa.getQa_content()));
+		
+		request.setAttribute("qa", qa);
+		return "/WEB-INF/views/qa/detail.jsp";
+	}
+
+}
