@@ -1,7 +1,5 @@
 package kr.car.vo;
 
-import java.sql.Date;
-
 public class CarVO {
 	private int car_num;					//차량 식별 번호
 	private String car_maker;			//제조사
