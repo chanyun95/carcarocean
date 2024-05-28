@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,23 @@
 <title>내 차 팔기 메인</title>
 	<script>
     	function openPopup() {
-    		window.open("insertSellForm.do", "판매 신청서", "width=950,height=650,scrollbars=no,resizable=yes");
+    		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
     	}
 	</script>
-</head>
+	<style>
+        .background-image {
+            background-image: url('../images/service.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 450px;
+        }
 
+        .btn-xl {
+            padding: 1.5rem 3.5rem !important;
+            font-size: 2rem !important;
+        }
+    </style>
+</head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <body>
 	<div>
@@ -21,25 +34,27 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<!-- 판매 신청 부분 -->
-			<div class="bg-light">
-				<div>
-					<h2>내 차 팔기!</h2>
-					<h3>지금 카카오션에 자신의 차를 팔아보세요!</h3>
-					<h1>흥정 없이 높은 가격으로 중고차를 판매하세요!!</h1>
-				</div>
-				<div>
-					<button onclick="openPopup()" class="btn btn-danger btn-lg">간편 신청</button>
+			<div class="bg-light d-flex flex-column justify-content-center background-image" style="height:450px;">
+				<div class="m-3">
+					<div>
+						<h2>내 차 팔기!</h2>
+						<h3>지금 카카오션에 자신의 차를 팔아보세요!</h3>
+						<h1>흥정 없이 높은 가격으로 중고차를 판매하세요!!</h1>
+					</div>
+					<div class="p-3">
+						<button onclick="openPopup()" class="btn btn-danger btn-lg btn-xl">간편 신청 ></button>
+					</div>
 				</div>
 			</div>
 			<!-- 이벤트 부분 -->
-			<div class="bg-white d-flex justify-content-between border rounded">
+			<div class="bg-white d-flex flex-row justify-content-between border rounded mt-5 mb-5 p-5">
 				<div>
 					<p class="fs-3">내 차 팔기 이벤트!</p>
 					<p class="fs-4">지금 <b>카카오션</b>에 내 차를 팔면?</p>
 					<p class="fs-2">내 차 팔기 <b>당일 판매시</b> 혜택이 더욱 풍성해집니다!</p>
 				</div>
-				<div>
-					<ul>
+				<div class="d-flex align-items-center">
+					<ul class="list-unstyled">
 						<li>
 							대상고객 : 당일 판매 하신 분!
 						</li>
@@ -56,20 +71,20 @@
 				</div>
 			</div>
 			<!-- 카카오션의 차별점 -->
-			<div class="bg-light text-center">
+			<div class="bg-light text-center mb-5 p-5">
 				<p class="fs-1"><b>카카오션</b>은</p>
 				<p class="fs-2">무엇이 다른가요?</p>
-				<div class="d-flex justify-content-between">
-					<div class="border rounded">
+				<div class="d-flex flex-row justify-content-between">
+					<div class="border rounded mb-4">
 						<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
 						<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
 					</div>
-					<div class="border rounded">
+					<div class="border rounded mb-4">
 						<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
 						<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
 					</div>
 				</div>
-				<div class="d-flex justify-content-between">
+				<div class="d-flex flex-row justify-content-between">
 					<div class="border rounded">
 						<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
 						<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
@@ -81,9 +96,9 @@
 				</div>
 			</div>
 			<!-- 내 차 팔기 진행 방식 -->
-			<div class="container bg-white mt-5">
-				<p class="fs-1"><b>카카오션</b> 내 차 팔기</p>
-				<p class="fs-2">이렇게 진행 됩니다.</p>
+			<div class="container bg-white mb-5">
+				<p class="fs-1 text-center"><b>카카오션</b> 내 차 팔기</p>
+				<p class="fs-2 text-center">이렇게 진행 됩니다.</p>
 				<div class="d-flex justify-content-between">
 					<div class="p-2 border">
 						<p>step1</p>
@@ -111,7 +126,25 @@
 					</div>
 				</div>
 			</div>
+			<!-- 최근 올라온 차량 3개만 보여주기 -->
+			<div class="container mb-5">
+				<h2 class="text-center">최근 등록된 차량</h2>
+				<div class="row d-flex justify-content-center">
+				<div class="col-1 align-self-center"><a href="#">이전</a></div>
+				<c:forEach var="car" items="${carList}">
+				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+					<div class="col-2 border mt-3 text-center">
+						<a href="#"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:170px; height:100px;" class="img-fluid img-thumbnail rounded"></a>
+						<p>${car.car_maker} / ${car.car_name}</p>
+						<p><b>${car.car_price}</b>만원</p>
+						<p><b>${car.car_mile}</b>KM</p>
+					</div>
+				</c:forEach>
+				<div class="col-1 align-self-center"><a href="#">다음</a></div>
+				</div>
+			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>

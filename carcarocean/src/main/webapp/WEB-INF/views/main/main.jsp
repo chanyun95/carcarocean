@@ -19,7 +19,7 @@
 	
 	<!-- 표지화면 -->
 	<div id="carouselExampleIndicators" class="carousel slide"
-		style="background-color: #D7DF01;">
+		style="background-color: #FEE500;">
 		
 		<div class="carousel-indicators">
 			<button type="button" data-bs-target="#carouselExampleIndicators"
@@ -159,7 +159,7 @@
 	
 	<!-- Footer-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-  
+	<!-- end of Footer -->
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

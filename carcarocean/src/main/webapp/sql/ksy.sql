@@ -11,11 +11,12 @@ CREATE TABLE SELL (
 	sell_place2 VARCHAR2(100) NOT NULL,
 	sell_date NUMBER NOT NULL,
 	sell_check NUMBER(1) DEFAULT 0 NOT NULL ,
+	sell_modify_check DATE,
 	sell_reg DATE DEFAULT SYSDATE NOT NULL ,
 	sell_modify DATE,
 	mem_num NUMBER NOT NULL,
 	constraint sell_pk primary key (sell_num),
-	constraint sell_fk foreign key (mem_num) references member (mem_num)
+	constraint sell_fk foreign key (mem_num) references member (mem_num),
 );
 CREATE SEQUENCE SELL_SEQ;
  
@@ -38,7 +39,6 @@ CREATE TABLE CHECKER(
 	checker_photo VARCHAR2(400) NOT NULL,
 	checker_company VARCHAR2(30) NOT NULL,
 	checker_phone VARCHAR2(11) NOT NULL,
-	checker_opinion VARCHAR2(150) NOT NULL,
 	CONSTRAINT checker_pk PRIMARY KEY (checker_num)
 );
 CREATE CHECKER_SEQ;
@@ -66,6 +66,7 @@ CREATE TABLE CAR(
 	car_drive_op VARCHAR2(400) NOT NULL,
 	car_status NUMBER(1) DEFAULT 0 NOT NULL,
 	checker_num NUMBER NOT NULL,
+	car_checker_opinion VARCHAR2(100) NOT NULL
 	CONSTRAINT car_pk PRIMARY KEY (car_num),
 	CONSTRAINT car_fk FOREIGN KEY (checker_num) REFERENCES checker (checker_num)
 )

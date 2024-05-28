@@ -5,12 +5,27 @@ public class BoardVo {
 	private int mem_num;
 	private String board_title;
 	private String board_content;
-	private String photo;
+	private String board_photo;
 	private int board_hit;
 	private int board_report;
 	private String board_reg;
 	private String board_modify;
 	
+	private String mem_id;
+	private String mem_photo;
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getMem_photo() {
+		return mem_photo;
+	}
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -35,11 +50,11 @@ public class BoardVo {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public String getPhoto() {
-		return photo;
+	public String getBoard_photo() {
+		return board_photo;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setBoard_Photo(String board_photo) {
+		this.board_photo = board_photo;
 	}
 	public int getBoard_hit() {
 		return board_hit;

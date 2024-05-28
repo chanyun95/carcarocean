@@ -1,5 +1,7 @@
 package kr.b_re.vo;
 
+import java.sql.Date;
+
 public class B_ReVo {
 	private int b_re_num;
 	private int buy_num;
@@ -9,6 +11,24 @@ public class B_ReVo {
 	private String b_re_reg;
 	private String b_re_modify;
 	
+	private String car_name;
+	private Date buy_reg;
+	
+
+	public Date getBuy_reg() {
+		return buy_reg;
+	}
+	public void setBuy_reg(Date buy_reg) {
+		this.buy_reg = buy_reg;
+	}
+	
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+
 	public int getB_re_num() {
 		return b_re_num;
 	}

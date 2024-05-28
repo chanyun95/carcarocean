@@ -9,8 +9,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script>
 	/* 제출 버튼 */
-	function submitForm() {
-	    const myForm = document.getElementById("my_form");
+	function submitForm(event) {
+		event.preventDefault();
 		const data = document.querySelectorAll(".sell-data");
 		for(let i=0; i<data.length; i++){
 			const label = document.querySelector('label[for="'+data[i].id+'"]');
@@ -30,10 +30,10 @@
 					return;
 				}
 			}
-			/* 신청자명은 3자에서 4자까지 인정 */
+			/* 신청자명은 2자에서 4자까지 인정 */
 			if(data[i].id=='sell_name'){
-				if(data[i].value.length<3 || data[i].value.length>5){
-					alert('신청자명은 본명으로 입력해주세요! (3~4자)');
+				if(data[i].value.length<2 || data[i].value.length>5){
+					alert('신청자명은 본명으로 입력해주세요! (2~4자)');
 					data[i].value = '';
 					data[i].focus();
 					return;
@@ -64,11 +64,7 @@
 				}
 			}
 		}
-		alert('신청이 완료되었습니다!');
-		myForm.submit();
-		setTimeout(() => {
-            window.close();
-        }, 1000);
+		document.getElementById('my_form').submit();
 	}
 	/* 취소 버튼 */
 	function closePopup() {
@@ -78,7 +74,7 @@
 </script>
 </head>
 <body>
-	<div class="container text-center">
+	<div class="container text-center p-5">
 		<h1>내 차 팔기 신청서</h1>
 		<form id="my_form" action="insertSell.do" method="post">
 			<%-- <input type="hidden" name="mem_num" value="${user_num}"> --%>
@@ -186,7 +182,7 @@
 				</li>
 			</ul>
 			<div class="bg-color-gray">
-				<input type="button" class="btn btn-primary" value="제출" onclick="submitForm()">
+				<input type="submit" class="btn btn-primary" value="제출">
 				<input type="button" class="btn btn-secondary" value="취소" onclick="closePopup()">
 			</div>
 		</form>
