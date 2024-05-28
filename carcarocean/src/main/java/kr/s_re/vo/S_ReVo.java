@@ -1,5 +1,7 @@
 package kr.s_re.vo;
 
+import kr.car.vo.CarVO;
+
 public class S_ReVo {
 	private int s_re_num;
 	private int car_num;
@@ -7,7 +9,30 @@ public class S_ReVo {
 	private String s_re_title;
 	private String s_re_content;
 	private String s_re_reg;
-	private String s_re_modify;
+	private String s_re_modify;	
+	
+	private CarVO car;
+	private String car_name;
+	
+	private String mem_id;			//회원아이디
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+	public CarVO getCar() {
+		return car;
+	}
+	public void setCar(CarVO car) {
+		this.car = car;
+	}
 	public int getS_re_num() {
 		return s_re_num;
 	}
