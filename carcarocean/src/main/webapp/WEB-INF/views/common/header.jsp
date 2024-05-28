@@ -44,7 +44,7 @@
                   <li class="nav-item"><a class="nav-link text-dark font-weight-bold px-3" href="${pageContext.request.contextPath}/main/main.do">홈</a></li>
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 구매</a>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 구매</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="#">차량 구매 후기</a>
                         <a class="dropdown-item" href="#">관심 차량</a>
                      </div>
