@@ -19,7 +19,7 @@
 }
 /* nav-item 간격 조정 */
 .nav-item {
-    margin-right: 90px;
+    margin-right: 50px;
 }
 /* 로고 크기 및 위치 조정 */
 .navbar-brand img {
@@ -52,7 +52,7 @@
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/s_re>list.do">차량 판매 후기</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
                      </div>
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">커뮤니티</a>
