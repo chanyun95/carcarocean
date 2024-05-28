@@ -19,7 +19,7 @@
 	
 	<!-- 표지화면 -->
 	<div id="carouselExampleIndicators" class="carousel slide"
-		style="background-color: #D7DF01;">
+		style="background-color: #FEE500;">
 		
 		<div class="carousel-indicators">
 			<button type="button" data-bs-target="#carouselExampleIndicators"
