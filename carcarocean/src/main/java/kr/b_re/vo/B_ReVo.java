@@ -11,8 +11,29 @@ public class B_ReVo {
 	private String b_re_reg;
 	private String b_re_modify;
 	
-	private String car_name;
 	private Date buy_reg;
+	private int car_num;
+	private int mem_num;
+	
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
+	public int getCar_num() {
+		return car_num;
+	}
+	public void setCar_num(int car_num) {
+		this.car_num = car_num;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+	private String car_name;
 	
 
 	public Date getBuy_reg() {
@@ -21,14 +42,6 @@ public class B_ReVo {
 	public void setBuy_reg(Date buy_reg) {
 		this.buy_reg = buy_reg;
 	}
-	
-	public String getCar_name() {
-		return car_name;
-	}
-	public void setCar_name(String car_name) {
-		this.car_name = car_name;
-	}
-
 	public int getB_re_num() {
 		return b_re_num;
 	}
