@@ -168,14 +168,15 @@ window.onload = function(){
 					items[i].focus();
 					return false;
 				}
-		}
+			}
+		alert('등록되었습니다!');
 	};
 };
+
 function submit_btn (){
 	if(!confirm('정말 제출하시겠습니까?')){
-		return false;
+		return;
 	}
-	alert('등록되었습니다!');
 }
 </script>
 </head>
@@ -186,34 +187,8 @@ function submit_btn (){
 	<div class="content-main">
 	<h1 class="text-center">차량 등록 폼</h1>
 	<form id="write_form" action="carWrite.do" method="post" enctype="multipart/form-data" class="m-5">
-		<!-- sell의 sell_check 값을 2(검수완료)로 변경하기 위함 -->
-		<input type="hidden" name="sell_check" value="${sell_check}">
-		<input type="hidden" name="sell_num" value="${sell_num}">
+		<input type="hidden" name="sell_num" value="${sell.sell_num}">
 		<ul class="list-unstyled">
-			<!-- 
-				차량 식별자
-				검수자 식별자
-				
-				제조사
-				차명
-				차종
-				연식
-				배기량
-				연료
-				연비
-				주행거리
-				가격
-				색상
-				사진URL
-				변속기
-				사용기간
-				사고이력
-				소유자변경횟수
-				디자인옵션
-				편의옵션
-				주행옵션
-				판매가능여부
-			 -->
 			<li>
 				<label for="car_maker">제조사</label>
 				<input type="text" name="car_maker" id="car_maker" class="input-check form-control" placeholder="예) 제네시스" value="${sell.sell_maker}">

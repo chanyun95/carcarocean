@@ -59,6 +59,7 @@ public class CarDao {
 		}
 	}
 	//차량 전체 수, 검색 수
+	
 	//차량 전체 목록, 검색 목록
 	public List<CarVO> getListCar(int start, int end, String keyfield, String keyword, int status) throws Exception{
 		Connection conn = null;
@@ -77,8 +78,11 @@ public class CarDao {
 				else if(keyfield.equals("2")) sub_sql += "AND car_name LIKE '%' || ? || '%'";
 				else if(keyfield.equals("3")) sub_sql += "AND car_size LIKE '%' || ? || '%'";
 			}
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM car WHERE car_status > ? " + sub_sql
-					+ " ORDER BY car_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
+			sql =
+			"SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM car WHERE car_status <= ? "
+			+ sub_sql + " ORDER BY car_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, status);
 			if(keyword != null && !"".equals(keyword)) {
@@ -123,4 +127,29 @@ public class CarDao {
 	//차량 상세
 	//차량 수정
 	//차량 삭제
+	
+	//차량 갯수 조회 (검수자 번호)
+	public int getCarCountByChecker(int checker_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count = 0;
+
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT count(*) FROM car WHERE checker_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, checker_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return count;
+	}
 }

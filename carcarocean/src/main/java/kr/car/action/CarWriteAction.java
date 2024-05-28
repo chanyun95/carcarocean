@@ -18,28 +18,25 @@ public class CarWriteAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
+		//로그인 체크&관리자 체크
 		HttpSession session = request.getSession();
-		Integer user_num = 
-				(Integer)session.getAttribute("user_num");
-		if(user_num == null) { //로그인 되지 않은 경우
+		Integer user_num = (Integer)session.getAttribute("user_num");
+		Integer user_auth = (Integer)session.getAttribute("user_auth");
+		//로그인 안되어 있을 시 로그인 폼으로 이동
+		if(user_num==null) {
 			return "redirect:/member/loginForm.do";
 		}
-		Integer user_auth = (Integer)session.getAttribute("user_auth");
-		if(user_auth != 9) { //관리자로 로그인하지 않은 경우
-			return "/WEB-INF/views/common/notice.jsp";
+		//관리자아닌데 잘못된 접근시 main.do로 이동
+		if(user_auth!=9) {
+			return "/WEB-INF/views/common/warningPage";
 		}
-		//관리자로 로그인한 경우
-		*/
-		
-		
-		
+
 		
 		//전송된 데이터 인코딩 타입 지정
 		request.setCharacterEncoding("utf-8");
 		
 		// 판매 정보 '검수 완료'로 변경
-		int sell_check = Integer.parseInt(request.getParameter("sell_check"));
+		int sell_check = 2;
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
 		SellDao sellDao = SellDao.getDao();
 		sellDao.updateSellCheck(sell_num, sell_check);
