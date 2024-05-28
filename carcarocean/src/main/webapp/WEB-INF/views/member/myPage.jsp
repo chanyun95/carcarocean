@@ -77,32 +77,14 @@
         margin: 10px 0;
     }
     .mypage{
-    
-    
 
     }
 </style>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 	<div class="page-main">
-		<div class="mypage">
-			<h3>마이페이지</h3>
-			<ul class="menu">
-				<li><a href="#">회원정보</a></li>
-			</ul>
-			<hr width="10%" size="1" noshade="noshade">
-			<ul class="menu">
-				<li><a href="myFavoriteCarForm.do">관심차량</a><br></li>
-				<li><a href="mySellCurrentStatusForm.do">내차팔기 신청현황</a><br></li>
-				<li><a href="myTransactionalForm.do">거래내역</a></li>
-			</ul>
-			<hr width="10%" size="1" noshade="noshade">
-			<ul class="menu">
-				<li><a href="myQnAForm.do">문의내역</a><br></li>
-				<li><a href="myWriteBoardForm.do">내가 쓴 글</a></li>
-			</ul>
-		</div>
 		<div class="content-main">
 			<div class="mypage-div">
 
@@ -111,7 +93,7 @@
 					<div class="profile">
 						<div class="profile-info">
 							<a style="font-size: 50px;">${member.mem_name} 님</a><br> <a
-								href="#">정보수정</a><br>
+								href="${pageContext.request.contextPath}/member/modifyUserForm.do">정보수정</a><br>
 						</div>
 						<c:if test="${empty member.mem_photo}">
 							<!-- 이미지가 비어있는 경우 -->
@@ -124,7 +106,6 @@
 								src="${pageContext.request.contextPath}/upload/${member.mem_photo}"
 								width="200" height="200" class="my-photo">
 						</c:if>
-						관심차량 판매신청차량
 					</div>
 				</div>
 				<div class="border border-warning p-3 bg-right w-80 mx-auto">
@@ -173,4 +154,9 @@
 		</div>
 	</div>
 </body>
+<footer>
+	<!-- Footer-->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<!-- end of Footer -->
+</footer>
 </html>

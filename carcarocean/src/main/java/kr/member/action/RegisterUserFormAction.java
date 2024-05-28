@@ -10,6 +10,7 @@ public class RegisterUserFormAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//JSP 경로 표시
+		
 		return "/WEB-INF/views/member/registerUserForm.jsp";
 	}
 
