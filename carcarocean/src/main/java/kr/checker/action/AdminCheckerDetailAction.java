@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.car.dao.CarDao;
 import kr.checker.dao.CheckerDao;
 import kr.checker.vo.CheckerVo;
 import kr.controller.Action;
@@ -30,6 +31,11 @@ public class AdminCheckerDetailAction implements Action{
 		CheckerVo checker = dao.getChecker(checker_num);
 		
 		request.setAttribute("checker", checker);
+		
+		// 해당 검수자가 검수한 차량이 존재한다면 삭제 버튼을 가리기 위해 검수한 차량의 갯수 보냄
+		CarDao carDao = CarDao.getDao();
+		int count = carDao.getCarCountByChecker(checker_num);
+		request.setAttribute("count", count);
 		
 		return "/WEB-INF/views/checker/adminCheckerDetail.jsp";
 	}

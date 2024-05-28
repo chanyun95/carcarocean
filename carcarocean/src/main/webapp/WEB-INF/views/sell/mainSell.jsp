@@ -129,25 +129,19 @@
 			<!-- 최근 올라온 차량 3개만 보여주기 -->
 			<div class="container mb-5">
 				<h2 class="text-center">최근 등록된 차량</h2>
-				<c:if test="${carList==null}">
-						등록된 차량이 없습니다!
-				</c:if>
-				<c:if test="${carList!=null}">
-				<div class="d-flex flex-row justify-content-center align-items-center">
-					<div class="row">
-					<c:forEach var="car" items="${carList}">
-					<div class="col d-flex flex-column justify-content-center align-items-between border p-3 m-4">
-						<c:set var="carPhotoList" value="${fn:split(car.car_photo, ',')}" />
-						<c:set var="firstCarPhoto" value="${carPhotoList[0]}" />
-						<div><a href="#"><img src="${pageContext.request.contextPath}/upload/${firstCarPhoto}" width="300" height="300"></a></div>
-						<h3 class="text-center">${car.car_maker} / ${car.car_name}</h3>
-						<h4 class="text-center"><b>${car.car_price}</b>만원</h4>
-						<h5 class="text-center"><b>${car.car_mile}</b>KM</h5>
+				<div class="row d-flex justify-content-center">
+				<div class="col-1 align-self-center"><a href="#">이전</a></div>
+				<c:forEach var="car" items="${carList}">
+				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+					<div class="col-2 border mt-3 text-center">
+						<a href="#"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:170px; height:100px;" class="img-fluid img-thumbnail rounded"></a>
+						<p>${car.car_maker} / ${car.car_name}</p>
+						<p><b>${car.car_price}</b>만원</p>
+						<p><b>${car.car_mile}</b>KM</p>
 					</div>
-					</c:forEach>
-					</div>
+				</c:forEach>
+				<div class="col-1 align-self-center"><a href="#">다음</a></div>
 				</div>
-				</c:if>
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

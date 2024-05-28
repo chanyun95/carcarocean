@@ -169,14 +169,14 @@ window.onload = function(){
 					return false;
 				}
 			}
+		alert('등록되었습니다!');
 	};
 };
 
 function submit_btn (){
 	if(!confirm('정말 제출하시겠습니까?')){
-		return false;
+		return;
 	}
-	alert('등록되었습니다!');
 }
 </script>
 </head>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,38 +59,18 @@
 					<!-- 차량 리스트 -->
 	                <div class="container">
 	                	<div class="row mb-3">
+	                	<c:forEach var="car" items="${carList}" begin="0" end="2">
+        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
 	                		<div class="col-4">
-				                <div class="p-3 border bg-light">1</div>
+				                <div class="p-3 border bg-light text-center">
+				                	<a href="#"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p>${car.car_maker} ${car.car_name}</p>
+				                	<p>${car.car_price}만원</p>
+				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
+				                </div>
 				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">2</div>
-				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">3</div>
-				            </div>
+                		</c:forEach>
                 		</div>
-                		<div class="row mb-3">
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">5</div>
-				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">6</div>
-				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">7</div>
-				            </div>
-				        </div>
-				        <div class="row mb-3">
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">9</div>
-				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">10</div>
-				            </div>
-				            <div class="col-4">
-				                <div class="p-3 border bg-light">11</div>
-				            </div>
-				        </div>
 	                </div>
 	            </main>
 	        </div>

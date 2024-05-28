@@ -16,6 +16,7 @@ public class CheckerDao {
 	}
 	private CheckerDao() {};
 	
+	//검수자 등록
 	public void insertChecker(CheckerVo checker) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -100,6 +101,7 @@ public class CheckerDao {
 		return checker;
 	}
 	
+	//검수자 정보 수정
 	public void updateChecker(CheckerVo checker) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -123,6 +125,7 @@ public class CheckerDao {
 		}
 	}
 	
+	//검수자 정보 삭제
 	public void deleteChecker(int checker_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;

@@ -15,7 +15,8 @@ public class MainSellAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//최근 등록된 차량 보여주기
 		CarDao cDao = CarDao.getDao();
-		List<CarVO>carList = cDao.getListCar(1, 3, null, null, -1);
+		//판매중인 리스트만
+		List<CarVO>carList = cDao.getListCar(1, 3, null, null, 0);
 		request.setAttribute("carList", carList);
 		
 		return "/WEB-INF/views/sell/mainSell.jsp";

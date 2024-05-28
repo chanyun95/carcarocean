@@ -42,7 +42,7 @@ function delete_btn() {
 		<div class="float-end">
 			<input type="button" value="목록" class="btn btn-warning" onclick="location.href='adminCheckerList.do'">
 			<input type="button" value="수정" class="btn btn-primary" onclick="location.href='adminUpdateCheckerForm.do?checker_num=${checker.checker_num}'">
-			<input type="button" value="삭제" class="btn btn-danger" onclick="delete_btn()">
+			<input type="button" value="삭제" class="btn btn-danger" onclick="delete_btn()" <c:if test="${count>0}">disabled</c:if>>
 		</div>
 	</div>
 </body>
