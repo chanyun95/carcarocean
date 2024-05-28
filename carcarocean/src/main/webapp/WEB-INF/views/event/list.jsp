@@ -45,7 +45,9 @@
 			</ul>
 		</form>
 		<div class="list-space align-right">
+			<c:if test="${!empty user_num && user_auth == 9}">
 			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+			</c:if>
 			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		</div>
 		<c:if test="${count == 0}">

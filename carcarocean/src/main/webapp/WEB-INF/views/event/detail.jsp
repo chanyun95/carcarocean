@@ -30,6 +30,7 @@
 					</c:if>
 					작성일: ${event.event_reg}
 						<input type="button" value="목록" onclick="location.href='list.do'">
+						<c:if test="${!empty user_num && user_auth == 9}">
 						<input type="button" value="수정" onclick="location.href='updateForm.do?event_num=${event.event_num}'">
 						<input type="button" value="삭제" id="delete_btn">
 						<script type="text/javascript">
@@ -42,6 +43,7 @@
 								}
 							};
 						</script>
+						</c:if>
 				</li>
 			</ul>
 		</div>
