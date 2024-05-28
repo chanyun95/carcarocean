@@ -59,11 +59,47 @@
 					<!-- 차량 리스트 -->
 	                <div class="container">
 	                	<div class="row mb-3">
+	                	<!-- 3 * 4 반복문 시작 -->
+	                	<!-- 한 블럭 시작 -->
 	                	<c:forEach var="car" items="${carList}" begin="0" end="2">
         				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
 	                		<div class="col-4">
 				                <div class="p-3 border bg-light text-center">
-				                	<a href="#"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p>${car.car_maker} ${car.car_name}</p>
+				                	<p>${car.car_price}만원</p>
+				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
+				                </div>
+				            </div>
+                		</c:forEach>
+                		<!-- 한 블럭 끝 -->
+                		<c:forEach var="car" items="${carList}" begin="3" end="5">
+        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+	                		<div class="col-4">
+				                <div class="p-3 border bg-light text-center">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p>${car.car_maker} ${car.car_name}</p>
+				                	<p>${car.car_price}만원</p>
+				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
+				                </div>
+				            </div>
+                		</c:forEach>
+                		<c:forEach var="car" items="${carList}" begin="6" end="8">
+        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+	                		<div class="col-4">
+				                <div class="p-3 border bg-light text-center">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p>${car.car_maker} ${car.car_name}</p>
+				                	<p>${car.car_price}만원</p>
+				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
+				                </div>
+				            </div>
+                		</c:forEach>
+                		<c:forEach var="car" items="${carList}" begin="9" end="11">
+        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+	                		<div class="col-4">
+				                <div class="p-3 border bg-light text-center">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
 				                	<p>${car.car_maker} ${car.car_name}</p>
 				                	<p>${car.car_price}만원</p>
 				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
@@ -71,6 +107,7 @@
 				            </div>
                 		</c:forEach>
                 		</div>
+                		<!-- 3 * 4 반복문 끝 -->
 	                </div>
 	            </main>
 	        </div>

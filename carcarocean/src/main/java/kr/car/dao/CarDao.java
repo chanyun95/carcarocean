@@ -114,6 +114,8 @@ public class CarDao {
 				car.setCar_con_op(rs.getString("car_con_op"));
 				car.setCar_drive_op(rs.getString("car_drive_op"));
 				car.setCar_status(rs.getInt("car_status"));
+				car.setChecker_num(rs.getInt("checker_num"));
+				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
 				
 				list.add(car);
 			}
@@ -125,6 +127,51 @@ public class CarDao {
 		return list;
 	}
 	//차량 상세
+	public CarVO getCar(int car_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		CarVO car = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM car WHERE car_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, car_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				car = new CarVO();
+				car.setCar_num(rs.getInt("car_num"));
+				car.setCar_maker(rs.getString("car_maker"));
+				car.setCar_name(rs.getString("car_name"));
+				car.setCar_size(rs.getInt("car_size"));
+				car.setCar_birth(rs.getString("car_birth"));
+				car.setCar_cc(rs.getInt("car_cc"));
+				car.setCar_fuel_type(rs.getInt("car_fuel_type"));
+				car.setCar_fuel_efficiency(rs.getInt("car_fuel_efficiency"));
+				car.setCar_mile(rs.getInt("car_mile"));
+				car.setCar_price(rs.getInt("car_price"));
+				car.setCar_color(rs.getString("car_color"));
+				car.setCar_photo(rs.getString("car_photo"));
+				car.setCar_auto(rs.getInt("car_auto"));
+				car.setCar_use(rs.getInt("car_use"));
+				car.setCar_accident(rs.getString("car_accident"));
+				car.setCar_owner_change(rs.getInt("car_owner_change"));
+				car.setCar_design_op(rs.getString("car_design_op"));
+				car.setCar_con_op(rs.getString("car_con_op"));
+				car.setCar_drive_op(rs.getString("car_drive_op"));
+				car.setCar_status(rs.getInt("car_status"));
+				car.setChecker_num(rs.getInt("checker_num"));
+				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return car;
+	}
 	//차량 수정
 	//차량 삭제
 	
