@@ -16,7 +16,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4" class = "bs-warning-bg-subtle">
-                    <h5 class = "text-white">회사 정보</h5> 
+                    <h4 class = "text-white">회사 정보</h4> 
+                    <br>
                     <ul class = "text-white">
                         <li>회사명 : CarCarOcean</li>
                         <li>주소 : 서울특별시 강남구</li>
@@ -26,6 +27,7 @@
                 </div>
                 <div class="col-md-8 text-right">
                     <h5 class="text-warning">회사</h5>
+                    <br>
                     <ul class = "text-white">
                         <li>월요일 - 금요일, 9:00 - 18:00</li>
                         <li>사업제휴 문의 : carcarO@test.com</li>
