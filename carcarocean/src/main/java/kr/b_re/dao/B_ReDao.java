@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import kr.b_re.vo.B_ReVo;
 import kr.util.DBUtil;
 
@@ -26,10 +28,10 @@ public class B_ReDao {
 			conn = DBUtil.getConnection();
 			
 			sql = "INSERT INTO b_re(b_re_num,buy_num,b_re_title,b_re_content,b_re_photo) "
-					+ "VALUES(b_re_seq.nextval,?,?,?,?,?)";
+					+ "VALUES(b_re_seq.nextval,(SELECT buy_num FROM buy WHERE mem_num=?),?,?,?)";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, b_re.getBuy_num());
+			pstmt.setInt(++cnt, b_re.getMem_num());
 			pstmt.setString(++cnt, b_re.getB_re_title());
 			pstmt.setString(++cnt, b_re.getB_re_content());
 			pstmt.setString(++cnt, b_re.getB_re_photo());
@@ -52,7 +54,7 @@ public class B_ReDao {
 	    try {
 	        conn = DBUtil.getConnection();
 
-	        sql = "SELECT car_num,car_name,buy_num,buy_reg FROM buy JOIN car USING(car_num)  WHERE mem_num = ?";
+	        sql = "SELECT car_num,car_name,buy_num,buy_reg FROM buy JOIN car USING(car_num) WHERE mem_num = ?";
 
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, mem_num);
@@ -61,11 +63,9 @@ public class B_ReDao {
 	        list = new ArrayList<B_ReVo>();
 	        while (rs.next()) {
 	            B_ReVo buy = new B_ReVo();
-	            /*
-	            buy.setCar_num(rs.getInt("car_num"));
-	            */
-	            buy.setCar_name(rs.getString("car_name"));
 	            buy.setBuy_num(rs.getInt("buy_num"));
+	            buy.setCar_num(rs.getInt("car_num"));
+	            buy.setCar_name(rs.getString("car_name"));
 	            buy.setBuy_reg(rs.getDate("buy_reg"));
 	            list.add(buy);
 	        }

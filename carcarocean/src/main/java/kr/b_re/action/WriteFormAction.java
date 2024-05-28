@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import kr.b_re.dao.B_ReDao;
 import kr.b_re.vo.B_ReVo;
+import kr.car.dao.CarDao;
+import kr.car.vo.CarVO;
 import kr.controller.Action;
 
 public class WriteFormAction implements Action{
@@ -22,8 +24,7 @@ public class WriteFormAction implements Action{
 		}
 		
 		B_ReDao dao = B_ReDao.getDao();
-
-	    List<B_ReVo> buyList = dao.getBuyList(user_num);
+		List<B_ReVo> buyList = dao.getBuyList(user_num);
 	    
 	    request.setAttribute("buyList", buyList);
 	    
