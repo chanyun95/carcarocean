@@ -32,6 +32,7 @@
 					<th>글번호</th>
 					<th>제목</th>
 					<th>작성자</th>
+					<th>차종</th>
 					<th>작성일</th>
 				</tr>
 				<c:forEach var="s_re" items="${list}">
@@ -39,7 +40,10 @@
 					<td>${s_re.s_re_num}</td>
 					<td><a href="detail.do?s_re_num=${s_re.s_re_num}"><b>${s_re.s_re_title}</b></a></td>
 					<td>${s_re.mem_id}</td>
-					<td>${s_re.s_re_reg}</td>
+					<td>${s_re.sell_cname} / ${s_re.sell_maker}</td>
+					<td> ${s_re.s_re_reg} </td>
+					
+					
 				</tr>
 				</c:forEach>
 			</table>

@@ -142,14 +142,14 @@ CREATE SEQUENCE qa_comment_seq;
 --판매 후기 게시판
 CREATE TABLE s_re(
 s_re_num NUMBER NOT NULL,            -- 판매 후기 식별자
-car_num NUMBER NOT NULL,               -- 차량 식별자
+sell_num NUMBER NOT NULL,               -- 판매정보 식별자
 mem_num NUMBER NOT NULL,               -- 회원 식별자
 s_re_title VARCHAR2(150) NOT NULL,
 s_re_content CLOB NOT NULL,
 s_re_reg DATE DEFAULT SYSDATE NOT NULL,
 s_re_modify DATE,
 CONSTRAINT s_re_pk PRIMARY KEY (s_re_num),
-CONSTRAINT s_re_fk1 FOREIGN KEY (car_num) REFERENCES car (car_num),
+CONSTRAINT s_re_fk1 FOREIGN KEY (sell_num) REFERENCES sell (sell_num),
 CONSTRAINT s_re_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE s_re_seq;
