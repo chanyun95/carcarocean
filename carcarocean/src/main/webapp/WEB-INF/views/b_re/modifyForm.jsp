@@ -48,6 +48,7 @@
 		<div>
 			<h2>구매 후기 게시판 글 쓰기</h2>
 			<form id="modify_form" action="modify.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="b_re_num" value="${b_re.b_re_num}">
 				<ul>
 					<li>
 						<label for="b_re_title">제목(필수)</label>
@@ -73,7 +74,7 @@
 					<li>
 						<label for="b_re_photo">파일첨부(필수)</label>
 						<br>
-						<input type="file" name="b_re_photo" id="b_re_photo" accept="image/gif,image/png,image/jpeg" multiple>
+						<input type="file" name="b_re_photo" accept="image/gif,image/png,image/jpeg" multiple>
 						<div id="file_detail">
 							<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" width="100">
 							<br>

@@ -22,7 +22,6 @@ public class DeleteFileAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//전송된 데이터 반환
 		int b_re_num = Integer.parseInt(request.getParameter("b_re_num"));
-		
 		B_ReDao dao = B_ReDao.getDao();
 		B_ReVo db_b_re = dao.getB_Re(b_re_num);
 		dao.deleteFile(b_re_num);
