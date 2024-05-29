@@ -28,10 +28,10 @@ public class MySellCurrentStatusFormAction implements Action{
 				MemberDao dao1 = MemberDao.getDao();
 				
 				MemberVo member = dao1.getMember(user_num);
-				MyPageDao dao = MyPageDao.getDao();
+				//MyPageDao dao = MyPageDao.getDao();
 				//리스트 정보
 
-				List<SellVo> list = MyPageDao.getSellCurrent(user_num);
+				//List<SellVo> list = MyPageDao.getSellCurrent(user_num);
 
 				request.setAttribute("list", list);
 				request.setAttribute("member", member);
