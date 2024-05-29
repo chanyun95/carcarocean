@@ -6,6 +6,7 @@ public class CarVO {
 	private String car_name;			//차명
 	private int car_size;					//차종
 	private String car_birth;				//연식
+	private String car_cnumber;				//차량번호
 	private int car_cc;						//배기량
 	private int car_fuel_type;			//연료타입
 	private float car_fuel_efficiency;	//연비
@@ -53,6 +54,12 @@ public class CarVO {
 	}
 	public void setCar_birth(String car_birth) {
 		this.car_birth = car_birth;
+	}
+	public String getCar_cnumber() {
+		return car_cnumber;
+	}
+	public void setCar_cnumber(String car_cnumber) {
+		this.car_cnumber = car_cnumber;
 	}
 	public int getCar_cc() {
 		return car_cc;

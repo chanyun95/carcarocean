@@ -16,7 +16,7 @@ public class MainBuyAction implements Action{
 		
 		CarDao cDao = CarDao.getDao();
 		// 판매중인 차량, 판매 완료 차량 모두
-		List<CarVO> carList = cDao.getListCar(1, 12, null, null, 0);
+		List<CarVO> carList = cDao.getListCar(1, 12, null, null, 1);
 		
 		request.setAttribute("carList", carList);
 		

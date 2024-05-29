@@ -48,6 +48,7 @@ public class CarWriteAction implements Action{
 		car.setCar_name(request.getParameter("car_name"));
 		car.setCar_size(Integer.parseInt(request.getParameter("car_size")));
 		car.setCar_birth(request.getParameter("car_birth"));
+		car.setCar_cnumber(request.getParameter("car_cnumber"));
 		car.setCar_cc(Integer.parseInt(request.getParameter("car_cc")));
 		car.setCar_fuel_type(Integer.parseInt(request.getParameter("car_fuel_type")));
 		car.setCar_fuel_efficiency(Float.parseFloat(request.getParameter("car_fuel_efficiency")));

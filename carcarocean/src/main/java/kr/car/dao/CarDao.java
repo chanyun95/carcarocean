@@ -25,16 +25,17 @@ public class CarDao {
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "INSERT INTO car (car_num, car_maker, car_name, car_size, car_birth, "
+			sql = "INSERT INTO car (car_num, car_maker, car_name, car_size, car_birth, car_cnumber, "
 					+ "car_fuel_type, car_mile, car_price, car_color, car_photo, car_auto, "
 					+ "car_fuel_efficiency, car_use, car_cc, car_accident, car_owner_change, "
 					+ "car_design_op, car_con_op, car_drive_op, checker_num, car_checker_opinion) "
-					+ "VALUES (car_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "VALUES (car_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(++cnt, car.getCar_maker());
 			pstmt.setString(++cnt, car.getCar_name());
 			pstmt.setInt(++cnt, car.getCar_size());
 			pstmt.setString(++cnt, car.getCar_birth());
+			pstmt.setString(++cnt, car.getCar_cnumber());
 			pstmt.setInt(++cnt, car.getCar_fuel_type());
 			pstmt.setInt(++cnt, car.getCar_mile());
 			pstmt.setInt(++cnt, car.getCar_price());
@@ -81,7 +82,7 @@ public class CarDao {
 			
 			sql =
 			"SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM car WHERE car_status <= ? "
-			+ sub_sql + " ORDER BY car_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			+ sub_sql + " ORDER BY car_status,car_num DESC)a) WHERE rnum >=? AND rnum <=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, status);
@@ -99,6 +100,7 @@ public class CarDao {
 				car.setCar_name(rs.getString("car_name"));
 				car.setCar_size(rs.getInt("car_size"));
 				car.setCar_birth(rs.getString("car_birth"));
+				car.setCar_cnumber(rs.getString("car_cnumber"));
 				car.setCar_cc(rs.getInt("car_cc"));
 				car.setCar_fuel_type(rs.getInt("car_fuel_type"));
 				car.setCar_fuel_efficiency(rs.getInt("car_fuel_efficiency"));
@@ -147,6 +149,7 @@ public class CarDao {
 				car.setCar_name(rs.getString("car_name"));
 				car.setCar_size(rs.getInt("car_size"));
 				car.setCar_birth(rs.getString("car_birth"));
+				car.setCar_cnumber(rs.getString("car_cnumber"));
 				car.setCar_cc(rs.getInt("car_cc"));
 				car.setCar_fuel_type(rs.getInt("car_fuel_type"));
 				car.setCar_fuel_efficiency(rs.getInt("car_fuel_efficiency"));
@@ -198,5 +201,48 @@ public class CarDao {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 		return count;
+	}
+	
+	//차량 판매 상태 변경
+	public void updateCarStatus(int car_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		String sql = null;
+		int cnt = 0;
+		int status = -1;
+		
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			sql = "SELECT CAR_STATUS FROM CAR WHERE CAR_NUM=?";
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(1, car_num);
+			rs = pstmt1.executeQuery();
+			if(rs.next()) {
+				status = rs.getInt(1);
+			}
+			
+			sql = "UPDATE CAR SET CAR_STATUS=? WHERE CAR_NUM=?";
+			
+			pstmt2 = conn.prepareStatement(sql);
+			
+			if(status==0) {
+				pstmt2.setInt(++cnt,1);
+			} else if(status==1) {
+				pstmt2.setInt(++cnt,0);
+			}
+			pstmt2.setInt(++cnt,car_num);
+			pstmt2.executeUpdate();
+			
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt1, null);
+			DBUtil.executeClose(rs, pstmt2, conn);
+		}
 	}
 }

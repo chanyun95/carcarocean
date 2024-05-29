@@ -49,7 +49,7 @@ CREATE TABLE CAR(
 	car_maker VARCHAR2(50) NOT NULL,
 	car_name VARCHAR2(50) NOT NULL,
 	car_size NUMBER(1) NOT NULL,
-	car_birth DATE NOT NULL,
+	car_birth VARCHAR2(15) NOT NULL,
 	car_fuel_type NUMBER(1) NOT NULL,
 	car_mile NUMBER NOT NULL,
 	car_price NUMBER NOT NULL,
@@ -65,6 +65,7 @@ CREATE TABLE CAR(
 	car_con_op VARCHAR2(400) NOT NULL,
 	car_drive_op VARCHAR2(400) NOT NULL,
 	car_status NUMBER(1) DEFAULT 0 NOT NULL,
+	car_cnumber VARCHAR2(11) NOT NULL,
 	checker_num NUMBER NOT NULL,
 	car_checker_opinion VARCHAR2(100) NOT NULL
 	CONSTRAINT car_pk PRIMARY KEY (car_num),
