@@ -29,7 +29,7 @@ public class MyFavoriteCarFormAction implements Action{
 		MemberDao dao1 = MemberDao.getDao();
 		MemberVo member = dao1.getMember(user_num);
 		
-		MyPageDao dao = MyPageDao.getDao();
+		//MyPageDao dao = MyPageDao.getDao();
 		//관심게시물 정보 넣어야됨.
 		
 		
