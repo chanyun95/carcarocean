@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,56 +65,27 @@
 	                	<c:forEach var="car" items="${carList}" begin="0" end="2">
         				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
 	                		<div class="col-4">
-				                <div class="p-3 border bg-light text-center">
+				                <div class="p-3 border bg-light">
 				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
-				                	<p>${car.car_maker} ${car.car_name}</p>
-				                	<p>${car.car_price}만원</p>
-				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
+				                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}</p>
+				                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,0,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
 				                </div>
 				            </div>
                 		</c:forEach>
                 		<!-- 한 블럭 끝 -->
-                		<c:forEach var="car" items="${carList}" begin="3" end="5">
-        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
-	                		<div class="col-4">
-				                <div class="p-3 border bg-light text-center">
-				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
-				                	<p>${car.car_maker} ${car.car_name}</p>
-				                	<p>${car.car_price}만원</p>
-				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
-				                </div>
-				            </div>
-                		</c:forEach>
-                		<c:forEach var="car" items="${carList}" begin="6" end="8">
-        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
-	                		<div class="col-4">
-				                <div class="p-3 border bg-light text-center">
-				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
-				                	<p>${car.car_maker} ${car.car_name}</p>
-				                	<p>${car.car_price}만원</p>
-				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
-				                </div>
-				            </div>
-                		</c:forEach>
-                		<c:forEach var="car" items="${carList}" begin="9" end="11">
-        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
-	                		<div class="col-4">
-				                <div class="p-3 border bg-light text-center">
-				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
-				                	<p>${car.car_maker} ${car.car_name}</p>
-				                	<p>${car.car_price}만원</p>
-				                	<p>${car.car_birth} ${car.car_mile}km ${car.car_fuel_type}</p>
-				                </div>
-				            </div>
-                		</c:forEach>
                 		</div>
                 		<!-- 3 * 4 반복문 끝 -->
 	                </div>
 	            </main>
 	        </div>
 	    </div>
-	    <!-- 푸터 -->
-	    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     </div>
+    <!-- 푸터 -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

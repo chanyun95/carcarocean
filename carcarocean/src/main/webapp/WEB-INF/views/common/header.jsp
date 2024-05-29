@@ -26,41 +26,43 @@
     max-height: 150px;
 }
 </style>
-
-
 </head>
 <body>
-   <div class="container">
+    <!-- continer 기본 padding값 때문에 로그아웃 회원가입이 밀려서 일단 임시조치로 left right 0으로 처리 -->
+    <div class="container" style="padding-left:0; padding-right:0;">
       <!-- nav태그 상단 고정 -->
-      <nav class="navbar navbar-expand-lg navbar-light be-white">
+      <nav class="navbar navbar-expand-lg">
          <div class="container-fluid">
             <!-- 로고 시작 -->
-            <a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img class="fa-2x" src="${pageContext.request.contextPath}/images/mainlogo.png" width="150" height="150"></a>
+            <a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/mainlogo.png"></a>
             <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>  
             <!-- 로고 끝 -->
             <!-- 메뉴 시작 -->
             <div class="collapse navbar-collapse justify-content-between" id="nav">
                <ul class="navbar-nav">
-                  <li class="nav-item"><a class="nav-link text-dark font-weight-bold px-3" href="${pageContext.request.contextPath}/main/main.do">홈</a></li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 구매</a>
+               	  <!-- 첫번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 구매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="#">차량 구매 후기</a>
                         <a class="dropdown-item" href="#">관심 차량</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 판매</a>
+                  <!-- 두번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">커뮤니티</a>
+                  <!-- 세번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">커뮤니티</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">자유게시판</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">고객 센터</a>
+                  <!-- 네번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">고객 센터</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/event/list.do">이벤트</a>
@@ -69,7 +71,7 @@
                   </li>
                   <c:if test="${!empty user_num && user_auth ==9}">
                   
-                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">관리자</a>
+                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">관리자</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 목록</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/checker/adminCheckerList.do">검수자 정보 목록</a>
