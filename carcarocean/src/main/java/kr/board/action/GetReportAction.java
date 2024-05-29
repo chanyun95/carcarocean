@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.board.dao.BoardDao;
-import kr.board.vo.BoardVo;
+import kr.board.vo.ReportBoardVO;
 import kr.controller.Action;
 
 public class GetReportAction implements Action{
@@ -26,17 +26,21 @@ public class GetReportAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		BoardDao dao = BoardDao.getDao();
-		if(user_num == null) {
+		if(user_num == null) { //로그인 되지 않은 경우
 			mapAjax.put("status", "noReport");
-		}else {
-			BoardVo boardReport = dao.selectReport(board_num, user_num);
-			if(boardReport != null) {
+		}else { //로그인 된 경우
+			ReportBoardVO reportVO = new ReportBoardVO(); 
+            reportVO.setBoard_num(board_num);
+            reportVO.setMem_num(user_num);
+            
+			ReportBoardVO report = dao.checkReport(reportVO);
+			if(report != null) {
 				mapAjax.put("status", "yesReport");
 			}else {
 				mapAjax.put("status", "noReport");
 			}
 		}
-		mapAjax.put("count", dao.selectReportCount(board_num));
+		mapAjax.put("count", dao.checkReportCount(board_num));
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);
