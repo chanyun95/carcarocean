@@ -10,11 +10,63 @@ public class B_ReVo {
 	private String b_re_photo;
 	private String b_re_reg;
 	private String b_re_modify;
-	
 	private Date buy_reg;
-	private int car_num;
-	private int mem_num;
 	
+	private int mem_num;
+	//차량의 차명,차 사진,제조사,주행거리,차량번호,가격
+	private int car_num;
+	private String car_name;
+	private String car_photo;
+	private String car_maker;
+	private int car_mile;
+	private String car_cnumber;
+	private int car_price;
+	//검수자 이름,사진
+	private String checker_name;
+	private String checker_photo;
+	
+	public int getCar_price() {
+		return car_price;
+	}
+	public void setCar_price(int car_price) {
+		this.car_price = car_price;
+	}
+	public String getChecker_name() {
+		return checker_name;
+	}
+	public void setChecker_name(String checker_name) {
+		this.checker_name = checker_name;
+	}
+	public String getChecker_photo() {
+		return checker_photo;
+	}
+	public void setChecker_photo(String checker_photo) {
+		this.checker_photo = checker_photo;
+	}
+	public String getCar_maker() {
+		return car_maker;
+	}
+	public void setCar_maker(String car_maker) {
+		this.car_maker = car_maker;
+	}
+	public int getCar_mile() {
+		return car_mile;
+	}
+	public void setCar_mile(int car_mile) {
+		this.car_mile = car_mile;
+	}
+	public String getCar_cnumber() {
+		return car_cnumber;
+	}
+	public void setCar_cnumber(String car_cnumber) {
+		this.car_cnumber = car_cnumber;
+	}
+	public String getCar_photo() {
+		return car_photo;
+	}
+	public void setCar_photo(String car_photo) {
+		this.car_photo = car_photo;
+	}
 	public int getMem_num() {
 		return mem_num;
 	}
@@ -33,8 +85,6 @@ public class B_ReVo {
 	public void setCar_name(String car_name) {
 		this.car_name = car_name;
 	}
-	private String car_name;
-	
 
 	public Date getBuy_reg() {
 		return buy_reg;
