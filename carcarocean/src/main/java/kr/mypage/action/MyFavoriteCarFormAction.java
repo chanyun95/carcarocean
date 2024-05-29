@@ -1,4 +1,6 @@
-package kr.member.action;
+package kr.mypage.action;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,9 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.dao.SellDao;
+import kr.sell.vo.SellVo;
 
 public class MyFavoriteCarFormAction implements Action{
 
@@ -21,10 +26,12 @@ public class MyFavoriteCarFormAction implements Action{
 		
 		//로그인이 된경우
 		//회원정보
-		MemberDao dao = MemberDao.getDao();
-		MemberVo member = dao.getMember(user_num);
+		MemberDao dao1 = MemberDao.getDao();
+		MemberVo member = dao1.getMember(user_num);
 		
+		MyPageDao dao = MyPageDao.getDao();
 		//관심게시물 정보 넣어야됨.
+		
 		
 		request.setAttribute("member", member);
 		return "/WEB-INF/views/member/myFavoriteCarForm.jsp";

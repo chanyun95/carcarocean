@@ -3,11 +3,11 @@ package kr.member.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-
-
 import kr.member.vo.MemberVo;
 import kr.util.DBUtil;
+import kr.util.StringUtil;
 
 public class MemberDao {
 	/*
@@ -241,25 +241,25 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		String sql = null;
-		
+
 		try {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//auto commit 해제
 			conn.setAutoCommit(false);
-			
+
 			//zmember의 auth 값 변경
 			sql = "UPDATE member SET mem_auth=0 WHERE mem_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mem_num);
 			pstmt.executeUpdate();
-			
+
 			//zmember_detail의 레코드 삭제
 			sql = "DELETE FROM member_detail WHERE mem_num=?";
 			pstmt2 = conn.prepareCall(sql);
 			pstmt2.setInt(1, mem_num);
 			pstmt2.executeUpdate();
-			
+
 			//모든 SQL문의 실행이 성공하면 커밋
 			conn.commit();
 		}catch(Exception e) {
@@ -344,8 +344,10 @@ public class MemberDao {
 		}
 	}
 
+	//회원가입 및 회원정보 수정, 삭제 끝
 
 
+	//차량 판매 신청 현황
 
 
 }

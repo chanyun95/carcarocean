@@ -1,4 +1,4 @@
-package kr.member.action;
+package kr.mypage.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +8,7 @@ import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
 
-public class MyTransactionalFormAction implements Action {
+public class MyQnAFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,7 +27,7 @@ public class MyTransactionalFormAction implements Action {
 		//관심게시물 정보 넣어야됨.
 		
 		request.setAttribute("member", member);
-		return "/WEB-INF/views/member/myTransactionalForm.jsp";
+		return "/WEB-INF/views/member/myQnAForm.jsp";
 	}
 
 }
