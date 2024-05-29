@@ -8,10 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>차량 판매후기 쓰기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
 <script type="text/javascript">
 window.onload=function(){
-	const myForm = document.getElementById('s_re_write_form');
+	const myForm = document.getElementById('write_form');
 	//이벤트 연결
 	myForm.onsubmit=function(){
 		const title = document.getElementById('s_re_title');
@@ -21,10 +20,10 @@ window.onload=function(){
 			title.focus();
 			return false;
 		}
-		const carNum = document.getElementById('car_num');
-        if (carNum.value == '') {
+		const sellNum = document.getElementById('sell_num');
+        if (sellNum.value == '') {
             alert('판매한 차량 식별번호를 선택하세요');
-            carNum.focus();
+            sellNum.focus();
             return false;
         }
 		const content = document.getElementById('s_re_content');
@@ -56,16 +55,17 @@ window.onload=function(){
 					</li> -->
                   
 					<li>
-                    	<label for="car_num">판매한 차량 식별번호(필수)</label><br>
-                    	<input type="number" name="car_num" id="car_num" maxlength="50">
-                    		<%-- <select name="car_num" id="car_num">
+                    	<label for="sell_num">판매한 차량 식별번호(필수)</label><br>
+                    		<select name="sell_num" id="sell_num">
 							<option value="">거래 내역을 선택하세요</option>
 							<c:forEach var="sell" items="${sellList}">
-								<option value="${sell.car_num()}">${sell.mem_num} ${sell.car_name()} / ${sell.sell_reg}</option>
-								<option value="${buy.car_num}">${buy.buy_num}. ${buy.car_name} / ${buy.buy_reg}</option>
+							
+								<option value="${sell.sell_num}">${sell.sell_num}/ ${sell.sell_maker}/${sell.sell_cname}</option>
+								
 							</c:forEach>
-					</select> --%>
+					</select> 
 					</li>
+					
 					<li>
 						<label for="s_re_content">내용</label><br>
 						<textarea rows="5" cols="40" name="s_re_content" id="s_re_content"></textarea>

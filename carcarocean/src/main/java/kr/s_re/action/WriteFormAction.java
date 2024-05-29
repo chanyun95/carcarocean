@@ -33,14 +33,6 @@ public class WriteFormAction implements Action{
 		S_ReDao dao = S_ReDao.getDao();
 		List<S_ReVo> sellList = dao.sellList(user_num);
 		
-		// 판매 후기와 차량 정보를 적절하게 설정하여 JSP 파일로 전달
-	    for (S_ReVo sell : sellList) {
-	        // 판매 후기와 연결된 차량 정보 설정
-	        CarVO car = new CarVO();
-	        car.setCar_num(sell.getCar_num());
-	        car.setCar_name(sell.getCar_name());
-	        sell.setCar(car);
-	    }
 		
 		request.setAttribute("sellList", sellList);
 		

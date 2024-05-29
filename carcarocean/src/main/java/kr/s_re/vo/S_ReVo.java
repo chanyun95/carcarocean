@@ -1,50 +1,55 @@
 package kr.s_re.vo;
 
-import kr.car.vo.CarVO;
 
 public class S_ReVo {
 	private int s_re_num;
-	private int car_num;
+	private int sell_num;
+	
 	private int mem_num;
 	private String s_re_title;
 	private String s_re_content;
 	private String s_re_reg;
-	private String s_re_modify;	
+	private String s_re_modify;
 	
-	private CarVO car;
-	private String car_name;
+	private String sell_maker;
+	private String sell_cname;
 	
 	private String mem_id;			//회원아이디
+	
+	
+	public int getSell_num() {
+		return sell_num;
+	}
+	public void setSell_num(int sell_num) {
+		this.sell_num = sell_num;
+	}
+	public String getSell_maker() {
+		return sell_maker;
+	}
+	public void setSell_maker(String sell_maker) {
+		this.sell_maker = sell_maker;
+	}
+	public String getSell_cname() {
+		return sell_cname;
+	}
+	public void setSell_cname(String sell_cname) {
+		this.sell_cname = sell_cname;
+	}
+	
 	public String getMem_id() {
 		return mem_id;
 	}
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public String getCar_name() {
-		return car_name;
-	}
-	public void setCar_name(String car_name) {
-		this.car_name = car_name;
-	}
-	public CarVO getCar() {
-		return car;
-	}
-	public void setCar(CarVO car) {
-		this.car = car;
-	}
+	
 	public int getS_re_num() {
 		return s_re_num;
 	}
 	public void setS_re_num(int s_re_num) {
 		this.s_re_num = s_re_num;
 	}
-	public int getCar_num() {
-		return car_num;
-	}
-	public void setCar_num(int car_num) {
-		this.car_num = car_num;
-	}
+	
 	public int getMem_num() {
 		return mem_num;
 	}

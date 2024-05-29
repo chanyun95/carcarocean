@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.car.vo.CarVO;
+
 import kr.s_re.vo.S_ReVo;
 import kr.util.DBUtil;
 
@@ -30,7 +30,7 @@ public class S_ReDao {
 	         conn = DBUtil.getConnection();
 	         
 	         //SQL문 작성
-	         sql="INSERT INTO s_re(s_re_num,s_re_title,car_num,s_re_content,mem_num) "
+	         sql="INSERT INTO s_re(s_re_num,s_re_title,sell_num,s_re_content,mem_num) "
 	         		+ "VALUES(s_re_seq.nextval,?,?,?,?)";
 	         
 	         //PreparedStatment 객체 생성
@@ -38,7 +38,7 @@ public class S_ReDao {
 	         
 	         //?에 데이터 바인딩
 	         pstmt.setString(++cnt,s_re.getS_re_title());
-	         pstmt.setInt(++cnt,s_re.getCar_num());
+	         pstmt.setInt(++cnt,s_re.getSell_num());
 	         pstmt.setString(++cnt,s_re.getS_re_content());
 	         pstmt.setInt(++cnt, s_re.getMem_num());
 	         //SQL문 실행   
@@ -50,7 +50,7 @@ public class S_ReDao {
 	      }
 	}
 	
-	// sellList 메서드 수정
+	//회원 번호로 판매 내역을 조회
 	public List<S_ReVo> sellList(int mem_num) throws Exception {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -59,24 +59,18 @@ public class S_ReDao {
 	    ResultSet rs = null;
 	    try {
 	        conn = DBUtil.getConnection();
-	        sql = "SELECT car.car_num, car.car_name, s_re.s_re_num, s_re.mem_num, s_re.s_re_title, s_re.s_re_content "
-	            + "FROM car LEFT JOIN s_re ON car.car_num = s_re.car_num "
-	            + "WHERE s_re.mem_num = ?";
+	        sql = "SELECT * FROM sell JOIN member USING(mem_num) WHERE mem_num =?";
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, mem_num);
 	        rs = pstmt.executeQuery();
 	        list = new ArrayList<S_ReVo>();
 	        while (rs.next()) {
 	            S_ReVo sell = new S_ReVo();
-	            sell.setS_re_num(rs.getInt("s_re_num"));
+	            sell.setSell_num(rs.getInt("sell_num"));
 	            sell.setMem_num(rs.getInt("mem_num"));
-	            sell.setS_re_title(rs.getString("s_re_title"));
-	            sell.setS_re_content(rs.getString("s_re_content"));
-	            // 차량 정보 설정
-	            CarVO car = new CarVO();
-	            car.setCar_num(rs.getInt("car_num"));
-	            car.setCar_name(rs.getString("car_name"));
-	            sell.setCar(car);
+	            sell.setSell_maker(rs.getString("sell_maker"));
+	            sell.setSell_cname(rs.getString("sell_cname"));
+
 	            list.add(sell);
 	        }
 	    } catch (Exception e) {
@@ -132,60 +126,72 @@ public class S_ReDao {
 	
 
 	//판매 후기 게시판 글 목록, 검색 글 목록
-	public List<S_ReVo> getListSellReview(int start, int end, 
-							String keyfield, String keyword) throws Exception{
-		Connection conn = null;
-	      PreparedStatement pstmt = null;
-	      String sql =null;
-	      List<S_ReVo> list = null;
-	      String sub_sql = "";
-	      ResultSet rs = null;
-	      int cnt = 0;
-	      try {
-	         //커넥션풀로부터 커넥션 할당
-	         conn = DBUtil.getConnection();
-	         if(keyword !=null && !"".equals(keyword)) {
-	        	 //검색처리
-	        	 if(keyfield.equals("1")) sub_sql +="WHERE s_re_title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql +="WHERE mem_id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql +="WHERE s_re_content LIKE '%' || ? || '%'";
-	         }
-	         
-	         //SQL문 작성
-	         sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
-	         		+ "(SELECT * FROM s_re JOIN member USING(mem_num) " +sub_sql
-	         		+"ORDER BY s_re_num DESC)a) WHERE rnum >=? AND rnum <=?";
-	         
-	         //PreparedStatment 객체 생성
-	         pstmt = conn.prepareStatement(sql);
-	         
-	         //?에 데이터 바인딩
-				if(keyword!=null && !"".equals(keyword)) {
-					pstmt.setString(++cnt, keyword);
-				}
-				pstmt.setInt(++cnt, start);
-				pstmt.setInt(++cnt, end);
-				
-				rs = pstmt.executeQuery();
-				list = new ArrayList<S_ReVo>();
-				while(rs.next()) {
-					S_ReVo s_re = new S_ReVo();
-					s_re.setS_re_num(rs.getInt("s_re_num"));
-					s_re.setS_re_title(rs.getString("s_re_title"));
-					s_re.setCar_num(rs.getInt("car_num"));
-					s_re.setS_re_reg(rs.getString("s_re_reg"));
-					s_re.setS_re_modify(rs.getString("s_re_modify"));
-					s_re.setMem_id(rs.getString("mem_id"));
-					
-					list.add(s_re);
-				}
-	      }catch(Exception e) {
-	         throw new Exception(e);
-	      }finally {
-	         DBUtil.executeClose(rs, pstmt, conn);
-	      }
-		return list;
+	// 판매 후기 게시판 글 목록, 검색 글 목록
+	public List<S_ReVo> getListSellReview(int start, int end, String keyfield, String keyword) throws Exception {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    String sql = null;
+	    List<S_ReVo> list = null;
+	    String sub_sql = "";
+	    ResultSet rs = null;
+	    int cnt = 0;
+	    try {
+	        // 커넥션풀로부터 커넥션 할당
+	        conn = DBUtil.getConnection();
+	        if (keyword != null && !"".equals(keyword)) {
+	            // 검색 처리
+	            if (keyfield.equals("1")) {
+	                sub_sql += "WHERE s.s_re_title LIKE '%' || ? || '%'";
+	            } else if (keyfield.equals("2")) {
+	                sub_sql += "WHERE m.mem_id LIKE '%' || ? || '%'";
+	            } else if (keyfield.equals("3")) {
+	                sub_sql += "WHERE s.s_re_content LIKE '%' || ? || '%'";
+	            }
+	        }
+
+	        // SQL문 작성
+	        sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
+	            + "(SELECT s.s_re_num, s.s_re_title, s.sell_num, s.s_re_reg, s.s_re_modify, "
+	            + "m.mem_id, sell.sell_cname, sell.sell_maker "
+	            + "FROM s_re s JOIN member m ON s.mem_num = m.mem_num "
+	            + "JOIN sell ON s.sell_num = sell.sell_num "
+	            + sub_sql
+	            + " ORDER BY s.s_re_num DESC) a) "
+	            + "WHERE rnum >= ? AND rnum <= ?";
+
+	        // PreparedStatement 객체 생성
+	        pstmt = conn.prepareStatement(sql);
+
+	        // ?에 데이터 바인딩
+	        if (keyword != null && !"".equals(keyword)) {
+	            pstmt.setString(++cnt, keyword);
+	        }
+	        pstmt.setInt(++cnt, start);
+	        pstmt.setInt(++cnt, end);
+
+	        rs = pstmt.executeQuery();
+	        list = new ArrayList<S_ReVo>();
+	        while (rs.next()) {
+	            S_ReVo s_re = new S_ReVo();
+	            s_re.setS_re_num(rs.getInt("s_re_num"));
+	            s_re.setS_re_title(rs.getString("s_re_title"));
+	            s_re.setSell_num(rs.getInt("sell_num"));
+	            s_re.setS_re_reg(rs.getString("s_re_reg"));
+	            s_re.setS_re_modify(rs.getString("s_re_modify"));
+	            s_re.setMem_id(rs.getString("mem_id"));
+	            s_re.setSell_cname(rs.getString("sell_cname"));
+	            s_re.setSell_maker(rs.getString("sell_maker"));
+
+	            list.add(s_re);
+	        }
+	    } catch (Exception e) {
+	        throw new Exception(e);
+	    } finally {
+	        DBUtil.executeClose(rs, pstmt, conn);
+	    }
+	    return list;
 	}
+
 	//판매 후기 게시판 글 상세
 	public S_ReVo getSellReview(int s_re_num)throws Exception{
 		Connection conn = null;
@@ -199,10 +205,27 @@ public class S_ReDao {
 	         conn = DBUtil.getConnection();
 	         
 	         //SQL문 작성
-	         sql="";
+	         sql="SELECT * FROM sell JOIN s_re r USING(sell_num) "
+	         		+ "JOIN member m ON r.mem_num=m.mem_num WHERE s_re_num = ?";
 	         
 	         //PreparedStatment 객체 생성
 	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setInt(++cnt,s_re_num);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	        	 s_Re = new S_ReVo();
+	        	 s_Re.setS_re_num(rs.getInt("s_re_num"));
+	        	 s_Re.setS_re_title(rs.getString("s_re_title"));
+	        	 s_Re.setS_re_content(rs.getString("s_re_content"));
+	        	 s_Re.setS_re_reg(rs.getString("s_re_reg"));
+	        	 s_Re.setS_re_modify(rs.getString("s_re_modify"));
+	        	 s_Re.setSell_num(rs.getInt("sell_num"));
+	        	 s_Re.setMem_num(rs.getInt("mem_num"));
+	        	 
+	         }
 	      }catch(Exception e) {
 	         throw new Exception(e);
 	      }finally {
