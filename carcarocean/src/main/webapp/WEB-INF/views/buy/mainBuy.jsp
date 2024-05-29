@@ -10,12 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>내 차 구매 메인</title>
-<style>
+	<style>
         /* 검색 창의 너비를 조절하고 높이를 키웁니다 */
         #keyword {
             width: 250px; /* 너비 조절 */
             height: 50px; /* 높이 조절 */
         }
+        .grayscale {
+        	filter: grayscale(100%);
+    	}
     </style>
 </head>
 <body>
@@ -63,13 +66,19 @@
 	                	<!-- 3 * 4 반복문 시작 -->
 	                	<!-- 한 블럭 시작 -->
 	                	<c:forEach var="car" items="${carList}" begin="0" end="2">
-        				<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
-	                		<div class="col-4">
+        					<c:if test="${fn:contains(car.car_photo, ',')}">
+	                			<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+	                			<c:set var="firstPhoto" value="${photoList[0]}"/>
+	                		</c:if>
+	        				<c:if test="${!fn:contains(car.car_photo, ',')}">
+	        					<c:set var="firstPhoto" value="${car.car_photo}" />
+	        				</c:if>
+	                		<div class="col-4 mt-3">
 				                <div class="p-3 border bg-light">
 				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
 				                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}</p>
 				                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
-				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,0,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
 				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
 				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
 				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
@@ -78,6 +87,69 @@
 				            </div>
                 		</c:forEach>
                 		<!-- 한 블럭 끝 -->
+                		<c:forEach var="car" items="${carList}" begin="3" end="5">
+        					<c:if test="${fn:contains(car.car_photo, ',')}">
+	                			<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+	                			<c:set var="firstPhoto" value="${photoList[0]}"/>
+	                		</c:if>
+	        				<c:if test="${!fn:contains(car.car_photo, ',')}">
+	        					<c:set var="firstPhoto" value="${car.car_photo}" />
+	        				</c:if>
+	                		<div class="col-4 mt-3">
+				                <div class="p-3 border bg-light">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}</p>
+				                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+				                </div>
+				            </div>
+                		</c:forEach>
+                		<c:forEach var="car" items="${carList}" begin="6" end="8">
+	                		<c:if test="${fn:contains(car.car_photo, ',')}">
+	                			<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+	                			<c:set var="firstPhoto" value="${photoList[0]}"/>
+	                		</c:if>
+	        				<c:if test="${!fn:contains(car.car_photo, ',')}">
+	        					<c:set var="firstPhoto" value="${car.car_photo}" />
+	        				</c:if>
+	                		<div class="col-4 mt-3">
+				                <div class="p-3 border bg-light">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}</p>
+				                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+				                </div>
+				            </div>
+                		</c:forEach>
+                		<c:forEach var="car" items="${carList}" begin="9" end="11">
+        					<c:if test="${fn:contains(car.car_photo, ',')}">
+	                			<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+	                			<c:set var="firstPhoto" value="${photoList[0]}"/>
+	                		</c:if>
+	        				<c:if test="${!fn:contains(car.car_photo, ',')}">
+	        					<c:set var="firstPhoto" value="${car.car_photo}" />
+	        				</c:if>
+	                		<div class="col-4 mt-3">
+				                <div class="p-3 border bg-light">
+				                	<a href="buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded"></a>
+				                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}</p>
+				                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+				                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+				                </div>
+				            </div>
+                		</c:forEach>
                 		</div>
                 		<!-- 3 * 4 반복문 끝 -->
 	                </div>

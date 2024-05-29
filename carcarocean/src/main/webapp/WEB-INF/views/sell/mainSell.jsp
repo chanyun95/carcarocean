@@ -131,7 +131,13 @@
 			<div class="row d-flex justify-content-center">
 			<div class="col-1 align-self-center"><a href="#">이전</a></div>
 			<c:forEach var="car" items="${carList}">
-			<c:set var="firstPhoto" value="${fn:substringBefore(car.car_photo, ',')}" />
+				<c:if test="${fn:contains(car.car_photo, ',')}">
+            		<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+            		<c:set var="firstPhoto" value="${photoList[0]}"/>
+            	</c:if>
+    			<c:if test="${!fn:contains(car.car_photo, ',')}">
+    				<c:set var="firstPhoto" value="${car.car_photo}" />
+    			</c:if>
 				<div class="col-2 border mt-3 text-center">
 					<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:170px; height:100px;" class="img-fluid img-thumbnail rounded"></a>
 					<p>${car.car_maker} / ${car.car_name}</p>
