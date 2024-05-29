@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>문의 글 상세 보기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/qacom.reply.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/qa_comment.js"></script>
 </head>
 <body>
 	<div class="page-main">
@@ -54,7 +55,7 @@
 				<span class="re-title">답변 등록</span>
 				<form id="re_form">
 					<input type="hidden" name="qa_num" value="${qa.qa_num}" id="qa_num">
-					<textarea rows="5" cols="70" name="re_content"></textarea>
+					<textarea rows="5" cols="70" name="qa_comm_content" id="re_content" class="rep-content"></textarea>
 						<div id="re_first">
 							<span class="letter-count">300/300</span>
 						</div>
