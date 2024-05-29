@@ -32,7 +32,7 @@ public class MySellCurrentStatusFormAction implements Action{
 
 				//List<SellVo> list = MyPageDao.getSellCurrent(user_num);
 
-				request.setAttribute("list", list);
+				//request.setAttribute("list", list);
 				request.setAttribute("member", member);
 		return "/WEB-INF/views/member/mySellCurrentStatusForm.jsp";
 	}
