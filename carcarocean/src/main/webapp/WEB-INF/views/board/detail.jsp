@@ -44,9 +44,8 @@
 		<ul class="detail-sub">
 			<li>
 				<!-- 신고 -->
-				<img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50">
+				<img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="40">
 				신고
-				<span id="output_reportcount"></span>
 			</li>
 			<li>
 				<c:if test="${!empty board.board_modify}">

@@ -31,6 +31,8 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인 후 신고를 눌러주세요!');
 				}else if(param.result == 'success'){
+					let choice = confirm("신고하시겠습니까");
+					choice();
 					displayReport(param);
 				}else if(param.result == 'alreadyCheck'){
 					alert('이미 신고된 글입니다.');

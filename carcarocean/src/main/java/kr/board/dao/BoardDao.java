@@ -254,44 +254,44 @@ public class BoardDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//신고 등록
-	public void insertReport(ReportBoardVO reportVO) throws Exception{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		try {
-			conn = DBUtil.getConnection();
-			sql = "INSERT INTO report_board (report_board_num,board_num, mem_num) VALUES (report_board_num_seq.nextval,?,?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reportVO.getBoard_num());
-			pstmt.setInt(2, reportVO.getMem_num());
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(null, pstmt, conn);
-		}
-	}
 	/*
-	 * //신고 등록 public void insertReport(ReportBoardVO reportVO) throws Exception {
-	 * Connection conn = null; PreparedStatement pstmt = null; String
-	 * sqlInsertReport =
-	 * "INSERT INTO report_board (report_board_num, board_num, mem_num) VALUES (report_board_num_seq.nextval, ?, ?)"
-	 * ; String sqlUpdateBoard =
-	 * "UPDATE board SET board_report = board_report + 1 WHERE board_num = ?";
-	 * 
-	 * try { conn = DBUtil.getConnection(); pstmt =
-	 * conn.prepareStatement(sqlInsertReport); pstmt.setInt(1,
+	 * //신고 등록 public void insertReport(ReportBoardVO reportVO) throws Exception{
+	 * Connection conn = null; PreparedStatement pstmt = null; String sql = null;
+	 * try { conn = DBUtil.getConnection(); sql =
+	 * "INSERT INTO report_board (report_board_num,board_num, mem_num) VALUES (report_board_num_seq.nextval,?,?)"
+	 * ; pstmt = conn.prepareStatement(sql); pstmt.setInt(1,
 	 * reportVO.getBoard_num()); pstmt.setInt(2, reportVO.getMem_num());
 	 * pstmt.executeUpdate();
 	 * 
-	 * // 두 번째 쿼리를 실행하기 전에 PreparedStatement를 재사용합니다. pstmt.clearParameters(); // 기존
-	 * 매개변수를 지웁니다. pstmt = conn.prepareStatement(sqlUpdateBoard); pstmt.setInt(1,
-	 * reportVO.getBoard_num()); pstmt.executeUpdate(); } catch (Exception e) {
-	 * throw new Exception(e); } finally { DBUtil.executeClose(null, pstmt, conn); }
-	 * }
+	 * }catch(Exception e) { throw new Exception(e); }finally {
+	 * DBUtil.executeClose(null, pstmt, conn); } }
 	 */
+
+	//신고 등록 
+		public void insertReport(ReportBoardVO reportVO) throws Exception {
+		Connection conn = null; 
+		PreparedStatement pstmt = null; String
+		sqlInsertReport ="INSERT INTO report_board (report_board_num, board_num, mem_num) VALUES (report_board_num_seq.nextval, ?, ?)";
+		String sqlUpdateBoard ="UPDATE board SET board_report = board_report + 1 WHERE board_num = ?";
+
+		try { 
+			conn = DBUtil.getConnection(); pstmt =
+			conn.prepareStatement(sqlInsertReport); pstmt.setInt(1,
+			reportVO.getBoard_num()); pstmt.setInt(2, reportVO.getMem_num());
+			pstmt.executeUpdate();
+			// 두 번째 쿼리를 실행하기 전에 PreparedStatement를 재사용합니다.
+			// 기존매개변수를 지웁니다.
+			pstmt.clearParameters();
+			pstmt = conn.prepareStatement(sqlUpdateBoard); 
+			pstmt.setInt(1,reportVO.getBoard_num());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn); 
+		}
+	}
+	 
 	
 	//회원번호와 게시물 번호를 이용한 신고 정보
 	public ReportBoardVO checkReport(ReportBoardVO reportVO) throws Exception{
