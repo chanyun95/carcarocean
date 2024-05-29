@@ -18,7 +18,7 @@ public class ModifyUserFormAction implements Action{
 		if(user_num == null) {//로그인이 되지 않은 경우
 			return "redirect:/member/loginForm.do";
 		}
-		
+		 
 		//로그인이 된 경우
 		MemberDao dao = MemberDao.getDao();
 		MemberVo member = dao.getMember(user_num);

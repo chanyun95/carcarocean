@@ -1,4 +1,6 @@
-package kr.member.action;
+package kr.mypage.action;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,8 +9,11 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.dao.SellDao;
+import kr.sell.vo.SellVo;
 
-public class MyQnAFormAction implements Action {
+public class MySellCurrentStatusFormAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,16 +23,19 @@ public class MyQnAFormAction implements Action {
 		if(user_num == null) { //로그인이 되지 않은 경우 즉, 로그인값이 없는경우
 			return "redirect:/member/loginForm.do";
 		}
-		
 		//로그인이 된경우
-		//회원정보
-		MemberDao dao = MemberDao.getDao();
-		MemberVo member = dao.getMember(user_num);
-		
-		//관심게시물 정보 넣어야됨.
-		
-		request.setAttribute("member", member);
-		return "/WEB-INF/views/member/myQnAForm.jsp";
+				//회원정보
+				MemberDao dao1 = MemberDao.getDao();
+				
+				MemberVo member = dao1.getMember(user_num);
+				MyPageDao dao = MyPageDao.getDao();
+				//리스트 정보
+
+				List<SellVo> list = MyPageDao.getSellCurrent(user_num);
+
+				request.setAttribute("list", list);
+				request.setAttribute("member", member);
+		return "/WEB-INF/views/member/mySellCurrentStatusForm.jsp";
 	}
 
 }
