@@ -20,7 +20,7 @@ public class Qa_CommentDao {
 	private Qa_CommentDao() {}
 	
 	//답글 등록
-	public void insertQa_Comment(Qa_CommentVo qa_comm)throws Exception{
+	public void insertQa_Comment(Qa_CommentVo qa_comment)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -34,8 +34,8 @@ public class Qa_CommentDao {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setString(++cnt, qa_comm.getQa_comm_content());
-			pstmt.setInt(++cnt, qa_comm.getQa_num());
+			pstmt.setString(++cnt, qa_comment.getQa_comm_content());
+			pstmt.setInt(++cnt, qa_comment.getQa_num());
 			//SQL문 실행
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -86,8 +86,8 @@ public class Qa_CommentDao {
 			//커넥션풀에서 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM qa_comment"
-					+ " WHERE qa_num=? ORDER BY qa_comm_num DESC)a WHERE rnum >=? AND rnum <=?";
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM qa_comment"
+					+ " WHERE qa_num=? ORDER BY qa_comm_num DESC)a) WHERE rnum >=? AND rnum <=?";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, qa_num);
@@ -115,20 +115,59 @@ public class Qa_CommentDao {
 		return list;
 	}
 	
-	//답글 상세(답글 수정, 삭제 시 작성자 회원번호 체크 용도로 사용)
-	public Qa_CommentVo detailQa_Comment(int qa_comm_num)throws Exception{
+	//댓글 상세(댓글 수정, 삭제 시 작성자 회원번호 체크 용도로 사용)
+	public Qa_CommentVo ListQa_Comment(int qa_comm_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Qa_CommentVo reply = null;
 		String sql = null;
-		
+		int cnt = 0;
+		try {
+			//커넥션 풀에 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT * FROM qa_comment WHERE qa_comm_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(++cnt, qa_comm_num);
+			//SQL문 실행
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				reply = new Qa_CommentVo();
+				reply.setQa_comm_num(rs.getInt("qa_comm_num"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
 		return reply;
 	}
 	
 	//답글 수정
 	public void updateQa_Comment(Qa_CommentVo reply)throws Exception{
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "UPDATE qa_comment SET qa_comm_content=?, qa_comm_modify=SYSDATE WHERE qa_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(++cnt, reply.getQa_comm_content());
+			pstmt.setInt(++cnt, reply.getQa_num());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 	
 	//답글 삭제
