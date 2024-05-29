@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
-import kr.mypage.dao.MyPageDao;
+
 import kr.sell.dao.SellDao;
 import kr.sell.vo.SellVo;
 
