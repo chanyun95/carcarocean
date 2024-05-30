@@ -15,12 +15,11 @@ public class ModifyFormAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		
 		Integer user_num = (Integer)session.getAttribute("user_num");
-		if(user_num == null) {
+		if(user_num == null) {//로그인X
 			return "redirect:/member/loginForm.do";
 		}
-		
+		//로그인O
 		int b_re_num = Integer.parseInt(request.getParameter("b_re_num"));
 		
 		B_ReDao dao = B_ReDao.getDao();

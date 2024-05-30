@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>글상세</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/b_re_comment.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-main">
@@ -32,7 +34,9 @@
 				<c:if test="${!empty b_re.b_re_modify}">
 					${b_re.b_re_modify}
 				</c:if>
-				${b_re.b_re_reg}
+				<c:if test="${empty b_re.b_re_modify}">
+					${b_re.b_re_reg}
+				</c:if>
 			</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
@@ -59,7 +63,7 @@
 			</li>
 			<li>${b_re.checker_name} 검수자</li>
 			<li>
-				<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 -->
+				<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정 가능 -->
 				<c:if test="${user_num == b_re.mem_num}">
 				<input type="button" value="수정"
 				  onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
@@ -69,10 +73,29 @@
 		<!-- 댓글 시작 -->
 		<div id="reply_div">
 			<span class="re-title">댓글 달기</span>
-			
+			<form id="b_re_comm_form">
+				<input type="hidden" name="b_re_num" value="${b_re.b_re_num}" id="b_re_num">
+				<textarea rows="3" cols="50" name="b_re_comm_content"
+				<c:if test="${empty user_num}">disabled="disabled"</c:if>	
+				  id="b_re_comm_content" class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>    
+				<c:if test="${!empty user_num}">
+				<div id="b_re_comm_first">
+					<span class="letter-count">300/300</span>
+				</div>
+				<div id="b_re_comm_second">
+					<input type="submit" value="전송">
+				</div>
+				</c:if>
+			</form>
 		</div>
 		<!-- 댓글 목록 출력 시작 -->
-		
+		<div id="output"></div>
+		<div class="paging-button" style="display:none;">
+			<input type="button" value="다음글 보기">
+		</div>
+		<div id="loading" style="display:none;">
+			<img src="${pageContext.request.contextPath}/images/loading.gif" width="50" height="50">
+		</div>
 		<!-- 댓글 목록 출력 끝 -->
 		<!-- 댓글 끝 -->
 	</div>

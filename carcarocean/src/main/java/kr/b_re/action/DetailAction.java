@@ -15,7 +15,7 @@ public class DetailAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
-		
+		//글 번호 반환
 		int b_re_num = Integer.parseInt(request.getParameter("b_re_num"));
 		
 		B_ReDao b_reDao = B_ReDao.getDao();

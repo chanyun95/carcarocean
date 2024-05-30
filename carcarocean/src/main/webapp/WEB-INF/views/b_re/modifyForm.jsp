@@ -31,13 +31,17 @@
 				content.focus();
 				return false;
 			}
-			const photo = document.getElementById('b_re_photo');
-			if(photo.value.trim()==''){
-				alert('사진을 첨부하세요!');
-				photo.value='';
-				photo.focus();
-				return false;
+			const photo2 = document.getElementById('b_re_photo2');
+			if(photo2.value.trim()==''){
+				const photo = document.getElementById('b_re_photo');
+				if(photo.value.trim()==''){
+					alert('사진을 첨부하세요!');
+					photo.value='';
+					photo.focus();
+					return false;
+				}
 			}
+			
 		};
 	};
 </script>
@@ -74,9 +78,10 @@
 					<li>
 						<label for="b_re_photo">파일첨부(필수)</label>
 						<br>
-						<input type="file" name="b_re_photo" accept="image/gif,image/png,image/jpeg" multiple>
+						<input type="file" name="b_re_photo" id="b_re_photo" accept="image/gif,image/png,image/jpeg" multiple>
+						<hr size="1" noshade="noshade" width="100%">
 						<div id="file_detail">
-							<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" width="100">
+							<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" id="b_re_photo2" width="100">
 							<br>
 							<input type="button" value="파일 삭제" id="file_del">
 						</div>
@@ -94,7 +99,10 @@
 											dataType:'json',
 											success:function(param){
 												if(param.result == 'success'){
+													// 파일 삭제 성공 시, 이미지와 파일명 제거
 													$('#file_detail').hide();
+													// b_re_photo2에 빈 문자열 설정
+													$('#b_re_photo2').val('');
 												}else{
 													alert('파일 삭제 오류 발생');
 												}
