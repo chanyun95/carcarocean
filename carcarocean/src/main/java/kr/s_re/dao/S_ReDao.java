@@ -8,6 +8,7 @@ import java.util.List;
 
 
 import kr.s_re.vo.S_ReVo;
+import kr.s_re_comment.vo.S_Re_CommentVo;
 import kr.util.DBUtil;
 
 public class S_ReDao {
@@ -145,7 +146,7 @@ public class S_ReDao {
 	            } else if (keyfield.equals("2")) {
 	                sub_sql += "WHERE m.mem_id LIKE '%' || ? || '%'";
 	            } else if (keyfield.equals("3")) {
-	                sub_sql += "WHERE s.s_re_content LIKE '%' || ? || '%'";
+	                sub_sql += "WHERE sell.sell_maker LIKE '%' || ? || '%'";
 	            }
 	        }
 
@@ -234,7 +235,6 @@ public class S_ReDao {
 	      
 	      return s_Re;
 	}
-	//파일 삭제
 	
 	//판매 후기 게시판 글 수정
 	public void updateSellReview(S_ReVo S_Re)throws Exception{
@@ -247,10 +247,15 @@ public class S_ReDao {
 	         conn = DBUtil.getConnection();
 	         
 	         //SQL문 작성
-	         sql="";
+	         sql="UPDATE s_re SET s_re_title=?,s_re_content=?,s_re_modify=SYSDATE WHERE=s_re_num=?";
 	         
 	         //PreparedStatment 객체 생성
 	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(++cnt, S_Re.getS_re_title());
+	         pstmt.setString(++cnt, S_Re.getS_re_content());
+	         pstmt.setInt(cnt, S_Re.getS_re_num());
+	         
+	         pstmt.executeUpdate();
 	      }catch(Exception e) {
 	         throw new Exception(e);
 	      }finally {
@@ -269,15 +274,18 @@ public class S_ReDao {
 	         conn = DBUtil.getConnection();
 	         
 	         //SQL문 작성
-	         sql="";
+	         sql="DELETE FROM s_re WHERE s_re_num=?";
 	         
 	         //PreparedStatment 객체 생성
 	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(++cnt,s_re_num);
+	         pstmt.executeUpdate();
 	      }catch(Exception e) {
 	         throw new Exception(e);
 	      }finally {
 	         DBUtil.executeClose(null, pstmt, conn);
 	      }
 	}
+	
 	
 }

@@ -5,14 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목록</title>
+<title>판매후기게시판 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
 <div class="page-main">
 	<div class="content-main">
-		<h2>게시판 목록</h2>
+		<h2>판매후기게시판 목록</h2>
+		<form id="search_form" action="list.do" method="get">
+			<ul class="search">
+				<li>
+					<select name="keyfield">
+						<%-- c:if와 selected를 쓰는건 검색을 계속 유지 시키기 위해서 --%>
+						<option value="1" <c:if test="${param.keyfield ==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield ==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
+					</select>
+				</li>
+				<li>
+				<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}">
+				</li>
+				<li>
+				<input type="submit" value="검색">
+				
+				</li>
+				
+			</ul>
+		</form>
 		<div class="list-space align-right">
 			<input type="button" value="글쓰기" 
 				onclick="location.href='writeForm.do'"	
@@ -32,7 +52,7 @@
 					<th>글번호</th>
 					<th>제목</th>
 					<th>작성자</th>
-					<th>차종</th>
+					<th>차명/제조사</th>
 					<th>작성일</th>
 				</tr>
 				<c:forEach var="s_re" items="${list}">
