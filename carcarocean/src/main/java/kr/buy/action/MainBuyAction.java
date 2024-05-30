@@ -38,7 +38,6 @@ public class MainBuyAction implements Action{
 		
 		List<CarVO> carList = null;
 		if(count>0) {
-			
 			carList = cDao.getListCar(page.getStartRow(), page.getEndRow(), keyfield, keyword, 1, user_num);
 		}
 		
@@ -46,6 +45,7 @@ public class MainBuyAction implements Action{
 		request.setAttribute("carList", carList);
 		request.setAttribute("page", page.getPage());
 		request.setAttribute("keyfield", keyfield);
+		
 		
 		return "/WEB-INF/views/buy/mainBuy.jsp";
 	}
