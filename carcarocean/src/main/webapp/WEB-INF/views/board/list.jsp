@@ -66,6 +66,7 @@ window.onload=function(){
 				<th>조회</th>
 			</tr>
 			<c:forEach var="board" items="${list}">
+			<c:if test="${board.board_report < 10}">
 			<tr>
 				<td>${board.board_num}</td>
 				<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
@@ -73,6 +74,7 @@ window.onload=function(){
 				<td>${board.board_reg}</td>
 				<td>${board.board_hit}</td>
 			</tr>
+			</c:if>
 			</c:forEach>
 		</table>
 		<div class="align-center">${page}</div>

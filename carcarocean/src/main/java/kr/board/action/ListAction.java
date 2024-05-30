@@ -20,6 +20,12 @@ public class ListAction implements Action{
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
 		
+		int boardReport = 0; // 기본값 설정
+	    String boardReportParam = request.getParameter("board_report");
+	    if (boardReportParam != null && !boardReportParam.isEmpty()) {
+	        boardReport = Integer.parseInt(boardReportParam);
+	    }
+	    
 		BoardDao dao = BoardDao.getDao();
 		int count = dao.getBoardCount(keyfield, keyword);
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"list.do");
@@ -31,6 +37,7 @@ public class ListAction implements Action{
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
+		request.setAttribute("board_report", boardReport);
 		
 		return "/WEB-INF/views/board/list.jsp";
 	}

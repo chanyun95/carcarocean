@@ -1,4 +1,5 @@
 $(function(){
+	let reportCount = $('#output_report').attr('data-checkRedirect');
 	/*============================
 	 * 신고선택 여부와 선택한 총 개수 읽기
 	 * =========================== */
@@ -11,9 +12,10 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				displayReport(param);
+				
 			},
 			error:function(){
-				alert('네트워크 오류 발생');
+				alert('네트워크 오류 발생1');
 			}
 		});
 	}
@@ -21,29 +23,35 @@ $(function(){
 	 * 신고 등록(및 삭제) 이벤트 연결
 	 * =========================== */
 	$('#output_report').click(function(){
-		//서버와 통신
-		$.ajax({
-			url:'writeReport.do',
-			type:'post',
-			data:{board_num:$(this).attr('data-num')},
-			dataType:'json',
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인 후 신고를 눌러주세요!');
-				}else if(param.result == 'success'){
-					let choice = confirm("신고하시겠습니까");
-					choice();
-					displayReport(param);
-				}else if(param.result == 'alreadyCheck'){
-					alert('이미 신고된 글입니다.');
-				}else{
-					alert('신고 등록/삭제 오류 발생');
+		let choice = confirm("신고하시겠습니까");
+		if(choice){
+			//서버와 통신
+			$.ajax({
+				url:'writeReport.do',
+				type:'post',
+				data:{board_num:$(this).attr('data-num')},
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 신고를 눌러주세요!');
+					}else if(param.result == 'success'){
+							alert('신고되었습니다.');
+							if(param.count>=10){
+								checkRedirect();
+							}
+							$('#output_report').off('click');
+					}else if(param.status == 'alreadyReport'){
+						alert('이미 신고된 글입니다.');
+						$('#output_report').off('click');
+					}else{
+						alert('신고 등록/삭제 오류 발생');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생2');
 				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
+			});
+		}
 	});
 	/*============================
 	 * 신고 표시 함수
@@ -51,14 +59,25 @@ $(function(){
 	function displayReport(param){
 		let output;
 		if(param.status == 'yesReport'){
-			output = '../images/report01.png';
+			output = '../images/report02.png';
+			text = '신고하기';
 		}else{
 			output = '../images/report01.png';
+			text = '이미 신고된 글입니다.';
+			$('#output_report').off('click');
 		}
+
 		//문서 객체에 설정
 		$('#output_report').attr('src',output);
-		$('#output_reportcount').text(param.count);
+		$('#report_status_text').text(text);
 	}
+	
+	function checkRedirect() {
+
+        alert('신고 수가 10을 넘어가 페이지가 이동합니다.');
+        location.href = 'list.do';
+
+    }
 	/*============================
 	 * 초기 데이터 호출
 	 * =========================== */

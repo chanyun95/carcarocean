@@ -29,18 +29,21 @@ public class GetReportAction implements Action{
 		if(user_num == null) { //로그인 되지 않은 경우
 			mapAjax.put("status", "noReport");
 		}else { //로그인 된 경우
+			
 			ReportBoardVO reportVO = new ReportBoardVO(); 
             reportVO.setBoard_num(board_num);
             reportVO.setMem_num(user_num);
             
 			ReportBoardVO report = dao.checkReport(reportVO);
 			if(report != null) {
-				mapAjax.put("status", "yesReport");
+				mapAjax.put("status", "alreadyReport");
+				
 			}else {
-				mapAjax.put("status", "noReport");
+				mapAjax.put("status", "yesReport");
 			}
 		}
-		mapAjax.put("count", dao.checkReportCount(board_num));
+		int reportCount = dao.checkReportCount(board_num);
+		mapAjax.put("count", reportCount);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

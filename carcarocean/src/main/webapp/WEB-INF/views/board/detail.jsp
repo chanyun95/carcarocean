@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.report.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/board.reply.js"></script>
 </head>
 <body>
 <div class="page-main">
@@ -44,8 +45,8 @@
 		<ul class="detail-sub">
 			<li>
 				<!-- 신고 -->
-				<img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="40">
-				신고
+				<p id="report_status_text"></p>
+				<img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}">
 			</li>
 			<li>
 				<c:if test="${!empty board.board_modify}">
@@ -69,10 +70,12 @@
 		</ul>
 		<div id="reply_div">
 			<span class="re-title">댓글 달기</span>
-			<form id="re_form">
+			<form id="bor_comm_form">
 				<input type="hidden" name="board_num" value="${board.board_num}" id="board_num">
-				<textarea rows="3" cols="50" name="re_content" id="re_content" <c:if test="${empty user_num}">disabled="disabled"</c:if>
-						class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+				<textarea rows="3" cols="50" name="bor_comm_content" 
+					<c:if test="${empty user_num}">disabled="disabled"</c:if> 
+					 id="bor_comm_content"
+					class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 						<c:if test="${!empty user_num}">
 						<div id="re_first">
 						<span class="letter-count">300/300</span>
