@@ -12,7 +12,7 @@
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="container">
         <div class="row">
-            <c:set var="sub_title" value="${member.mem_name}님의 차 팔기현황" scope="request" />
+            <c:set var="sub_title" value="${member.mem_name}님 판매현황" scope="request" />
             <jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
             <main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
@@ -52,6 +52,7 @@
                     </table>
                 </div>
             </main>
+            
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
