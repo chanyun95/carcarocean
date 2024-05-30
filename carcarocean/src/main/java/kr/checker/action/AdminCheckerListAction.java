@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import kr.checker.dao.CheckerDao;
 import kr.checker.vo.CheckerVo;
 import kr.controller.Action;
+import kr.util.PagingUtil;
 
 public class AdminCheckerListAction implements Action{
 
@@ -26,9 +27,33 @@ public class AdminCheckerListAction implements Action{
 		if(user_auth!=9) {
 			return "/WEB-INF/views/common/warningPage.jsp";
 		}
+		request.setCharacterEncoding("utf-8");
+		
+		// 확인 끝
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		
+		String keyfield = request.getParameter("keyfield");
+		String keyword = request.getParameter("keyword");
 		
 		CheckerDao dao = CheckerDao.getDao();
-		List<CheckerVo> list = dao.getCheckerAllList();
+		int count = dao.getCheckerListCount(keyfield, keyword);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum),count,15,10,"adminCheckerListAction.do");
+		
+		List<CheckerVo> list = null;
+		if(count > 0) {
+			list = dao.getCheckerList(page.getStartRow(), page.getEndRow(), keyfield, keyword);
+		}
+		
+		request.setAttribute("count", count);
+		request.setAttribute("list", list);
+		request.setAttribute("page", page.getPage());
+		request.setAttribute("keyfield", keyfield);
+
 		request.setAttribute("list", list);
 		return "/WEB-INF/views/checker/adminCheckerList.jsp";
 	}

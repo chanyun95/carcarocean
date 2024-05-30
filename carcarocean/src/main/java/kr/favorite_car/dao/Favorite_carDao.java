@@ -15,29 +15,24 @@ public class Favorite_carDao {
 	}
 	private Favorite_carDao() {};
 	
-	public boolean getFc(int car_num, int mem_num) throws Exception{
+	public Favorite_carVo getFc(int car_num, int mem_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		boolean fc = false;
-		
-		int cnt = -1;
-		
+		Favorite_carVo fc = null;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT COUNT(*) FROM favorite_car WHERE car_num=? and mem_num=?";
+			sql = "SELECT * FROM favorite_car WHERE car_num=? and mem_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, car_num);
 			pstmt.setInt(2, mem_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				cnt = rs.getInt(1);
-			}
-			if(cnt==0) {
-				fc = false;
-			} else if(cnt==1) {
-				fc = true;
+				fc = new Favorite_carVo();
+				fc.setFav_num(rs.getInt("fav_num"));
+				fc.setMem_num(rs.getInt("mem_num"));
+				fc.setCar_num(rs.getInt("car_num"));
 			}
 		} catch (Exception e) {
 			throw new Exception(e);

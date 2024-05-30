@@ -13,58 +13,43 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>내 차 구매 메인</title>
 	<style>
-        /* 검색 창의 너비를 조절하고 높이를 키웁니다 */
+        /* 검색 창의 너비 조절*/
         #keyword {
-            width: 250px; /* 너비 조절 */
-            height: 50px; /* 높이 조절 */
+            width: 250px;
+            height: 50px;
         }
+        /* 판매 완료 차량 사진 흑백 */
         .brightness {
         	filter: brightness(50%);
     	}
+    	/* 사진 상자 */
     	.image-container {
             position: relative;
             display: inline-block;
+            overflow: hidden;
         }
+        /* 사진 */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지가 부모 div를 덮도록 설정 */
+        }
+        /* 하트 아이콘 */
         .overlay-icon {
             position: absolute;
             bottom: 10px; /* 원하는 위치에 따라 조정 가능 */
             right: 10px;  /* 원하는 위치에 따라 조정 가능 */
             font-size: 25px;
-            color:red;
+            color: red;
         }
     </style>
-    <script>
-	    function favCar(carnum,favIconId) {
-	        $.ajax({
-	        	url:'${pageContext.request.contextPath}/buy/favCar.do',
-	        	type:'post',
-	        	data:{car_num:carnum,mem_num:${user_num}},
-	        	dataType:'json',
-	        	success:function(param){
-	        		if(param.result=='insertFav'){
-	        			alert('관심상품 등록 완료');
-	        			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
-					} else if(param.result=='removeFav'){
-						alert('관심상품 삭제 완료');
-						$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
-					} else if(param.result=='logout'){
-						alert('로그인 후 이용해주세요!');
-						location.href = '${pageContext.request.contextPath}/member/loginForm.do';
-					}
-	        	},
-	        	error:function(){
-	        		alert('네트워크에 오류가 발생했습니다!');
-	        	}
-	        });
-	    };
-    </script>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 	<!-- 헤더 고정 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <!-- 중간 컨텐츠 -->
- <div class="container-fluid">
+ <div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
          <nav class="col-md-2 bg-light sidebar pt-5 pb-5">
@@ -87,22 +72,20 @@
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
          	<div class="d-flex justify-content-center bg-light p-5 mb-5">
-		<form id="search_form" action="" method="get" class="d-flex justify-content-center">
-			<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-				<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
-				<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
-				<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차종</option>
-			</select>
-			<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-			<input type="submit" class="btn btn-warning" value="검색">
-		</form>
-	</div>
+				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
+					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
+						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
+						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
+					</select>
+					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+					<input type="submit" class="btn btn-warning ms-2" value="검색">
+				</form>
+			</div>
 	
-	<!-- 차량 리스트 -->
+			<!-- 차량 리스트 -->
              <div class="container">
              	<div class="row mb-3">
-             	<!-- 3 * 4 반복문 시작 -->
-             	<!-- 한 블럭 시작 -->
+
              	<c:forEach var="car" items="${carList}" begin="0" end="11" varStatus="status">
    					<c:if test="${fn:contains(car.car_photo, ',')}">
            				<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -113,7 +96,8 @@
      				</c:if>
              		<div class="col-4 mt-3">
 		                <div class="p-3 border bg-light">
-		                	<div class="image-container">
+		                	<!-- 사진 상자 -->
+		                	<div class="image-container ps-3">
 			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
 			                	<c:if test="${car.car_status==0 or user_auth==9}">
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
@@ -125,22 +109,30 @@
 			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
 			                	</c:if>
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
-			                	<a href="#" onclick="favCar(${car.car_num},'${favIconId}')" ><i id="${favIconId}" class="bi bi-heart overlay-icon"></i></a>
+              	     			<c:if test="${!car.fav_check}">
+		                		<i id="${favIconId}" class="bi bi-heart overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
+		                		</c:if>
+		                		<c:if test="${car.fav_check}">
+		                		<i id="${favIconId}" class="bi bi-heart-fill overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
+		                		</c:if>
 		                	</div>
-		                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}<c:if test="${car.car_status==1}"><b style="color:red;"> 예약완료</b></c:if></p>
-		                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
-		                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
-		                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
-		                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
-		                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
-		                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+		                	<!-- 설명 -->
+		                	<div>
+			                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}<c:if test="${car.car_status==1}"><b style="color:red;"> 예약완료</b></c:if></p>
+			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+			                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
+			                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+			                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+			                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+			                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+		                	</div>
 		                </div>
 		            </div>
-           		</c:forEach>
-            		<!-- 한 블럭 끝 -->
-            		</div>
-            		<!-- 3 * 4 반복문 끝 -->
+       			</c:forEach>
+       			
+           		</div>
              </div>
+             <div class="text-center">${page}</div>
          </main>
      </div>
   </div>
@@ -148,4 +140,34 @@
 <!-- 푸터 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+<script>
+		
+	    function favCar(carnum,favIconId) {
+	        $.ajax({
+	        	url:'favCar.do',
+	        	type:'post',
+	        	data:{car_num:carnum},
+	        	dataType:'json',
+	        	success:function(param){
+	        		if(param.result=='success'){
+	    	    		if(param.action=='insertFav'){
+	    	    			alert('관심차량 등록 완료');
+	    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
+	    				} else if(param.action=='removeFav'){
+	    					alert('관심차량 삭제 완료');
+	    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
+	    				}
+	    	    	} else if(param.result=='logout'){
+	     				alert('로그인 후 이용해주세요!');
+	     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
+	    	    	}else {
+	    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
+	    	    	}
+	        	},
+	        	error:function(){
+	        		alert('네트워크에 오류가 발생했습니다!');
+	        	}
+	        });
+	    };
+    </script>
 </html>

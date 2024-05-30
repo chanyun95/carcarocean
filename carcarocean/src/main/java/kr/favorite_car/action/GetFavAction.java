@@ -9,37 +9,35 @@ import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import kr.buy.dao.BuyDao;
-import kr.buy.vo.BuyVo;
-import kr.car.dao.CarDao;
 import kr.controller.Action;
 import kr.favorite_car.dao.Favorite_carDao;
 import kr.favorite_car.vo.Favorite_carVo;
 
-public class FavCarAction implements Action{
+public class GetFavAction implements Action{
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String,String> mapAjax = new HashMap<>();
+
+		Map<String,Object> mapAjax = new HashMap<String,Object>();
 		
 		HttpSession session = request.getSession();
+		
 		Integer user_num = (Integer)session.getAttribute("user_num");
+		int car_num = Integer.parseInt(request.getParameter("car_num"));
+		
+		Favorite_carDao dao = Favorite_carDao.getDao();
 		if(user_num==null) {
-			mapAjax.put("result", "logout");
-		}else {
-			int car_num = Integer.parseInt(request.getParameter("car_num"));
-			
-			Favorite_carDao fcDao = Favorite_carDao.getDao();
-			Favorite_carVo fc = fcDao.getFc(car_num,user_num);
-			if(fc==null) {
-				fcDao.insertFav(car_num, user_num);
-				mapAjax.put("action", "insertFav");
+			mapAjax.put("show", "noFav");
+		}else {//로그인 된 경우
+			Favorite_carVo fc = dao.getFc(car_num,user_num);
+			if(fc!=null) {
+				mapAjax.put("show", "yesFav");
 			}else {
-				fcDao.removeFav(car_num, user_num);
-				mapAjax.put("action", "removeFav");
+				mapAjax.put("show", "noFav");
 			}
-			mapAjax.put("result", "success");
 		}
 		
+		//JSON 데이터 생성
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);
 		

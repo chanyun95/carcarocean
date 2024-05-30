@@ -84,6 +84,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="text-center">${page}</div>
 	</div>
 </body>
 </html>
