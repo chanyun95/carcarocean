@@ -4,6 +4,8 @@ public class Favorite_carVo {
 	private int fav_num;
 	private int mem_num;
 	private int car_num;
+	
+	
 	public int getFav_num() {
 		return fav_num;
 	}

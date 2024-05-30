@@ -74,8 +74,8 @@
          	<div class="d-flex justify-content-center bg-light p-5 mb-5">
 				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
 					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
-						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
+						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
+						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 					</select>
 					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
 					<input type="submit" class="btn btn-warning ms-2" value="검색">
@@ -99,15 +99,15 @@
 		                	<!-- 사진 상자 -->
 		                	<div class="image-container ps-3">
 			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
-			                	<c:if test="${car.car_status==0 or user_auth==9}">
+			                	<%-- <c:if test="${car.car_status==0 or user_auth==9}"> --%>
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
 			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded img-fluid">
 		                		</a>
-			                	</c:if>
+			                	<%-- </c:if> --%>
 			                	<!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐-->
-			                	<c:if test="${car.car_status==1 and user_auth!=9}">
+			                	<%-- <c:if test="${car.car_status==1 and user_auth!=9}">
 			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
-			                	</c:if>
+			                	</c:if> --%>
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
               	     			<c:if test="${!car.fav_check}">
 		                		<i id="${favIconId}" class="bi bi-heart overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
