@@ -85,19 +85,21 @@ public class BoardDao {
 			conn  = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
 				//검색 처리
-				if(keyfield.equals("1")) sub_sql += "WHERE title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '%' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += " WHERE title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += " WHERE id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += " WHERE content LIKE '%' || ? || '%'";
 			}
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
 					+ "(SELECT * FROM board JOIN member USING(mem_num) " + sub_sql
 					+ " ORDER BY board_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
 			pstmt = conn.prepareStatement(sql);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
+	        
 			rs = pstmt.executeQuery();
 			list = new ArrayList<BoardVo>();
 			while(rs.next()) {
@@ -107,7 +109,7 @@ public class BoardDao {
 				board.setBoard_hit(rs.getInt("board_hit"));
 				board.setBoard_reg(rs.getString("board_reg"));
 				board.setMem_id(rs.getString("mem_id"));
-				
+				board.setBoard_report(rs.getInt("board_report"));
 				list.add(board);
 			}
 		}catch(Exception e) {
@@ -277,12 +279,13 @@ public class BoardDao {
 		try { 
 			conn = DBUtil.getConnection(); pstmt =
 			conn.prepareStatement(sqlInsertReport); pstmt.setInt(1,
-			reportVO.getBoard_num()); pstmt.setInt(2, reportVO.getMem_num());
+			reportVO.getBoard_num()); 
+			pstmt.setInt(2, reportVO.getMem_num());
 			pstmt.executeUpdate();
 			// 두 번째 쿼리를 실행하기 전에 PreparedStatement를 재사용합니다.
 			// 기존매개변수를 지웁니다.
 			pstmt.clearParameters();
-			pstmt = conn.prepareStatement(sqlUpdateBoard); 
+			pstmt = conn.prepareStatement(sqlUpdateBoard);
 			pstmt.setInt(1,reportVO.getBoard_num());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -329,12 +332,12 @@ public class BoardDao {
 		int count = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT COUNT(board_report)  FROM board WHERE board_num=? ";
+			sql = "SELECT board_report  FROM board WHERE board_num=? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, board_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				count = rs.getInt(1);
+				count = rs.getInt("board_report");
 			}
 		}catch(Exception e) {
 			throw new Exception(e);

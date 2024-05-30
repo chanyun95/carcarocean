@@ -34,12 +34,13 @@ public class WriteReportAction implements Action{
 			BoardDao dao = BoardDao.getDao();
 			ReportBoardVO db_report = dao.checkReport(reportVO);
 			if(db_report != null) {
-				mapAjax.put("status", "alreadyCheck");
+				mapAjax.put("status", "alreadyReport");
 			}else {
 				dao.insertReport(reportVO);
 				mapAjax.put("status", "yesReport");
 			}
 			mapAjax.put("result", "success");
+			
 			mapAjax.put("count", dao.checkReportCount(board_num));
 		}
 		
