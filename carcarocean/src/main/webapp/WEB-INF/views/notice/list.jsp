@@ -58,6 +58,7 @@
 						<th>번호</th>
 						<th>제목</th>
 						<th>등록일</th>
+						<th>조회수</th>
 					</tr>
 					<c:forEach var="notice" items="${list}">
 					<c:if test="${notice.notice_impt == 1}">
@@ -65,6 +66,7 @@
 								<td>[중요]</td>
 								<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 								<td>${notice.notice_reg}</td>
+								<td>${notice.notice_hit}</td>
 							</tr>
 					</c:if>				
 					</c:forEach>
@@ -74,6 +76,7 @@
 							<td>${notice.notice_num}</td>
 							<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 							<td>${notice.notice_reg}</td>
+							<td>${notice.notice_hit}</td>
 						</tr>
 					</c:if>
 					</c:forEach>

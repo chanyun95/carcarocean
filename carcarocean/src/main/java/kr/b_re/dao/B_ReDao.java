@@ -214,35 +214,41 @@ public class B_ReDao {
 	        //PreparedStatment 객체 생성
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(++cnt, b_re_num);
+	        
 	        pstmt.executeUpdate();
-	        
-	        
 	     }catch(Exception e) {
 	        throw new Exception(e);
 	     }finally {
 	        DBUtil.executeClose(null, pstmt, conn);
 	     }
 	}
+	
 	//구매 후기 게시판 글 수정
 	public void updateB_Re(B_ReVo b_re)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
+		String sub_sql = "";
 		int cnt = 0;
 		try {
          //커넥션풀로부터 커넥션 할당
          conn = DBUtil.getConnection();
+         
+         if(b_re.getB_re_photo()!=null && !"".equals(b_re.getB_re_photo())) {
+        	 sub_sql += ",b_re_photo=?";
+         }
          //SQL문 작성
-         sql = "UPDATE b_re SET buy_num=(SELECT buy_num FROM buy WHERE mem_num=? AND ROWNUM = 1), "
-         	+ "b_re_title=?, b_re_content=?, b_re_photo=? "
-        	+ "WHERE b_re_num=?";
+         sql = "UPDATE b_re SET buy_num=(SELECT buy_num FROM buy WHERE mem_num=? AND ROWNUM = 1),"
+         	+ "b_re_title=?,b_re_content=?,b_re_modify=SYSDATE"+sub_sql+" WHERE b_re_num=?";
          
          //PreparedStatment 객체 생성
          pstmt = conn.prepareStatement(sql);
          pstmt.setInt(++cnt, b_re.getMem_num());
          pstmt.setString(++cnt, b_re.getB_re_title());
          pstmt.setString(++cnt, b_re.getB_re_content());
-         pstmt.setString(++cnt, b_re.getB_re_photo());
+         if(b_re.getB_re_photo()!=null && !"".equals(b_re.getB_re_photo())) {
+        	 pstmt.setString(++cnt, b_re.getB_re_photo());
+         }
          pstmt.setInt(++cnt, b_re.getB_re_num());
          
          pstmt.executeUpdate();
