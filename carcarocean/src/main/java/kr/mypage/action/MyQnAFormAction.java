@@ -1,5 +1,7 @@
 package kr.mypage.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,6 +9,9 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.vo.SellVo;
+import kr.qa.vo.QaVo;
 
 public class MyQnAFormAction implements Action {
 
@@ -21,11 +26,15 @@ public class MyQnAFormAction implements Action {
 		
 		//로그인이 된경우
 		//회원정보
-		MemberDao dao = MemberDao.getDao();
-		MemberVo member = dao.getMember(user_num);
+		MemberDao dao1 = MemberDao.getDao();
 		
-		//관심게시물 정보 넣어야됨.
-		
+		MemberVo member = dao1.getMember(user_num);
+		MyPageDao dao = MyPageDao.getDao();
+		//리스트 정보
+
+		List<QaVo> list = MyPageDao.MyQna(user_num);
+
+		request.setAttribute("list", list);
 		request.setAttribute("member", member);
 		return "/WEB-INF/views/member/myQnAForm.jsp";
 	}

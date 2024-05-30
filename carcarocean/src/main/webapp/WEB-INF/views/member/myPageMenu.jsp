@@ -19,9 +19,9 @@
 </head>
 <body>
 	<nav class="col-md-2 bg-light sidebar pt-5 pb-5">
-			<h4>
+			<h5 class = "text-warning">
 				<b>${sub_title}</b>
-			</h4>
+			</h5>
 			<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link active" href="modifyUserForm.do">회원정보
 					</a></li>

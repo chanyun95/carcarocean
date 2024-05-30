@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="nav">
                <ul class="navbar-nav">
                	  <!-- 첫번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 구매</a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 구매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/b_re/list.do">차량 구매 후기</a>
@@ -49,20 +49,20 @@
                      </div>
                   </li>
                   <!-- 두번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 판매</a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
                      </div>
                   </li>
                   <!-- 세번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">커뮤니티</a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">커뮤니티</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
                      </div>
                   </li>
                   <!-- 네번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">고객 센터</a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">고객 센터</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/event/list.do">이벤트</a>
@@ -71,7 +71,7 @@
                   </li>
                   <c:if test="${!empty user_num && user_auth ==9}">
                   
-                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">관리자</a>
+                   <li class="nav-item dropdown"><a class="nav-link text-dark px-3 dropdown-toggle fs-5" href="#" data-toggle="dropdown">관리자</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 목록</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/checker/adminCheckerList.do">검수자 정보 목록</a>
@@ -90,7 +90,9 @@
                <!-- 로그인시 로그인 , 로그아웃 -->
                <c:if test="${!empty user_num}">
                <div>
+               	  <c:if test = "${!empty user_num && user_auth != 9}">
                   <i class="bi bi-person-circle"><a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></i>
+                  </c:if>
                   <i class="bi bi-person-circle"><a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></i>
                </div>
                </c:if>

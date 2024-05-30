@@ -88,12 +88,9 @@ $(function(){
 			</main>
 		</div>
 	</div>
-</body>
-<footer>
-	<!-- Footer-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	<!-- end of Footer -->
-</footer>
+</body>
+
 </html>
 
 

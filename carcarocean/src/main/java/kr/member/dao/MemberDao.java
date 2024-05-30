@@ -121,6 +121,7 @@ public class MemberDao {
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
+			
 		}finally {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
@@ -343,11 +344,76 @@ public class MemberDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-
-	//회원가입 및 회원정보 수정, 삭제 끝
-
-
-	//차량 판매 신청 현황
-
+	//아이디 찾기
+	public MemberVo findMember(String mem_name, String mem_email)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVo member = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			//zmember와 zmember_detail 테이블을 조인할 때
+			//누락된 데이터가 보여야 id 중복 체크 가능
+			sql = "SELECT m.mem_id FROM member m JOIN member_detail md ON m.mem_num = md.mem_num "
+					+ "WHERE md.mem_name = ? AND md.mem_email = ?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(++cnt, mem_name);
+			pstmt.setString(++cnt, mem_email);
+			//SQL문 실행
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new MemberVo();
+				member.setMem_id(rs.getString("mem_id"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return member;
+	}
+	//비밀번호 찾기
+	public MemberVo findPasswd(String mem_name, String mem_email, String mem_id, String mem_phone)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVo member = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			//zmember와 zmember_detail 테이블을 조인할 때
+			//누락된 데이터가 보여야 id 중복 체크 가능
+			sql = "SELECT md.mem_passwd FROM member m JOIN member_detail md ON m.mem_num = md.mem_num "
+					+ "WHERE md.mem_name = ? AND md.mem_email = ? AND m.mem_id = ? AND md.mem_phone = ?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(++cnt, mem_name);
+			pstmt.setString(++cnt, mem_email);
+			pstmt.setString(++cnt, mem_id);
+			pstmt.setString(++cnt, mem_phone);
+			
+			//SQL문 실행
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new MemberVo();
+				member.setMem_passwd(rs.getString("mem_passwd"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return member;
+	}
 
 }

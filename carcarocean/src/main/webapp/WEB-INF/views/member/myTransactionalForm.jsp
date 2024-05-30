@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님의 거래내역"
+			<c:set var="sub_title" value="${member.mem_name}님 거래내역"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
