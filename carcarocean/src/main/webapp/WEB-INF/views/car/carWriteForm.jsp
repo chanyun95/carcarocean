@@ -148,7 +148,7 @@ function submit_btn (){
 			</li>
 			<li>
 				<label for="car_birth">연식</label>
-				<input type="text" name="car_birth" id="car_birth" class="input-check form-control" maxlength="8" placeholder="예) 2018년 05월">
+				<input type="text" name="car_birth" id="car_birth" class="input-check form-control" maxlength="9" placeholder="예) 2018년 05월">
 			</li>
 			<li>
 				<label for="car_cc">배기량(cc)</label>

@@ -34,7 +34,7 @@
                 </div>
             </div> 
             <div class="text-center">
-                <p class="text-white">Copyright &copy; Your Website 2024</p>
+                <div class="text-white">Copyright &copy; Your Website 2024</div>
             </div>
         </div>
     	</footer>

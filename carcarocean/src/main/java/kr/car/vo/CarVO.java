@@ -1,5 +1,7 @@
 package kr.car.vo;
 
+import kr.favorite_car.vo.Favorite_carVo;
+
 public class CarVO {
 	private int car_num;					//차량 식별 번호
 	private String car_maker;			//제조사
@@ -24,6 +26,16 @@ public class CarVO {
 	private int checker_num;			//검수자 식별 번호
 	private int car_status;				//차량 판매 가능 여부 0:판매중, 1:판매완료
 	private String car_checker_opinion;
+	
+	private boolean fav_check; //관심상품 식별
+	
+	
+	public boolean getFav_check() {
+		return fav_check;
+	}
+	public void setFav_check(boolean fav_check) {
+		this.fav_check = fav_check;
+	}
 	
 	public int getCar_num() {
 		return car_num;
