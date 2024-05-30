@@ -74,7 +74,12 @@
 						<c:if test="${qa.qa_status == 1}">
 						<td>미처리</td>
 						</c:if>
+						<c:if test="${!empty user_num && (user_auth == 9 || user_num == qa.mem_num)}">
 						<td><a href="detail.do?qa_num=${qa.qa_num}">${qa.qa_title}</a></td>
+						</c:if>
+						<c:if test="${empty user_num || (user_auth != 9 && user_num != qa.mem_num)}">
+						<td>${qa.qa_title}</td>
+						</c:if>						
 						<td>${qa.mem_id}</td>
 						<td>${qa.qa_reg}</td>
 					</tr>

@@ -50,31 +50,38 @@
 				</li>
 			</ul>
 			<!-- 답글 시작 -->
-			<c:if test="${!empty user_num && user_auth == 9}">
+			
 			<div id="reply_div">
-				<span class="re-title">답변 등록</span>
+				<span class="re-title">답변하기</span>
 				<form id="re_form">
 					<input type="hidden" name="qa_num" value="${qa.qa_num}" id="qa_num">
-					<textarea rows="5" cols="70" name="qa_comm_content" id="re_content" class="rep-content"></textarea>
+					<textarea rows="3" cols="50" name="qa_comm_content" <c:if test="${user_auth != 9}">disabled="disabled"</c:if> id="re_content" 
+					class="rep-content"><c:if test="${user_auth != 9}">관리자만 답변할 수 있습니다.</c:if></textarea>
+					<c:if test="${user_auth == 9}">
 						<div id="re_first">
 							<span class="letter-count">300/300</span>
 						</div>
 						<div id="re_second" class="align-right">
-							<input type="submit" value="등록">
+							<input type="submit" value="전송">
 						</div>
-				</form>
+					</c:if>
+				</form>	
 			</div>
+			
+			<!-- 답글 끝 -->
 			<!-- 댓글 목록 출력 시작 -->
-			<div id="output"></div>
+			<h4>관리자 답변</h4>
+			<div id="output">
+				<!-- ajax로 정보가 추가되는 공간 -->
+			</div>
 			<div class="paging-button" style="display: none;">
 				<input type="button" value="다음글 보기">
 			</div>
 			<div id="loding" style="display: none;">
 				<img src="${pageContext.request.contextPath}/images/loading.gif" width="50" height="50">
-			</div>
-			</c:if>
-			<!-- 댓글 목록 출력 끝 -->
-			<!-- 답글 끝 -->
+			</div>			
+			<!-- 댓글 목록 출력 끝 -->	
+			
 		</div>
 	</div>
 </body>
