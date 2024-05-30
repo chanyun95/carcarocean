@@ -7,6 +7,15 @@ public class S_Re_CommentVo {
 	private String s_re_comm_content;
 	private int s_re_comm_report;
 	private String s_re_comm_reg;
+	
+	private String mem_id;			//회원아이디
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	public int getS_re_comm_num() {
 		return s_re_comm_num;
 	}

@@ -26,9 +26,12 @@ public class DetailAction implements Action{
 		 SellDao selldao = SellDao.getDao(); 
 		 SellVo sellvo = selldao.getSell(s_re.getSell_num());
 		  sellvo.setSell_cname(sellvo.getSell_cname());
-		 
-		
-		
+		  sellvo.setSell_maker(sellvo.getSell_maker());
+		  sellvo.setSell_mile(sellvo.getSell_mile());
+		  sellvo.setSell_cnumber(sellvo.getSell_cnumber());
+		  sellvo.setSell_place1(sellvo.getSell_place1());
+		  sellvo.setSell_place2(sellvo.getSell_place2());
+		  sellvo.setSell_check(sellvo.getSell_check());
 		request.setAttribute("sellvo", sellvo);
 		request.setAttribute("s_re",s_re);
 		return "/WEB-INF/views/s_re/detail.jsp";
