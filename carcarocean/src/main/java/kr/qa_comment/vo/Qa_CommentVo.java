@@ -36,6 +36,9 @@ public class Qa_CommentVo {
 	public void setQa_comm_modify(String qa_comm_modify) {
 		this.qa_comm_modify = qa_comm_modify;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Qa_CommentVo [qa_comm_num=" + qa_comm_num + ", qa_num=" + qa_num + ", qa_comm_content="
+				+ qa_comm_content + ", qa_comm_reg=" + qa_comm_reg + ", qa_comm_modify=" + qa_comm_modify + "]";
+	}
 }

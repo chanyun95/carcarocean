@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -34,8 +35,6 @@ public class ListQa_CommentAction implements Action{
 		int qa_num = Integer.parseInt(request.getParameter("qa_num"));
 		Qa_CommentDao dao = Qa_CommentDao.getDao();
 		int count = dao.CountQa_Comment(qa_num);
-
-		System.out.println(pageNum + "," + rowCount + "," + count);
 		
 		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, Integer.parseInt(rowCount));
 		List<Qa_CommentVo> list = null;
@@ -49,7 +48,18 @@ public class ListQa_CommentAction implements Action{
 		Map<String, Object> mapAjax = new HashMap<String, Object>();
 		mapAjax.put("count", count);
 		mapAjax.put("list", list);
+		
+		
+		
 
+		HttpSession session = request.getSession();
+		Integer user_auth = (Integer)session.getAttribute("user_auth");
+		if(user_auth!=null) {
+			mapAjax.put("auth", user_auth);
+		}
+		
+		
+		
 		//JSON 문자열로 변환
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

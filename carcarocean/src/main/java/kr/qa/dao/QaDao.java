@@ -122,6 +122,7 @@ public class QaDao {
 				qa.setQa_title(StringUtil.useNoHTML(rs.getString("qa_title")));
 				qa.setMem_id(rs.getString("mem_id"));
 				qa.setQa_reg(rs.getString("qa_reg"));
+				qa.setMem_num(rs.getInt("mem_num"));
 				list.add(qa);
 			}
 		}catch(Exception e) {

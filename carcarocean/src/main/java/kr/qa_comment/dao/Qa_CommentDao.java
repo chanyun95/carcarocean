@@ -39,6 +39,7 @@ public class Qa_CommentDao {
 			//SQL문 실행
 			pstmt.executeUpdate();
 		}catch(Exception e) {
+
 			throw new Exception(e);
 		}finally {
 			DBUtil.executeClose(null, pstmt, conn);
@@ -148,6 +149,7 @@ public class Qa_CommentDao {
 	
 	//답글 수정
 	public void updateQa_Comment(Qa_CommentVo reply)throws Exception{
+		System.out.println(reply);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -156,12 +158,12 @@ public class Qa_CommentDao {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "UPDATE qa_comment SET qa_comm_content=?, qa_comm_modify=SYSDATE WHERE qa_num=?";
+			sql = "UPDATE qa_comment SET qa_comm_content=?, qa_comm_modify=SYSDATE WHERE qa_comm_num=?";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
 			pstmt.setString(++cnt, reply.getQa_comm_content());
-			pstmt.setInt(++cnt, reply.getQa_num());
+			pstmt.setInt(++cnt, reply.getQa_comm_num());
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -172,6 +174,25 @@ public class Qa_CommentDao {
 	
 	//답글 삭제
 	public void deleteQa_Comment(int qa_comm_num)throws Exception{
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "DELETE FROM qa_comment WHERE qa_comm_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(++cnt, qa_comm_num);
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }
