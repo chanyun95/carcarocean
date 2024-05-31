@@ -10,8 +10,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<hr size="1" width="100%" noshade="noshade">
 		<h1 class="text-center">검수자 정보 목록</h1>
 		<table class="table table-hover">

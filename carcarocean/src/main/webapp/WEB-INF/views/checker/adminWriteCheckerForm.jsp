@@ -17,8 +17,8 @@
 	}
 </script>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container text-center p-5">
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<hr size="1" width="100%" noshade="noshade">
 		<h1>검수자 정보 등록</h1>
 		<form id="my_form" action="adminWriteChecker.do" method="post" enctype="multipart/form-data">
