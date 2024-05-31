@@ -32,8 +32,8 @@
 						class="d-block w-20" alt="1화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/mainlogo.png"
-						class="d-block w-20" alt="2화묜">
+					<img src="${pageContext.request.contextPath}/images/service.jpg"
+						class="d-block w-20" alt="2화면">
 				</div>
 				<div class="carousel-item">
 					<img src="${pageContext.request.contextPath}/images/mainlogo.png"

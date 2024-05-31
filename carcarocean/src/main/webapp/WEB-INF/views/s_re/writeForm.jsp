@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>차량 판매후기 쓰기</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript">
 window.onload=function(){
 	const myForm = document.getElementById('write_form');
@@ -36,11 +37,12 @@ window.onload=function(){
 	};
 };
 </script>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 </head>
 <body>
-<div class="page-main">
-		<div class="content-main">
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div style="background-color:#f5f6f9;">
+		<div class="container">
 			<h2>글쓰기</h2>
 			<form id="write_form" action="write.do" method="post" 
 				enctype="mutipart/form-data">
@@ -71,12 +73,13 @@ window.onload=function(){
 						<textarea rows="5" cols="40" name="s_re_content" id="s_re_content"></textarea>
 					</li>
 				</ul>
-				<div class="align-center">
+				<div>
 					<input type="submit" value="등록">
 					<input type="button" value="목록" onclick="location.href='list.do'">
 				</div>
 			</form>
 		</div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
