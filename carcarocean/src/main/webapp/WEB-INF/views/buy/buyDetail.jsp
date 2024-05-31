@@ -35,8 +35,7 @@
 				</div>
 				<c:if test="${user_auth==9}">
 				<div>
-					<button class="btn btn-primary" onclick="">수정하기</button>
-					<button class="btn btn-danger" onclick="">삭제하기</button>
+					<button class="btn btn-primary" onclick="update_car()" id="update_btn">수정하기</button>
 				</div>
 				</c:if>
 			</div>
@@ -148,6 +147,13 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+function update_car(){
+	if(confirm('차량 정보를 수정하시겠습니까?')){
+		location.href='${pageContext.request.contextPath}/car/carUpdateForm.do?car_num=${car.car_num}';
+		// 수정하는거 해야함!!!
+	}
+}
+
 function share_btn() {
     /* navigator.clipboard.writeText(location.href);
     alert("주소가 복사되었습니다"); */
