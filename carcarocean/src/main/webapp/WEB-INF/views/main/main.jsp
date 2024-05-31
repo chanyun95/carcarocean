@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>카카오션</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>

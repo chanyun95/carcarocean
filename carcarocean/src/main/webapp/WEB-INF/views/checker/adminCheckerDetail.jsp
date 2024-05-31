@@ -18,8 +18,8 @@ function delete_btn() {
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<hr size="1" noshade width="100%">
 		<h1 class="text-center">검수자 세부정보</h1>
 		<div>

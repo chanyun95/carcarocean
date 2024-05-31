@@ -14,14 +14,14 @@
 <title>차량 상세 정보</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 	<fmt:formatNumber value="${car.car_price}" type="number" var="carPrice"/>
 	<fmt:formatNumber value="${car.car_price*0.0007}" pattern="#" type="number" var="firstPrice"/>
 	<fmt:formatNumber value="${car.car_price*0.00018}" pattern="#" type="number" var="secondPrice"/>
 	<fmt:formatNumber value="${car.car_price*0.0001}" pattern="#" type="number" var="thirdPrice"/>
 	<fmt:formatNumber value="${car.car_price+firstPrice+secondPrice+thirdPrice}" type="number" var="totalPrice"/>
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		<div>
+		<div class="p-3">
 			<h1>${car.car_maker} ${car.car_name}</h1>
 			<div class="d-flex justify-content-between">
 				<div class="mb-3">
@@ -41,8 +41,8 @@
 				</c:if>
 			</div>
 		</div>
-		<div class="bg-secondary d-flex justify-content-between">
-			<div class="p-3 text-white">#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</div>
+		<div class="d-flex justify-content-between border rounded-top" style="background-color:#FEE500;">
+			<div class="p-3">#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</div>
 			<div class="p-3"><i class="bi bi-telephone-fill"> ${checker.checker_phone} | ${checker.checker_name}</i></div>
 		</div>
 		<!-- 갤러리 사진 옆으로 넘기기 구현해야 함 -->
@@ -54,7 +54,7 @@
 			<c:if test="${!fn:contains(car.car_photo, ',')}">
 				<c:set var="firstPhoto" value="${car.car_photo}" />
 			</c:if>
-			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="1296px" height="700px">
+			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="1296px" height="700px" class="rounded-bottom">
 		</div>
 		<!-- 사진 아래 컨텐츠 -->
 	    <div class="container-fluid">
@@ -79,7 +79,7 @@
 	            </main>
 	            <!-- 구매 버튼 공간 -->
 	            <div class="col-md-3 sidebar">
-	            	<div class="sticky-top border rounded p-4">
+	            	<div class="sticky-top border rounded-bottom p-4">
 		                <div class="fs-3 text-center"><i class="bi bi-telephone-fill"></i> ${checker.checker_phone}</div>
 		                <hr size="1" width="100%" noshade>
 		                <div class="fs-2">
@@ -129,12 +129,16 @@
 						</div>
 						<div class="text-center pt-3">
 							<c:if test="${empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i id ="fav_icon" class="bi bi-heart">찜하기</i></button>
+							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart">찜하기</i></button>
 							</c:if>
 							<c:if test="${!empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i id ="fav_icon" class="bi bi-heart-fill">찜하기</i></button>
+							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart-fill">찜하기</i></button>
 							</c:if>
-							<button class="btn btn-outline-success" id="share_btn" onclick=""><i class="bi bi-share">공유하기</i></button>
+							<button class="btn btn-outline-success" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
+							<div class="text-center bg-light pt-1" id="share_div" style="display:none; position:absolute; transform:translate(85px,0)">
+								<button class="btn btn-sm" style="background-color: #3b5998; color:white;" onclick="shareFacebook()"><i class="bi bi-facebook">페이스북</i></button>
+								<button class="btn btn-sm" style="background-color: #00acee; color:white;" onclick="shareTwitter()"><i class="bi bi-twitter">트위터</i></button>
+							</div>
 						</div>
 					</div>
 	            </div>
@@ -144,6 +148,24 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+function share_btn() {
+    /* navigator.clipboard.writeText(location.href);
+    alert("주소가 복사되었습니다"); */
+    if($("#share_div").css("display") =="none"){
+    	$("#share_div").show();
+    }else {
+    	$("#share_div").hide();
+    }
+}
+const url = encodeURI(window.location.href);
+function shareFacebook(){
+	window.open("http://www.facebook.com/sharer/sharer.php?u=" + url,"FaceBook","width=410,height=500,resizable=yes");
+}
+function shareTwitter(){
+	const text = '중고차를 판매해보세요!'
+	window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" +  url,"Twitter","width=410,height=500,resizable=yes")
+}
+
 function deleteBuy_btn(){
 	if(confirm('구매 예약을 취소하시겠습니까?')){
 		location.href='deleteBuy.do?car_num=${car.car_num}';
@@ -160,10 +182,10 @@ function favCar(carnum){
 			if(param.result=='success'){
 	    		if(param.action=='insertFav'){
 	    			alert('관심차량 등록 완료');
-	    			$("#fav_icon").removeClass("bi-heart").addClass("bi-heart-fill");
+	    			$(".fav_icon").removeClass("bi-heart").addClass("bi-heart-fill");
 				} else if(param.action=='removeFav'){
 					alert('관심차량 삭제 완료');
-					$("#fav_icon").removeClass("bi-heart-fill").addClass("bi-heart");
+					$(".fav_icon").removeClass("bi-heart-fill").addClass("bi-heart");
 				}
 	    	} else if(param.result=='logout'){
  				alert('로그인 후 이용해주세요!');
