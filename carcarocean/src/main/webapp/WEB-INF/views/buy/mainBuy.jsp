@@ -15,7 +15,7 @@
 	<style>
         /* 검색 창의 너비 조절*/
         #keyword {
-            width: 250px;
+            width: 400px;
             height: 50px;
         }
         /* 판매 완료 차량 사진 흑백 */
@@ -42,6 +42,12 @@
             font-size: 25px;
             color: red;
         }
+        .nav-item a:link{
+        	color:black;
+        }
+        .nav-item a:visited{
+        	color:black;
+        }
     </style>
 </head>
 <body>
@@ -49,40 +55,84 @@
  <div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
-         <nav class="col-md-2 bg-light sidebar pt-5 pb-5">
+         <nav class="col-md-2 bg-light sidebar rounded py-2">
              <ul class="nav flex-column">
                  <li class="nav-item">
-                     <a class="nav-link active" href="#">Menu Item 1</a>
+                     <a class="nav-link" href="#">차종</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 2</a>
+                     <a class="nav-link" href="#">연식</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 3</a>
+                     <a class="nav-link" href="#">주행거리</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 4</a>
+                     <a class="nav-link" href="#">가격</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">색상</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">옵션</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">연료</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">변속기</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">사고유무</a>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">구동방식</a>
                  </li>
              </ul>
          </nav>
          <!-- 사이드바 제외 메인 컨텐츠 -->
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
-         	<div class="d-flex justify-content-center bg-light p-5 mb-5">
+         	<div class="d-flex justify-content-center rounded bg-light p-5 mb-5">
 				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
 					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
 						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
 						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
 					<input type="submit" class="btn btn-warning ms-2" value="검색">
 				</form>
 			</div>
-	
+			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
 			<!-- 차량 리스트 -->
              <div class="container">
              	<div class="row mb-3">
-
              	<c:forEach var="car" items="${carList}" begin="0" end="11" varStatus="status">
    					<c:if test="${fn:contains(car.car_photo, ',')}">
            				<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -98,12 +148,12 @@
 			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
 			                	<c:if test="${car.car_status==0 or user_auth==9}">
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
-			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded img-fluid">
+			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
 		                		</a>
 			                	</c:if>
 			                	<!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐-->
 			                	<c:if test="${car.car_status==1 and user_auth!=9}">
-			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
+			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
 			                	</c:if>
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
               	     			<c:if test="${!car.fav_check}">
@@ -116,7 +166,7 @@
 		                	<!-- 설명 -->
 		                	<div>
 			                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}<c:if test="${car.car_status==1}"><b style="color:red;"> 예약완료</b></c:if></p>
-			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
+			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></p>
 			                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
 			                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
 			                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
