@@ -12,9 +12,9 @@
 <body>
   	<footer class="footer pt-3 rounded-top border-top border-color-gray" >
         <div class="container">
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-md-4">
-                    <h4>회사 정보</h4>
+                    <h4><b>회사 정보</b></h4>
                     <ul class = "list-unstyled text-secondary">
                         <li>회사명 : 카카오션</li>
                         <li>주소 : 서울특별시 강남구</li>
@@ -23,14 +23,14 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>운영 정보</h4>
+                    <h4><b>운영 정보</b></h4>
                     <ul class = "list-unstyled text-secondary">
                         <li>월요일 - 금요일, 9:00 - 18:00</li>
                         <li>사업제휴 문의 : carcarocean@test.com</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>팀 정보</h4>
+                    <h4><b>팀 정보</b></h4>
                     <ul class = "list-unstyled text-secondary">
                         <li>김승연: 인스타 주소</li>
                         <li>구승회: 인스타 주소</li>

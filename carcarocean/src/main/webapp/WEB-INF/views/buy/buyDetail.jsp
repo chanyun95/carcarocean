@@ -22,16 +22,16 @@
 	<fmt:formatNumber value="${car.car_price*0.0001}" pattern="#" type="number" var="thirdPrice"/>
 	<fmt:formatNumber value="${car.car_price+firstPrice+secondPrice+thirdPrice}" type="number" var="totalPrice"/>
 		<div class="p-3">
-			<h1>${car.car_maker} ${car.car_name}</h1>
+			<h1><b>${car.car_maker} ${car.car_name}</b></h1>
 			<div class="d-flex justify-content-between">
 				<div class="mb-3">
-					${car.car_cnumber} · ${car.car_birth} · ${car.car_mile}km · 
+					${car.car_cnumber} <b>·</b> ${car.car_birth} <b>·</b> ${car.car_mile}km <b>·</b> 
 					<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
 					<c:if test="${car.car_fuel_type==2}">디젤</c:if>
 					<c:if test="${car.car_fuel_type==3}">전기</c:if>
-					<c:if test="${car.car_fuel_type==4}">수소</c:if> · ${car.car_color} · 
+					<c:if test="${car.car_fuel_type==4}">수소</c:if> <b>·</b> ${car.car_color} <b>·</b> 
 					<c:if test="${car.car_auto==1}">오토</c:if>
-					<c:if test="${car.car_auto==2}">수동</c:if> · ${car.car_price}만원
+					<c:if test="${car.car_auto==2}">수동</c:if> <b>·</b> ${car.car_price}만원
 				</div>
 				<c:if test="${user_auth==9}">
 				<div>
@@ -40,8 +40,8 @@
 				</c:if>
 			</div>
 		</div>
-		<div class="d-flex justify-content-between border rounded-top" style="background-color:#FEE500;">
-			<div class="p-3">#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</div>
+		<div class="d-flex justify-content-between border rounded-top bg-warning">
+			<div class="p-3"><b>#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</b></div>
 			<div class="p-3"><i class="bi bi-telephone-fill"> ${checker.checker_phone} | ${checker.checker_name}</i></div>
 		</div>
 		<!-- 갤러리 사진 옆으로 넘기기 구현해야 함 -->
@@ -251,10 +251,10 @@
 						</div>
 						<div class="text-center pt-3">
 							<c:if test="${empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart">찜하기</i></button>
+							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><b><i class="fav_icon bi bi-heart">찜하기</i></b></button>
 							</c:if>
 							<c:if test="${!empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart-fill">찜하기</i></button>
+							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><b><i class="fav_icon bi bi-heart-fill">찜하기</i></b></button>
 							</c:if>
 							<button class="btn btn-outline-success" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
 							<div class="text-center bg-light pt-1" id="share_div" style="display:none; position:absolute; transform:translate(85px,0)">
