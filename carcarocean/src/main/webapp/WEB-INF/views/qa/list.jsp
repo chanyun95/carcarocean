@@ -22,6 +22,7 @@
 				return false;
 			}
 		};
+		
 	};
 </script>
 </head>
@@ -73,6 +74,9 @@
 						<td>${qa.qa_num}</td>
 						<c:if test="${qa.qa_status == 1}">
 						<td>미처리</td>
+						</c:if>
+						<c:if test="${qa.qa_status == 2}">
+						<td>처리</td>
 						</c:if>
 						<c:if test="${!empty user_num && (user_auth == 9 || user_num == qa.mem_num)}">
 						<td><a href="detail.do?qa_num=${qa.qa_num}">${qa.qa_title}</a></td>

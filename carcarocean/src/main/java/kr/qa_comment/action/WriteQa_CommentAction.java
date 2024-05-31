@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.controller.Action;
+import kr.qa.dao.QaDao;
 import kr.qa_comment.dao.Qa_CommentDao;
 import kr.qa_comment.vo.Qa_CommentVo;
   
@@ -26,6 +27,12 @@ public class WriteQa_CommentAction implements Action{
 		}else {//로그인 된 경우
 			//전송된 데이터 인코딩 타입 지정
 			request.setCharacterEncoding("utf-8");
+			
+			int qa_status = 2;
+			int qa_num = Integer.parseInt(request.getParameter("qa_num"));
+			QaDao qadao = QaDao.getDao();
+			qadao.updateQaStatus(qa_num, qa_status);
+			
 			//자바빈(VO)을 생성해서 전송된 데이터 저장
 			Qa_CommentVo reply = new Qa_CommentVo();
 			reply.setQa_comm_content(request.getParameter("qa_comm_content"));

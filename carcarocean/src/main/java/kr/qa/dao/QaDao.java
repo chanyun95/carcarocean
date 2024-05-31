@@ -193,6 +193,29 @@ public class QaDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
+	
+	//처리상태여부 변경
+	public void updateQaStatus(int qa_num, int qa_status)throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE qa SET qa_status=? WHERE qa_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, qa_status);
+			pstmt.setInt(++cnt, qa_num);
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	
+	
 	//글 수정
 	public void updateQa(QaVo qa)throws Exception{
 		Connection conn = null;
