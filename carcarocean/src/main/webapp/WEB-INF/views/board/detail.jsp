@@ -77,10 +77,10 @@
 					 id="bor_comm_content"
 					class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 						<c:if test="${!empty user_num}">
-						<div id="re_first">
+						<div id="bor_comm_first">
 						<span class="letter-count">300/300</span>
 						</div>
-						<div id="re_second" class="align-right">
+						<div id="bor_comm_second" class="align-right">
 							<input type="submit" value="전송">
 						</div>
 						</c:if>
