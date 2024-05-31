@@ -32,7 +32,7 @@ public class UpdateAction implements Action{
 		event.setEvent_num(event_num);
 		event.setEvent_title(request.getParameter("event_title"));
 		event.setEvent_content(request.getParameter("event_content"));
-		event.setEvent_photo(FileUtil.createFile(request, "event_photo"));
+		event.setEvent_photo(FileUtil.createFiles(request));
 		dao.updateEvent(event);
 		
 		if(event.getEvent_photo() != null && !"".equals(event.getEvent_photo())) {

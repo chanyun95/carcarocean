@@ -123,6 +123,7 @@ public class QaDao {
 				qa.setMem_id(rs.getString("mem_id"));
 				qa.setQa_reg(rs.getString("qa_reg"));
 				qa.setMem_num(rs.getInt("mem_num"));
+				qa.setQa_modify(rs.getString("qa_modify"));
 				list.add(qa);
 			}
 		}catch(Exception e) {
@@ -194,7 +195,7 @@ public class QaDao {
 		}
 	}
 	
-	//처리상태여부 변경
+	//처리상태여부 변경 (답변 등록 시: 미처리 → 처리)
 	public void updateQaStatus(int qa_num, int qa_status)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -213,7 +214,6 @@ public class QaDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	
 	
 	
 	//글 수정

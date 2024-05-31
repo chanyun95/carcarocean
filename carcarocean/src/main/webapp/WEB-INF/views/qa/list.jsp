@@ -7,8 +7,8 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>고객 문의</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript">
 	window.onload = function(){
 		const myForm = document.getElementById('search_form');
@@ -29,39 +29,38 @@
 <body>
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		<div class="content-main">
-		<h2>고객 문의</h2>
-		<form id="search_form" action="list.do" method="get">
-			<ul class="search">
-				<li>
-					<select name="keyfield">
+		<div class="container">
+		<hr size="1" noshade="noshade" width="100%">
+		<h2 class="pt-5">고객 문의</h2>
+		<!-- 검색바 -->
+		<div class="d-flex justify-content-center bg-light p-5 mb-5">
+			<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
+					<select name="keyfield" class="form-select">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					</select>
-				</li>
-				<li>
-					<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="검색">
-				</li>
-			</ul>
-		</form>
-		<div class="list-space align-right">
-			<c:if test="${!empty user_num && user_auth == 2}">
-			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
-			</c:if>
-			<input type="button" value="목록" onclick="location.href='list.do'">
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+					<input type="search" name="keyword" class="form-control rounded" id="keyword" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+					<input type="submit" class="btn btn-warning ms-2" value="검색">
+			</form>
 		</div>
+		<!-- 버튼 -->
+		<div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end">
+			<c:if test="${!empty user_num && user_auth == 2}">
+			<input type="button" class="btn btn-warning ms-2" value="글쓰기" onclick="location.href='writeForm.do'">
+			</c:if>
+			<input type="button" class="btn btn-warning ms-2" value="목록" onclick="location.href='list.do'">
+			<input type="button" class="btn btn-warning ms-2" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+		</div>
+		<!-- 목록 표 -->
 		<c:if test="${count == 0}">
 		<div class="result-display">
 			표시할 문의내역이 없습니다.
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-			<table>
+			<table class="table table-hover">
+				<thead>
 				<tr>
 					<th>글번호</th>
 					<th>처리상태</th>
@@ -69,6 +68,8 @@
 					<th>작성자</th>
 					<th>작성일</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach var="qa" items="${list}">
 					<tr>
 						<td>${qa.qa_num}</td>
@@ -85,13 +86,20 @@
 						<td>${qa.qa_title}</td>
 						</c:if>						
 						<td>${qa.mem_id}</td>
+						<c:if test="${empty qa.qa_modify}">
 						<td>${qa.qa_reg}</td>
+						</c:if>	
+						<c:if test="${!empty qa.qa_modify}">
+						<td>${qa.qa_modify}</td>
+						</c:if>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
-			<div class="align-center">${page}</div>
+			<div class="text-center">${page}</div>
 		</c:if>
 		</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>

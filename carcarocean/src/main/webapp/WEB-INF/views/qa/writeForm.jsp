@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고객 문의하기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript">
 window.onload = function(){
 	const myForm = document.getElementById('write_form');
@@ -46,7 +46,7 @@ window.onload = function(){
 						</li>
 						<li>
 							<label for="qa_photo">파일 첨부</label><br>
-							<input type="file" name="qa_photo" id="qa_photo" accept="image/gif, image/png, image/jpeg">
+							<input type="file" name="qa_photo" id="qa_photo" accept="image/gif, image/png, image/jpeg" multiple>
 						</li>
 					</ul>
 					<div class="align-center">
