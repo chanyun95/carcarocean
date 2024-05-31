@@ -43,7 +43,7 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                	<h3>구매후기</h3><a href = "${pageContext.request.contextPath}/s_re/list.do">더보기..</a>
+                	<h3>판매후기</h3><a href = "${pageContext.request.contextPath}/s_re/list.do">더보기..</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -69,7 +69,7 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <h3>판매후기</h3><a href = "${pageContext.request.contextPath}/b_re/list.do">더보기..</a>
+                    <h3>구매후기</h3><a href = "${pageContext.request.contextPath}/b_re/list.do">더보기..</a>
                     <table class="table">
                         <thead>
                             <tr>
