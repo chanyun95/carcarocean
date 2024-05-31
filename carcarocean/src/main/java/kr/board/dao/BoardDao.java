@@ -10,6 +10,7 @@ import kr.board.vo.BoardVo;
 import kr.board.vo.ReportBoardVO;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class BoardDao {
 	private static BoardDao dao = new BoardDao();
@@ -211,6 +212,7 @@ public class BoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 =null;
 		String sql = null;
 		int cnt = 0;
 		try {
@@ -224,16 +226,24 @@ public class BoardDao {
 			
 			cnt = 0;
 			
-			sql="DELETE FROM board WHERE board_num=?";
+			sql = "DELETE FROM report_board WHERE board_num=?";
 			pstmt2 = conn.prepareStatement(sql);
 			pstmt2.setInt(++cnt, board_num);
 			pstmt2.executeUpdate();
+			
+			cnt = 0;
+			
+			sql="DELETE FROM board WHERE board_num=?";
+			pstmt3 = conn.prepareStatement(sql);
+			pstmt3.setInt(++cnt, board_num);
+			pstmt3.executeUpdate();
 			
 			conn.commit();
 		}catch(Exception e) {
 			conn.rollback();
 			throw new Exception(e);
 		}finally {
+			DBUtil.executeClose(null, pstmt3, null);
 			DBUtil.executeClose(null, pstmt2, null);
 			DBUtil.executeClose(null, pstmt, conn);
 		}

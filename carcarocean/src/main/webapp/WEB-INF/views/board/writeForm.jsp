@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 글쓰기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <script type="text/javascript">
 window.onload = function(){
 	const myForm = document.getElementById('write_form');

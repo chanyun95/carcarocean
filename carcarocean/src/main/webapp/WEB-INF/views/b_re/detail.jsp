@@ -44,7 +44,7 @@ $(function(){
 					output += '<div class="sub-item">';
 					output += '<p>' + item.b_re_comm_content + '</p>';
 					output += '<span>등록일 : ' + item.b_re_comm_reg + '</span>';
-					//output += ' <input type="button" data-renum="' + item.b_re_comm_num + '" value="신고" class="report-btn">';
+					output += ' <input type="button" data-renum="' + item.b_re_comm_num + '" value="신고" class="report-btn">';
 					output += '<hr size="1" noshade width="100%">';
 					output += '</div>';
 					output += '</div>';

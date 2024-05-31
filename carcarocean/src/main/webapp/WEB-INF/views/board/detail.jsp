@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.report.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.reply.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 <div class="page-main">
@@ -33,11 +35,15 @@
 			</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
-		<c:if test="${!empty board.board_photo}">
 		<div class="align-center">
-		<img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="detail-img">
-		</div>
+		<c:if test="${!empty board.board_photo}">
+			<div>
+			<c:forEach var="photo" items="${fn:split(board.board_photo,',')}">
+				<img src="${pageContext.request.contextPath}/upload/${photo}">
+			</c:forEach>
+			</div>
 		</c:if>
+		</div>
 		<p>
 			${board.board_content}
 		</p>
@@ -46,7 +52,8 @@
 			<li>
 				<!-- 신고 -->
 				<p id="report_status_text"></p>
-				<img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}">
+				<%-- <img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}"> --%>
+				<button class="btn btn-outline-danger" onclick="" id="output_report" data-num="${board.board_num}" data-checkRedirect="${check_redirect}"><i id="reportIcon" class="bi bi-exclamation-octagon-fill">신고</i></button>
 			</li>
 			<li>
 				<c:if test="${!empty board.board_modify}">

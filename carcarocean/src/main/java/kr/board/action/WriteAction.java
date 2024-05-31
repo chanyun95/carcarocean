@@ -24,7 +24,7 @@ public class WriteAction implements Action{
 		BoardVo board = new BoardVo();
 		board.setBoard_title(request.getParameter("board_title"));
 		board.setBoard_content(request.getParameter("board_content"));
-		board.setBoard_Photo(FileUtil.createFile(request, "board_photo"));
+		board.setBoard_Photo(FileUtil.createFiles(request));
 		board.setMem_num(user_num);
 		
 		BoardDao dao = BoardDao.getDao();

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <script type="text/javascript">
 window.onload=function(){
 	const myForm = document.getElementById('search_form');
@@ -24,28 +24,22 @@ window.onload=function(){
 </script>
 </head>
 <body>
-<div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="content-main">
-		<h2>게시판 목록</h2>
-		<form id="search_form" action="list.do" method="get">
-			<ul class="search">
-				<li>
-					<select name="keyfield">
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<div class="container">
+		<h1 class="text-center">게시판 목록</h1>
+		<form  action="list.do" method="get">
+			<div class="d-flex justify-content-between">
+					<select name="keyfield" class="form-select" style="width:auto;">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					</select>
-				</li>
-				<li>
-					<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="검색">
-				</li>
-			</ul>
+				
+						<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+						<input type="submit" value="검색" class="btn btn-primary">
+					 </div>
 		</form>
-		<div class="list-space align-right">
+		<div class="float-end">
 			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
 				<c:if test="${empty user_num}">disabled="disabled"</c:if>>
 			<input type="button" value="목록" onclick="location.href='list.do'">
@@ -57,7 +51,8 @@ window.onload=function(){
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table>
+		<table class="table table-hover">
+			<thead class="table-light">
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
@@ -65,6 +60,8 @@ window.onload=function(){
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="board" items="${list}">
 			<c:if test="${board.board_report < 10}">
 			<tr>
@@ -76,10 +73,10 @@ window.onload=function(){
 			</tr>
 			</c:if>
 			</c:forEach>
+						</tbody>
 		</table>
-		<div class="align-center">${page}</div>
+		<div class="text-center">${page}</div>
 		</c:if>
 	</div>
-</div>
 </body>
 </html>
