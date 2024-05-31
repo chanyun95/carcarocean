@@ -60,25 +60,148 @@
 	        <div class="row">
 	            <!-- 차량 상세정보 들어갈 공간 -->
 	            <main class="col-md-9">
-	            	<div class="border rounded mt-5" style="height:200px;">
-	            		
+	            	<div class="border rounded mt-5 p-4">
+	            		<div class="text-center">
+	            			<span><b class="fs-2 text-danger">${carPrice}</b><b class="fs-5"> 만원</b></span>
+	            		</div>
+	            		<div class="mt-3 text-center">
+	            			<span class="text-secondary fs-5">할부 </span><span class="fs-5 text-decoration-underline">월 <b class="text-danger"><fmt:formatNumber type="number" value="${car.car_price/60}" pattern="#"/></b> 만원</span>
+	            		</div>
+	            		<div class="row mt-3">
+	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;">
+	            				세부 정보 위치로 이동
+	            			</div>
+	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;">
+	            				차량평가사 정보 위치로 이동
+	            			</div>
+	            		</div>
 	            	</div>
-	            	<div class="border rounded mt-5" style="height:600px;">
-	            		
+	            	
+	            	<div class="mt-5">
+            			<div class="border rounded p-5">
+            				<div class="row">
+	            				<div class="col-4">
+	            					<h5>디자인 옵션</h5>
+	            					<b>${car.car_design_op}</b>
+	            				</div>
+	            				<div class="col-4">
+	            					<h5>디자인 옵션</h5>
+	            					<b>${car.car_con_op}</b>
+	            				</div>
+	            				<div class="col-4">
+	            					<h5>디자인 옵션</h5>
+	            					<b>${car.car_drive_op}</b>
+	            				</div>
+            				</div>
+            			</div>
 	            	</div>
-	            	<div class="border rounded mt-5" style="height:400px;">
-	            		
+	            	
+	            	<div class="mt-5">
+	            		<h4>CarCarOcean이 직접 확인한 진단 결과</h4>
+	            		<div class="border border-warning rounded-top p-5">
+            				${car.car_checker_opinion}
+	            		</div>
+	            		<div class="d-flex justify-content-between border border-warning rounded-bottom bg-warning p-2">
+            				<div>
+           						<b>CarCarOcean ${checker.checker_name} 차량평가사</b>
+           					</div>
+            				<div>
+            					<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" class="img-circle" width="50" height="50">
+           					</div>
+            			</div>
 	            	</div>
-	            	<div class="border rounded mt-5" style="height:300px;">
-	            		
+	            	
+	            	<div class="mt-5">
+	            		<h4>진단결과</h4>
+		            	<div class="border rounded p-4">
+		            		<div class="row">
+		            			<div class="col-4">
+		            				아이콘
+		            			</div>
+		            			<div class="col-4">
+		            				사고진단
+		            			</div>
+		            			<div class="col-4">
+		            				무사고
+		            			</div>
+		            		</div>
+		            		<hr size="1" width="100%" noshade>
+		            		<div class="row">
+		            			<div class="col-4">
+		            				아이콘
+		            			</div>
+		            			<div class="col-4">
+		            				진단통과
+		            			</div>
+		            			<div class="col-4">
+		            				무사고
+		            			</div>
+		            		</div>
+		            		<hr size="1" width="100%" noshade>
+		            		<div class="row">
+		            			<div class="col-4">
+		            				아이콘
+		            			</div>
+		            			<div class="col-4">
+		            				알림사항
+		            			</div>
+		            			<div class="col-4">
+		            				무사고
+		            			</div>
+		            		</div>
+		            	</div>
 	            	</div>
-	            	<div class="border rounded mt-5" style="height:500px;">
-	            		
+	            	
+	            	<div class="mt-5">
+	            		<h4>검수자 정보</h4>
+		            	<div class="border rounded p-5">
+		            		<div class="row mb-4">
+			            		<div class="col-4"><b>${checker.checker_name}</b></div>
+			            		<div class="col-4"><i class="bi bi-telephone-fill"> ${checker.checker_phone}</i></div>
+			            		<div class="col-4">${checker.checker_company}</div>
+		            		</div>
+		            		<hr size="1" width="100%" noshade>
+		            		<div class="text-center">
+		            			<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250" height="150">
+		            		</div>
+		            	</div>
+	            	</div>
+	            	
+	            	<div class="mt-5">
+	            		<h4>예약 후 직영점 방문</h4>
+	            		<div class="border rounded p-4">
+            				<b>차량을 직접 보시고 싶다면, 직영점 당일 방문 예약을 이용해 주세요.</b>
+	            			<div class="d-flex justify-content-between">
+	            				<div>
+		            				<ul>
+		            					<li class="text-secondary">토요일은 전화를 통한 예약만 가능합니다.</li>
+		            					<li class="text-secondary">예약 차량은 다른 고객에게 판매하지 않습니다.</li>
+		            				</ul>
+	            				</div>
+	            				<div>
+	            					<button class="btn btn-outline-danger px-5 py-3">예약하기</button>
+            					</div>
+            				</div>
+	            		</div>
+	            	</div>
+	            	
+	            	<div class="my-5">
+	            		<h4>구매후기 정보</h4>
+		            	<div class="border rounded p-5">
+		            		<div class="row">
+		            			<div class="col-6">
+		            				첫번째 구매후기 정보
+		            			</div>
+		            			<div class="col-6">
+		            				두번째 구매후기 정보
+		            			</div>
+		            		</div>
+		            	</div>
 	            	</div>
 	            </main>
 	            <!-- 구매 버튼 공간 -->
 	            <div class="col-md-3 sidebar">
-	            	<div class="sticky-top border rounded-bottom p-4">
+	            	<div class="sticky-top border rounded mt-5 p-4">
 		                <div class="fs-3 text-center"><i class="bi bi-telephone-fill"></i> ${checker.checker_phone}</div>
 		                <hr size="1" width="100%" noshade>
 		                <div class="fs-2">
@@ -150,7 +273,6 @@
 function update_car(){
 	if(confirm('차량 정보를 수정하시겠습니까?')){
 		location.href='${pageContext.request.contextPath}/car/carUpdateForm.do?car_num=${car.car_num}';
-		// 수정하는거 해야함!!!
 	}
 }
 

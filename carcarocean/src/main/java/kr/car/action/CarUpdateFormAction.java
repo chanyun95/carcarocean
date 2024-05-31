@@ -26,7 +26,7 @@ public class CarUpdateFormAction implements Action{
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {
-			return "/WEB-INF/views/common/warningPage";
+			return "/WEB-INF/views/common/warningPage.jsp";
 		}
 
 		int car_num = Integer.parseInt(request.getParameter("car_num"));
