@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,39 +16,54 @@
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
-				<div class="mypage-div">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">First</th>
-								<th scope="col">Last</th>
-								<th scope="col">Handle</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td colspan="2">Larry the Bird</td>
-								<td>@twitter</td>
-							</tr>
-						</tbody>
-					</table>
-
-				</div>
-			</main>
+                <div class="mypage-div">
+                	<h4>판매내역</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>차명</th>
+                                <th>판매신청일</th>
+                                <th>거래완료일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="sell" items="${mlist}">
+                                <tr>
+                                    <td>${sell.sell_num}</td>
+                                    <!-- 링크 추가해야함 -->
+                                    <td>${sell.sell_cname}</td>
+                                    <td>${fn:substring(sell.sell_reg,0,10)}
+									<td>${fn:substring(sell.sell_modify_check,0,10)}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <h4>판매내역</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>차명</th>
+                                <th>판매신청일</th>
+                                <th>거래완료일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="sell" items="${mlist}">
+                                <tr>
+                                    <td>${sell.sell_num}</td>
+                                    <!-- 링크 추가해야함 -->
+                                    <td>${sell.sell_cname}</td>
+                                    <td>${fn:substring(sell.sell_reg,0,10)}
+									<td>${fn:substring(sell.sell_modify_check,0,10)}</td>
+									
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

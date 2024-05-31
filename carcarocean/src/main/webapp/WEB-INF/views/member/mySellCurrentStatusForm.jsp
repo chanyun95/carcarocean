@@ -30,7 +30,8 @@
                             <c:forEach var="sell" items="${list}">
                                 <tr>
                                     <td>${sell.sell_num}</td>
-                                    <td>${sell.sell_cname}</td>
+                                    <!-- 링크 추가해야함 -->
+                                    <td><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
                                     <c:if test = "${sell.sell_check==0}">
                                     <td>검수전</td>
                                     </c:if>
