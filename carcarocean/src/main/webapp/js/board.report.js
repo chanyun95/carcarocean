@@ -33,16 +33,13 @@ $(function(){
 				dataType:'json',
 				success:function(param){
 					if(param.result == 'logout'){
-						alert('로그인 후 신고를 눌러주세요!');
+						alert('로그인 후 신고가 가능합니다.');
 					}else if(param.result == 'success'){
 							alert('신고되었습니다.');
 							if(param.count>=10){
 								checkRedirect();
 							}
 							$('#output_report').off('click');
-					}else if(param.status == 'alreadyReport'){
-						alert('이미 신고된 글입니다.');
-						$('#output_report').off('click');
 					}else{
 						alert('신고 등록/삭제 오류 발생');
 					}
@@ -57,19 +54,28 @@ $(function(){
 	 * 신고 표시 함수
 	 * =========================== */
 	function displayReport(param){
-		let output;
-		if(param.status == 'yesReport'){
-			output = '../images/report02.png';
-			text = '신고하기';
-		}else{
+        let output;
+        let text;
+        if(param.status === 'yesReport'){
+            output = '../images/report01.png';
+            text = '이미 신고된 글입니다.';
+            $('#output_report').off('click');
+        } else if(param.status === 'alreadyReport'){
 			output = '../images/report01.png';
-			text = '이미 신고된 글입니다.';
-			$('#output_report').off('click');
-		}
-
+            text = '이미 신고된 글입니다.';
+        } else {
+            output = '../images/report01.png';
+            text = '신고하기';
+        }
 		//문서 객체에 설정
 		$('#output_report').attr('src',output);
 		$('#report_status_text').text(text);
+		
+		if (param.result === 'logout') {
+            $('#output_report').click(function() {
+                alert('로그인 후 신고가 가능합니다.');
+            });
+        }
 	}
 	
 	function checkRedirect() {
@@ -78,6 +84,8 @@ $(function(){
         location.href = 'list.do';
 
     }
+
+
 	/*============================
 	 * 초기 데이터 호출
 	 * =========================== */

@@ -27,7 +27,7 @@ public class GetReportAction implements Action{
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		BoardDao dao = BoardDao.getDao();
 		if(user_num == null) { //로그인 되지 않은 경우
-			mapAjax.put("status", "noReport");
+			mapAjax.put("status", "logout");
 		}else { //로그인 된 경우
 			
 			ReportBoardVO reportVO = new ReportBoardVO(); 
@@ -36,10 +36,10 @@ public class GetReportAction implements Action{
             
 			ReportBoardVO report = dao.checkReport(reportVO);
 			if(report != null) {
-				mapAjax.put("status", "alreadyReport");
+				mapAjax.put("status", "yesReport");
 				
 			}else {
-				mapAjax.put("status", "yesReport");
+				mapAjax.put("status", "noReport");
 			}
 		}
 		int reportCount = dao.checkReportCount(board_num);

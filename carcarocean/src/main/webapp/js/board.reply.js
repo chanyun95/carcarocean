@@ -32,7 +32,7 @@ $(function(){
 					output += '<div class="sub-item">';
 					output += '<p>' + item.bor_comm_content + '</p>';
 					output += '<span>등록일 : ' + item.bor_comm_reg + '</span>';
-					output += '<input type="button" data-renum="' + item.bor_comm_num + '" value="신고" class="report-btn">';
+					/*output += '<input type="button" data-renum="' + item.bor_comm_num + '" value="신고" class="report-btn">';*/
 					output += '<hr size="1" noshade width="100%">';
 					output += '</div>';
 					output += '</div>';
@@ -104,7 +104,7 @@ $(function(){
 	//댓글 작성 폼 초기화
 	function initForm(){
 		$('textarea').val('');
-		$('#re_first .letter-count').text('300/300');
+		$('#bor_comm_first .letter-count').text('300/300');
 	}
 	
 	/* ===============================
@@ -122,7 +122,7 @@ $(function(){
 			remain += '/300';
 			if($(this).attr('id') == 'bor_comm_content'){
 				//등록폼 글자수
-				$('#re_first .letter-count').text(remain);
+				$('#bor_comm_first .letter-count').text(remain);
 			}
 		}
 	});
