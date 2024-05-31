@@ -36,11 +36,11 @@
 							<c:if test="${fn:contains(b_re.car_photo, ',')}">
 								<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
 								<c:set var="firstPhoto" value="${photoList[0]}"/>
-								<td>${photoList[0]}</td>
+								<td><img src="${pageContext.request.contextPath}/upload/${photoList[0]}"></td>
 							</c:if>
 							<c:if test="${!fn:contains(b_re.car_photo, ',')}">
 								<c:set var="firstPhoto" value="${b_re.car_photo}" />
-								<td>${b_re.car_photo}</td>
+								<td><img src="${pageContext.request.contextPath}/upload/${b_re.car_photo}"></td>
 							</c:if>
 						</tr>
 					</c:forEach>

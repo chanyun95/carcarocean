@@ -68,7 +68,6 @@ public class B_ReDao {
 	            buy.setBuy_num(rs.getInt("buy_num"));
 	            buy.setCar_num(rs.getInt("car_num"));
 	            buy.setCar_name(rs.getString("car_name"));
-	            buy.setCar_name(rs.getString("car_name"));
 	            buy.setBuy_reg(rs.getDate("buy_reg"));
 	            list.add(buy);
 	        }
