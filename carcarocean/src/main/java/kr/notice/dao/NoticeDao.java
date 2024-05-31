@@ -116,6 +116,7 @@ public class NoticeDao {
 				notice.setNotice_reg(rs.getString("notice_reg"));
 				notice.setNotice_hit(rs.getInt("notice_hit"));
 				notice.setNotice_impt(rs.getInt("notice_impt"));
+				notice.setNotice_modify(rs.getString("notice_modify"));
 				list.add(notice);
 			}
 		}catch(Exception e) {
@@ -173,7 +174,7 @@ public class NoticeDao {
 	        //SQL문 작성
 	        sql="UPDATE notice SET notice_photo='' WHERE notice_num=?";
 	         
-         //PreparedStatment 객체 생성
+	        //PreparedStatment 객체 생성
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(++cnt, notice_num);
 	        

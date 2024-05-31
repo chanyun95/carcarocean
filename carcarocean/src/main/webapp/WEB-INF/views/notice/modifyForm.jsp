@@ -49,7 +49,7 @@
 					<li>
 						<label for="notice_photo">파일첨부(선택)</label>
 						<br>
-						<input type="file" name="notice_photo" accept="image/gif,image/png,image/jpeg" multiple>
+						<input type="file" name="notice_photo" accept="image/gif,image/png,image/jpeg" disabled="disabled" multiple>
 						<c:if test="${!empty notice.notice_photo}">
 							<div id="file_detail">
 								<img src="${pageContext.request.contextPath}/upload/${notice.notice_photo}" width="100">

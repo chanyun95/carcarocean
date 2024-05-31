@@ -19,7 +19,9 @@ public class ModifyAction implements Action{
 		notice.setNotice_num(Integer.parseInt(request.getParameter("notice_num")));
 		notice.setNotice_title(request.getParameter("notice_title"));
 		notice.setNotice_content(request.getParameter("notice_content"));
+		notice.setNotice_modify(request.getParameter("notice_modify"));
 		notice.setNotice_photo(FileUtil.createFiles(request));
+		
 		String noticeImptParam = request.getParameter("notice_impt");
 	    int noticeImpt = 0; // 기본값 설정
 	    
@@ -27,8 +29,8 @@ public class ModifyAction implements Action{
 	        noticeImpt = Integer.parseInt(noticeImptParam);
 	    }
 	    notice.setNotice_impt(noticeImpt);
-		
-		NoticeDao dao = NoticeDao.getDao();
+	    
+	    NoticeDao dao = NoticeDao.getDao();
 		dao.updateNotice(notice);
 		
 		request.setAttribute("notice_msg", "공지사항 글 수정 완료");
