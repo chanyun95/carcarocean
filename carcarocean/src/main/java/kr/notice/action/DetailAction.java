@@ -27,7 +27,6 @@ public class DetailAction implements Action{
 		String[] photo = notice.getNotice_photo().split(",");
 		*/
 		
-		request.setAttribute("notice_photo", notice.getNotice_photo());
 		request.setAttribute("notice", notice);
 		request.setAttribute("user_num", user_num);
 		

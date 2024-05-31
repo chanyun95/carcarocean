@@ -6,27 +6,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>구매 후기</title>
 </head>
 <body>
-	<div>
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		<div>
-			<h1>구매 후기 목록</h1>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<hr size="1" noshade width="100%">
+		<h1 class="pt-5">구매 후기 목록</h1>
 			<c:if test="${count == 0}">
 				<div>
 					표시할 게시물이 없습니다.
 				</div>
 			</c:if>
 			<c:if test="${count > 0}">
-					<table>
-					<tr>
-						<th>차명</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>등록일</th>
-						<th>차사진</th>
-					</tr>
+					<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>차명</th>
+							<th>제목</th>
+							<th>내용</th>
+							<th>등록일</th>
+							<th>차사진</th>
+						</tr>
+					</thead>
+					<tbody>
 					<c:forEach var="b_re" items="${list}">
 						<tr>
 							<td>${b_re.car_name}</td>
@@ -44,10 +48,11 @@
 							</c:if>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
-				<div>${page}</div>
+				<div class="text-center">${page}</div>
 			</c:if>
 		</div>
-	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

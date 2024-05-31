@@ -88,9 +88,11 @@
 						<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 						<script type="text/javascript">
 							$(function(){
+								
 								$('#file_del').click(function(){
 									let choice = confirm('삭제하시겠습니까?');
 									if(choice){
+										$('#b_re_photo').show();
 										//서버와 통신
 										$.ajax({
 											url:'deleteFile.do',
@@ -124,5 +126,7 @@
 			</form>
 		</div>
 	</div>
+	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

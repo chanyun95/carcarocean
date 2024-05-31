@@ -26,8 +26,13 @@ public class DeleteFileAction implements Action{
 		NoticeDao dao = NoticeDao.getDao();
 		NoticeVo db_notice = dao.getNotice(notice_num);
 		dao.deleteFile(notice_num);
+		
+		
 		//파일 삭제
-		FileUtil.removeFile(request, db_notice.getNotice_photo());
+		String[] photos = db_notice.getNotice_photo().split(",");
+		for(String pho : photos) {
+			FileUtil.removeFile(request, pho);
+		}
 		
 		mapAjax.put("result", "success");
 		//JSON 데이터 생성

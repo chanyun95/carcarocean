@@ -18,12 +18,19 @@
 		</div>
 		<hr size="1" noshade="noshade" width="80%">
 		<h3>${notice.notice_title}</h3>
-		<h4>관리자 | ${notice.notice_reg} | ${notice.notice_hit}</h4>
+		<h4>관리자 | 
+		<c:if test="${empty notice.notice_modify}">
+			${notice.notice_reg} 
+		</c:if>
+		<c:if test="${!empty notice.notice_modify}">
+			${notice.notice_modify}
+		</c:if>
+		| ${notice.notice_hit}</h4>
 		<hr size="1" noshade="noshade" width="80%">
 		<c:if test="${!empty notice.notice_photo}">
 			<div>
-			<c:forEach var="photo" items="${fn:split(notice_photo,',')}">
-				<img src="${pageContext.request.contextPath}/upload/${notice_photo}">
+			<c:forEach var="photoList" items="${fn:split(notice.notice_photo,',')}">
+				<img src="${pageContext.request.contextPath}/upload/${photoList}">
 			</c:forEach>
 			</div>
 		</c:if>
