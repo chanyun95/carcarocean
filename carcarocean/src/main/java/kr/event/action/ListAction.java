@@ -24,7 +24,7 @@ public class ListAction implements Action{
 		int count = dao.getEventCount(keyfield, keyword);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 3, 10, "list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 10, 10, "list.do");
 		
 		List<EventVo> list = null;
 		if(count > 0) {

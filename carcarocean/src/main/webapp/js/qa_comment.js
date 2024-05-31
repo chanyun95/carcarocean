@@ -87,6 +87,7 @@ $(function(){
 			data: {pageNum:pageNum,rowCount:rowCount,qa_num:$('#qa_num').val()},
 			dataType: 'json',
 			success:function(param){
+				
 				//로딩 이미지 감추기
 				$('#loading').hide();
 				count = param.count;
@@ -239,7 +240,7 @@ $(function(){
 		$.ajax({
 			url: 'deleteQa_Comment.do',
 			type: 'post',
-			data: {qa_comm_num:qa_comm_num},
+			data: {qa_comm_num:qa_comm_num,qa_num:$('#qa_num').val()},
 			dataType: 'json',
 			success:function(param){
 				if(param.result == 'logout'){

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문의 글 상세 보기</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/qa_comment.js"></script>
 </head>
@@ -18,7 +19,9 @@
 			<hr size="1" noshade="noshade" width="100%">
 			<c:if test="${!empty qa.qa_photo}">
 				<div class="align-center">
-				<img src="${pageContext.request.contextPath}/upload/${qa.qa_photo}" class="detail-img">
+				<c:forEach var="photo" items="${fn:split(qa.qa_photo,',')}">
+				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img">
+				</c:forEach>
 				</div>
 			</c:if>
 			<p>
@@ -28,14 +31,16 @@
 			<ul class="detail-sub">
 				<li>
 					<c:if test="${!empty qa.qa_modify}">
-					최근 수정일: ${qa.qa_modify}
+					${qa.qa_modify}
 					</c:if>
-					작성일: ${qa.qa_reg}
+					<c:if test="${empty qa.qa_modify}">
+					${qa.qa_reg}
+					</c:if>
 						<input type="button" value="목록" onclick="location.href='list.do'">
 						<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 						<c:if test="${user_num == qa.mem_num}">
 						<input type="button" value="수정" onclick="location.href='updateForm.do?qa_num=${qa.qa_num}'">
-						<input type="button" value="삭제" id="delete_btn">
+						<input type="button" value="삭제" id="delete_btn" >
 						<script type="text/javascript">
 							const delete_btn = document.getElementById('delete_btn');
 							//이벤트 연결
@@ -83,6 +88,7 @@
 			<!-- 댓글 목록 출력 끝 -->	
 			
 		</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</div>
 </body>
 </html>
