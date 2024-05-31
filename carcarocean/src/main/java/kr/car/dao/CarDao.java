@@ -321,9 +321,7 @@ public class CarDao {
 			pstmt.setInt(++cnt, car.getCar_mile());
 			pstmt.setInt(++cnt, car.getCar_price());
 			pstmt.setString(++cnt, car.getCar_color());
-			
 			pstmt.setString(++cnt, car.getCar_photo());
-			
 			pstmt.setInt(++cnt, car.getCar_auto());
 			pstmt.setFloat(++cnt, car.getCar_fuel_efficiency());
 			pstmt.setInt(++cnt, car.getCar_use());
@@ -336,6 +334,7 @@ public class CarDao {
 			pstmt.setInt(++cnt, car.getChecker_num());
 			pstmt.setString(++cnt, car.getCar_checker_opinion());
 			pstmt.setInt(++cnt, car.getCar_num());
+			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e);

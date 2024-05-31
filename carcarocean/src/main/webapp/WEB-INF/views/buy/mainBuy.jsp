@@ -137,33 +137,32 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
-		
-	    function favCar(carnum,favIconId) {
-	        $.ajax({
-	        	url:'favCar.do',
-	        	type:'post',
-	        	data:{car_num:carnum},
-	        	dataType:'json',
-	        	success:function(param){
-	        		if(param.result=='success'){
-	    	    		if(param.action=='insertFav'){
-	    	    			alert('관심차량 등록 완료');
-	    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
-	    				} else if(param.action=='removeFav'){
-	    					alert('관심차량 삭제 완료');
-	    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
-	    				}
-	    	    	} else if(param.result=='logout'){
-	     				alert('로그인 후 이용해주세요!');
-	     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
-	    	    	}else {
-	    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
-	    	    	}
-	        	},
-	        	error:function(){
-	        		alert('네트워크에 오류가 발생했습니다!');
-	        	}
-	        });
-	    };
+    function favCar(carnum,favIconId) {
+        $.ajax({
+        	url:'favCar.do',
+        	type:'post',
+        	data:{car_num:carnum},
+        	dataType:'json',
+        	success:function(param){
+        		if(param.result=='success'){
+    	    		if(param.action=='insertFav'){
+    	    			alert('관심차량 등록 완료');
+    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
+    				} else if(param.action=='removeFav'){
+    					alert('관심차량 삭제 완료');
+    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
+    				}
+    	    	} else if(param.result=='logout'){
+     				alert('로그인 후 이용해주세요!');
+     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
+    	    	}else {
+    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
+    	    	}
+        	},
+        	error:function(){
+        		alert('네트워크에 오류가 발생했습니다!');
+        	}
+        });
+    };
     </script>
 </html>

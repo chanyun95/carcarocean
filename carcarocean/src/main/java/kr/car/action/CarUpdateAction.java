@@ -1,5 +1,7 @@
 package kr.car.action;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,13 +25,14 @@ public class CarUpdateAction implements Action{
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {
-			return "/WEB-INF/views/common/warningPage";
+			return "/WEB-INF/views/common/warningPage.jsp";
 		}
 		//전송된 데이터 인코딩 타입 지정
 		request.setCharacterEncoding("utf-8");
 		CarVO car = new CarVO();
+		int car_num = Integer.parseInt(request.getParameter("car_num"));
 		CarDao dao = CarDao.getDao();
-		/* SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); */
+		car.setCar_num(car_num);
 		car.setCar_maker(request.getParameter("car_maker"));
 		car.setCar_name(request.getParameter("car_name"));
 		car.setCar_size(Integer.parseInt(request.getParameter("car_size")));
@@ -43,7 +46,7 @@ public class CarUpdateAction implements Action{
 		car.setCar_color(request.getParameter("car_color"));
 		
 		// 다중 파일 삭제
-		int car_num = Integer.parseInt(request.getParameter("car_num"));
+		
 		CarVO oldCar = dao.getCar(car_num);
 		String[] photos = oldCar.getCar_photo().split(",");
 		for (String photo: photos) {
@@ -65,8 +68,7 @@ public class CarUpdateAction implements Action{
 		
 		dao.updateCar(car);
 		
-		
-		return "/WEB-INF/views/car/buyDetail.do?car_num"+car_num;
+		return "redirect:/buy/buyDetail.do?car_num="+car_num;
 	}
 
 }

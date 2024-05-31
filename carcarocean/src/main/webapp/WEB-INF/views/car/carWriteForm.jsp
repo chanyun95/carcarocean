@@ -49,7 +49,7 @@ window.onload = function(){
 			if (items[i].id == 'car_color') {
     			var koreanRegex = /^[가-힣\s]+$/; // 한글만 허용하는 정규표현식
    				 if (!koreanRegex.test(items[i].value)) {
-       			 alert('한글로만 입력해주세요.');
+       			 alert('색상을 다시 입력해주세요. 예) 검은색');
        			 items[i].value = '';
        			 items[i].focus();
       			  return false;
@@ -74,7 +74,7 @@ window.onload = function(){
 			
 			/* 연식 양식 체크 */
 			if(items[i].id == 'car_birth'){
-				if(items[i].value.length!=8){
+				if(items[i].value.length!=9){
 					alert('연식은 공백을 기준으로 년도와 월을 입력해주세요. 예) 0000년 00월');
 					items[i].value = '';
 					items[i].focus();
@@ -103,22 +103,20 @@ window.onload = function(){
 	                return false;
 	            }
 	        }
-		alert('등록되었습니다!');
+		}
+		if(!confirm('정말 제출하시겠습니까?')){
+			return false;
+		}else {
+			alert('등록되었습니다!');
+		}
 	};
 };
-
-function submit_btn (){
-	if(!confirm('정말 제출하시겠습니까?')){
-		return;
-	}
-}
 </script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<hr size="1" width="100%" noshade="noshade">
-	<div class="content-main">
 	<h1 class="text-center">차량 등록 폼</h1>
 	<form id="write_form" action="carWrite.do" method="post" enctype="multipart/form-data" class="m-5">
 		<input type="hidden" name="sell_num" value="${sell.sell_num}">
@@ -225,7 +223,7 @@ function submit_btn (){
 			</li>
 			<li>
 				<label for="car_checker_opinion">검수자 의견</label>
-				<textarea rows="5" name="car_checker_opinion" id="car_checker_opinion" class="form-control"></textarea>
+				<textarea rows="5" name="car_checker_opinion" id="car_checker_opinion" class="input-check form-control"></textarea>
 			</li>
 			</c:if>
 		</ul>
@@ -236,11 +234,10 @@ function submit_btn (){
 		<c:if test="${!empty checkerList }">
 		<div class="text-center">
 			<input type="button" value="뒤로가기" onclick="history.back()" class="btn btn-secondary btn-lg">
-			<input type="submit" value="등록" class="btn btn-primary btn-lg" onclick="submit_btn()">
+			<input type="submit" value="등록" class="btn btn-primary btn-lg">
 		</div>
 		</c:if>
 	</form>
-	</div>
 </div>
 </body>
 </html>

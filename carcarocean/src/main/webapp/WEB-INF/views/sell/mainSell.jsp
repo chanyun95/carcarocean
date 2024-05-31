@@ -33,7 +33,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<!-- 판매 신청 부분 -->
-		<div class="bg-light d-flex flex-column justify-content-center background-image" style="height:450px;">
+		<div class="bg-light d-flex flex-column justify-content-center background-image p-4" style="height:450px;">
 			<div class="m-3">
 				<div>
 					<h2>내 차 팔기!</h2>
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<!-- 카카오션의 차별점 -->
-		<div class="bg-light text-center mb-5 p-5">
+		<div class="bg-light text-center rounded mb-5 p-5">
 			<p class="fs-1"><b>카카오션</b>은</p>
 			<p class="fs-2">무엇이 다른가요?</p>
 			<div class="d-flex flex-row justify-content-between">
