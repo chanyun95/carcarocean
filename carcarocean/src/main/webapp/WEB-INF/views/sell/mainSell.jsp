@@ -160,8 +160,7 @@
 		<!-- 최근 올라온 차량 3개만 보여주기 -->
 		<div class="my-5">
 			<h2 class="text-center"><b>최근 등록된 차량</b></h2>
-			<div class="row d-flex justify-content-between">
-			<div class="col-1 align-self-center"><a href="#">이전</a></div>
+			<div class="row d-flex justify-content-center">
 			<c:forEach var="car" items="${carList}">
 				<c:if test="${fn:contains(car.car_photo, ',')}">
             		<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -177,7 +176,6 @@
 					<p><b><fmt:formatNumber value="${car.car_mile}" type="number"/></b>km</p>
 				</div>
 			</c:forEach>
-			<div class="col-1 align-self-center"><a href="#">다음</a></div>
 			</div>
 		</div>
 		<!-- 판매 후기 -->

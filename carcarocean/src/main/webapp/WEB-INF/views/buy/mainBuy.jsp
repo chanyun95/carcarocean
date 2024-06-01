@@ -42,11 +42,14 @@
             font-size: 25px;
             color: red;
         }
-        .nav-item a:link{
+        .menu-name:link{
         	color:black;
         }
-        .nav-item a:visited{
+        .menu-name:visited{
         	color:black;
+        }
+        .menu-name{
+        	text-decoration-line: none;
         }
     </style>
 </head>
@@ -55,64 +58,142 @@
  <div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
-         <nav class="col-md-2 bg-light sidebar rounded py-2">
+         <nav class="col-md-2 bg-light sidebar rounded">
              <ul class="nav flex-column">
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">차종</a>
+             	<!-- 첫번째 토글 -->
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
+						<b>차종</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample1">
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">경차</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">소형차</button>
+						</div>
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">준중형차</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">중형차</button>
+						</div>
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">준대형차</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">대형차</button>
+						</div>
+					 </div>
+                 </li>
+                 <!-- 절취선 -->
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="text-secondary fs-5 menu-name">
+						<b>연식</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample2">
+						<form>
+							<div>
+								<input type="number" id="minBirth" name="minBirth" placeholder="최소" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxBirth" name="maxBirth" placeholder="최대" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">연식</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="text-secondary fs-5 menu-name">
+						<b>주행거리</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample3">
+						<form>
+							<div>
+								<input type="number" id="minMile" name="minMile" placeholder="최소" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxMile" name="maxMile" placeholder="최대" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">주행거리</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="text-secondary fs-5 menu-name">
+						<b>가격</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample4">
+						<form>
+							<div>
+								<input type="number" id="minPrice" name="minPrice" placeholder="최소(만원)" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxPrice" name="maxPrice" placeholder="최대(만원)" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">가격</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="text-secondary fs-5 menu-name">
+						<b>색상</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample5">
+						<form>
+							<div>
+								<input type="text" id="color" name="color" placeholder="색상 검색" style="width: 160px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">색상</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="text-secondary fs-5 menu-name">
+						<b>옵션</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample6">
+						<form>
+							<div>
+								<input type="text" id="option" name="option" placeholder="옵션 검색" style="width: 160px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">옵션</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="text-secondary fs-5 menu-name">
+						<b>연료</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample7">
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">가솔린</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">디젤</button>
+						</div>
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">전기</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">수소</button>
+						</div>
+					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">연료</a>
-                 </li>
-                 <li>
-                 	<hr size="1" noshade width="100%">
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">변속기</a>
-                 </li>
-                 <li>
-                 	<hr size="1" noshade width="100%">
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">사고유무</a>
-                 </li>
-                 <li>
-                 	<hr size="1" noshade width="100%">
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">구동방식</a>
+                 <li class="mt-4 text-center">
+					<a data-bs-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="text-secondary fs-5 menu-name">
+						<b>변속기</b>
+					</a>
+					 <div class="collapse mt-3" id="collapseExample8">
+						<div class="row">
+							<button class="col-6 btn btn-outline-secondary d-inline">오토</button>
+							<button class="col-6 btn btn-outline-secondary d-inline">수동</button>
+						</div>
+					 </div>
                  </li>
              </ul>
          </nav>
@@ -126,7 +207,7 @@
 						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 					</select>
 					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning ms-2" value="검색">
+					<input type="submit" class="btn btn-warning" value="검색">
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
@@ -185,7 +266,7 @@
   </div>
 <!-- 푸터 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function favCar(carnum,favIconId) {
         $.ajax({
@@ -214,5 +295,6 @@
         	}
         });
     };
-    </script>
+</script>
+</body>
 </html>
