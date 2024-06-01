@@ -12,6 +12,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>차량 상세 정보</title>
+<style>
+	.myList li{
+		margin-top:15px; 
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -49,11 +54,30 @@
 			<c:if test="${fn:contains(car.car_photo, ',')}">
         		<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
         		<c:set var="firstPhoto" value="${photoList[0]}"/>
+        		<div id="carouselExample" class="carousel slide">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="d-block" width="1296px" height="700px" alt="...">
+						</div>
+					<c:forEach var="photo" items="${photoList}" begin="1">
+						<div class="carousel-item">
+							<img src="${pageContext.request.contextPath}/upload/${photo}" class="d-block" width="1296px" height="700px" alt="...">
+						</div>
+					</c:forEach>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
        		</c:if>
 			<c:if test="${!fn:contains(car.car_photo, ',')}">
-				<c:set var="firstPhoto" value="${car.car_photo}" />
+				<img src="${pageContext.request.contextPath}/upload/${car.car_photo}" width="1296px" height="700px" class="rounded-bottom">
 			</c:if>
-			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="1296px" height="700px" class="rounded-bottom">
 		</div>
 		<!-- 사진 아래 컨텐츠 -->
 	    <div class="container-fluid">
@@ -68,11 +92,96 @@
 	            			<span class="text-secondary fs-5">할부 </span><span class="fs-5 text-decoration-underline">월 <b class="text-danger"><fmt:formatNumber type="number" value="${car.car_price/60}" pattern="#"/></b> 만원</span>
 	            		</div>
 	            		<div class="row mt-3">
-	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;">
-	            				세부 정보 위치로 이동
+	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								<div class="row text-center">
+									<div class="col-3 align-self-center">
+										<i class="bi bi-car-front-fill" style="font-size: 3rem;"></i>
+									</div>
+									<div class="col-7 align-self-center">
+										<span class="fs-5 fw-bold text-secondary">차량 기본정보 상세</span>
+									</div>
+									<div class="col-2 align-self-center">
+										<i class="bi bi-caret-right-fill" style="font-size: 1.5rem;"></i>
+									</div>
+								</div>
 	            			</div>
-	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;">
-	            				차량평가사 정보 위치로 이동
+							<div class="modal" id="exampleModal" tabindex="-1">
+								<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title"><b>차량 기본정보 상세</b></h4>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body p-4">
+											<div class="row">
+												<div class="col-3">
+													<ul class="list-unstyled fw-bold myList">
+														<li>제조사</li>
+														<li>차명</li>
+														<li>차종</li>
+														<li>연식</li>
+														<li>배기량</li>
+														<li>연료</li>
+														<li>연비</li>
+														<li>주행거리</li>
+														<li>가격</li>
+													</ul>
+												</div>
+												<div class="col-3 border-end">
+													<ul class="list-unstyled text-secondary myList">
+														<li>${car.car_maker}</li>
+														<li>${car.car_name}</li>
+														<li>${car.car_size}</li>
+														<li>${car.car_birth}</li>
+														<li>${car.car_cc}</li>
+														<li>${car.car_fuel_type}</li>
+														<li>${car.car_fuel_efficiency}</li>
+														<li>${car.car_mile}</li>
+														<li>${car.car_price}</li>
+													</ul>
+												</div>
+												<div class="col-3">
+													<ul class="list-unstyled fw-bold myList">
+														<li>색상</li>
+														<li>변속기</li>
+														<li>사용기간</li>
+														<li>사고이력</li>
+														<li>사용자 변경 횟수</li>
+														<li>디자인 옵션</li>
+														<li>편의 옵션</li>
+														<li>주행 옵션</li>
+													</ul>
+												</div>
+												<div class="col-3 border-end">
+													<ul class="list-unstyled text-secondary myList">
+														<li>${car.car_color}</li>
+														<li>${car.car_auto}</li>
+														<li>${car.car_use}</li>
+														<li>${car.car_accident}</li>
+														<li>${car.car_owner_change}</li>
+														<li>${car.car_design_op}</li>
+														<li>${car.car_con_op}</li>
+														<li>${car.car_drive_op}</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;" onclick="location.href='#checkerInfo'">
+	            				<div class="row text-center">
+									<div class="col-3 align-self-center">
+										<i class="bi bi-file-person-fill" style="font-size: 3rem;"></i>
+									</div>
+									<div class="col-7 align-self-center">
+										<span class="fs-5 fw-bold text-secondary">차량평가사 정보</span>
+									</div>
+									<div class="col-2 align-self-center">
+										<i class="bi bi-caret-right-fill" style="font-size: 1.5rem;"></i>
+									</div>
+								</div>
 	            			</div>
 	            		</div>
 	            	</div>
@@ -115,45 +224,76 @@
 	            		<h4>진단결과</h4>
 		            	<div class="border rounded p-4">
 		            		<div class="row">
-		            			<div class="col-4">
-		            				아이콘
+		            			<div class="col-4 ps-5">
+		            				<i class="bi bi-car-front" style="font-size: 3rem;"></i>
 		            			</div>
-		            			<div class="col-4">
-		            				사고진단
+		            			<div class="col-4 align-self-center">
+		            				<b>사고진단</b>
 		            			</div>
-		            			<div class="col-4">
-		            				무사고
-		            			</div>
-		            		</div>
-		            		<hr size="1" width="100%" noshade>
-		            		<div class="row">
-		            			<div class="col-4">
-		            				아이콘
-		            			</div>
-		            			<div class="col-4">
-		            				진단통과
-		            			</div>
-		            			<div class="col-4">
-		            				무사고
+		            			<div class="col-4 align-self-center">
+		            				<c:if test="${car.car_accident=='없음'}"><b class="text-danger fs-4">무사고</b></c:if>
+		            				<c:if test="${car.car_accident!='없음'}"><b class="text-danger fs-5">${car.car_accident}</b> 이력 있음</c:if>
 		            			</div>
 		            		</div>
 		            		<hr size="1" width="100%" noshade>
 		            		<div class="row">
-		            			<div class="col-4">
-		            				아이콘
+		            			<div class="col-4 ps-5">
+		            				<i class="bi bi-check2-circle" style="font-size: 3rem;"></i>
 		            			</div>
-		            			<div class="col-4">
-		            				알림사항
+		            			<div class="col-4 align-self-center">
+		            				<b>진단통과</b>
 		            			</div>
-		            			<div class="col-4">
-		            				무사고
+		            			<div class="col-4 align-self-center">
+		            				<div>
+		            					<div class="d-inline">
+		            						<b>실내 및 외관 <b class="text-danger">6</b>건</b>
+		            					</div>
+		            					<div class="d-inline">
+		            						<b>소모품 <b class="text-danger">8</b>건</b>
+		            					</div>
+		            				</div>
+		            				<div>
+		            					<div class="d-inline">
+		            						<b>타이어 및 휠 <b class="text-danger">3</b>건</b>
+		            					</div>
+		            					<div class="d-inline">
+		            						<b>하체 <b class="text-danger">5</b>건</b>
+		            					</div>
+		            				</div>
+		            			</div>
+		            		</div>
+		            		<hr size="1" width="100%" noshade>
+		            		<div class="row">
+		            			<div class="col-4 ps-5">
+		            				<i class="bi bi-exclamation-circle-fill" style="font-size: 3rem;"></i>
+		            			</div>
+		            			<div class="col-4 align-self-center">
+		            				<b>알림사항</b>
+		            			</div>
+		            			<div class="col-4 align-self-center">
+		            				<div>
+		            					<div class="d-inline">
+		            						<b>실내 및 외관 <b class="text-danger">0</b>건</b>
+		            					</div>
+		            					<div class="d-inline">
+		            						<b>소모품 <b class="text-danger">1</b>건</b>
+		            					</div>
+		            				</div>
+		            				<div>
+		            					<div class="d-inline">
+		            						<b>타이어 및 휠 <b class="text-danger">1</b>건</b>
+		            					</div>
+		            					<div class="d-inline">
+		            						<b>하체 <b class="text-danger">0</b>건</b>
+		            					</div>
+		            				</div>
 		            			</div>
 		            		</div>
 		            	</div>
 	            	</div>
 	            	
-	            	<div class="mt-5">
-	            		<h4>검수자 정보</h4>
+	            	<div class="mt-5" id="checkerInfo">
+	            		<h4>차량평가사 정보</h4>
 		            	<div class="border rounded p-5">
 		            		<div class="row mb-4">
 			            		<div class="col-4"><b>${checker.checker_name}</b></div>
@@ -268,8 +408,16 @@
 	    </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+});
+
 function update_car(){
 	if(confirm('차량 정보를 수정하시겠습니까?')){
 		location.href='${pageContext.request.contextPath}/car/carUpdateForm.do?car_num=${car.car_num}';
