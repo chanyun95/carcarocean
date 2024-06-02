@@ -22,6 +22,19 @@
             background-size: cover;
             background-position: center;
         }
+        .img:hover{
+        	filter:brightness(80%);
+        }
+        
+        .car-name-link:link{
+        	color:black;
+        }
+        .car-name-link:visited{
+        	color:black;
+        }
+        .car-name-link{
+        	text-decoration-line: none;
+        }
     </style>
 </head>
 <body>
@@ -169,9 +182,9 @@
     			<c:if test="${!fn:contains(car.car_photo, ',')}">
     				<c:set var="firstPhoto" value="${car.car_photo}" />
     			</c:if>
-				<div class="col-3 border mt-3 text-center">
-					<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:200px; height:150px;" class="img-fluid img-thumbnail rounded"></a>
-					<p><b class="fs-5">${car.car_maker} ${car.car_name}</b></p>
+				<div class="col-3 border mt-3 text-center p-3">
+					<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:200px; height:150px;" class="img img-fluid img-thumbnail rounded"></a>
+					<p><b class="fs-5"><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="car-name-link">${car.car_maker} ${car.car_name}</a></b></p>
 					<p><b><fmt:formatNumber value="${car.car_price}" type="number"/></b>만원</p>
 					<p><b><fmt:formatNumber value="${car.car_mile}" type="number"/></b>km</p>
 				</div>

@@ -13,8 +13,8 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="text-center">검수자 정보 목록</h1>
-		<table class="table table-hover">
+		<h1 class="my-3 text-center">검수자 정보 목록</h1>
+		<table class="table table-hover mt-3 text-center fw-bold">
 			<thead class="table-light">
 				<tr>
 					<th>#</th>
@@ -25,9 +25,9 @@
 			<tbody>
 				<c:forEach var="checker" items="${list}">
 				<tr>
-					<td>${checker.checker_num}</td>
-					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}">${checker.checker_name}</a></td>
-					<td>${checker.checker_company}</td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_num}</a></td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_name}</a></td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_company}</a></td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -12,6 +12,14 @@
 <!-- bootstrap 아이콘 cdn 링크 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.noto-sans-kr-<uniquifier> {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
 /* 메뉴 hover 방식 */
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -39,7 +47,7 @@
 }
 </style>
 </head>
-<body>
+<body style="font-family:Noto Sans KR;">
     <!-- continer 기본 padding값 때문에 로그아웃 회원가입이 밀려서 일단 임시조치로 left right 0으로 처리 -->
     <div class="container rounded-bottom" style="padding-left:0; padding-right:0; background-color:;">
       <!-- nav태그 상단 고정 -->
@@ -58,7 +66,7 @@
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/b_re/list.do">차량 구매 후기</a>
-                        <a class="dropdown-item" href="#">관심 차량</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/fav/myFavList.do">내 관심 차량</a>
                      </div>
                   </li>
                   <!-- 두번째 메뉴 -->

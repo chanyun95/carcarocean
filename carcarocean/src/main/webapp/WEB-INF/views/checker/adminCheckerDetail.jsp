@@ -25,16 +25,16 @@ function delete_btn() {
 		<div>
 			<ul class="list-unstyled">
 				<li>
-					이름 : ${checker.checker_name}
+					<p class="fs-3 fw-bold">이름 : ${checker.checker_name}</p>
 				</li>
 				<li>
-					회사 : ${checker.checker_company}
+					<p class="fs-5 fw-bold">회사 : ${checker.checker_company}</p>
 				</li>
 				<li>
-					전화번호 : ${checker.checker_phone}
+					<p class="fs-5 fw-bold">전화번호 : ${checker.checker_phone}</p>
 				</li>
 				<li>
-					<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}">
+					<p class="text-center"><img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250px" height="150px"></p>
 				</li>
 			</ul> 
 		</div>
