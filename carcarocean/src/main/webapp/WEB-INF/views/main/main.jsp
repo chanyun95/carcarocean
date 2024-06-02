@@ -8,6 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>카카오션</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<style>
+	#carouselExampleIndicators {
+		width: 100vw;
+		margin-left: calc(-50vw + 50%);
+	}
+</style>
 </head>
 <body>
 	<!-- 헤더 시작 -->
@@ -18,37 +24,28 @@
 		<!-- 표지화면 시작 -->
 		<div id="carouselExampleIndicators" class="carousel slide" style="background-color: #FEE500;">
 			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1" ></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" ></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath}/images/mainlogo.png"
-						class="d-block w-20" alt="1화면">
+					<img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-20" style="height: 450px;" alt="1화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/service.jpg"
-						class="d-block w-20" alt="2화면">
+					<img src="${pageContext.request.contextPath}/images/service.jpg" class="d-block w-20" style="height: 450px;" alt="2화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/mainlogo.png"
-						class="d-block w-20" alt="3화면">
+					<img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-20" style="height: 450px;" alt="3화면">
 				</div>
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="visually-hidden">Previous</span>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
 			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="visually-hidden">Next</span>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
 		<!-- 표지화면 끝 -->

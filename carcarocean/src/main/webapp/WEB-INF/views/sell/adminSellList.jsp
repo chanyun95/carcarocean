@@ -45,7 +45,7 @@
 				</form>
 			</div>
 		</div>
-		<table class="table table-hover mt-3">
+		<table class="table table-hover mt-3 text-center fw-bold">
 			<thead class="table-light">
 				<tr>
 					<th>#</th>
@@ -60,24 +60,23 @@
 			<tbody>
 				<c:forEach var="sell" items="${list}">
 				<tr>
-					<td>${sell.sell_num}</td>
-					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-success">${sell.sell_name}</a></td>
-					<td>${sell.sell_maker}</td>
-					<td>${sell.sell_cname}</td>
-					<td>${sell.sell_reg}</td>
+					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">${sell.sell_num}</a></td>
+					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">${sell.sell_name}</a></td>
+					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">${sell.sell_maker}</a></td>
+					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">${sell.sell_cname}</a></td>
+					<td><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">${sell.sell_reg}</a></td>
 					<td>
 						<c:choose>
-							<c:when test="${sell.sell_check == 0}">미검수</c:when>
-							<c:when test="${sell.sell_check == 1}">검수중</c:when>
-							<c:when test="${sell.sell_check == 2}">검수 완료</c:when>
+							<c:when test="${sell.sell_check == 0}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">미검수</a></c:when>
+							<c:when test="${sell.sell_check == 1}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-primary">검수중</a></c:when>
+							<c:when test="${sell.sell_check == 2}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-danger">검수 완료</a></c:when>
 						</c:choose>
 					</td>
 					<td>
                         <c:choose>
-                            <c:when test="${sell.sell_date == 0}">즉시</c:when>
-                            <c:when test="${sell.sell_date == 1}">7일 이내</c:when>
-                            <c:when test="${sell.sell_date == 2}">30일 이내</c:when>
-                            <c:otherwise>알 수 없음</c:otherwise>
+                            <c:when test="${sell.sell_date == 0}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">즉시</a></c:when>
+                            <c:when test="${sell.sell_date == 1}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">7일 이내</a></c:when>
+                            <c:when test="${sell.sell_date == 2}"><a href="adminSellDetail.do?sell_num=${sell.sell_num}" class="text-decoration-none text-dark">30일 이내</a></c:when>
                         </c:choose>
                     </td>
 				</tr>

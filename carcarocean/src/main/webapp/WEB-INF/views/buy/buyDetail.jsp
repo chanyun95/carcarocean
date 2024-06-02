@@ -22,21 +22,27 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 	<fmt:formatNumber value="${car.car_price}" type="number" var="carPrice"/>
-	<fmt:formatNumber value="${car.car_price*0.0007}" pattern="#" type="number" var="firstPrice"/>
-	<fmt:formatNumber value="${car.car_price*0.00018}" pattern="#" type="number" var="secondPrice"/>
-	<fmt:formatNumber value="${car.car_price*0.0001}" pattern="#" type="number" var="thirdPrice"/>
+	<fmt:formatNumber value="${car.car_price*0.07}" pattern="#" type="number" var="firstPrice"/>
+	<fmt:formatNumber value="${car.car_price*0.005}" pattern="#" type="number" var="secondPrice"/>
+	<fmt:formatNumber value="${car.car_price*0.0009}" pattern="#" type="number" var="thirdPrice"/>
 	<fmt:formatNumber value="${car.car_price+firstPrice+secondPrice+thirdPrice}" type="number" var="totalPrice"/>
 		<div class="p-3">
-			<h1><b>${car.car_maker} ${car.car_name}</b></h1>
+			<h1 class="fw-bold">${car.car_maker} ${car.car_name}</h1>
 			<div class="d-flex justify-content-between">
 				<div class="mb-3">
-					${car.car_cnumber} <b>·</b> ${car.car_birth} <b>·</b> ${car.car_mile}km <b>·</b> 
-					<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
-					<c:if test="${car.car_fuel_type==2}">디젤</c:if>
-					<c:if test="${car.car_fuel_type==3}">전기</c:if>
-					<c:if test="${car.car_fuel_type==4}">수소</c:if> <b>·</b> ${car.car_color} <b>·</b> 
-					<c:if test="${car.car_auto==1}">오토</c:if>
-					<c:if test="${car.car_auto==2}">수동</c:if> <b>·</b> ${car.car_price}만원
+					<b>${car.car_cnumber}</b>
+					<div class="vr me-2 ms-1"></div>${fn:substring(car.car_birth,2,4)}년 ${fn:substring(car.car_birth,5,7)}월식
+					<div class="vr me-2 ms-1"></div>${car.car_mile}km
+					<div class="vr me-2 ms-1"></div>
+						<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+						<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+						<c:if test="${car.car_fuel_type==3}">전기</c:if>
+						<c:if test="${car.car_fuel_type==4}">수소</c:if>
+					<div class="vr me-2 ms-1"></div>${car.car_color}
+					<div class="vr me-2 ms-1"></div>
+						<c:if test="${car.car_auto==1}">오토</c:if>
+						<c:if test="${car.car_auto==2}">수동</c:if>
+					<div class="vr me-2 ms-1"></div>${car.car_price}만원
 				</div>
 				<c:if test="${user_auth==9}">
 				<div>
@@ -46,8 +52,8 @@
 			</div>
 		</div>
 		<div class="d-flex justify-content-between border rounded-top bg-warning">
-			<div class="p-3"><b>#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</b></div>
-			<div class="p-3"><i class="bi bi-telephone-fill"> ${checker.checker_phone} | ${checker.checker_name}</i></div>
+			<div class="p-3 fw-bold fst-italic text-secondary">#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</div>
+			<div class="p-3"><b class="text-danger"><i class="bi bi-telephone-fill"> </i>${checker.checker_phone}</b><div class="vr me-2 ms-2"></div>${checker.checker_name}</div>
 		</div>
 		<!-- 갤러리 사진 옆으로 넘기기 구현해야 함 -->
 		<div class="text-center">
@@ -89,18 +95,18 @@
 	            			<span><b class="fs-2 text-danger">${carPrice}</b><b class="fs-5"> 만원</b></span>
 	            		</div>
 	            		<div class="mt-3 text-center">
-	            			<span class="text-secondary fs-5">할부 </span><span class="fs-5 text-decoration-underline">월 <b class="text-danger"><fmt:formatNumber type="number" value="${car.car_price/60}" pattern="#"/></b> 만원</span>
+	            			<span class="text-secondary fs-5">할부 </span><span class="fs-5 text-decoration-underline fw-bold">월 <b class="text-danger"><fmt:formatNumber type="number" value="${car.car_price/60}" pattern="#"/></b> 만원</span>
 	            		</div>
-	            		<div class="row mt-3">
-	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-								<div class="row text-center">
-									<div class="col-3 align-self-center">
+	            		<div class="row mt-3 align-items-center">
+	            			<div class="col-5 border rounded ms-5" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								<div class="row text-center align-items-center">
+									<div class="col-3">
 										<i class="bi bi-car-front-fill" style="font-size: 3rem;"></i>
 									</div>
-									<div class="col-7 align-self-center">
+									<div class="col-7">
 										<span class="fs-5 fw-bold text-secondary">차량 기본정보 상세</span>
 									</div>
-									<div class="col-2 align-self-center">
+									<div class="col-2">
 										<i class="bi bi-caret-right-fill" style="font-size: 1.5rem;"></i>
 									</div>
 								</div>
@@ -170,15 +176,15 @@
 								</div>
 							</div>
 
-	            			<div class="col-5 border rounded ms-5" style="height:90px; cursor:pointer;" onclick="location.href='#checkerInfo'">
-	            				<div class="row text-center">
-									<div class="col-3 align-self-center">
+	            			<div class="col-5 border rounded ms-5" style="cursor:pointer;" onclick="location.href='#checkerInfo'">
+	            				<div class="row text-center align-items-center">
+									<div class="col-3">
 										<i class="bi bi-file-person-fill" style="font-size: 3rem;"></i>
 									</div>
-									<div class="col-7 align-self-center">
+									<div class="col-7">
 										<span class="fs-5 fw-bold text-secondary">차량평가사 정보</span>
 									</div>
-									<div class="col-2 align-self-center">
+									<div class="col-2">
 										<i class="bi bi-caret-right-fill" style="font-size: 1.5rem;"></i>
 									</div>
 								</div>
@@ -188,17 +194,17 @@
 	            	
 	            	<div class="mt-5">
             			<div class="border rounded p-5">
-            				<div class="row">
-	            				<div class="col-4">
+            				<div class="row text-center">
+	            				<div class="col-4 fw-bold">
 	            					<h5>디자인 옵션</h5>
 	            					<b>${car.car_design_op}</b>
 	            				</div>
-	            				<div class="col-4">
-	            					<h5>디자인 옵션</h5>
+	            				<div class="col-4 fw-bold">
+	            					<h5>편의 옵션</h5>
 	            					<b>${car.car_con_op}</b>
 	            				</div>
-	            				<div class="col-4">
-	            					<h5>디자인 옵션</h5>
+	            				<div class="col-4 fw-bold">
+	            					<h5>주행 옵션</h5>
 	            					<b>${car.car_drive_op}</b>
 	            				</div>
             				</div>
@@ -210,8 +216,8 @@
 	            		<div class="border border-warning rounded-top p-5">
             				${car.car_checker_opinion}
 	            		</div>
-	            		<div class="d-flex justify-content-between border border-warning rounded-bottom bg-warning p-2">
-            				<div>
+	            		<div class="d-flex justify-content-between border-bottom border-warning rounded-bottom bg-warning p-2">
+            				<div class="align-self-center">
            						<b>CarCarOcean ${checker.checker_name} 차량평가사</b>
            					</div>
             				<div>
@@ -295,7 +301,7 @@
 	            	<div class="mt-5" id="checkerInfo">
 	            		<h4>차량평가사 정보</h4>
 		            	<div class="border rounded p-5">
-		            		<div class="row mb-4">
+		            		<div class="row mb-4 text-center">
 			            		<div class="col-4"><b>${checker.checker_name}</b></div>
 			            		<div class="col-4"><i class="bi bi-telephone-fill"> ${checker.checker_phone}</i></div>
 			            		<div class="col-4">${checker.checker_company}</div>
@@ -319,7 +325,7 @@
 		            				</ul>
 	            				</div>
 	            				<div>
-	            					<button class="btn btn-outline-danger px-5 py-3">예약하기</button>
+	            					<button class="btn btn-outline-danger fw-bold px-5 py-3">예약하기</button>
             					</div>
             				</div>
 	            		</div>
@@ -342,18 +348,19 @@
 	            <!-- 구매 버튼 공간 -->
 	            <div class="col-md-3 sidebar">
 	            	<div class="sticky-top border rounded mt-5 p-4">
-		                <div class="fs-3 text-center"><i class="bi bi-telephone-fill"></i> ${checker.checker_phone}</div>
+		                <div class="fs-3 text-center text-danger fw-bold"><i class="bi bi-telephone-fill"></i> ${checker.checker_phone}</div>
 		                <hr size="1" width="100%" noshade>
-		                <div class="fs-2">
+		                <div class="fs-2 fw-bold">
 		                	${car.car_maker} ${car.car_name}
 	                	</div>
 		                <div class="text-center pt-3">
-			                ${fn:substring(car.car_birth,0,9)} ·
-			                ${car.car_mile}km ·
-			                <c:if test="${car.car_fuel_type==1}">가솔린</c:if>
-							<c:if test="${car.car_fuel_type==2}">디젤</c:if>
-							<c:if test="${car.car_fuel_type==3}">전기</c:if>
-							<c:if test="${car.car_fuel_type==4}">수소</c:if>
+			                ${fn:substring(car.car_birth,2,4)}년 ${fn:substring(car.car_birth,5,7)}월식
+			                <div class="vr me-2 ms-2"></div>${car.car_mile}km
+			                <div class="vr me-2 ms-2"></div>
+				                <c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+								<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+								<c:if test="${car.car_fuel_type==3}">전기</c:if>
+								<c:if test="${car.car_fuel_type==4}">수소</c:if>
 						</div>
 						<div class="p-3 text-center">
 							<div class="fs-5">총 예상 구매비용</div>
@@ -375,31 +382,31 @@
 						<div class="text-center pt-3">
 							<!-- 구매 안 되었을 때 -->
 							<c:if test="${car.car_status==0}">
-							<input type="button" class="btn btn-danger" id="buy_btn" value="구매 예약" onclick="buy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
+							<input type="button" class="btn btn-danger fw-bold" id="buy_btn" value="구매 예약" onclick="buy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
 							</c:if>
 							<!-- 구매 되었을 때-->
 							<c:if test="${car.car_status==1}">
 								<!-- 로그인된 회원이 구매한 차량일 때 -->
 								<c:if test="${!empty buy}">
-								<input type="button" class="btn btn-danger" value="구매 취소" onclick="deleteBuy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
+								<input type="button" class="btn btn-danger fw-bold" value="구매 취소" onclick="deleteBuy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
 								</c:if>
 								<!-- 로그인된 회원이 구매한 차량이 아닐 때 -->
 								<c:if test="${empty buy}">
-								<input type="button" class="btn btn-danger" value="예약 완료" style="padding: 1.5rem 3.0rem; font-size: 2rem;" disabled>
+								<input type="button" class="btn btn-danger fw-bold" value="예약 완료" style="padding: 1.5rem 3.0rem; font-size: 2rem;" disabled>
 								</c:if>
 							</c:if>
 						</div>
 						<div class="text-center pt-3">
 							<c:if test="${empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><b><i class="fav_icon bi bi-heart">찜하기</i></b></button>
+							<button class="btn btn-outline-danger fw-bold" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart">찜하기</i></button>
 							</c:if>
 							<c:if test="${!empty fav}">
-							<button class="btn btn-outline-danger" id="fav_btn" onclick="favCar(${car.car_num})"><b><i class="fav_icon bi bi-heart-fill">찜하기</i></b></button>
+							<button class="btn btn-outline-danger fw-bold" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart-fill">찜하기</i></button>
 							</c:if>
-							<button class="btn btn-outline-success" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
+							<button class="btn btn-outline-success fw-bold" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
 							<div class="text-center bg-light pt-1" id="share_div" style="display:none; position:absolute; transform:translate(85px,0)">
-								<button class="btn btn-sm" style="background-color: #3b5998; color:white;" onclick="shareFacebook()"><i class="bi bi-facebook">페이스북</i></button>
-								<button class="btn btn-sm" style="background-color: #00acee; color:white;" onclick="shareTwitter()"><i class="bi bi-twitter">트위터</i></button>
+								<button class="btn btn-sm" style="background-color: #3b5998; color:white;" onclick="shareFacebook()"><i class="bi bi-facebook"> 페이스북</i></button>
+								<button class="btn btn-sm" style="background-color: #00acee; color:white;" onclick="shareTwitter()"><i class="bi bi-twitter-x"> 트위터 X</i></button>
 							</div>
 						</div>
 					</div>
@@ -425,8 +432,6 @@ function update_car(){
 }
 
 function share_btn() {
-    /* navigator.clipboard.writeText(location.href);
-    alert("주소가 복사되었습니다"); */
     if($("#share_div").css("display") =="none"){
     	$("#share_div").show();
     }else {

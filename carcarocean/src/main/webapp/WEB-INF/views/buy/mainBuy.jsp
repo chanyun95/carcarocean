@@ -34,6 +34,11 @@
             height: 100%;
             object-fit: cover; /* 이미지가 부모 div를 덮도록 설정 */
         }
+        /* 이미지에 마우스 갖다 대면 흑백 */
+        .image-container:hover{
+        	filter: brightness(85%);
+        }
+        
         /* 하트 아이콘 */
         .overlay-icon {
             position: absolute;
@@ -58,25 +63,25 @@
  <div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
-         <nav class="col-md-2 bg-light sidebar rounded">
-             <ul class="nav flex-column">
+         <nav class="col-md-2 sidebar mt-5">
+             <ul class="nav flex-column bg-light rounded">
              	<!-- 첫번째 토글 -->
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
-						<b>차종</b>
+						차종
 					</a>
 					 <div class="collapse mt-3" id="collapseExample1">
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">경차</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">소형차</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">경차</button>
+							<button class="col-5 btn btn-outline-secondary">소형차</button>
 						</div>
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">준중형차</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">중형차</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">준중형차</button>
+							<button class="col-5 btn btn-outline-secondary">중형차</button>
 						</div>
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">준대형차</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">대형차</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">준대형차</button>
+							<button class="col-5 btn btn-outline-secondary">대형차</button>
 						</div>
 					 </div>
                  </li>
@@ -85,9 +90,9 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="text-secondary fs-5 menu-name">
-						<b>연식</b>
+						연식
 					</a>
 					 <div class="collapse mt-3" id="collapseExample2">
 						<form>
@@ -102,9 +107,9 @@
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="text-secondary fs-5 menu-name">
-						<b>주행거리</b>
+						주행거리
 					</a>
 					 <div class="collapse mt-3" id="collapseExample3">
 						<form>
@@ -119,9 +124,9 @@
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="text-secondary fs-5 menu-name">
-						<b>가격</b>
+						가격
 					</a>
 					 <div class="collapse mt-3" id="collapseExample4">
 						<form>
@@ -136,9 +141,9 @@
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="text-secondary fs-5 menu-name">
-						<b>색상</b>
+						색상
 					</a>
 					 <div class="collapse mt-3" id="collapseExample5">
 						<form>
@@ -151,9 +156,9 @@
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="text-secondary fs-5 menu-name">
-						<b>옵션</b>
+						옵션
 					</a>
 					 <div class="collapse mt-3" id="collapseExample6">
 						<form>
@@ -166,32 +171,32 @@
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="text-secondary fs-5 menu-name">
-						<b>연료</b>
+						연료
 					</a>
 					 <div class="collapse mt-3" id="collapseExample7">
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">가솔린</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">디젤</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">가솔린</button>
+							<button class="col-5 btn btn-outline-secondary">디젤</button>
 						</div>
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">전기</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">수소</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">전기</button>
+							<button class="col-5 btn btn-outline-secondary">수소</button>
 						</div>
 					 </div>
                  </li>
                  <li>
                  	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="mt-4 text-center">
+                 <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="text-secondary fs-5 menu-name">
-						<b>변속기</b>
+						변속기
 					</a>
 					 <div class="collapse mt-3" id="collapseExample8">
-						<div class="row">
-							<button class="col-6 btn btn-outline-secondary d-inline">오토</button>
-							<button class="col-6 btn btn-outline-secondary d-inline">수동</button>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">오토</button>
+							<button class="col-5 btn btn-outline-secondary">수동</button>
 						</div>
 					 </div>
                  </li>
@@ -207,7 +212,7 @@
 						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 					</select>
 					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning" value="검색">
+					<input type="submit" class="btn btn-warning fw-bold" value="검색">
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
@@ -246,13 +251,24 @@
 		                	</div>
 		                	<!-- 설명 -->
 		                	<div>
-			                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}<c:if test="${car.car_status==1}"><b style="color:red;"> 예약완료</b></c:if></p>
+		                		<!-- 판매 중 -->
+		                		<c:if test="${car.car_status==0}">
+			                	<p class="fs-5 mt-3 fw-bold"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a></p>
+			                	<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
+			                	</c:if>
+			                	<!-- 판매 완료 -->
+			                	<c:if test="${car.car_status==1}">
+			                	<p class="fs-5 mt-3 fw-bold">${car.car_maker} ${car.car_name}<b class="text-danger"> 예약완료</b></p>
 			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></p>
-			                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
-			                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
-			                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
-			                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
-			                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+			                	</c:if>
+			                	<div class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식
+			                	<div class="vr mx-1"></div>${car.car_mile}km
+			                	<div class="vr mx-1"></div>
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if>
+				                </div>
 		                	</div>
 		                </div>
 		            </div>
