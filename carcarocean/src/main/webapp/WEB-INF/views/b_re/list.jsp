@@ -50,7 +50,7 @@
 					</c:forEach>
 					</tbody>
 				</table>
-				<div class="text-center">${page}</div>
+				<div class="text-center mb-4">${page}</div>
 			</c:if>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
