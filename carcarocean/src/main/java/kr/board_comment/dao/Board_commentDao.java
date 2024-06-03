@@ -104,8 +104,7 @@ public class Board_commentDao {
 		}
 		return list;
 	}
-	//자유게시판 댓글 수정
-	//자유게시판 댓글 삭제
+
 	//자유게시판 댓글 신고 등록
 	//자유게시판 댓글 신고 개수
 }
