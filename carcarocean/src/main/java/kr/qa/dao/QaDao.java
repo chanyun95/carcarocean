@@ -156,6 +156,7 @@ public class QaDao {
 			if(rs.next()) {
 				qa = new QaVo();
 				qa.setQa_num(rs.getInt("qa_num"));
+				qa.setMem_id(rs.getString("mem_id"));
 				qa.setQa_title(rs.getString("qa_title"));
 				qa.setQa_content(rs.getString("qa_content"));
 				qa.setQa_status(rs.getInt("qa_status"));

@@ -67,3 +67,18 @@ CONSTRAINT s_re_comment_fk1 FOREIGN KEY (s_re_num) REFERENCES s_re (s_re_num),
 CONSTRAINT s_re_comment_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 CREATE SEQUENCE s_re_comment_seq;
+
+--자동차 뉴스 게시판
+CREATE TABLE news(
+news_num NUMBER NOT NULL,
+news_title VARCHAR2(150) NOT NULL,
+news_content CLOB NOT NULL,
+news_photo VARCHAR2(400),
+news_hit NUMBER DEFAULT 0 NOT NULL,
+news_reg DATE DEFAULT SYSDATE NOT NULL,
+news_modify DATE,
+CONSTRAINT news_pk PRIMARY KEY (news_num)
+);
+
+CREATE SEQUENCE news_seq;
+
