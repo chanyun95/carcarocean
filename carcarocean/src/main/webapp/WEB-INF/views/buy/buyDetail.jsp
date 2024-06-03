@@ -326,7 +326,12 @@
 		            				</ul>
 	            				</div>
 	            				<div>
-	            					<button class="btn btn-outline-danger fw-bold px-5 py-3">예약하기</button>
+		            				<c:if test="${car.car_status==0}">
+	            					<button class="btn btn-outline-danger fw-bold px-5 py-3" onclick="insertReservation_btn()">예약하기</button>
+	            					</c:if>
+	            					<c:if test="${car.car_status==1}">
+	            					<button class="btn btn-outline-danger fw-bold px-5 py-3" onclick="insertReservation_btn()" disabled="disabled">예약하기</button>
+	            					</c:if>
             					</div>
             				</div>
 	            		</div>

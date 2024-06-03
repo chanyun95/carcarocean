@@ -34,7 +34,7 @@
 				</form>
 			</div>
 			<div class="d-flex">
-				<form id="search_form" action="adminSellList.do" method="get" class="d-flex flex-row justify-cotent-between">
+				<form id="search_form" action="adminSellList.do" method="get" class="d-flex flex-row justify-content-between">
 					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
 						<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>신청자명</option>
 						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>

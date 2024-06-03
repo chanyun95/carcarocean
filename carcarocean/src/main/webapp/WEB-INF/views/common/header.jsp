@@ -100,7 +100,7 @@
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 관리</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/checker/adminCheckerList.do">검수자 정보 관리</a>
-                        <a class="dropdown-item" href="#">차량 구매 관리</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/adminBuyList.do">차량 구매 관리</a>
                      </div>
                   </li>
                   </c:if>
