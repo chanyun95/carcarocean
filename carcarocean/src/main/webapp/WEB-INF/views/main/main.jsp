@@ -54,29 +54,16 @@
 		<section id="model-find">
 			<div class="container p-4">
 				<h2>모델검색</h2>
-				<div class="row gx-4 justify-content-left" style="border: 2px solid #000; padding: 50px; margin: 50px 0;">
-					<div class="col-lg-8" >
-						<div class="input-group mb-3">
-							<select class="form-select" id="inputGroupSelect02">
-								<option selected>제조사</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
+				<div class="row" style="border: 2px solid #000; padding: 50px; margin: 50px 0;">
+					<div class="input-group mb-3 row">
+						<form id="search_form" action="${pageContext.request.contextPath}/buy/mainBuy.do" method="get" class="d-flex justify-content-around">
+							<select id="keyfield" name="keyfield" class="form-select" style="width: auto;">
+								<option value="1">제조사</option>
+								<option value="2">차량</option>
 							</select>
-							<select class="form-select" class = "align-left" id="inputGroupSelect02">
-								<option selected>대표모델</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-							<select class="form-select" class = "align-right" id="inputGroupSelect02">
-								<option selected>세부모델</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-							<button type="submit" class="btn btn-primary">검색</button>
-						</div>
+							<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
+							<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+						</form>
 					</div>
 				</div>
 			</div>

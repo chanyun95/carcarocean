@@ -1,14 +1,33 @@
 package kr.buy.vo;
 
+import kr.car.vo.CarVO;
+import kr.member.vo.MemberVo;
+
 public class BuyVo {
 	private int buy_num;
 	private int mem_num;
 	private int car_num;
 	private String buy_reg;
-
+	private int buy_status;
+	
 	private String car_name;
 	private int car_price;
+	
+	private CarVO car;
+	private MemberVo member;
 
+	public CarVO getCar() {
+		return car;
+	}
+	public void setCar(CarVO car) {
+		this.car = car;
+	}
+	public MemberVo getMember() {
+		return member;
+	}
+	public void setMember(MemberVo member) {
+		this.member = member;
+	}
 	public int getBuy_num() {
 		return buy_num;
 	}

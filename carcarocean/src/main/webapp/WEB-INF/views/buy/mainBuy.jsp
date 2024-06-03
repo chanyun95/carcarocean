@@ -211,8 +211,8 @@
 						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
 						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning fw-bold" value="검색">
+					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
+					<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
