@@ -17,6 +17,8 @@
 </style>
 </head>
 <body>
+	<!-- 로딩화면 인클루드 필요하다면 -->
+	<%-- <jsp:include page="/WEB-INF/views/common/loading.jsp" /> --%>
 	<!-- 헤더 시작 -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<!-- 헤더 끝 -->
