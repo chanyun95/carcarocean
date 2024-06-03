@@ -1,14 +1,21 @@
-package kr.member.action;
+package kr.mypage.action;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.car.dao.CarDao;
+import kr.car.vo.CarVO;
 import kr.controller.Action;
+import kr.favorite_car.vo.Favorite_carVo;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
 
-public class MyQnAFormAction implements Action {
+public class MyFavoriteCarFormAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -21,13 +28,21 @@ public class MyQnAFormAction implements Action {
 		
 		//로그인이 된경우
 		//회원정보
-		MemberDao dao = MemberDao.getDao();
-		MemberVo member = dao.getMember(user_num);
+		MemberDao dao1 = MemberDao.getDao();
+		MemberVo member = dao1.getMember(user_num);
 		
-		//관심게시물 정보 넣어야됨.
+		//MyPageDao dao = MyPageDao.getDao();
+		List<Favorite_carVo> favList = MyPageDao.myFavCar(user_num);
+		List<CarVO> carList = new ArrayList<>();
+		CarDao cdao = CarDao.getDao();
+		for(Favorite_carVo fav:favList) {
+			carList.add(cdao.getCar(fav.getCar_num()));
+		}
 		
+
+		request.setAttribute("carList", carList);
 		request.setAttribute("member", member);
-		return "/WEB-INF/views/member/myQnAForm.jsp";
+		return "/WEB-INF/views/member/myFavoriteCarForm.jsp";
 	}
 
 }

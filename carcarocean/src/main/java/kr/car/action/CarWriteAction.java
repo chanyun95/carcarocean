@@ -28,7 +28,7 @@ public class CarWriteAction implements Action{
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {
-			return "/WEB-INF/views/common/warningPage";
+			return "/WEB-INF/views/common/warningPage.jsp";
 		}
 
 		
@@ -48,6 +48,7 @@ public class CarWriteAction implements Action{
 		car.setCar_name(request.getParameter("car_name"));
 		car.setCar_size(Integer.parseInt(request.getParameter("car_size")));
 		car.setCar_birth(request.getParameter("car_birth"));
+		car.setCar_cnumber(request.getParameter("car_cnumber"));
 		car.setCar_cc(Integer.parseInt(request.getParameter("car_cc")));
 		car.setCar_fuel_type(Integer.parseInt(request.getParameter("car_fuel_type")));
 		car.setCar_fuel_efficiency(Float.parseFloat(request.getParameter("car_fuel_efficiency")));

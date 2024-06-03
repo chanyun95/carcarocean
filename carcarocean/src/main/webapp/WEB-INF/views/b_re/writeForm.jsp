@@ -55,9 +55,9 @@
 						<input type="text" name="b_re_title" id="b_re_title" maxlength="50">
 					</li>
 					<li>
-						<label for="car_num">거래 내역(필수)</label>
+						<label for="buy_num">거래 내역(필수)</label>
 						<br>
-						<select name="car_num" id="car_num">
+						<select name="buy_num" id="buy_num">
                             <option value="">거래 내역을 선택하세요</option>
                             <c:forEach var="buy" items="${buyList}">
                                 <option value="${buy.car_num}">${buy.buy_num}. ${buy.car_name} / ${buy.buy_reg}</option>

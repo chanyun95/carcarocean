@@ -61,8 +61,8 @@
             if (parts.length === 2) { return parts[1].split(';')[0]; }
         }
     </script>
-</head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+</head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -80,8 +80,14 @@
                     </div>
                     <button type="submit" class="btn btn-warning btn-block">로그인</button>
                 </form>
+                <br>
+	            <div class="d-grid gap-2 d-md-block">
+	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findIdForm.do'">아이디 찾기</button>
+	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findPasswdForm.do'">비밀번호 찾기</button>
+				</div>
+            </div>
                 <!-- 카카오 로그인 버튼 -->
-                <ul class="mt-3">
+                <ul class="mt-1">
                     <li>
                         <a id="kakao-login-btn" href="javascript:loginWithKakao()" class="btn btn-block" >
                             <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" />
@@ -91,7 +97,6 @@
                 <!-- 토큰 결과를 표시할 곳 -->
                 <p id="token-result" class="mt-3"></p>
                 <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button>
-            </div>
         </div>
     </div>
 </body>

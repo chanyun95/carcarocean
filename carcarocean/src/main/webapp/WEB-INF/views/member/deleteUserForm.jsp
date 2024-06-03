@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원탈퇴</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pgh.css" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/pgh.css" type="text/css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	//아이디,비밀번호 유효성 체크
@@ -51,54 +53,44 @@ $(function(){
 });
 </script>
 </head>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-	<c:set var="sub_title" value="${member.mem_name} 회원탈퇴" scope="request"/>
-	<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp"/>
-<div class="page-main">
-	<div class="content-main">
-		<h2>회원탈퇴</h2>
-		<form id="delete_form" action="deleteUser.do"
-		                                      method="post">
-			<ul>
-				<li>
-					<label for="mem_id">아이디</label>
-					<input type="text" name="mem_id" id="mem_id"
-					  maxlength="12" autocomplete="off" 
-					                     class="input-check">
-				</li>
-				<li>
-					<label for="mem_email">이메일</label>
-					<input type="email" name="mem_email" id="mem_email"
-					  maxlength="50" autocomplete="off" 
-					                     class="input-check">
-				</li>
-				<li>
-					<label for="mem_passwd">비밀번호</label>
-					<input type="password" name="mem_passwd" id="mem_passwd"
-					       maxlength="12" class="input-check">
-				</li>
-				<li>
-					<label for="cpasswd">비밀번호 확인</label>
-					<input type="password" id="cpasswd"
-					       maxlength="12" class="input-check">
-					<span id="message_cpasswd"></span>       
-				</li>
-			</ul>    
-			<div class="align-center">
-				<input type="submit" value="회원탈퇴">
-				<input type="button" value="My페이지"
-				    onclick="location.href='myPage.do'">
-			</div>                                  
-		</form>
+	<div class="container">
+		<div class="row">
+			<c:set var="sub_title" value="회원탈퇴" scope="request" />
+			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
+			<main class="col-md-10 pt-5 pb-5">
+				<div class="mypage-div">
+					<div class="content-main">
+						<h2>회원탈퇴</h2>
+						<form id="delete_form" action="deleteUser.do" method="post">
+							<ul>
+								<li><label for="mem_id">아이디</label> <input type="text"
+									name="mem_id" id="mem_id" maxlength="12" autocomplete="off"
+									class="input-check"></li>
+								<li><label for="mem_email">이메일</label> <input type="email"
+									name="mem_email" id="mem_email" maxlength="50"
+									autocomplete="off" class="input-check"></li>
+								<li><label for="mem_passwd">비밀번호</label> <input
+									type="password" name="mem_passwd" id="mem_passwd"
+									maxlength="12" class="input-check"></li>
+								<li><label for="cpasswd">비밀번호 확인</label> <input
+									type="password" id="cpasswd" maxlength="12" class="input-check">
+									<span id="message_cpasswd"></span></li>
+							</ul>
+							<div class="align-center">
+								<input type="submit" value="회원탈퇴"> <input type="button"
+									value="My페이지" onclick="location.href='myPage.do'">
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+		</div>
 	</div>
-</div>
-</body>
-<footer>
-	<!-- Footer-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	<!-- end of Footer -->
-</footer>
+</body>
+
 </html>
 
 

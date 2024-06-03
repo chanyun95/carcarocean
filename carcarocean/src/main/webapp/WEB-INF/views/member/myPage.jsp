@@ -9,83 +9,16 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>마이페이지</title>
-<style>
-    .page-main {
-        padding: 20px;
-    }
-
-    .content-main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .mypage-div {
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        width: 80%;
-        max-width: 1000px;
-    }
-
-    .menu-container {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .menu {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column; /* 세로 정렬 */
-    }
-
-    .menu li {
-        display: inline;
-        margin-right: 10px; /* 메뉴 간격 조절 */
-    }
-
-    .menu a {
-        color: #a1a6a2; /* 링크 색상 변경 */
-        text-decoration: none; /* 밑줄 제거 */
-    }
-
-    .menu a:hover {
-        color: black; /* 링크에 마우스를 올렸을 때 색상 변경 */
-    }
-
-    .profile {
-        display: flex;
-        align-items: center; /* 세로 정렬 */
-        margin-left: 20px;
-        flex-grow: 1;
-    }
-
-    .profile-info {
-        margin-right: 20px;
-    }
-
-    .profile img {
-        margin-left: 20px;
-    }
-
-    hr {
-        margin: 10px 0;
-    }
-    .mypage{
-
-    }
-</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
+	
+	<div class="container">
+	<div class="row">
+	<c:set var="sub_title" value="마이페이지" scope="request"/>
 	<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
-	<div class="page-main">
-		<div class="content-main">
+	<main class="col-md-10 pt-5 pb-5">
+
 			<div class="mypage-div">
 
 				<div class="menu-container">
@@ -151,12 +84,9 @@
 				</div>
 
 			</div>
+		</main>
 		</div>
 	</div>
-</body>
-<footer>
-	<!-- Footer-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	<!-- end of Footer -->
-</footer>
+</body>
 </html>

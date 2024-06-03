@@ -1,6 +1,6 @@
 package kr.car.vo;
 
-import java.sql.Date;
+import kr.favorite_car.vo.Favorite_carVo;
 
 public class CarVO {
 	private int car_num;					//차량 식별 번호
@@ -8,6 +8,7 @@ public class CarVO {
 	private String car_name;			//차명
 	private int car_size;					//차종
 	private String car_birth;				//연식
+	private String car_cnumber;				//차량번호
 	private int car_cc;						//배기량
 	private int car_fuel_type;			//연료타입
 	private float car_fuel_efficiency;	//연비
@@ -25,6 +26,16 @@ public class CarVO {
 	private int checker_num;			//검수자 식별 번호
 	private int car_status;				//차량 판매 가능 여부 0:판매중, 1:판매완료
 	private String car_checker_opinion;
+	
+	private boolean fav_check; //관심상품 식별
+	
+	
+	public boolean getFav_check() {
+		return fav_check;
+	}
+	public void setFav_check(boolean fav_check) {
+		this.fav_check = fav_check;
+	}
 	
 	public int getCar_num() {
 		return car_num;
@@ -55,6 +66,12 @@ public class CarVO {
 	}
 	public void setCar_birth(String car_birth) {
 		this.car_birth = car_birth;
+	}
+	public String getCar_cnumber() {
+		return car_cnumber;
+	}
+	public void setCar_cnumber(String car_cnumber) {
+		this.car_cnumber = car_cnumber;
 	}
 	public int getCar_cc() {
 		return car_cc;

@@ -8,6 +8,14 @@ public class Board_CommentVo {
 	private int bor_comm_report;
 	private String bor_comm_reg;
 	
+	private String mem_id;		//회원 아이디
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	public int getBor_comm_num() {
 		return bor_comm_num;
 	}

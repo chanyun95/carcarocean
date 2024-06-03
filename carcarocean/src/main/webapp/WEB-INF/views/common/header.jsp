@@ -12,85 +12,111 @@
 <!-- bootstrap 아이콘 cdn 링크 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.noto-sans-kr-<uniquifier> {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
 /* 메뉴 hover 방식 */
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
-/* nav-item 간격 조정 */
+/* 메뉴 간격 조정 */
 .nav-item {
-    margin-right: 50px;
+    margin-left: 30px;
 }
 /* 로고 크기 및 위치 조정 */
 .navbar-brand img {
     max-height: 150px;
 }
+.myLink:link {
+  color : black;
+}
+.myLink:visited {
+  color : black;
+}
+.nav-link{
+	cursor: pointer;
+}
+.myLink{
+	text-decoration-line: none;
+}
 </style>
-
-
 </head>
-<body>
-   <div class="container">
+<body style="font-family:Noto Sans KR;">
+    <!-- continer 기본 padding값 때문에 로그아웃 회원가입이 밀려서 일단 임시조치로 left right 0으로 처리 -->
+    <div class="container rounded-bottom" style="padding-left:0; padding-right:0; background-color:;">
       <!-- nav태그 상단 고정 -->
-      <nav class="navbar navbar-expand-lg navbar-light be-white">
-         <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg">
+         <div class="container">
             <!-- 로고 시작 -->
-            <a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img class="fa-2x" src="${pageContext.request.contextPath}/images/mainlogo.png" width="150" height="150"></a>
-            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav"><span class="navbar-toggler-icon"></span></button>  
+            <div class="pe-3">
+            	<a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/mainlogo.png" width="200"></a>  
+            </div>
             <!-- 로고 끝 -->
             <!-- 메뉴 시작 -->
             <div class="collapse navbar-collapse justify-content-between" id="nav">
                <ul class="navbar-nav">
-                  <li class="nav-item"><a class="nav-link text-dark font-weight-bold px-3" href="${pageContext.request.contextPath}/main/main.do">홈</a></li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 구매</a>
+               	  <!-- 첫번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>차량 구매</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
-                        <a class="dropdown-item" href="#">차량 구매 후기</a>
-                        <a class="dropdown-item" href="#">관심 차량</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/b_re/list.do">차량 구매 후기</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/fav/myFavList.do">내 관심 차량</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">차량 판매</a>
+                  <!-- 두번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>차량 판매</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">커뮤니티</a>
+                  <!-- 세번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>커뮤니티</b></a>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">자유게시판</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
                      </div>
                   </li>
-                  <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">고객 센터</a>
+                  <!-- 네번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>고객 센터</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/event/list.do">이벤트</a>
-                        <a class="dropdown-item" href="#">고객 문의</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/qa/list.do">고객 문의</a>
                      </div>
                   </li>
                   <c:if test="${!empty user_num && user_auth ==9}">
                   
-                   <li class="nav-item dropdown"><a class="nav-link text-dark font-weight-bold px-3 dropdown-toggle" href="#" data-toggle="dropdown">관리자</a>
+                   <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>관리자</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 목록</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/checker/adminCheckerList.do">검수자 정보 목록</a>
-                        <a class="dropdown-item" href="#">고객 문의</a>
                      </div>
                   </li>
                   </c:if>
                </ul>
                <!-- 로그인 및 회원가입 시작 -->
                <c:if test="${empty user_num}">
-               <div>
-                  <i class="bi bi-person-circle"><a href="${pageContext.request.contextPath}/member/loginForm.do">로그인</a></i>
-                  <i class="bi bi-person-plus"><a href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입</a></i>
+               <div class="d-flex justify-content-center">
+                  <i class="bi bi-person-fill pe-3"> <a class="myLink" href="${pageContext.request.contextPath}/member/loginForm.do"><b>로그인</b></a></i>
+                  <div class="border-end"></div>
+                  <i class="bi bi-person-fill-add ps-3"> <a class="myLink" href="${pageContext.request.contextPath}/member/registerUserForm.do"><b>회원가입</b></a></i>
                </div>
                </c:if>
                <!-- 로그인 및 회원가입 끝 -->
                <!-- 로그인시 로그인 , 로그아웃 -->
                <c:if test="${!empty user_num}">
-               <div>
-                  <i class="bi bi-person-circle"><a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></i>
-                  <i class="bi bi-person-circle"><a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></i>
+               <div class="d-flex justify-content-center">
+               	  <c:if test = "${!empty user_num && user_auth != 9}">
+                  <i class="bi bi-person-fill-gear pe-3"><a class="myLink" href="${pageContext.request.contextPath}/member/myPage.do"><b>MyPage</b></a></i>
+                  <div class="border-end"></div>
+                  </c:if>
+                  <i class="bi bi-person-fill-dash ps-3"><a class="myLink" href="${pageContext.request.contextPath}/member/logout.do"><b>로그아웃</b></a></i>
                </div>
                </c:if>
             </div>

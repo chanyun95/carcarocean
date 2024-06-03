@@ -8,6 +8,15 @@ public class B_Re_CommentVo {
 	private int b_re_comm_report;
 	private String b_re_comm_reg;
 	
+	//작성자ID
+	private String mem_id;
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	public int getB_re_comm_num() {
 		return b_re_comm_num;
 	}

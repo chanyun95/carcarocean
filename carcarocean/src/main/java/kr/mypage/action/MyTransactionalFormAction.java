@@ -1,4 +1,6 @@
-package kr.member.action;
+package kr.mypage.action;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.vo.SellVo;
 
-public class MySellCurrentStatusFormAction implements Action{
+public class MyTransactionalFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -24,10 +28,10 @@ public class MySellCurrentStatusFormAction implements Action{
 		MemberDao dao = MemberDao.getDao();
 		MemberVo member = dao.getMember(user_num);
 		
-		//관심게시물 정보 넣어야됨.
-		
+		List<SellVo> mlist = MyPageDao.mySell(user_num);
+		request.setAttribute("mlist", mlist);
 		request.setAttribute("member", member);
-		return "/WEB-INF/views/member/mySellCurrentStatusForm.jsp";
+		return "/WEB-INF/views/member/myTransactionalForm.jsp";
 	}
 
 }

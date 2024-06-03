@@ -10,11 +10,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="text-center">검수자 정보 목록</h1>
-		<table class="table table-hover">
+		<h1 class="my-3 text-center">검수자 정보 목록</h1>
+		<table class="table table-hover mt-3 text-center fw-bold">
 			<thead class="table-light">
 				<tr>
 					<th>#</th>
@@ -25,13 +25,14 @@
 			<tbody>
 				<c:forEach var="checker" items="${list}">
 				<tr>
-					<td>${checker.checker_num}</td>
-					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}">${checker.checker_name}</a></td>
-					<td>${checker.checker_company}</td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_num}</a></td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_name}</a></td>
+					<td><a href="adminCheckerDetail.do?checker_num=${checker.checker_num}" class="text-decoration-none text-dark">${checker.checker_company}</a></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="text-center">${page}</div>
 		<hr size="1" width="100%" noshade="noshade">
 		<div class="float-end">
 			<input type="button" value="검수자 등록" class="btn btn-primary" onclick="location.href='adminWriteCheckerForm.do'">

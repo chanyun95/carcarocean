@@ -14,7 +14,7 @@ public class InsertSellFormAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/sell/logout.jsp";
 		}
 		
 		//로그인이 되어 있을 때

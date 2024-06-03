@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.board.vo.BoardVo;
+import kr.board.vo.ReportBoardVO;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
 
@@ -84,19 +85,21 @@ public class BoardDao {
 			conn  = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
 				//검색 처리
-				if(keyfield.equals("1")) sub_sql += "WHERE title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '%' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += " WHERE title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += " WHERE id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += " WHERE content LIKE '%' || ? || '%'";
 			}
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
 					+ "(SELECT * FROM board JOIN member USING(mem_num) " + sub_sql
 					+ " ORDER BY board_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
 			pstmt = conn.prepareStatement(sql);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
+	        
 			rs = pstmt.executeQuery();
 			list = new ArrayList<BoardVo>();
 			while(rs.next()) {
@@ -106,7 +109,7 @@ public class BoardDao {
 				board.setBoard_hit(rs.getInt("board_hit"));
 				board.setBoard_reg(rs.getString("board_reg"));
 				board.setMem_id(rs.getString("mem_id"));
-				
+				board.setBoard_report(rs.getInt("board_report"));
 				list.add(board);
 			}
 		}catch(Exception e) {
@@ -253,67 +256,88 @@ public class BoardDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//신고 등록
-	public void insertReport(BoardVo reportVO) throws Exception{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		int cnt = 0;
-		try {
-			conn = DBUtil.getConnection();
-			sql = "UPDATE board SET board_report=board_report+1 WHERE board_num=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, reportVO.getBoard_num());
+	/*
+	 * //신고 등록 public void insertReport(ReportBoardVO reportVO) throws Exception{
+	 * Connection conn = null; PreparedStatement pstmt = null; String sql = null;
+	 * try { conn = DBUtil.getConnection(); sql =
+	 * "INSERT INTO report_board (report_board_num,board_num, mem_num) VALUES (report_board_num_seq.nextval,?,?)"
+	 * ; pstmt = conn.prepareStatement(sql); pstmt.setInt(1,
+	 * reportVO.getBoard_num()); pstmt.setInt(2, reportVO.getMem_num());
+	 * pstmt.executeUpdate();
+	 * 
+	 * }catch(Exception e) { throw new Exception(e); }finally {
+	 * DBUtil.executeClose(null, pstmt, conn); } }
+	 */
+
+	//신고 등록 
+		public void insertReport(ReportBoardVO reportVO) throws Exception {
+		Connection conn = null; 
+		PreparedStatement pstmt = null; String
+		sqlInsertReport ="INSERT INTO report_board (report_board_num, board_num, mem_num) VALUES (report_board_num_seq.nextval, ?, ?)";
+		String sqlUpdateBoard ="UPDATE board SET board_report = board_report + 1 WHERE board_num = ?";
+
+		try { 
+			conn = DBUtil.getConnection(); pstmt =
+			conn.prepareStatement(sqlInsertReport); pstmt.setInt(1,
+			reportVO.getBoard_num()); 
+			pstmt.setInt(2, reportVO.getMem_num());
 			pstmt.executeUpdate();
-		}catch(Exception e) {
+			// 두 번째 쿼리를 실행하기 전에 PreparedStatement를 재사용합니다.
+			// 기존매개변수를 지웁니다.
+			pstmt.clearParameters();
+			pstmt = conn.prepareStatement(sqlUpdateBoard);
+			pstmt.setInt(1,reportVO.getBoard_num());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
 			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(null, pstmt, conn);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn); 
 		}
 	}
+	 
+	
 	//회원번호와 게시물 번호를 이용한 신고 정보
-	public BoardVo selectReport(int board_num, int mem_num) throws Exception{
+	public ReportBoardVO checkReport(ReportBoardVO reportVO) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		BoardVo report = null;
+		ReportBoardVO check = null;
 		String sql = null;
-		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM board WHERE mem_num=? AND board_num=?";
+			sql = "SELECT * FROM report_board WHERE board_num=? AND mem_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, mem_num);
-			pstmt.setInt(++cnt, board_num);
+			pstmt.setInt(1, reportVO.getBoard_num());
+			pstmt.setInt(2, reportVO.getMem_num());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				report = new BoardVo();
-				report.setMem_num(rs.getInt("mem_num"));
-				report.setBoard_num(rs.getInt("board_num"));
+				check = new ReportBoardVO();
+				check.setBoard_num(rs.getInt("board_num"));
+				check.setMem_num(rs.getInt("mem_num"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
 		}finally {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
-		return report;
+		return check;
 	}
+	
 	//신고 개수
-	public int selectReportCount(int board_num) throws Exception{
+	public int checkReportCount(int board_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
 		int count = 0;
-		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT COUNT(*) FROM board WHERE board_num=?";
+			sql = "SELECT board_report  FROM board WHERE board_num=? ";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, board_num);
+			pstmt.setInt(1, board_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				count = rs.getInt(1);
+				count = rs.getInt("board_report");
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -322,5 +346,4 @@ public class BoardDao {
 		}
 		return count;
 	}
-	
 }

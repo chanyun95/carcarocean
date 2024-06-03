@@ -2,6 +2,7 @@ package kr.event.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.event.dao.EventDao;
@@ -19,7 +20,7 @@ public class WriteAction implements Action{
 		EventVo event = new EventVo();
 		event.setEvent_title(request.getParameter("event_title"));
 		event.setEvent_content(request.getParameter("event_content"));
-		event.setEvent_photo(FileUtil.createFile(request, "event_photo"));
+		event.setEvent_photo(FileUtil.createFiles(request));
 		
 		EventDao dao = EventDao.getDao();
 		dao.insertEvent(event);

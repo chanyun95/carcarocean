@@ -5,7 +5,6 @@
 <head>  
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -81,73 +80,64 @@ $(function(){
 	
 });
 </script>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 </head>
 <body>
-<div class="page-main">
-	
-	<div class="content-main">
-		<h2>모든 정보는</h2><br>
-	<h2 style="color: #3ba4c4;">필수입력</h2>
-	<h2>항목입니다.</h2>
-		<form id="register_form" action="registerUser.do" method="post" class="border border-warning p-3 bg-right w-80 mx-auto"><!-- 회원가입 내용을 명시하는 폼 -->
-			<ul>
-			<li>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<div class="container">
+	<div class="row justify-content-center">
+	<div class="col-md-6">
+	<h2 class="row justify-content-left">모든 정보는</h2>
+	<h2 class="row justify-content-left" style="color: #3ba4c4;">필수입력</h2>
+	<h2 class="row justify-content-left">항목입니다.</h2>
+		<form id="register_form" action="registerUser.do" method="post" class="border border-warning p-3"><!-- 회원가입 내용을 명시하는 폼 -->
+			<div class="form-group">
 				<label for="mem_id">아이디</label>
-				<input type="text" id="mem_id" name="mem_id" maxlength="12" autocomplete="off" class="input-check" >
-				<input type="button" value="중복확인" id="mem_id_check">
+				 <input type="text" id="mem_id" name="mem_id" maxlength="12" autocomplete="off" class="input-check form-control">
+    			<input type="button" value="중복확인" id="mem_id_check" class="btn btn-warning">	
 				<span id="message_mem_id"></span>
 				<div class="form-notice">*영문 또는 숫자(4자~12자)</div><br>
-			</li>
-				<li>
+			</div>
+				<div class="form-group">
 					<label for="mem_name">이름</label>
-					<input type="text" id="mem_name" name="mem_name" maxlength="10" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="text" id="mem_name" name="mem_name" maxlength="10" class="input-check form-control">
+				</div>	
+				<div class="form-group">
 					<label for="mem_passwd">비밀번호</label>
-					<input type="password" id="mem_passwd" name="mem_passwd" maxlength="10" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="password" id="mem_passwd" name="mem_passwd" maxlength="10" class="input-check form-control">
+				</div>
+				<div class="form-group">
 					<label for="mem_birth">생년월일</label>
-					<input type="date" id="mem_birth" name="mem_birth" maxlength="10" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="date" id="mem_birth" name="mem_birth" maxlength="10" class="input-check form-control">
+				</div>
+				<div class="form-group">
 					<label for="mem_phone">전화번호</label>
-					<input type="text" id="mem_phone" name="mem_phone" maxlength="15" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="text" id="mem_phone" name="mem_phone" maxlength="15" class="input-check form-control">
+				</div>
 					<label for="mem_email">이메일</label>
-					<input type="email" id="mem_email" name="mem_email" maxlength="50" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="email" id="mem_email" name="mem_email" maxlength="50" class="input-check form-control">
+				<div class="form-group">
 					<label for="mem_zipcode">우편번호</label>
 					<input type="text" id="mem_zipcode" name="mem_zipcode" maxlength="5" 
-					autocomplete="off" class="input-check">
-					<input type="button" value="우편번호 찾기" onclick="execDaumPostcode()">
-				</li>
-				<br>
-				<li>
+					autocomplete="off" class="input-check form-control">
+					<input type="button" value="우편번호 찾기" class="btn btn-warning" onclick="execDaumPostcode()">
+				</div>
+				<div class="form-group">
 					<label for="mem_address1">주소</label>
-					<input type="text" id="mem_address1" name="mem_address1" maxlength="30" class="input-check">
-				</li>
-				<br>
-				<li>
+					<input type="text" id="mem_address1" name="mem_address1" maxlength="30" class="input-check form-control">
+				</div>
+				<div class="form-group">
 					<label for="mem_address2">나머지 주소</label>
-					<input type="text" id="mem_address2" name="mem_address2" maxlength="30" class="input-check">
-				</li>
-			</ul>
-			<div class="align-center">
+					<input type="text" id="mem_address2" name="mem_address2" maxlength="30" class="input-check form-control">
+				</div>
+			<div class="d-grid gap-2 d-md-block">
 				<input type="submit" class="btn btn-warning" value="등록">
 				<input type="button" class="btn btn-warning" value="홈으로" 
 					onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 				
 			</div>
 		</form>
+		</div>
 		<!-- 다음우편번호 API시작 -->
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -249,5 +239,6 @@ $(function(){
 	</div>
 	<!-- 다음우편번호 API 끝 -->
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
