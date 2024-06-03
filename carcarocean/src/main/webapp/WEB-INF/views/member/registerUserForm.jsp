@@ -84,17 +84,18 @@ $(function(){
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="container">
+<div class="container" style = "margin-bottom:100px; margin-top:50px">
 	<div class="row justify-content-center">
 	<div class="col-md-6">
 	<h2 class="row justify-content-left">모든 정보는</h2>
 	<h2 class="row justify-content-left" style="color: #3ba4c4;">필수입력</h2>
-	<h2 class="row justify-content-left">항목입니다.</h2>
-		<form id="register_form" action="registerUser.do" method="post" class="border border-warning p-3"><!-- 회원가입 내용을 명시하는 폼 -->
+	<h2 class="row justify-content-left">항목입니다</h2>
+	<br>
+		<form id="register_form" action="registerUser.do" method="post" class="shadow p-3 bg-light"><!-- 회원가입 내용을 명시하는 폼 -->
 			<div class="form-group">
 				<label for="mem_id">아이디</label>
 				 <input type="text" id="mem_id" name="mem_id" maxlength="12" autocomplete="off" class="input-check form-control">
-    			<input type="button" value="중복확인" id="mem_id_check" class="btn btn-warning">	
+    			<input type="button" value="중복확인" id="mem_id_check" class="btn btn-warning text-white">	
 				<span id="message_mem_id"></span>
 				<div class="form-notice">*영문 또는 숫자(4자~12자)</div><br>
 			</div>
@@ -120,7 +121,7 @@ $(function(){
 					<label for="mem_zipcode">우편번호</label>
 					<input type="text" id="mem_zipcode" name="mem_zipcode" maxlength="5" 
 					autocomplete="off" class="input-check form-control">
-					<input type="button" value="우편번호 찾기" class="btn btn-warning" onclick="execDaumPostcode()">
+					<input type="button" value="우편번호 찾기" class="btn btn-warning text-white" onclick="execDaumPostcode()">
 				</div>
 				<div class="form-group">
 					<label for="mem_address1">주소</label>
@@ -130,12 +131,12 @@ $(function(){
 					<label for="mem_address2">나머지 주소</label>
 					<input type="text" id="mem_address2" name="mem_address2" maxlength="30" class="input-check form-control">
 				</div>
-			<div class="d-grid gap-2 d-md-block">
-				<input type="submit" class="btn btn-warning" value="등록">
-				<input type="button" class="btn btn-warning" value="홈으로" 
+				<br>
+				<div class="btn-group w-100" role="group" aria-label="Basic outlined example">
+				<input type="submit" class="btn btn-outline-light bg-warning text-white" value="등록">
+				<input type="button" class="btn btn-outline-light bg-warning text-white" value="홈으로" 
 					onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
-				
-			</div>
+				</div>
 		</form>
 		</div>
 		<!-- 다음우편번호 API시작 -->

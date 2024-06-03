@@ -5,6 +5,11 @@ public class BuyVo {
 	private int mem_num;
 	private int car_num;
 	private String buy_reg;
+	private int buy_status;
+	private String car_name;
+	private int car_price;
+	
+	
 	public int getBuy_num() {
 		return buy_num;
 	}
@@ -29,4 +34,23 @@ public class BuyVo {
 	public void setBuy_reg(String buy_reg) {
 		this.buy_reg = buy_reg;
 	}
+	public int getBuy_status() {
+		return buy_status;
+	}
+	public void setBuy_status(int buy_status) {
+		this.buy_status = buy_status;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+	public int getCar_price() {
+		return car_price;
+	}
+	public void setCar_price(int car_price) {
+		this.car_price = car_price;
+	}
+
 }

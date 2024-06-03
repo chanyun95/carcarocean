@@ -30,8 +30,8 @@
                         <tbody>
                             <c:forEach var="qa" items="${list}">
                                 <tr>
-                                    <td>${qa.qa_num}</td>
-                                    <td><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
+                                    <td width = "250px">${qa.qa_num}</td>
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
                                    	<td>${fn:substring(qa.qa_reg,0,10)}</td>
                                     <c:if test = "${!empty qa.qa_modify}">
 									<td>${fn:substring(qa.qa_modify,0,10)}</td>
