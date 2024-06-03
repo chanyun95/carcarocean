@@ -31,30 +31,34 @@ window.onload = function(){
 </head>
 <body>
 <div class="page-main">
-		<div class="content-main">
-			<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-			<h2>고객 문의하기</h2>
+		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+		<div class="container">
+			<h2 class="mt-5 mb-5">고객 문의하기</h2>
 				<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
-					<ul>
-						<li>
+					<ul class="list-unstyled">
+						<li class="mb-2">
 							<label for="qa_title">제목</label><br>
-							<input type="text" name="qa_title" id="qa_title" maxlength="50">
+							<input type="text" class="form-control" name="qa_title" id="qa_title" maxlength="50">
+						</li>
+						<li class="mt-2">
+							<label for="qa_content" class="fs-4 mb-2">내용</label><br>
+							<textarea rows="20" cols="70" class="form-control" name="qa_content" id="qa_content"></textarea>
 						</li>
 						<li>
-							<label for="qa_content">내용</label><br>
-							<textarea rows="5" cols="40" name="qa_content" id="qa_content"></textarea>
-						</li>
-						<li>
-							<label for="qa_photo">파일 첨부</label><br>
-							<input type="file" name="qa_photo" id="qa_photo" accept="image/gif, image/png, image/jpeg" multiple>
+							<input type="file" class="form-control mt-3 mb-2" name="qa_photo" id="qa_photo" accept="image/gif, image/png, image/jpeg" multiple>
 						</li>
 					</ul>
-					<div class="align-center">
-						<input type="submit" value="문의하기">
-						<input type="button" value="목록" onclick="location.href='list.do'">
+					<div class="mt-3 mb-5 row justify-content-center">
+					 <div class="col-auto">
+						<input type="submit" class="btn btn-warning" value="문의하기">
+					 </div>
+					 <div class="col-auto">
+						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+					 </div>
 					</div>
 				</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
