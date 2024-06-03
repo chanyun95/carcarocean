@@ -27,7 +27,7 @@ public class InsertReservationAction implements Action{
 			int car_num = Integer.parseInt(request.getParameter("car_num"));
 			// 차량 예약 완료로 변경
 			CarDao carDao = CarDao.getDao();
-			carDao.updateCarStatus(car_num);
+			carDao.updateCarStatus(car_num,1);
 			
 			// 구매 예약 정보 등록
 			BuyVo buy = new BuyVo();
