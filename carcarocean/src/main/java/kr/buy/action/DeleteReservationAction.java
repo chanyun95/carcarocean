@@ -23,7 +23,7 @@ public class DeleteReservationAction implements Action{
 		buyDao.deleteReservation(user_num, car_num);
 		
 		CarDao carDao = CarDao.getDao();
-		carDao.updateCarStatus(car_num);
+		carDao.updateCarStatus(car_num,0);
 		request.setAttribute("car_num", car_num);
 		
 		return "/WEB-INF/views/buy/deleteReservationResult.jsp?car_num="+car_num;

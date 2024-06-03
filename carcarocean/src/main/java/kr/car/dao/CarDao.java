@@ -262,45 +262,28 @@ public class CarDao {
 	}
 	
 	//차량 판매 상태(예약) 변경
-	public void updateCarStatus(int car_num) throws Exception{
+	public void updateCarStatus(int car_num, int car_status) throws Exception{
 		Connection conn = null;
-		PreparedStatement pstmt1 = null;
-		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
 		int cnt = 0;
-		int status = -1;
 		
 		try {
 			conn = DBUtil.getConnection();
-			conn.setAutoCommit(false);
-			sql = "SELECT CAR_STATUS FROM CAR WHERE CAR_NUM=?";
-			pstmt1 = conn.prepareStatement(sql);
-			pstmt1.setInt(1, car_num);
-			rs = pstmt1.executeQuery();
-			if(rs.next()) {
-				status = rs.getInt(1);
-			}
 			
 			sql = "UPDATE CAR SET CAR_STATUS=? WHERE CAR_NUM=?";
 			
-			pstmt2 = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			
-			if(status==0) {
-				pstmt2.setInt(++cnt,1);
-			} else if(status==1) {
-				pstmt2.setInt(++cnt,0);
-			}
-			pstmt2.setInt(++cnt,car_num);
-			pstmt2.executeUpdate();
+			pstmt.setInt(++cnt, car_status);
+			pstmt.setInt(++cnt,car_num);
 			
-			conn.commit();
+			pstmt.executeUpdate();
 		} catch (Exception e) {
-			conn.rollback();
 			throw new Exception(e);
 		} finally {
-			DBUtil.executeClose(null, pstmt1, null);
-			DBUtil.executeClose(rs, pstmt2, conn);
+			DBUtil.executeClose(rs, pstmt, conn);
 		}
 	}
 	
