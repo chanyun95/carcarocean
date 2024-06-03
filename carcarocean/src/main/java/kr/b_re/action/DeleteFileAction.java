@@ -27,9 +27,10 @@ public class DeleteFileAction implements Action{
 		B_ReVo db_b_re = dao.getB_Re(b_re_num);
 		
 		dao.deleteFile(b_re_num);
+		
 		//파일 삭제
 		String[] photos = db_b_re.getB_re_photo().split(",");
-
+		
 		for(String photo : photos) {
 			FileUtil.removeFile(request, photo);
 		}
