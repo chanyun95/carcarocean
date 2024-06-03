@@ -25,6 +25,7 @@
 	<fmt:formatNumber value="${car.car_price*0.07}" pattern="#" type="number" var="firstPrice"/>
 	<fmt:formatNumber value="${car.car_price*0.005}" pattern="#" type="number" var="secondPrice"/>
 	<fmt:formatNumber value="${car.car_price*0.0009}" pattern="#" type="number" var="thirdPrice"/>
+	
 	<fmt:formatNumber value="${car.car_price+firstPrice+secondPrice+thirdPrice}" type="number" var="totalPrice"/>
 		<div class="p-3">
 			<h1 class="fw-bold">${car.car_maker} ${car.car_name}</h1>
@@ -380,18 +381,18 @@
 							<span class="text-danger fs-2">합계 </span><span class="fs-4">${totalPrice}만원</span>
 						</div>
 						<div class="text-center pt-3">
-							<!-- 구매 안 되었을 때 -->
+							<!-- 예약 안 되었을 때 -->
 							<c:if test="${car.car_status==0}">
-							<input type="button" class="btn btn-danger fw-bold" id="buy_btn" value="구매 예약" onclick="buy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
+							<input type="button" class="btn btn-danger fw-bold" id="buy_btn" value="구매 예약" onclick="insertReservation_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
 							</c:if>
-							<!-- 구매 되었을 때-->
+							<!-- 예약 되었을 때-->
 							<c:if test="${car.car_status==1}">
-								<!-- 로그인된 회원이 구매한 차량일 때 -->
-								<c:if test="${!empty buy}">
-								<input type="button" class="btn btn-danger fw-bold" value="구매 취소" onclick="deleteBuy_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
+								<!-- 로그인된 회원이 예약한 차량일 때 -->
+								<c:if test="${car.mem_num==user_num}">
+								<input type="button" class="btn btn-danger fw-bold" value="구매예약 취소" onclick="deleteReservation_btn()" style="padding: 1.5rem 2rem; font-size: 1.75rem;">
 								</c:if>
-								<!-- 로그인된 회원이 구매한 차량이 아닐 때 -->
-								<c:if test="${empty buy}">
+								<!-- 로그인된 회원이 예약한 차량이 아닐 때 -->
+								<c:if test="${car.mem_num!=user_num}">
 								<input type="button" class="btn btn-danger fw-bold" value="예약 완료" style="padding: 1.5rem 3.0rem; font-size: 2rem;" disabled>
 								</c:if>
 							</c:if>
@@ -447,12 +448,6 @@ function shareTwitter(){
 	window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" +  url,"Twitter","width=410,height=500,resizable=yes")
 }
 
-function deleteBuy_btn(){
-	if(confirm('구매 예약을 취소하시겠습니까?')){
-		location.href='deleteBuy.do?car_num=${car.car_num}';
-	}
-}
-
 function favCar(carnum){
 	$.ajax({
 		url:'favCar.do',
@@ -482,11 +477,11 @@ function favCar(carnum){
 };
 
 
-function buy_btn (){
+function insertReservation_btn (){
 	if(confirm("정말 예약하시겠습니까?")){
 		/* location.href= "insertBuy.do?car_num=${car.car_num}"; */
 		$.ajax({
-			url:'insertBuy.do',
+			url:'insertReservation.do',
 			type:'post',
 			data:{car_num:${car.car_num}},
 			dataType:'json',
@@ -502,6 +497,12 @@ function buy_btn (){
 				alert('네트워크에 오류가 발생했습니다!');
 			}
 		});
+	}
+};
+
+function deleteReservation_btn(){
+	if(confirm('구매 예약을 취소하시겠습니까?')){
+		location.href='deleteReservation.do?car_num=${car.car_num}';
 	}
 };
 </script>

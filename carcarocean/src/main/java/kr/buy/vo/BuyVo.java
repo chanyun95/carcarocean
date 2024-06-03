@@ -5,6 +5,15 @@ public class BuyVo {
 	private int mem_num;
 	private int car_num;
 	private String buy_reg;
+	private int buy_status;
+	
+	
+	public int getBuy_status() {
+		return buy_status;
+	}
+	public void setBuy_status(int buy_status) {
+		this.buy_status = buy_status;
+	}
 	public int getBuy_num() {
 		return buy_num;
 	}

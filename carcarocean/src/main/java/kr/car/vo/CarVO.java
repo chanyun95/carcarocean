@@ -1,7 +1,5 @@
 package kr.car.vo;
 
-import kr.favorite_car.vo.Favorite_carVo;
-
 public class CarVO {
 	private int car_num;					//차량 식별 번호
 	private String car_maker;			//제조사
@@ -29,7 +27,14 @@ public class CarVO {
 	
 	private boolean fav_check; //관심상품 식별
 	
+	private int mem_num; //누가 구매했는지 식별
 	
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
 	public boolean getFav_check() {
 		return fav_check;
 	}
