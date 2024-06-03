@@ -29,7 +29,7 @@ public class WriteAction implements Action{
 		dao.insertBuyReview(b_re);
 		
 		request.setAttribute("notice_msg", "구매 후기 게시판 글 쓰기 완료");
-		request.setAttribute("notice_url", request.getContextPath()+"/b_re/writeForm.do");
+		request.setAttribute("notice_url", request.getContextPath()+"/b_re/list.do");
 		
 		return "/WEB-INF/views/common/alert_view.jsp";
 	}

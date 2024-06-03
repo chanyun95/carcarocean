@@ -18,19 +18,21 @@
 			<div class="text-center fs-8 text-secondary">카카오션의 새로운 소식을 전달받으실 수 있습니다.</div>
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
-		<div class="row justify-content-center">
-			<div class="col fs-3">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<div class="fs-3">
 				<b>${notice.notice_title}</b>
 			</div>
-			<div class="col text-end mt-2">	
-				관리자 | 
-				<c:if test="${empty notice.notice_modify}">
-					${notice.notice_reg} 
-				</c:if>
-				<c:if test="${!empty notice.notice_modify}">
-					${notice.notice_modify}
-				</c:if>
-				| ${notice.notice_hit}
+			<div class="d-flex align-items-center mt-2">
+				<div class="me-3">관리자</div>
+				<div class="me-3">
+					<c:if test="${empty notice.notice_modify}">
+						${fn:substring(notice.notice_reg, 0, 10)} 
+					</c:if>
+					<c:if test="${!empty notice.notice_modify}">
+						${fn:substring(notice.notice_modify, 0, 10)}
+					</c:if>
+				</div>
+				<div class="col">${notice.notice_hit}</div>
 			</div>
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
