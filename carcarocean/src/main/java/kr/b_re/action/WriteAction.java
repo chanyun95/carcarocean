@@ -19,7 +19,6 @@ public class WriteAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//전송된 데이터 반환
 		B_ReVo b_re = new B_ReVo();
-		b_re.setMem_num(user_num);
 		b_re.setBuy_num(Integer.parseInt(request.getParameter("buy_num")));
 		b_re.setB_re_title(request.getParameter("b_re_title"));
 		b_re.setB_re_content(request.getParameter("b_re_content"));

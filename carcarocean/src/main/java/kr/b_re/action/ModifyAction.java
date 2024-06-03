@@ -24,7 +24,7 @@ public class ModifyAction implements Action{
 		
 		B_ReVo b_re = new B_ReVo();
 		b_re.setMem_num(user_num);
-		b_re.setB_re_num(Integer.parseInt(request.getParameter("b_re_num")));
+		b_re.setB_re_num(b_re_num);
 		b_re.setBuy_num(Integer.parseInt(request.getParameter("buy_num")));
 		b_re.setB_re_title(request.getParameter("b_re_title"));
 		b_re.setB_re_content(request.getParameter("b_re_content"));
