@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +97,54 @@
 		</section>
 		<!-- 공지사항 끝 -->
 		<!-- 이용후기 시작 -->
-	    <h2>이용후기</h2>
+		<section id="notice">
+			<div class="container p-4">
+			<h2>구매 이용후기</h2>
+		<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+		
+    <div class="carousel-inner">
+    	
+        <c:forEach var="b_re" items="${list}" varStatus="status">
+            <div class="carousel-item 
+            <c:if test='${status.index == 0}'>active</c:if>">
+                <div class="card text-center mb-3">
+                    <c:if test="${fn:contains(b_re.car_photo, ',')}">
+                        <c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
+                        <c:set var="firstPhoto" value="${photoList[0]}" />
+                        <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top">
+                    </c:if>
+                    <c:if test="${!fn:contains(b_re.car_photo, ',')}">
+                        <c:set var="firstPhoto" value="${b_re.car_photo}" />
+                        <img src="${pageContext.request.contextPath}/upload/${b_re.car_photo}" class="card-img-top">
+                    </c:if>
+                    <div class="card-body">
+                        <h5 class="card-title">${b_re.car_name}</h5>
+                        <p class="card-text">${b_re.b_re_title}</p>
+                        <p class="card-text">
+                         <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="btn btn-warning text-white">구매후기</a>
+                         <p>
+                        <p class="card-text">
+                            <small class="text-body-secondary">${b_re.b_re_reg}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+</div>
+</section>
+
+
+		<%-- <h2>이용후기2</h2>
 	    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 	        <div class="carousel-indicators">
 	            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
@@ -142,10 +190,13 @@
 	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
 	            <span class="visually-hidden">Next</span>
 	        </button>
-		</div>
+		</div> --%>
 	<!-- 이용후기 끝-->
     </div>
     <!-- 메인 컨텐츠 끝 -->
+    <!-- 챗봇 시작-->
+    <!--챗봇 끝  -->
+    <jsp:include page="/WEB-INF/views/common/chatbot.jsp" />
 	<!-- 푸터 시작-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<!-- 푸터 끝 -->
