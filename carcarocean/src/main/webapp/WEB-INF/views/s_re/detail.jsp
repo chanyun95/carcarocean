@@ -60,8 +60,8 @@
 			<li>
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 				<c:if test="${user_num == s_re.mem_num}">
-					<input type="button" value="수정" class="btn btn-warning" onclick="location.href='updateForm.do?s_re_num=${s_re.s_re_num}'">
-					<input type="button" value="삭제" class="btn btn-warning" id="delete_btn">
+					<input type="button" value="수정" class="btn btn-warning text-white" onclick="location.href='updateForm.do?s_re_num=${s_re.s_re_num}'">
+					<input type="button" value="삭제" class="btn btn-warning text-white" id="delete_btn">
 					<script type="text/javascript">
 						const delete_btn = document.getElementById('delete_btn')
 						//이벤트 연결
@@ -82,7 +82,7 @@
 			<form id="s_re_form">
 				<input type="hidden" name="s_re_num" value="${s_re.s_re_num}" id="s_re_num">
 				<!-- disabled는 댓글을 달지 못하도록 비활설화 시키는 역할 -->
-				<textarea rows="3" cols="50" name="s_re_comm_content" 
+				<textarea rows="3" cols="50" name="s_re_comm_content" class="form-control" placeholder="Leave a comment here"
 				<c:if test="${empty user_num}">disabled="disabled"</c:if> 
 				id="s_re_comm_content" class="s_re_comm_content">
 				<c:if test="${empty user_num}">로그인해야 작성할 수 있습니다</c:if>
@@ -92,7 +92,7 @@
 					<span class="s_re_letter-count">300/300</span><!-- 글자수 제한  -->
 				</div>
 				<div id="re_second" class="align-right">
-					<input type="submit" class="btn btn-warning" value="전송">
+					<input type="submit" class="btn btn-warning text-white" value="전송">
 				</div>
 				</c:if>
 			</form>

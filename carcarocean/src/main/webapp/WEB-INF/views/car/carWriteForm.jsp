@@ -92,17 +92,6 @@ window.onload = function(){
 				}
 			}
 			
-			/* 차량 번호 양식 숫자숫자숫자한글 숫자숫자숫자숫자 */ 
-			if (items[i].id == 'car_cnumber') {
-	            let carNumber = items[i].value;
-	            let regex = /^[0-9]{3}[가-힣]\s[0-9]{4}$/;
-	            if (!regex.test(carNumber)) {
-	                alert('차량 번호를 확인해주세요. 예) 123가 1234');
-	                items[i].value = '';
-	                items[i].focus();
-	                return false;
-	            }
-	        }
 		}
 		if(!confirm('정말 제출하시겠습니까?')){
 			return false;
@@ -142,7 +131,7 @@ window.onload = function(){
 			</li>
 			<li>
 				<label for="car_cnumber">차량번호</label>
-				<input type="text" name="car_cnumber" id="car_cnumber" class="input-check form-control" maxlength="7" placeholder="ex) 123가 1234" value="${sell.sell_cnumber}">
+				<input type="text" name="car_cnumber" id="car_cnumber" class="input-check form-control" maxlength="15" placeholder="ex) 123가 1234" value="${sell.sell_cnumber}">
 			</li>
 			<li>
 				<label for="car_birth">연식</label>

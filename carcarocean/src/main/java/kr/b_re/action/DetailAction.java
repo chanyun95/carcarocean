@@ -15,11 +15,13 @@ public class DetailAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
+		
 		//글 번호 반환
 		int b_re_num = Integer.parseInt(request.getParameter("b_re_num"));
 		
-		B_ReDao b_reDao = B_ReDao.getDao();
-		B_ReVo b_re = b_reDao.getB_Re(b_re_num);
+		B_ReDao dao = B_ReDao.getDao();
+		
+		B_ReVo b_re = dao.getB_Re(b_re_num);
 		/*int buy_num = b_re.getBuy_num();
 		
 		 * BuyDao buyDao = BuyDao.getDao(); 

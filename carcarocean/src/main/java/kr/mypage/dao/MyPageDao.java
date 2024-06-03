@@ -8,6 +8,7 @@ import java.util.List;
 
 import kr.b_re.vo.B_ReVo;
 import kr.board.vo.BoardVo;
+import kr.buy.vo.BuyVo;
 import kr.favorite_car.vo.Favorite_carVo;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
@@ -15,6 +16,7 @@ import kr.qa.vo.QaVo;
 import kr.s_re.vo.S_ReVo;
 import kr.sell.vo.SellVo;
 import kr.util.DBUtil;
+import kr.util.ShopUtil;
 
 public class MyPageDao {
 	//싱글톤
@@ -61,37 +63,7 @@ public class MyPageDao {
 		}
 		return list;
 	}
-	//관심차량
-	public static List<SellVo> getMyFavoriteCar(int mem_num)throws Exception{
-		List<SellVo> list = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		int cnt = 0;
-		try {
-			//커넥션풀로부터 커넥션 할당
-			conn = DBUtil.getConnection();
-			//SQL문 작성
-			//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
-			sql = "";
-			//PreparedStatement 객체 생성
-			pstmt = conn.prepareStatement(sql);
-			//?에 데이터 바인딩
-			pstmt.setInt(++cnt, mem_num);
-			//SQL문 실행
-			rs = pstmt.executeQuery();
-			list = new ArrayList<>();
-			while(rs.next()) {
-				
-			}
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
-		}
-		return list;
-	}
+	
 	//거래내역
 	public static List<SellVo> myTrade(int mem_num)throws Exception{
 		List<SellVo> list = null;
@@ -317,8 +289,8 @@ public class MyPageDao {
 			return list;
 		}
 		//구매내역
-		public static List<SellVo> myBuy(int mem_num)throws Exception{
-			List<SellVo> list = null;
+		public static List<BuyVo> myBuy(int mem_num)throws Exception{
+			List<BuyVo> list = null;
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -329,9 +301,9 @@ public class MyPageDao {
 				conn = DBUtil.getConnection();
 				//SQL문 작성
 				//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
-				sql = "SELECT * FROM (SELECT buy.buy_num,buy.mem_num,b_re_reg,b_re_modify FROM b_re JOIN buy ON b_re.buy_num = buy.buy_num"
-						+ " WHERE buy.mem_num = ?"
-						+ "ORDER BY b_re_reg DESC) WHERE ROWNUM <=  10";
+				sql = "SELECT * FROM (SELECT buy.buy_num,car.car_name,car.car_price,buy.buy_reg,mem_grade FROM "
+						+ "buy JOIN car ON buy.car_num = car.car_num LEFT OUTER JOIN member_detail d ON buy.mem_num=d.mem_num WHERE buy.mem_num = ? "
+						+ "ORDER BY buy.buy_reg DESC) WHERE ROWNUM <=  10";
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				//?에 데이터 바인딩
@@ -340,12 +312,12 @@ public class MyPageDao {
 				rs = pstmt.executeQuery();
 				list = new ArrayList<>();
 				while(rs.next()) {
-					SellVo sell = new SellVo();
-					sell.setSell_num(rs.getInt("sell_num"));
-					sell.setSell_cname(rs.getString("sell_cname"));
-					sell.setSell_reg(rs.getString("sell_reg"));
-					sell.setSell_modify_check(rs.getString("sell_modify_check"));
-					list.add(sell);
+					BuyVo buy = new BuyVo(); 
+					buy.setBuy_num(rs.getInt("buy_num"));
+					buy.setCar_name(rs.getString("car_name"));
+					buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
+					buy.setBuy_reg(rs.getString("buy_reg"));
+					list.add(buy);
 				}
 			}catch(Exception e) {
 				throw new Exception(e);
@@ -355,38 +327,4 @@ public class MyPageDao {
 			return list;
 		}
 		
-		//관심차량
-		public static List<Favorite_carVo> myFavCar(int mem_num)throws Exception{
-			List<Favorite_carVo> list = null;
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = null;
-			int cnt = 0;
-			try {
-				//커넥션풀로부터 커넥션 할당
-				conn = DBUtil.getConnection();
-				//SQL문 작성
-				//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
-				sql = "SELECT car_num, fav_num FROM favorite_car WHERE mem_num=?";
-				//PreparedStatement 객체 생성
-				pstmt = conn.prepareStatement(sql);
-				//?에 데이터 바인딩
-				pstmt.setInt(++cnt, mem_num);
-				//SQL문 실행
-				rs = pstmt.executeQuery();
-				list = new ArrayList<>();
-				while(rs.next()) {
-					Favorite_carVo fav = new Favorite_carVo();
-					fav.setCar_num(rs.getInt("car_num"));
-					fav.setFav_num(rs.getInt("fav_num"));
-					list.add(fav);
-				}
-			}catch(Exception e) {
-				throw new Exception(e);
-			}finally {
-				DBUtil.executeClose(rs, pstmt, conn);
-			}
-			return list;
-		}
 }

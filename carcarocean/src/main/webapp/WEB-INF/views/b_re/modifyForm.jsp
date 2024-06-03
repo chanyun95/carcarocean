@@ -39,10 +39,10 @@
 						<textarea rows="20" cols="70" class="form-control" name="b_re_content" id="b_re_content">${b_re.b_re_content}</textarea>
 					</li>
 					<li>
-						<input type="file" id="b_re_photo" class="form-control mt-3 mb-2" onchange="displaySelectedFiles(this)" accept="image/gif,image/png,image/jpeg" multiple>
+						<input type="file" id="b_re_photo" name="b_re_photo" class="form-control mt-3 mb-2" onchange="displaySelectedFiles(this)" accept="image/gif,image/png,image/jpeg" multiple>
 						<!-- 업로드하려는 파일명 노출 -->
-						<div class="mt-3 mb-3 border rounded">
-					    	<div id="fileNames" class="mt-3 mb-3 fs-5"></div>
+						<div class="mt-3 border rounded p-3">
+					    	<div id="fileNames" class="mt-3 mb-2 fs-5"></div>
 						</div>
 						<br>
 						<hr size="1" noshade="noshade" width="100%">
@@ -68,7 +68,6 @@
 						<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 						<script type="text/javascript">
 							$(function(){
-								
 								$('#file_del').click(function(){
 									let choice = confirm('삭제하시겠습니까?');
 									if(choice){
@@ -165,12 +164,12 @@
 	        }
 	        fileNamesContainer.appendChild(list);
 	        
-	        // 파일 선택 시, 이전 파일을 삭제하는 부분
+			/*// 파일 선택 시, 이전 파일을 삭제하는 부분
 	        const photo2 = document.getElementById('b_re_photo2');
 	        if (photo2.value.trim() !== '') {
 	            const photo = document.getElementById('b_re_photo');
 	            photo.value = ''; // 이전 파일 input 초기화
-	        }
+	        } */
 	    }
 	}
 </script>

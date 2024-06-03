@@ -34,6 +34,7 @@ public class B_ReDao {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, b_re.getMem_num());
+			pstmt.setInt(++cnt, b_re.getBuy_num());
 			pstmt.setString(++cnt, b_re.getB_re_title());
 			pstmt.setString(++cnt, b_re.getB_re_content());
 			pstmt.setString(++cnt, b_re.getB_re_photo());
@@ -56,19 +57,20 @@ public class B_ReDao {
 	    try {
 	        conn = DBUtil.getConnection();
 
-	        sql = "SELECT car_num,car_name,buy_num,buy_reg FROM buy JOIN car USING(car_num) WHERE mem_num = ?";
+	        sql = "SELECT car_num,car_name,buy_num,buy_reg FROM buy JOIN car USING(car_num) WHERE mem_num = ? AND buy_status=1";
 
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, mem_num);
 	        
 	        rs = pstmt.executeQuery();
 	        list = new ArrayList<B_ReVo>();
-	        if (rs.next()) {
+	        while (rs.next()) {
 	            B_ReVo buy = new B_ReVo();
 	            buy.setBuy_num(rs.getInt("buy_num"));
 	            buy.setCar_num(rs.getInt("car_num"));
 	            buy.setCar_name(rs.getString("car_name"));
 	            buy.setBuy_reg(rs.getDate("buy_reg"));
+	            
 	            list.add(buy);
 	        }
 
@@ -215,6 +217,7 @@ public class B_ReDao {
 	        pstmt.setInt(++cnt, b_re_num);
 	        
 	        pstmt.executeUpdate();
+	        
 	     }catch(Exception e) {
 	        throw new Exception(e);
 	     }finally {
