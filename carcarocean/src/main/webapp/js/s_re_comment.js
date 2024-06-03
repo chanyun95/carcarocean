@@ -31,7 +31,6 @@ $(function(){
 					output +='<h4>' + item.mem_id + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.s_re_comm_content + '</p>';
-					output +=' <input type="button" data-renum="'+ item.s_re_comm_num +'" value="신고" class="report-btn">';
 					output += '<span class="modify-date">최근 등록일 : ' + item.s_re_comm_reg + '</span>';
 					
 					

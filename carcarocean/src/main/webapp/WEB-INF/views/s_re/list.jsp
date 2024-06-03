@@ -26,7 +26,7 @@
 						<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
 					</select>
 				<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-				<input type="submit" class="btn btn-warning ms-2" value="검색">
+				<input type="submit" class="btn btn-warning text-white ms-2" value="검색">
 				
 			
 				
@@ -35,17 +35,17 @@
 		</div>
 		<div class="row justify-content-end"> 
 		<div class="col-auto pe-0">
-			<input type="button" value="글쓰기" class="btn btn-warning"
+			<input type="button" value="글쓰기" class="btn btn-warning text-white"
 				onclick="location.href='writeForm.do'"	
 					<c:if test="${empty user_num}">disabled="disabled" </c:if> <%-- 비홯성화 시키는 법 --%>
 			> 
 			</div>
 			<!-- input 닫는 꺽쇄 -->
 			<div class="col-auto pe-0">
-			<input type="button" value="목록" class="btn btn-warning" onclick="location.href='list.do'" >
+			<input type="button" value="목록" class="btn btn-warning text-white" onclick="location.href='list.do'" >
 			</div>
 			<div class="col-auto mb-2">
-			<input type="button" value="홈으로" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<input type="button" value="홈으로" class="btn btn-warning text-white" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 			
 			</div>
 			
@@ -57,7 +57,7 @@
 		</c:if>
 		<c:if test="${count>0}">
 		<div class="container">
-			<table class="table border rounded-4">
+			<table class="table table-hover mt-3 text-center fw-bold">
 				<thead>
 				<tr>
 					<th>글번호</th>
@@ -70,11 +70,11 @@
 				<tbody>
 				<c:forEach var="s_re" items="${list}">
 				<tr>
-					<td>${s_re.s_re_num}</td>
-					<td><a href="detail.do?s_re_num=${s_re.s_re_num}"><b>${s_re.s_re_title}</b></a></td>
-					<td>${s_re.mem_id}</td>
-					<td>${s_re.sell_cname} / ${s_re.sell_maker}</td>
-					<td> ${s_re.s_re_reg} </td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.mem_id}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark"> ${s_re.s_re_reg} </a></td>
 				</tr>
 				</c:forEach>
 				</tbody>
@@ -86,6 +86,9 @@
 	</div>
 </div>
 </div>
+<!--챗봇 끝  -->
+    <jsp:include page="/WEB-INF/views/common/chatbot.jsp" />
+	<!-- 푸터 시작-->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
