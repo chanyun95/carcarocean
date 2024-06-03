@@ -39,7 +39,7 @@
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark">${car.car_maker} ${car.car_name}</a></td>
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark">구매 가능</a></td>
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark"><fmt:formatNumber value="${car.car_price}" type="number"/>만원</a></td>
-					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></a></td>
+					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded"></a></td>
 					</c:if>
 					<c:if test="${car.car_status==1}">
 					<td>${car.car_maker} ${car.car_name}</td>

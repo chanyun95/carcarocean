@@ -37,11 +37,7 @@ public class BuyDetailAction implements Action{
 			Favorite_carVo fav = favDao.getFc(car_num, user_num);
 			request.setAttribute("fav", fav);
 			
-			//구매정보 체크
-			BuyDao buyDao = BuyDao.getDao();
-			BuyVo buy = buyDao.getBuyByMemCar(user_num, car_num);
-			request.setAttribute("buy", buy);
-		}
+		} 
 		return "/WEB-INF/views/buy/buyDetail.jsp";
 	}
 

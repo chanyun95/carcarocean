@@ -121,10 +121,10 @@ public class CarDao {
 				else if(keyfield.equals("2")) sub_sql += "AND car_name LIKE '%' || ? || '%'";
 				else if(keyfield.equals("3")) sub_sql += "AND car_size LIKE '%' || ? || '%'";
 			}
-			sql =
-			"SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM car WHERE car_status <= ? "
-			+ sub_sql + " ORDER BY car_status,car_num DESC)a) WHERE rnum >=? AND rnum <=?";
-					
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.*, (SELECT mem_num FROM buy WHERE car_num=c.car_num) mem_num  FROM car c WHERE c.car_status <= ? "
+					+ sub_sql + "ORDER BY c.car_status, c.car_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, status);
 			
@@ -161,6 +161,9 @@ public class CarDao {
 				car.setCar_status(rs.getInt("car_status"));
 				car.setChecker_num(rs.getInt("checker_num"));
 				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
+				
+				car.setMem_num(rs.getInt("mem_num"));
+				
 				//로그인 했고
 				if(mem_num!=null) {
 					//좋아요 있으면
@@ -191,7 +194,7 @@ public class CarDao {
 		CarVO car = null;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM car WHERE car_num=?";
+			sql = "SELECT c.*, (SELECT mem_num FROM buy WHERE car_num=c.car_num) mem_num  FROM car c where car_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, car_num);
 			rs = pstmt.executeQuery();
@@ -221,6 +224,7 @@ public class CarDao {
 				car.setCar_status(rs.getInt("car_status"));
 				car.setChecker_num(rs.getInt("checker_num"));
 				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
+				car.setMem_num(rs.getInt("mem_num"));
 			}
 		} catch (Exception e) {
 			throw new Exception(e);
@@ -257,7 +261,7 @@ public class CarDao {
 		return count;
 	}
 	
-	//차량 판매 상태 변경
+	//차량 판매 상태(예약) 변경
 	public void updateCarStatus(int car_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt1 = null;

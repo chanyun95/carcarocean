@@ -5,11 +5,10 @@ public class BuyVo {
 	private int mem_num;
 	private int car_num;
 	private String buy_reg;
-	private int buy_status;
+
 	private String car_name;
 	private int car_price;
-	
-	
+
 	public int getBuy_num() {
 		return buy_num;
 	}

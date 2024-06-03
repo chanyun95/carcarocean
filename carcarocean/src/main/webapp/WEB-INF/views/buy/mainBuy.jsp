@@ -231,17 +231,25 @@
 		                <div class="p-3 border bg-light">
 		                	<!-- 사진 상자 -->
 		                	<div class="image-container ps-3">
+			                	<!-- 
+			                		car.car_status : 판매중인가 아닌가
+			                		car.mem_num : 누가 샀는지
+			                		user_auth : 관리자인지 아닌지
+			                	 -->
 			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
-			                	<c:if test="${car.car_status==0 or user_auth==9}">
+			                	<%-- <c:if test="${(car.car_status==0 or user_auth==9) and empty car.mem_num}"> --%>
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
 			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
 		                		</a>
-			                	</c:if>
-			                	<!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐-->
-			                	<c:if test="${car.car_status==1 and user_auth!=9}">
+			                	<%-- </c:if> --%>
+			                	<%-- <!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐 또는 내가 구매한 차량이 아닐때 -->
+			                	<c:if test="${(car.car_status==1 and user_auth!=9) or (!empty car.mem_num and car.mem_num!=user_num)}">
 			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
-			                	</c:if>
+			                	</c:if> --%>
+			                	
+			                	
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
+              	     			<!-- 관심차량 아이콘 체크 -->
               	     			<c:if test="${!car.fav_check}">
 		                		<i id="${favIconId}" class="bi bi-heart overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
 		                		</c:if>
@@ -252,15 +260,19 @@
 		                	<!-- 설명 -->
 		                	<div>
 		                		<!-- 판매 중 -->
-		                		<c:if test="${car.car_status==0}">
-			                	<p class="fs-5 mt-3 fw-bold"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a></p>
+		                		<%-- <c:if test="${car.car_status==0}"> --%>
+			                	<p class="fs-5 mt-3 fw-bold"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a> <c:if test="${car.car_status==1}">
+																																			                		<c:if test="${empty car.mem_num or car.mem_num!=user_num}"><b class="text-danger"> 예약완료</b></c:if>
+																																			                		<c:if test="${!empty car.mem_num and car.mem_num==user_num}"><b class="text-warning"> 내가 예약한 차량</b></c:if>
+																														                						  </c:if>
 			                	<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
-			                	</c:if>
-			                	<!-- 판매 완료 -->
+			                	<%-- </c:if> --%>
+			                	<%-- <!-- 판매 완료 링크제거 및 예약완료 표시-->
 			                	<c:if test="${car.car_status==1}">
 			                	<p class="fs-5 mt-3 fw-bold">${car.car_maker} ${car.car_name}<b class="text-danger"> 예약완료</b></p>
 			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></p>
-			                	</c:if>
+			                	</c:if> --%>
+			                	
 			                	<div class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식
 			                	<div class="vr mx-1"></div>${car.car_mile}km
 			                	<div class="vr mx-1"></div>
