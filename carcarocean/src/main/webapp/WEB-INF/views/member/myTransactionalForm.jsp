@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,28 +18,28 @@
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
-                	<h4>판매내역</h4>
+                	<h4>구매내역</h4>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>차명</th>
-                                <th>판매신청일</th>
+                                <th>구매가격</th>
                                 <th>거래완료일</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="sell" items="${mlist}">
+                            <c:forEach var="buy" items="${buyList}">
                                 <tr>
-                                    <td>${sell.sell_num}</td>
-                                    <!-- 링크 추가해야함 -->
-                                    <td>${sell.sell_cname}</td>
-                                    <td>${fn:substring(sell.sell_reg,0,10)}
-									<td>${fn:substring(sell.sell_modify_check,0,10)}</td>
+                                    <td width = "250px">${buy.buy_num}</td>
+                                    <td width = "250px">${buy.car_name}</td>
+                                    <td>${buy.car_price}만원</td>
+									<td>${fn:substring(buy.buy_reg,0,10)}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
-                    </table>
+                    </table> 
+                    <br><br><br>
                     <h4>판매내역</h4>
                     <table class="table">
                         <thead>
@@ -50,14 +51,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="sell" items="${mlist}">
+                            <c:forEach var="sell" items="${sellList}">
                                 <tr>
-                                    <td>${sell.sell_num}</td>
-                                    <!-- 링크 추가해야함 -->
-                                    <td>${sell.sell_cname}</td>
-                                    <td>${fn:substring(sell.sell_reg,0,10)}
+                                    <td width = "250px">${sell.sell_num}</td>
+                                    <td width = "250px">${sell.sell_cname}</td>
+                                    <td>${fn:substring(sell.sell_reg,0,10)}</td>
 									<td>${fn:substring(sell.sell_modify_check,0,10)}</td>
-									
                                 </tr>
                             </c:forEach>
                         </tbody>

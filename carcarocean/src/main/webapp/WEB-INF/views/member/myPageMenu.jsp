@@ -19,13 +19,15 @@
 </head>
 <body>
 	<nav class="col-md-2 bg-light sidebar pt-5 pb-5">
-			<h5 class = "text-warning">
-				<b>${sub_title}</b>
-			</h5>
 			<ul class="nav flex-column">
+			<li><h2 class = "nav-item text-warning">
+				<b>${sub_title}</b>
+			</h2>
+			</li>
+			<li><br><br></li>
 			<li class="nav-item"><a class="nav-link active" href="modifyUserForm.do">회원정보
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="myFavoriteCarForm.do">관심차량
+			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/fav/myFavList.do">관심차량
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="mySellCurrentStatusForm.do">내차팔기신청현황
 					</a></li>

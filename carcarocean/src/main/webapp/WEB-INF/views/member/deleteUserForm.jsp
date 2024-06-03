@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원탈퇴</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/pgh.css" type="text/css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
@@ -62,25 +60,31 @@ $(function(){
 			<main class="col-md-10 pt-5 pb-5">
 				<div class="mypage-div">
 					<div class="content-main">
-						<h2>회원탈퇴</h2>
-						<form id="delete_form" action="deleteUser.do" method="post">
-							<ul>
-								<li><label for="mem_id">아이디</label> <input type="text"
+						<h2 class = "text-warning">회원탈퇴</h2>	
+						<form id="delete_form" action="deleteUser.do" method="post" class="shadow p-3 bg-light">
+								 <div class="form-group">
+								 <label for="mem_id">아이디</label> <input type="text"
 									name="mem_id" id="mem_id" maxlength="12" autocomplete="off"
-									class="input-check"></li>
-								<li><label for="mem_email">이메일</label> <input type="email"
+									class="input-check form-control">
+								 </div> 
+								 <div class="form-group">
+								 <label for="mem_email">이메일</label> <input type="email"
 									name="mem_email" id="mem_email" maxlength="50"
-									autocomplete="off" class="input-check"></li>
-								<li><label for="mem_passwd">비밀번호</label> <input
+									autocomplete="off" class="input-check form-control">
+								 </div>
+								 <div class="form-group">
+								 <label for="mem_passwd">비밀번호</label> <input
 									type="password" name="mem_passwd" id="mem_passwd"
-									maxlength="12" class="input-check"></li>
-								<li><label for="cpasswd">비밀번호 확인</label> <input
-									type="password" id="cpasswd" maxlength="12" class="input-check">
-									<span id="message_cpasswd"></span></li>
-							</ul>
-							<div class="align-center">
-								<input type="submit" value="회원탈퇴"> <input type="button"
-									value="My페이지" onclick="location.href='myPage.do'">
+									maxlength="12" class="input-check form-control"> 
+								 </div>
+								 <div class="form-group">	
+								 <label for="cpasswd">비밀번호 확인</label> <input
+									type="password" id="cpasswd" maxlength="12" class="input-check form-control">
+									<span id="message_cpasswd"></span> 
+								</div>
+							<div class="btn-group w-100" role="group" aria-label="Basic outlined example">
+								<input type="submit" value="회원탈퇴" class = "btn btn-outline-light bg-warning text-white"> 
+								<input type="button" value="My페이지" class = "btn btn-outline-light bg-warning text-white" onclick="location.href='myPage.do'">
 							</div>
 						</form>
 					</div>

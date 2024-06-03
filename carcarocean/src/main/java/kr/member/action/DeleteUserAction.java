@@ -36,9 +36,9 @@ public class DeleteUserAction implements Action{
 		//사용자가 입력한 아이디가 존재하고 로그인한 아이디와 일치하는지 체크,
 		//입력한 이메일과 저장된 이메일 일치 여부 체크
 		if(db_member!=null && mem_id.equals(user_id) 
-				&& mem_email.equals(db_member.getMem_email())) {
+				&& mem_email.equals(db_member.getMem_email()) && mem_passwd.equals(db_member.getMem_passwd())) {
 			//비밀번호 일치 여부 체크
-			check = db_member.isCheckedPassword(mem_passwd);
+			check = true;
 		}
 		if(check) {//인증 성공
 			//회원정보 삭제
@@ -48,7 +48,6 @@ public class DeleteUserAction implements Action{
 			//로그아웃
 			session.invalidate();
 		}
-		
 		request.setAttribute("check", check);
 		//JSP 경로 반환
 		return "/WEB-INF/views/member/deleteUser.jsp";
