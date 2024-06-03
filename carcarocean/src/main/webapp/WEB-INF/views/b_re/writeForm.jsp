@@ -6,6 +6,55 @@
 <head>
 <meta charset="UTF-8">
 <title>구매 후기 게시판 글 쓰기</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<div>
+			<h2 class="mt-5 mb-5">구매 후기 게시판 글 쓰기</h2>
+			<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
+				<ul class="list-unstyled">
+					<li class="mb-4">
+						<label for="b_re_title" class="fs-4 mt-2 mb-2">제목(필수)</label>
+						<br>
+						<input type="text" class="form-control" name="b_re_title" id="b_re_title" maxlength="50">
+					</li>
+					<li>
+						<label for="buy_num" class="fs-4 mb-2">거래 내역(필수)</label>
+						<br>
+						<select class="btn btn-secondary dropdown-toggle fs-5" name="buy_num" id="buy_num">
+                            <option value="">거래 내역을 선택하세요</option>
+                            <c:forEach var="buy" items="${buyList}">
+                                <option value="${buy.buy_num}">${buy.buy_num}. ${buy.car_name} / ${buy.buy_reg}</option>
+                            </c:forEach>
+                        </select>
+					</li>
+					<li>
+						<label for="b_re_content" class="fs-4 mt-3 mb-2">내용(필수)</label>
+						<br>
+						<textarea rows="20" cols="70" class="form-control" name="b_re_content" id="b_re_content"></textarea>
+					</li>
+					<li>
+						<input type="file" name="b_re_photo" id="b_re_photo" class="form-control mt-3 mb-2" onchange="displaySelectedFiles(this)" accept="image/gif,image/png,image/jpeg" multiple>
+						<!-- 업로드하려는 파일명 노출 -->
+						<div class="mt-3 mb-3 border rounded p-3" id="filename">
+					    	<div id="fileNames" class="mt-3 mb-3 fs-5"></div>
+						</div>
+					</li>
+				</ul>
+				<div>
+				<div class="mt-3 mb-5 row justify-content-center">
+					<div class="col-auto">
+						<input type="submit" class="btn btn-warning" value="글 쓰기">
+					</div>
+					<div class="col-auto">
+						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+					</div>
+			</form>
+		</div>
+	</div>
+</body>
 <script type="text/javascript">
 	window.onload=function(){
 		const myForm = document.getElementById('write_form');
@@ -40,48 +89,23 @@
 			}
 		};
 	};
+	//파일명 노출
+	function displaySelectedFiles(input) {
+	    const files = input.files;
+	    const fileNamesContainer = document.getElementById('fileNames');
+	    fileNamesContainer.innerHTML = ''; // 이전에 선택된 파일들의 이름을 모두 지움
+
+	    if (files.length === 0) {
+	        fileNamesContainer.textContent = '선택된 파일 없음';
+	    } else {
+	        const list = document.createElement('ul');
+	        for (let i = 0; i < files.length; i++) {
+	            const listItem = document.createElement('li');
+	            listItem.textContent = files[i].name;
+	            list.appendChild(listItem);
+	        }
+	        fileNamesContainer.appendChild(list);
+	    }
+	}
 </script>
-</head>
-<body>
-	<div>
-		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		<div>
-			<h2>구매 후기 게시판 글 쓰기</h2>
-			<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
-				<ul>
-					<li>
-						<label for="b_re_title">제목(필수)</label>
-						<br>
-						<input type="text" name="b_re_title" id="b_re_title" maxlength="50">
-					</li>
-					<li>
-						<label for="buy_num">거래 내역(필수)</label>
-						<br>
-						<select name="buy_num" id="buy_num">
-                            <option value="">거래 내역을 선택하세요</option>
-                            <c:forEach var="buy" items="${buyList}">
-                                <option value="${buy.car_num}">${buy.buy_num}. ${buy.car_name} / ${buy.buy_reg}</option>
-                                <input type="hidden" value="${buy.buy_num}" name="buy_num">
-                            </c:forEach>
-                        </select>
-					</li>
-					<li>
-						<label for="b_re_content">내용(필수)</label>
-						<br>
-						<textarea rows="20" cols="70" name="b_re_content" id="b_re_content"></textarea>
-					</li>
-					<li>
-						<label for="b_re_photo">파일첨부(필수)</label>
-						<br>
-						<input type="file" name="b_re_photo" id="b_re_photo" accept="image/gif,image/png,image/jpeg" multiple>
-					</li>
-				</ul>
-				<div>
-					<input type="submit" value="글 쓰기">
-					<input type="button" value="목록" onclick="location.href='list.do'">
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
 </html>
