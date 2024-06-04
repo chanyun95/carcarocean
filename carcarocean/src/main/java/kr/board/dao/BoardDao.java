@@ -52,9 +52,9 @@ public class BoardDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("1")) sub_sql += "WHERE title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '%' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += "WHERE board_title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += "WHERE board_content LIKE '%' || ? || '%'";
 			}
 			sql = "SELECT COUNT(*) FROM board JOIN member USING(mem_num) " + sub_sql;
 			pstmt = conn.prepareStatement(sql);
@@ -85,9 +85,9 @@ public class BoardDao {
 			conn  = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
 				//검색 처리
-				if(keyfield.equals("1")) sub_sql += " WHERE title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += " WHERE id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += " WHERE content LIKE '%' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += " WHERE board_title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += " WHERE mem_id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += " WHERE board_content LIKE '%' || ? || '%'";
 			}
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
 					+ "(SELECT * FROM board JOIN member USING(mem_num) " + sub_sql

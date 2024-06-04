@@ -55,7 +55,7 @@
          <div class="container">
             <!-- 로고 시작 -->
             <div class="pe-3">
-            	<a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/mainlogo.png" width="200"></a>  
+            	<a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/logo.png" width="200"></a>  
             </div>
             <!-- 로고 끝 -->
             <!-- 메뉴 시작 -->
