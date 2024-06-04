@@ -28,8 +28,9 @@ public class UpdateAction implements Action{
 		QaVo db_qa = dao.detailQa(qa_num);
 		//로그인한 회원번호와 작성자 회원번호 일치 여부 체크
 		if(user_num != db_qa.getMem_num()) {
-			//로그인한 회원번호와 작성자 회원번호 불일치
-			return "/WEB-INF/views/common/notice.jsp";
+			request.setAttribute("notice_msg", "회원정보가 일치하지 않습니다.");
+			request.setAttribute("notice_url", request.getContextPath() + "/qa/list.do");
+			return "/WEB-INF/views/common/alert_view.jsp";
 		}
 		//로그인한 회원번호와 작성자 회원번호 일치
 		QaVo qa = new QaVo();

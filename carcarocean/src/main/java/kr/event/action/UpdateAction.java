@@ -23,21 +23,27 @@ public class UpdateAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//전송된 데이터 반환
 		int event_num = Integer.parseInt(request.getParameter("event_num"));
-		
+
 		EventDao dao = EventDao.getDao();
 		//수정전 데이터
 		EventVo db_event = dao.detailEvent(event_num);
-		
+
 		EventVo event = new EventVo();
 		event.setEvent_num(event_num);
 		event.setEvent_title(request.getParameter("event_title"));
 		event.setEvent_content(request.getParameter("event_content"));
 		event.setEvent_photo(FileUtil.createFiles(request));
 		dao.updateEvent(event);
-		
+
 		if(event.getEvent_photo() != null && !"".equals(event.getEvent_photo())) {
 			//새 파일로 교체할 때 원래 파일 제거
-			FileUtil.removeFile(request, db_event.getEvent_photo());
+			if(db_event.getEvent_photo() != null) {
+				//사진 삭제
+				String[] photos = db_event.getEvent_photo().split(",");
+				for(String pho : photos) {
+					FileUtil.removeFile(request, pho);
+				}
+			}
 		}
 		return "redirect:/event/detail.do?event_num=" + event_num;
 	}
