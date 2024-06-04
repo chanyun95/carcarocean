@@ -8,6 +8,7 @@ import java.util.List;
 
 import kr.qa_comment.vo.Qa_CommentVo;
 import kr.util.DBUtil;
+import kr.util.DurationFromNow;
 import kr.util.StringUtil;
 
 public class Qa_CommentDao {
@@ -100,9 +101,9 @@ public class Qa_CommentDao {
 			while(rs.next()) {
 				Qa_CommentVo reply = new Qa_CommentVo();
 				reply.setQa_comm_num(rs.getInt("qa_comm_num"));
-				reply.setQa_comm_reg(rs.getString("qa_comm_reg"));
+				reply.setQa_comm_reg(DurationFromNow.getTimeDiffLabel(rs.getString("qa_comm_reg")));
 				if(rs.getString("qa_comm_modify") != null) {
-					reply.setQa_comm_modify(rs.getString("qa_comm_modify"));
+					reply.setQa_comm_modify(DurationFromNow.getTimeDiffLabel(rs.getString("qa_comm_modify")));
 				}
 				reply.setQa_comm_content(StringUtil.useBrNoHTML(rs.getString("qa_comm_content")));
 				reply.setQa_num(rs.getInt("qa_num"));

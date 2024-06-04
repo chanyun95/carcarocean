@@ -164,6 +164,7 @@ public class QaDao {
 				qa.setQa_modify(rs.getString("qa_modify"));
 				qa.setMem_num(rs.getInt("mem_num"));
 				qa.setQa_photo(rs.getString("qa_photo"));
+				qa.setMem_photo(rs.getString("mem_photo"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -256,22 +257,34 @@ public class QaDao {
 	public void deleteQa(int qa_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		String sql = null;
-		int cnt = 0;
 		try {
 			//커넥션풀로 커넥션 할당
 			conn = DBUtil.getConnection();
-			//SQL문 작성
-			sql = "DELETE FROM qa WHERE qa_num=?";
-			//PreparedStatement 객체 생성
+			//오토커밋 해제
+			conn.setAutoCommit(false);
+			
+			//답변 삭제
+			sql = "DELETE FROM qa_comment WHERE qa_num=?";
 			pstmt = conn.prepareStatement(sql);
-			//?에 데이터 바인딩
-			pstmt.setInt(++cnt, qa_num);
-			//SQL문 실행
+			pstmt.setInt(1, qa_num);
 			pstmt.executeUpdate();
+			
+			//부모글 삭제
+			sql = "DELETE FROM qa WHERE qa_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, qa_num);
+			pstmt2.executeUpdate();
+			
+			//예외 발생 없이 정상적으로 SQL문 실행
+			conn.commit();
 		}catch(Exception e) {
+			//예외 발생 시 롤백 
+			conn.rollback();
 			throw new Exception(e);
 		}finally {
+			DBUtil.executeClose(null, pstmt2, null);
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}

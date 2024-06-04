@@ -19,7 +19,7 @@ public class DeletePhotoAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, String> mapAjax = new HashMap<String, String>();
-		
+
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num == null) {//로그인이 되지 않은 경우
@@ -35,9 +35,14 @@ public class DeletePhotoAction implements Action{
 			if(user_num != db_qa.getMem_num()) {
 				mapAjax.put("result", "wrongAccess");
 			}else {
-				dao.deletePhoto(qa_num);
-				//파일 삭제
-				FileUtil.removeFile(request, db_qa.getQa_photo());
+				if(db_qa.getQa_photo() != null) {
+					dao.deletePhoto(qa_num);
+					//사진 삭제
+					String[] photos = db_qa.getQa_photo().split(",");
+					for(String pho : photos) {
+						FileUtil.removeFile(request, pho);
+					}
+				}
 				mapAjax.put("result", "success");
 			}
 		}

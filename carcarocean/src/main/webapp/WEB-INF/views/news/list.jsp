@@ -70,15 +70,15 @@
 				<tbody>
 				<c:forEach var="news" items="${list}">
 					<tr>
-						<td>${news.news_num}</td>
-						<td><a href="detail.do?news_num=${news.news_num}">${news.news_title}</a></td>
+						<td><a href="detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark fw-bold">${news.news_num}</a></td>
+						<td><a href="detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark fw-bold">${news.news_title}</a></td>
 						<c:if test="${!empty news.news_modify}">
-							<td>${fn:substring(news.news_modify,0,10)}</td>
+							<td><a href="detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(news.news_modify,0,10)}</a></td>
 						</c:if>
 						<c:if test="${empty news.news_modify}">
-							<td>${fn:substring(news.news_reg,0,10)}</td>
+							<td><a href="detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(news.news_reg,0,10)}</a></td>
 						</c:if>	
-						<td>${news.news_hit}</td>	
+						<td><a href="detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark fw-bold">${news.news_hit}</a></td>	
 					</tr>
 				</c:forEach>
 				</tbody>

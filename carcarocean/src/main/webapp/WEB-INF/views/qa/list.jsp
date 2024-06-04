@@ -73,26 +73,40 @@
 				<tbody>
 				<c:forEach var="qa" items="${list}">
 					<tr>
-						<td>${qa.qa_num}</td>
+						<c:if test="${!empty user_num && (user_auth == 9 || user_num == qa.mem_num)}">
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">${qa.qa_num}</a></td>
 						<c:if test="${qa.qa_status == 1}">
-						<td>미처리</td>
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">미처리</a></td>
 						</c:if>
 						<c:if test="${qa.qa_status == 2}">
-						<td>처리</td>
-						</c:if>
-						<c:if test="${!empty user_num && (user_auth == 9 || user_num == qa.mem_num)}">
-						<td><a href="detail.do?qa_num=${qa.qa_num}">${qa.qa_title}</a></td>
-						</c:if>
-						<c:if test="${empty user_num || (user_auth != 9 && user_num != qa.mem_num)}">
-						<td onclick="alert('조회할 수 있는 권한이 없습니다.')">${qa.qa_title}</td>
-						</c:if>						
-						<td>${qa.mem_id}</td>
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">처리</a></td>
+						</c:if>	
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">${qa.qa_title}</a></td>											
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">${qa.mem_id}</a></td>
 						<c:if test="${empty qa.qa_modify}">
-						<td>${fn:substring(qa.qa_reg,0,10)}</td>
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(qa.qa_reg,0,10)}</a></td>
 						</c:if>	
 						<c:if test="${!empty qa.qa_modify}">
-						<td>${fn:substring(qa.qa_modify,0,10)}</td>
+						<td><a href="detail.do?qa_num=${qa.qa_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(qa.qa_modify,0,10)}</a></td>
 						</c:if>
+						</c:if>
+						<c:if test="${empty user_num || (user_auth != 9 && user_num != qa.mem_num)}">
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.qa_num}</b></td>
+						<c:if test="${qa.qa_status == 1}">
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>미처리</b></td>
+						</c:if>
+						<c:if test="${qa.qa_status == 2}">
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>처리</b></td>
+						</c:if>	
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.qa_title}</b></td>
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.mem_id}</b></td>
+						<c:if test="${empty qa.qa_modify}">
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${fn:substring(qa.qa_reg,0,10)}</b></td>
+						</c:if>	
+						<c:if test="${!empty qa.qa_modify}">
+						<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${fn:substring(qa.qa_modify,0,10)}</b></td>
+						</c:if>
+						</c:if>	
 					</tr>
 				</c:forEach>
 				</tbody>

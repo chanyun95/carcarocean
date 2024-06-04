@@ -24,11 +24,18 @@ public class DeletePhotoAction implements Action{
 		int news_num = Integer.parseInt(request.getParameter("news_num"));
 		NewsDao dao = NewsDao.getDao();
 		NewsVo db_news = dao.detailNews(news_num);
-		dao.deletePhoto(news_num);
-		//사진 삭제
-		FileUtil.removeFile(request, db_news.getNews_photo());
+
+		//db_news에 담긴 news_photo가 NULL이 아닌 경우에만 실행
+		if(db_news.getNews_photo() != null) {
+			dao.deletePhoto(news_num);
+			//사진 삭제
+			String[] photos = db_news.getNews_photo().split(",");
+			for(String pho : photos) {
+				FileUtil.removeFile(request, pho);
+			}
+		}
 		mapAjax.put("result", "success");
-		
+
 		//JSON 데이터 생성
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

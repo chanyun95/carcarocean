@@ -42,7 +42,13 @@ public class UpdateAction implements Action{
 		
 		if(qa.getQa_photo() != null && !"".equals(qa.getQa_photo())) {
 			//새 파일로 교체할 때 원래 파일 제거
-			FileUtil.removeFile(request, db_qa.getPhoto());
+			if(db_qa.getQa_photo() != null) {
+				//사진 삭제
+				String[] photos = db_qa.getQa_photo().split(",");
+				for(String pho : photos) {
+					FileUtil.removeFile(request, pho);
+				}
+			}
 		}
 		return "redirect:/qa/detail.do?qa_num=" + qa_num;
 	}

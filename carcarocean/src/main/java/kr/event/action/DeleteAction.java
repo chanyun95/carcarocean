@@ -24,8 +24,11 @@ public class DeleteAction implements Action{
 		EventVo db_event = dao.detailEvent(event_num);
 		
 		dao.deleteEvent(event_num);
-		//파일 삭제
-		FileUtil.removeFile(request, db_event.getEvent_photo());
+		//사진 삭제
+		String[] photos = db_event.getEvent_photo().split(",");
+		for(String pho : photos) {
+			FileUtil.removeFile(request, pho);
+		}
 		request.setAttribute("notice_msg", "글 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/event/list.do");
 		return "/WEB-INF/views/common/alert_view.jsp";

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.controller.Action;
 import kr.qa.dao.QaDao;
 import kr.qa.vo.QaVo;
+import kr.qa_comment.dao.Qa_CommentDao;
 import kr.util.StringUtil;
 
 public class DetailAction implements Action{
@@ -17,12 +18,14 @@ public class DetailAction implements Action{
 		QaDao dao = QaDao.getDao();
 		
 		QaVo qa = dao.detailQa(qa_num);
-		
+		Qa_CommentDao ddao = Qa_CommentDao.getDao();
+		int count = ddao.CountQa_Comment(qa_num);
 		//HTML를 허용하지 않음
 		qa.setQa_title(StringUtil.useNoHTML(qa.getQa_title()));
 		//HTML를 허용하지 않음
 		qa.setQa_content(StringUtil.useBrNoHTML(qa.getQa_content()));
 		
+		request.setAttribute("count", count);
 		request.setAttribute("qa", qa);
 		return "/WEB-INF/views/qa/detail.jsp";
 	}

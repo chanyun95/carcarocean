@@ -69,13 +69,13 @@
 				<tbody>
 				<c:forEach var="event" items="${list}">
 					<tr>
-						<td>${event.event_num}</td>
-						<td><a href="detail.do?event_num=${event.event_num}">${event.event_title}</a></td>
+						<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_num}</a></td>
+						<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_title}</a></td>
 						<c:if test="${!empty event.event_modify}">
-							<td>${fn:substring(event.event_modify,0,10)}</td>
+							<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_modify,0,10)}</a></td>
 						</c:if>
 						<c:if test="${empty event.event_modify}">
-							<td>${fn:substring(event.event_reg,0,10)}</td>
+							<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_reg,0,10)}</a></td>
 						</c:if>		
 					</tr>
 				</c:forEach>
