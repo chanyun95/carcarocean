@@ -167,6 +167,7 @@ public class NewsDao {
 		return news;
 	}
 	
+	//상세 글 확인 시 조회 수 증가
 	public void updateReadCount(int news_num)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -192,16 +193,85 @@ public class NewsDao {
 	
 	//파일 삭제
 	public void deletePhoto(int news_num)throws Exception{
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "UPDATE news SET news_photo='' WHERE news_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(++cnt, news_num);
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 	
 	//글 수정
 	public void updateNews(NewsVo news)throws Exception{
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			
+			if(news.getNews_photo() != null && !"".equals(news.getNews_photo())) {
+				sub_sql += ",news_photo=?";
+			}
+			//SQL문 작성
+			sql = "UPDATE news SET news_title=?, news_content=?, news_modify=SYSDATE" + sub_sql
+					+ " WHERE news_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setString(++cnt, news.getNews_title());
+			pstmt.setString(++cnt, news.getNews_content());
+			
+			if(news.getNews_photo() != null && !"".equals(news.getNews_photo())) {
+				pstmt.setString(++cnt, news.getNews_photo());
+			}
+			pstmt.setInt(++cnt, news.getNews_num());
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}	
 	}
 	
 	//글 삭제
 	public void deleteNews(int news_num)throws Exception{
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "DELETE FROM news WHERE news_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(++cnt, news_num);
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }

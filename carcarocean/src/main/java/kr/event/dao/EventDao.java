@@ -230,6 +230,7 @@ public class EventDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
+		int cnt = 0;
 		try {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
@@ -238,7 +239,7 @@ public class EventDao {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setInt(1, event_num);
+			pstmt.setInt(++cnt, event_num);
 			//SQL문 실행
 			pstmt.executeUpdate();
 		}catch(Exception e) {
