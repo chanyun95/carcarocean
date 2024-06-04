@@ -17,7 +17,7 @@ public class MySellListAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {
-			return "/WEB-INF/views/member/loginForm.jsp";
+			return "redirect:/member/loginForm.do";
 		}
 		request.setCharacterEncoding("utf-8");
 		

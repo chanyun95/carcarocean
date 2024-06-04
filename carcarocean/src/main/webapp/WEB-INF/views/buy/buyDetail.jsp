@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/logo.png"/>
 <title>차량 상세 정보</title>
 <style>
 	.myList li{
@@ -379,6 +380,7 @@
 								<li><span class="float-start">이전등록비</span><span class="float-end">${firstPrice}만원</span><br></li>
 								<li><span class="float-start">관리비용</span><span class="float-end">${secondPrice}만원</span><br></li>
 								<li><span class="float-start">등록신청대행수수료</span><span class="float-end">${thirdPrice}만원</span><br></li>
+								<c:if test="${!empty user_grade}"><li><span class="float-start">등급수수료</span><span class="float-end">${user_discountFee}만원</span><br></li></c:if>
 								<!-- 회원 별 수수료 할인가 적용하면 좋음 -->
 							</ul>
 						</div>

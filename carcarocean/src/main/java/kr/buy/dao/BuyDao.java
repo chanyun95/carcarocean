@@ -186,22 +186,59 @@ public class BuyDao {
 	}
 	
 	//구매 확정 ( 구매 확정 전으로 못돌림 그래서 buy_status=1 고정)
-	public void insertBuy(int car_num, int mem_num) throws Exception{
+	public void insertBuy(int car_num, int mem_num, int car_price) throws Exception{
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		ResultSet rs = null;
 		int cnt = 0;
 		String sql = null;
 		try {
 			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			
 			sql = "UPDATE BUY SET BUY_STATUS=1, buy_reg=sysdate WHERE CAR_NUM=? AND MEM_NUM=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, car_num);
-			pstmt.setInt(++cnt, mem_num);
-			pstmt.executeUpdate();
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(++cnt, car_num);
+			pstmt1.setInt(++cnt, mem_num);
+			pstmt1.executeUpdate();
+			
+			sql = "UPDATE MEMBER_DETAIL set mem_total = mem_total+? where mem_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, car_price);
+			pstmt2.setInt(2, mem_num);
+			pstmt2.executeUpdate();
+			
+			sql = "SELECT MEM_TOTAL FROM MEMBER_DETAIL WHERE MEM_NUM=?";
+			pstmt3 = conn.prepareStatement(sql);
+			pstmt3.setInt(1, mem_num);
+			rs = pstmt3.executeQuery();
+			if(rs.next()) {
+				int mem_total = rs.getInt(1);
+				if(mem_total>=8000) {
+					sql = "UPDATE MEMBER_DETAIL SET MEM_GRADE=5 WHERE MEM_NUM=?";
+				} else if(mem_total>=6000) {
+					sql = "UPDATE MEMBER_DETAIL SET MEM_GRADE=4 WHERE MEM_NUM=?";
+				} else if(mem_total>=4000) {
+					sql = "UPDATE MEMBER_DETAIL SET MEM_GRADE=3 WHERE MEM_NUM=?";
+				} else if(mem_total>=2000) {
+					sql = "UPDATE MEMBER_DETAIL SET MEM_GRADE=2 WHERE MEM_NUM=?";
+				}
+				pstmt4 = conn.prepareStatement(sql);
+				pstmt4.setInt(1, mem_num);
+				pstmt4.executeUpdate();
+			}
+			conn.commit();
 		} catch (Exception e) {
+			conn.rollback();
 			throw new Exception(e);
 		} finally {
-			DBUtil.executeClose(null, pstmt, conn);
+			DBUtil.executeClose(null, pstmt1,null );
+			DBUtil.executeClose(null, pstmt2, null);
+			DBUtil.executeClose(null, pstmt3, null);
+			DBUtil.executeClose(rs, pstmt4, conn);
 		}
 	}
 	public BuyVo getReservation(int mem_num, int car_num) throws Exception{

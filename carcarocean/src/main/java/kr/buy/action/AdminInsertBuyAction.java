@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.buy.dao.BuyDao;
 import kr.car.dao.CarDao;
+import kr.car.vo.CarVO;
 import kr.controller.Action;
 
 public class AdminInsertBuyAction implements Action{
@@ -27,11 +28,12 @@ public class AdminInsertBuyAction implements Action{
 		int car_num = Integer.parseInt(request.getParameter("car_num"));
 		int mem_num = Integer.parseInt(request.getParameter("mem_num"));
 		
-		BuyDao buyDao = BuyDao.getDao();
-		buyDao.insertBuy(car_num, mem_num);
-		
 		CarDao carDao = CarDao.getDao();
 		carDao.updateCarStatus(car_num,2);
+		CarVO car = carDao.getCar(car_num);
+		
+		BuyDao buyDao = BuyDao.getDao();
+		buyDao.insertBuy(car_num, mem_num,car.getCar_price());
 		
 		return "redirect:/buy/adminBuyList.do";
 	}

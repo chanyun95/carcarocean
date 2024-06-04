@@ -208,8 +208,8 @@
          	<div class="d-flex justify-content-center rounded bg-light p-5 mb-5">
 				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
 					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
-						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
+						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
+						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 					</select>
 					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
 					<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">

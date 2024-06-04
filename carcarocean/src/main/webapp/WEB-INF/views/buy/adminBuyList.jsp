@@ -24,7 +24,7 @@
 					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
 				</select>
 				<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-				<input type="submit" class="btn btn-primary" value="검색">
+				<input type="submit" class="btn btn-warning btn-lg fw-bold text-white" value="검색">
 			</form>
 		</div>
 		<table class="table table-hover text-center align-content-center fw-bold mt-3">

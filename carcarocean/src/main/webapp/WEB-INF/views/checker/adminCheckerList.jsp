@@ -35,7 +35,7 @@
 		<div class="text-center">${page}</div>
 		<hr size="1" width="100%" noshade="noshade">
 		<div class="float-end">
-			<input type="button" value="검수자 등록" class="btn btn-primary" onclick="location.href='adminWriteCheckerForm.do'">
+			<input type="button" value="검수자 등록" class="btn btn-warning btn-lg text-lg text-white fw-bold" onclick="location.href='adminWriteCheckerForm.do'">
 		</div>
 	</div>
 </body>

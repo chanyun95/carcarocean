@@ -29,11 +29,12 @@
 				</select> <input type="search" id="keyword" name="keyword"
 					class="form-control rounded" placeholder="Search"
 					aria-label="Search" aria-describedby="search-addon"> <input
-					type="submit" class="btn btn-primary" value="검색">
+					type="submit" class="btn btn-warning text-white btn-lg" value="검색">
 			</form>
 		</div>
-		<table
-			class="table text-center align-content-center fw-bold mt-3">
+		
+		<button onclick="writeForm_btn()" class="btn btn-warning text-white">후기 작성</button>
+		<table class="table text-center align-content-center fw-bold mt-3">
 			<thead>
 				<tr class="table-light">
 					<td>#</td>
@@ -52,7 +53,8 @@
        					<td>${item.buy_reg}</td>
 						<td><img
 							src="${pageContext.request.contextPath}/upload/${item.car.car_photo}"
-							width="100px" height="100px"></td>
+							width="100px" height="100px">
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -62,5 +64,15 @@
 	</div>
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	function writeForm_btn(){
+		if(confirm('후기를 작성하시겠습니까?')){
+			let hostIndex = location.href.indexOf( location.host ) + location.host.length;
+			let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+			location.href = contextPath+'/b_re/writeForm.do';
+		}
+	}
+	</script>
 </body>
+
 </html>
