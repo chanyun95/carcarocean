@@ -22,12 +22,14 @@ public class DeleteAction implements Action{
 		int event_num = Integer.parseInt(request.getParameter("event_num"));
 		EventDao dao = EventDao.getDao();
 		EventVo db_event = dao.detailEvent(event_num);
-		
+
 		dao.deleteEvent(event_num);
-		//사진 삭제
-		String[] photos = db_event.getEvent_photo().split(",");
-		for(String pho : photos) {
-			FileUtil.removeFile(request, pho);
+		if(db_event.getEvent_photo() != null) {
+			//사진 삭제
+			String[] photos = db_event.getEvent_photo().split(",");
+			for(String pho : photos) {
+				FileUtil.removeFile(request, pho);
+			}
 		}
 		request.setAttribute("notice_msg", "글 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/event/list.do");

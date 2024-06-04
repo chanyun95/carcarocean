@@ -24,10 +24,12 @@ public class DeleteAction implements Action{
 		NewsVo db_news = dao.detailNews(news_num);
 
 		dao.deleteNews(news_num);
-		//사진 삭제
-		String[] photos = db_news.getNews_photo().split(",");
-		for(String pho : photos) {
-			FileUtil.removeFile(request, pho);
+		if(db_news.getNews_photo() != null) {
+			//사진 삭제
+			String[] photos = db_news.getNews_photo().split(",");
+			for(String pho : photos) {
+				FileUtil.removeFile(request, pho);
+			}
 		}
 		request.setAttribute("notice_msg", "뉴스 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/news/list.do");
