@@ -117,6 +117,7 @@ public class MemberDao {
 				member.setMem_auth(rs.getInt("mem_auth"));
 				member.setMem_passwd(rs.getString("mem_passwd"));
 				member.setMem_photo(rs.getString("mem_photo"));
+				member.setMem_grade(rs.getInt("mem_grade"));
 				member.setMem_email(rs.getString("mem_email"));//회원 탈퇴시 필요
 			}
 		}catch(Exception e) {
@@ -158,6 +159,7 @@ public class MemberDao {
 				member.setMem_id(rs.getString("mem_id"));
 				member.setMem_email(rs.getString("mem_email"));
 				member.setMem_auth(rs.getInt("mem_auth"));
+				member.setMem_grade(rs.getInt("mem_grade"));
 				member.setMem_name(rs.getString("mem_name"));
 				member.setMem_phone(rs.getString("mem_phone"));
 				member.setMem_zipcode(rs.getString("mem_zipcode"));

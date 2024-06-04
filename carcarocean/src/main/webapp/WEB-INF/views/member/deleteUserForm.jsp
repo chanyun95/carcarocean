@@ -51,8 +51,8 @@ $(function(){
 });
 </script>
 </head>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row">
 			<c:set var="sub_title" value="회원탈퇴" scope="request" />
