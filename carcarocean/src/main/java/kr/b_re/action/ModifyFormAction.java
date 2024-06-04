@@ -25,8 +25,7 @@ public class ModifyFormAction implements Action{
 		B_ReDao dao = B_ReDao.getDao();
 		B_ReVo b_re = dao.getB_Re(b_re_num);
 		
-		B_ReDao dao2 = B_ReDao.getDao();
-		List<B_ReVo> buyList = dao2.getBuyList(user_num);
+		List<B_ReVo> buyList = dao.getBuyList(user_num);
 		
 		request.setAttribute("b_re", b_re);
 	    request.setAttribute("buyList", buyList);

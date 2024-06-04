@@ -1,12 +1,17 @@
 package kr.mypage.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.buy.vo.BuyVo;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.vo.SellVo;
 
 public class MyTransactionalFormAction implements Action {
 
@@ -23,9 +28,11 @@ public class MyTransactionalFormAction implements Action {
 		//회원정보
 		MemberDao dao = MemberDao.getDao();
 		MemberVo member = dao.getMember(user_num);
+		List<SellVo> sellList = MyPageDao.mySell(user_num);
+		List<BuyVo> buyList = MyPageDao.myBuy(user_num);
 		
-		//관심게시물 정보 넣어야됨.
-		
+		request.setAttribute("sellList", sellList);
+		request.setAttribute("buyList", buyList);
 		request.setAttribute("member", member);
 		return "/WEB-INF/views/member/myTransactionalForm.jsp";
 	}

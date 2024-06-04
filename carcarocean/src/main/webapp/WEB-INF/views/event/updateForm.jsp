@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이벤트 게시글 수정</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/hjt.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript">
 	window.onload = function(){
 		const myForm = document.getElementById('update_form');
@@ -33,27 +33,26 @@
 <body>
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		<div class="content-main">
-			<h2>이벤트 게시글 수정</h2>
+		<div class="container">
+			<h2 class="mt-5 mb-5">이벤트 게시글 수정</h2>
 				<form id="update_form" action="update.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="event_num" value="${event.event_num}"> 
-					<ul>
-						<li>
-							<label for="event_title">제목</label>
-							<input type="text" name="event_title" id="event_title" value="${event.event_title}" maxlength="50">
+					<ul class="list-unstyled">
+						<li class="mb-2">
+							<label for="event_title" class="fs-4 mt-3 mb-2">제목</label><br>
+							<input type="text" class="form-control" name="event_title" id="event_title" value="${event.event_title}" maxlength="50">
+						</li>
+						<li class="mt-2">
+							<label for="event_content" class="fs-4 mb-2">내용</label>
+							<textarea rows="20" cols="70" class="form-control" name="event_content" id="event_content">${event.event_content}</textarea>
 						</li>
 						<li>
-							<label for="event_content">내용</label>
-							<textarea rows="5" cols="40" name="event_content" id="event_content">${event.event_content}</textarea>
-						</li>
-						<li>
-							<label for="event_photo">이미지</label>
-							<input type="file" name="event_photo" id="event_photo" accept="image/gif, image/png, image/jpeg">
+							<input type="file" name="event_photo" class="form-control mt-3 mb-2" id="event_photo" accept="image/gif, image/png, image/jpeg" multiple>
 							<c:if test="${!empty event.event_photo}">
 								<div id="photo_detail">
 									<img src="${pageContext.request.contextPath}/upload/${event.event_photo}" width="100">
 									<br>
-									<input type="button" value="사진 삭제" id="photo_del">
+									<input type="button" class="btn btn-warning mb-4" value="사진 삭제" id="photo_del">
 								</div>
 								<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 								<script type="text/javascript">
@@ -89,12 +88,17 @@
 							</c:if>
 						</li>
 					</ul>
-					<div class="align-center">
-						<input type="submit" value="수정">
-						<input type="button" value="목록" onclick="location.href='list.do'">
+					<div class="mt-3 mb-5 row justify-content-center">
+					  <div class="col-auto">	
+						<input type="submit" class="btn btn-warning" value="수정">
+					  </div>
+					  <div class="col-auto">
+						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+					  </div>
 					</div>
 				</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

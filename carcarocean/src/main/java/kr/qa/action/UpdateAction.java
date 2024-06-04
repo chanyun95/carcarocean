@@ -36,7 +36,7 @@ public class UpdateAction implements Action{
 		qa.setQa_num(qa_num);
 		qa.setQa_title(request.getParameter("qa_title"));
 		qa.setQa_content(request.getParameter("qa_content"));
-		qa.setQa_photo(FileUtil.createFile(request, "qa_photo"));
+		qa.setQa_photo(FileUtil.createFiles(request));
 		dao.updateQa(qa);
 		
 		if(qa.getQa_photo() != null && !"".equals(qa.getQa_photo())) {

@@ -121,10 +121,10 @@ public class CarDao {
 				else if(keyfield.equals("2")) sub_sql += "AND car_name LIKE '%' || ? || '%'";
 				else if(keyfield.equals("3")) sub_sql += "AND car_size LIKE '%' || ? || '%'";
 			}
-			sql =
-			"SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM car WHERE car_status <= ? "
-			+ sub_sql + " ORDER BY car_status,car_num DESC)a) WHERE rnum >=? AND rnum <=?";
-					
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT c.*, (SELECT mem_num FROM buy WHERE car_num=c.car_num) mem_num  FROM car c WHERE c.car_status <= ? "
+					+ sub_sql + "ORDER BY c.car_status, c.car_num DESC)a) WHERE rnum >=? AND rnum <=?";
+			
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, status);
 			
@@ -161,6 +161,9 @@ public class CarDao {
 				car.setCar_status(rs.getInt("car_status"));
 				car.setChecker_num(rs.getInt("checker_num"));
 				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
+				
+				car.setMem_num(rs.getInt("mem_num"));
+				
 				//로그인 했고
 				if(mem_num!=null) {
 					//좋아요 있으면
@@ -191,7 +194,7 @@ public class CarDao {
 		CarVO car = null;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECT * FROM car WHERE car_num=?";
+			sql = "SELECT c.*, (SELECT mem_num FROM buy WHERE car_num=c.car_num) mem_num  FROM car c where car_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, car_num);
 			rs = pstmt.executeQuery();
@@ -221,6 +224,7 @@ public class CarDao {
 				car.setCar_status(rs.getInt("car_status"));
 				car.setChecker_num(rs.getInt("checker_num"));
 				car.setCar_checker_opinion(rs.getString("car_checker_opinion"));
+				car.setMem_num(rs.getInt("mem_num"));
 			}
 		} catch (Exception e) {
 			throw new Exception(e);
@@ -257,46 +261,72 @@ public class CarDao {
 		return count;
 	}
 	
-	//차량 판매 상태 변경
-	public void updateCarStatus(int car_num) throws Exception{
+	//차량 판매 상태(예약) 변경
+	public void updateCarStatus(int car_num, int car_status) throws Exception{
 		Connection conn = null;
-		PreparedStatement pstmt1 = null;
-		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
 		int cnt = 0;
-		int status = -1;
 		
 		try {
 			conn = DBUtil.getConnection();
-			conn.setAutoCommit(false);
-			sql = "SELECT CAR_STATUS FROM CAR WHERE CAR_NUM=?";
-			pstmt1 = conn.prepareStatement(sql);
-			pstmt1.setInt(1, car_num);
-			rs = pstmt1.executeQuery();
-			if(rs.next()) {
-				status = rs.getInt(1);
-			}
 			
 			sql = "UPDATE CAR SET CAR_STATUS=? WHERE CAR_NUM=?";
 			
-			pstmt2 = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			
-			if(status==0) {
-				pstmt2.setInt(++cnt,1);
-			} else if(status==1) {
-				pstmt2.setInt(++cnt,0);
-			}
-			pstmt2.setInt(++cnt,car_num);
-			pstmt2.executeUpdate();
+			pstmt.setInt(++cnt, car_status);
+			pstmt.setInt(++cnt,car_num);
 			
-			conn.commit();
+			pstmt.executeUpdate();
 		} catch (Exception e) {
-			conn.rollback();
 			throw new Exception(e);
 		} finally {
-			DBUtil.executeClose(null, pstmt1, null);
-			DBUtil.executeClose(rs, pstmt2, conn);
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+	}
+	
+	public void updateCar(CarVO car) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE CAR SET car_maker=?, car_name=?, car_size=?, car_birth=?,"
+					+ " car_cnumber=?,car_fuel_type=?, car_mile=?, car_price=?, car_color=?, car_photo=?, car_auto=?,"
+					+ "car_fuel_efficiency=?, car_use=?, car_cc=?, car_accident=?, car_owner_change=?,"
+					+ "car_design_op=?, car_con_op=?, car_drive_op=?, checker_num=?, car_checker_opinion=? where car_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(++cnt, car.getCar_maker());
+			pstmt.setString(++cnt, car.getCar_name());
+			pstmt.setInt(++cnt, car.getCar_size());
+			pstmt.setString(++cnt, car.getCar_birth());
+			pstmt.setString(++cnt, car.getCar_cnumber());
+			pstmt.setInt(++cnt, car.getCar_fuel_type());
+			pstmt.setInt(++cnt, car.getCar_mile());
+			pstmt.setInt(++cnt, car.getCar_price());
+			pstmt.setString(++cnt, car.getCar_color());
+			pstmt.setString(++cnt, car.getCar_photo());
+			pstmt.setInt(++cnt, car.getCar_auto());
+			pstmt.setFloat(++cnt, car.getCar_fuel_efficiency());
+			pstmt.setInt(++cnt, car.getCar_use());
+			pstmt.setInt(++cnt, car.getCar_cc());
+			pstmt.setString(++cnt, car.getCar_accident());
+			pstmt.setInt(++cnt, car.getCar_owner_change());
+			pstmt.setString(++cnt, car.getCar_design_op());
+			pstmt.setString(++cnt, car.getCar_con_op());
+			pstmt.setString(++cnt, car.getCar_drive_op());
+			pstmt.setInt(++cnt, car.getChecker_num());
+			pstmt.setString(++cnt, car.getCar_checker_opinion());
+			pstmt.setInt(++cnt, car.getCar_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
 }

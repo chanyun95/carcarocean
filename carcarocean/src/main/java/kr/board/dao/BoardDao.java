@@ -282,14 +282,14 @@ public class BoardDao {
 	//신고 등록 
 		public void insertReport(ReportBoardVO reportVO) throws Exception {
 		Connection conn = null; 
-		PreparedStatement pstmt = null; String
-		sqlInsertReport ="INSERT INTO report_board (report_board_num, board_num, mem_num) VALUES (report_board_num_seq.nextval, ?, ?)";
+		PreparedStatement pstmt = null; 
+		String sqlInsertReport ="INSERT INTO report_board (report_board_num, board_num, mem_num) VALUES (report_board_num_seq.nextval, ?, ?)";
 		String sqlUpdateBoard ="UPDATE board SET board_report = board_report + 1 WHERE board_num = ?";
 
 		try { 
 			conn = DBUtil.getConnection(); pstmt =
-			conn.prepareStatement(sqlInsertReport); pstmt.setInt(1,
-			reportVO.getBoard_num()); 
+			conn.prepareStatement(sqlInsertReport); 
+			pstmt.setInt(1, reportVO.getBoard_num()); 
 			pstmt.setInt(2, reportVO.getMem_num());
 			pstmt.executeUpdate();
 			// 두 번째 쿼리를 실행하기 전에 PreparedStatement를 재사용합니다.

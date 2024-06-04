@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>차량 판매후기 쓰기</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript">
 window.onload=function(){
 	const myForm = document.getElementById('write_form');
@@ -36,27 +37,28 @@ window.onload=function(){
 	};
 };
 </script>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 </head>
 <body>
-<div class="page-main">
-		<div class="content-main">
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div style="background-color:#f5f6f9;">
+		<div class="container">
 			<h2>글쓰기</h2>
 			<form id="write_form" action="write.do" method="post" 
-				enctype="mutipart/form-data">
-				<ul>
-					<li>
+				enctype="mutipart/form-data" >
+				<div class="form-group" class="border border-warning p-3">
+				
 						<label for="s_re_title">제목(필수)</label><br>
-						<input type="text" name="s_re_title" id="s_re_title" maxlength="50">
-					</li>
+						<input type="text" name="s_re_title" id="s_re_title" maxlength="50" class="input-check form-control">
+					</div>
 					<!-- <li>
 						<label for="checker_num">차량 검수자(필수)</label><br>
 						<input type="text" name="checker_num" id="checker_num" maxlength="50">
 					</li> -->
                   
-					<li>
+					<div class="form-group">
                     	<label for="sell_num">판매한 차량 식별번호(필수)</label><br>
-                    		<select name="sell_num" id="sell_num">
+                    		<select name="sell_num" id="sell_num" class="form-select" style="width:auto;">
 							<option value="">거래 내역을 선택하세요</option>
 							<c:forEach var="sell" items="${sellList}">
 							
@@ -64,19 +66,20 @@ window.onload=function(){
 								
 							</c:forEach>
 					</select> 
-					</li>
+					</div>
 					
-					<li>
+					<div class="form-group">
 						<label for="s_re_content">내용</label><br>
-						<textarea rows="5" cols="40" name="s_re_content" id="s_re_content"></textarea>
-					</li>
-				</ul>
-				<div class="align-center">
-					<input type="submit" value="등록">
-					<input type="button" value="목록" onclick="location.href='list.do'">
+						<textarea rows="5" cols="40" name="s_re_content" id="s_re_content" class="form-control" placeholder="Leave a comment here"></textarea>
+					</div>
+				
+				<div>
+					<input type="submit" value="등록" class="btn btn-warning text-white">
+					<input type="button" value="목록" class="btn btn-warning text-white" onclick="location.href='list.do'">
 				</div>
 			</form>
 		</div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

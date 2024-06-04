@@ -8,12 +8,15 @@ import java.util.List;
 
 import kr.b_re.vo.B_ReVo;
 import kr.board.vo.BoardVo;
+import kr.buy.vo.BuyVo;
+import kr.favorite_car.vo.Favorite_carVo;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
 import kr.qa.vo.QaVo;
 import kr.s_re.vo.S_ReVo;
 import kr.sell.vo.SellVo;
 import kr.util.DBUtil;
+import kr.util.ShopUtil;
 
 public class MyPageDao {
 	//싱글톤
@@ -60,37 +63,7 @@ public class MyPageDao {
 		}
 		return list;
 	}
-	//관심차량
-	public static List<SellVo> getMyFavoriteCar(int mem_num)throws Exception{
-		List<SellVo> list = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		int cnt = 0;
-		try {
-			//커넥션풀로부터 커넥션 할당
-			conn = DBUtil.getConnection();
-			//SQL문 작성
-			//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
-			sql = "";
-			//PreparedStatement 객체 생성
-			pstmt = conn.prepareStatement(sql);
-			//?에 데이터 바인딩
-			pstmt.setInt(++cnt, mem_num);
-			//SQL문 실행
-			rs = pstmt.executeQuery();
-			list = new ArrayList<>();
-			while(rs.next()) {
-				
-			}
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
-		}
-		return list;
-	}
+	
 	//거래내역
 	public static List<SellVo> myTrade(int mem_num)throws Exception{
 		List<SellVo> list = null;
@@ -277,6 +250,81 @@ public class MyPageDao {
 				DBUtil.executeClose(rs, pstmt, conn);
 			}
 			return blist;
+		}
+		//판매내역
+		public static List<SellVo> mySell(int mem_num)throws Exception{
+			List<SellVo> list = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int cnt = 0;
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
+				sql = "SELECT * FROM (SELECT sell_num, sell_cname, sell_reg, sell_modify_check FROM sell WHERE mem_num = ? AND sell_check=2 "
+	                    + "ORDER BY sell_modify_check DESC) WHERE ROWNUM <= 10";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(++cnt, mem_num);
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				list = new ArrayList<>();
+				while(rs.next()) {
+					SellVo sell = new SellVo();
+					sell.setSell_num(rs.getInt("sell_num"));
+					sell.setSell_cname(rs.getString("sell_cname"));
+					sell.setSell_reg(rs.getString("sell_reg"));
+					sell.setSell_modify_check(rs.getString("sell_modify_check"));
+					list.add(sell);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
+		//구매내역
+		public static List<BuyVo> myBuy(int mem_num)throws Exception{
+			List<BuyVo> list = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int cnt = 0;
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
+				sql = "SELECT * FROM (SELECT buy.buy_num,car.car_name,car.car_price,buy.buy_reg,mem_grade FROM "
+						+ "buy JOIN car ON buy.car_num = car.car_num LEFT OUTER JOIN member_detail d ON buy.mem_num=d.mem_num WHERE buy.mem_num = ? "
+						+ "ORDER BY buy.buy_reg DESC) WHERE ROWNUM <=  10";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(++cnt, mem_num);
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				list = new ArrayList<>();
+				while(rs.next()) {
+					BuyVo buy = new BuyVo(); 
+					buy.setBuy_num(rs.getInt("buy_num"));
+					buy.setCar_name(rs.getString("car_name"));
+					buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
+					buy.setBuy_reg(rs.getString("buy_reg"));
+					list.add(buy);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
 		}
 		
 }

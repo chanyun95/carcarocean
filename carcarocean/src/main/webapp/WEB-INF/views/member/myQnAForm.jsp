@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>나의 문의내역</title>
 </head>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row">
 			<c:set var="sub_title" value="${member.mem_name}님 문의내역"
@@ -17,7 +17,7 @@
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
-                	<h2>내 문의내역</h2><a href = "${pageContext.request.contextPath}/qa/list.do">더보기..</a>
+                	<h2>내 문의내역</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -30,8 +30,8 @@
                         <tbody>
                             <c:forEach var="qa" items="${list}">
                                 <tr>
-                                    <td>${qa.qa_num}</td>
-                                    <td>${qa.qa_title}</td>
+                                    <td width = "250px">${qa.qa_num}</td>
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
                                    	<td>${fn:substring(qa.qa_reg,0,10)}</td>
                                     <c:if test = "${!empty qa.qa_modify}">
 									<td>${fn:substring(qa.qa_modify,0,10)}</td>

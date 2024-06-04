@@ -2,134 +2,226 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내 차 팔기 메인</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script>
     	function openPopup() {
     		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
     	}
 	</script>
 	<style>
-        .background-image {
-            background-image: url('../images/service.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 450px;
+        .background-image1 {
+            background-image: url('../images/logo.png');
+            background-size: inherit;
+            background-position: right;
+            background-repeat: no-repeat;
         }
-
-        .btn-xl {
-            padding: 1.5rem 3.5rem !important;
-            font-size: 2rem !important;
+        .img:hover{
+        	filter:brightness(80%);
+        }
+        
+        .car-name-link:link{
+        	color:black;
+        }
+        .car-name-link:visited{
+        	color:black;
+        }
+        .car-name-link{
+        	text-decoration-line: none;
+        }
+        .sellBox{
+			width: 100vw;
+			margin-left: calc(-50vw + 50%);
         }
     </style>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <body>
 	<!-- 헤더 고정 -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<!-- 판매 신청 부분 -->
-		<div class="bg-light d-flex flex-column justify-content-center background-image" style="height:450px;">
-			<div class="m-3">
-				<div>
-					<h2>내 차 팔기!</h2>
-					<h3>지금 카카오션에 자신의 차를 팔아보세요!</h3>
-					<h1>흥정 없이 높은 가격으로 중고차를 판매하세요!!</h1>
+		<!-- <div class="sellBox rounded background-image my-5 p-5"> -->
+		<div class="sellBox bg-light my-5 p-5">
+			<div class="container p-4">
+				<div class="background-image1">
+					<p class="text-danger fs-4 my-4"><b>내 차 팔기!</b></p>
+					<p class="fs-3 my-4"><b>지금 카카오션에 자신의 차를 팔아보세요!</b></p>
+					<h1><b>흥정 없이 높은 가격</b></h1>
+					<h1><b class="text-danger">12만원 </b><b>상당의 혜택까지 !</b></h1>
+					<p class="small"><b class="text-danger"><i class="bi bi-exclamation-circle-fill"> </i>당일 판매</b>에 한함</p>
 				</div>
-				<div class="p-3">
-					<button onclick="openPopup()" class="btn btn-danger btn-lg btn-xl">간편 신청 ></button>
+				<div class="mt-5">
+					<button onclick="openPopup()" class="btn btn-danger" style="padding: 0.8rem 5rem; font-size: 1.75rem;"><b>간편 신청 ></b></button>
 				</div>
 			</div>
 		</div>
 		<!-- 이벤트 부분 -->
-		<div class="bg-white d-flex flex-row justify-content-between border rounded mt-5 mb-5 p-5">
-			<div>
-				<p class="fs-3">내 차 팔기 이벤트!</p>
-				<p class="fs-4">지금 <b>카카오션</b>에 내 차를 팔면?</p>
-				<p class="fs-2">내 차 팔기 <b>당일 판매시</b> 혜택이 더욱 풍성해집니다!</p>
-			</div>
-			<div class="d-flex align-items-center">
-				<ul class="list-unstyled">
-					<li>
-						대상고객 : 당일 판매 하신 분!
-					</li>
-					<li>
-						상품안내 : 밀키트 포인트!
-					</li>
-					<li>
-						사용처 : www.mychef.kr
-					</li>
-					<li>
-						행사기간 : 
-					</li>
-				</ul>
+		<div class="border rounded my-5 p-5">
+			<div class="row">
+				<div class="col-6">
+					<div class="col">
+						<div class="row-4 px-3">
+							<div class="fs-5"><b>내차팔기 이벤트!</b></div>
+							<div class="fs-4"><b>내차팔기 <b class="text-danger fs-2">당일판매</b>시 혜택이 더욱 풍성해집니다!</b></div>
+						</div>
+						<div class="row-8 mt-4 text-center">
+							<img src="../images/logo.png" width="500" height="300" style="cursor: pointer;">
+						</div>
+					</div>
+				</div>
+				<div class="col-1 border-end"></div>
+				<div class="col-4 ms-5 align-self-center">
+					<ul class="list-unstyled">
+						<li class="py-2">
+							<div class="row">
+								<div class="col-3 text-center">
+									<span class="badge text-bg-danger">대상고객</span>
+								</div>
+								<div class="col-9">
+									차량평가사 방문 당일에 판매하신 고객
+								</div>
+							</div>
+						</li>
+						<li class="py-2">
+							<div class="row">
+								<div class="col-3 text-center">
+									<span class="badge text-bg-danger">상품안내</span>
+								</div>
+								<div class="col-9">
+									밀키트 포인트!
+								</div>
+							</div>
+						</li>
+						<li class="py-2">
+							<div class="row">
+								<div class="col-3 text-center">
+									<span class="badge text-bg-danger">사용처</span>
+								</div>
+								<div class="col-9">
+									www.mychef.kr
+								</div>
+							</div>
+						</li>
+						<li class="py-2">
+							<div class="row">
+								<div class="col-3 text-center">
+									<span class="badge text-bg-danger">행사기간</span>
+								</div>
+								<div class="col-9">
+									2024.05.31 ~ 이벤트 종료일
+								</div>
+							</div>
+						</li>
+						<li class="py-2">
+							<div class="row">
+								<div class="col-3 text-center">
+									<span class="badge text-bg-danger">지급방법</span>
+								</div>
+								<div class="col-9 fw-bold">
+									차량 판매금액 입금 후 최대 3일(영업일) 안에 문자메시지로 발송
+								</div>
+							</div>
+						</li>
+						<li>
+							<span style="font-size:12px;">※ 문자메시지를 받은 뒤 <span class="text-danger">6개월 이내</span>에 마이셰프 회원가입 후 적립해주세요.</span>
+							<p style="font-size:11px;">단, <span class="text-danger">적립 후 1년 이내</span>에 사용 가능합니다.</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<!-- 카카오션의 차별점 -->
-		<div class="bg-light text-center mb-5 p-5">
-			<p class="fs-1"><b>카카오션</b>은</p>
-			<p class="fs-2">무엇이 다른가요?</p>
-			<div class="d-flex flex-row justify-content-between">
-				<div class="border rounded mb-4">
-					<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
-					<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
-				</div>
-				<div class="border rounded mb-4">
-					<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
-					<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
-				</div>
-			</div>
-			<div class="d-flex flex-row justify-content-between">
-				<div class="border rounded">
-					<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
-					<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
-				</div>
-				<div class="border rounded">
-					<p class="fs-5">기다림 NO 하루만에 내 차 팔기</p>
-					<p class="fs-3">카카오션에서 빠르게 판매 해줍니다</p>
+		<div class="my-5">
+			<div class="text-center"><span class="fs-1"><b class="text-warning">카카오션 </b></span><span class="fs-2"><b>무엇이 다른가요?</b></span></div>
+			<div class="bg-light rounded p-4">
+				<div class="row justify-content-between p-4">
+					<div class="row col-6 border rounded mb-5 py-5">
+						<div class="col-3 text-center">
+							<i class="bi bi-speedometer" style="font-size: 4.5rem;"></i>
+						</div>
+						<div class="col-8">
+							<p><b>기다림 NO 하루만에 내 차 팔기</b><p>
+							<b class="text-secondary">K Car가 차량 판매의 모든 과정을 직접 진행하니까 방문견적부터 소유권 이전까지 하루 만에 끝나요.</b>
+						</div>
+					</div>
+					<div class="row col-6 border rounded mb-5 py-5">
+						<div class="col-3 text-center">
+							<i class="bi bi-clipboard2-check-fill" style="font-size: 4.5rem;"></i>
+						</div>
+						<div class="col-8">
+							<p><b>전국 어디든 K Car가 직접 방문</b><p>
+							<b class="text-secondary">제주도, 강원도는 물론 전국 어디든지 K Car 차량평가사가 직접 방문하니 편리해요.</b>
+						</div>
+					</div>
+					<div class="row col-6 border rounded py-5">
+						<div class="col-3 text-center">
+							<i class="bi bi-currency-exchange" style="font-size: 4.5rem;"></i>
+						</div>
+						<div class="col-8">
+							<p><b>수수료 없는 무료 방문 견적</b><p>
+							<b class="text-secondary">견적을 확인 후 판매하지 않아도 돼요! 견적비용이 없어 맘 편히 이용할 수 있어요.</b>
+						</div>
+					</div>
+					<div class="row col-6 border rounded py-5">
+						<div class="col-3 text-center">
+							<i class="bi bi-list-check text-center" style="font-size: 4.5rem;"></i>
+						</div>
+						<div class="col-8">
+							<p><b>부당감가 없이 정확한 견적</b><p>
+							<b class="text-secondary">K Car 차량평가사가 직접 차량을 평가하니까 부당감가 없이 믿고 팔 수 있어요.</b>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 내 차 팔기 진행 방식 -->
-		<div class="container bg-white mb-5">
-			<p class="fs-1 text-center"><b>카카오션</b> 내 차 팔기</p>
-			<p class="fs-2 text-center">이렇게 진행 됩니다.</p>
-			<div class="d-flex justify-content-between">
-				<div class="p-2 border">
-					<p>step1</p>
-					<span>1단계에서는 이런식으로 진행됩니다.</span>
+		<div class="my-5">
+			<p class="fs-1 text-center"><b class="text-warning">카카오션</b> <b>내 차 팔기</b></p>
+			<p class="fs-2 text-center"><b>이렇게 진행 됩니다.</b></p>
+			<div class="row">
+				<div class="col-2 p-2 border rounded-start text-center">
+					<p class="badge text-bg-secondary">STEP1</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">차량번호와 연락처 입력 후 신청</span>
 				</div>
-				<div class="p-2 border">
-					<p>step2</p>
-					<span>2단계에서는 이런식으로 진행됩니다.</span>
+				<div class="col-2 p-2 border text-center">
+					<p class="badge text-bg-secondary">STEP2</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">상담원이 전화 상담으로 내용 확인</span>
 				</div>
-				<div class="p-2 border">
-					<p>step3</p>
-					<span>3단계에서는 이런식으로 진행됩니다.</span>
+				<div class="col-2 p-2 border text-center">
+					<p class="badge text-bg-secondary">STEP3</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">차량 평가사와 전화로 방문 일정 조율</span>
 				</div>
-				<div class="p-2 border">
-					<p>step4</p>
-					<span>4단계에서는 이런식으로 진행됩니다.</span>
+				<div class="col-2 p-2 border text-center">
+					<p class="badge text-bg-secondary">STEP4</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">K Car 차량 평가사가 방문하여 무료 견적</span>
 				</div>
-				<div class="p-2 border">
-					<p>step5</p>
-					<span>5단계에서는 이런식으로 진행됩니다.</span>
+				<div class="col-2 p-2 border text-center">
+					<p class="badge text-bg-secondary">STEP5</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">계약서 작성 후 당일 판매대금 입금</span>
 				</div>
-				<div class="p-2 border">
-					<p>step6</p>
-					<span>6단계에서는 이런식으로 진행됩니다.</span>
+				<div class="col-2 p-2 border rounded-end text-center">
+					<p class="badge text-bg-secondary">STEP6</p><br>
+					<p><b>내차팔기신청</b></p>
+					<span class="text-secondary">차량 인도 및 명의 이전</span>
 				</div>
 			</div>
 		</div>
 		<!-- 최근 올라온 차량 3개만 보여주기 -->
-		<div class="container mb-5">
-			<h2 class="text-center">최근 등록된 차량</h2>
+		<div class="my-5">
+			<h2 class="text-center"><b>최근 등록된 차량</b></h2>
 			<div class="row d-flex justify-content-center">
-			<div class="col-1 align-self-center"><a href="#">이전</a></div>
 			<c:forEach var="car" items="${carList}">
 				<c:if test="${fn:contains(car.car_photo, ',')}">
             		<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -138,14 +230,63 @@
     			<c:if test="${!fn:contains(car.car_photo, ',')}">
     				<c:set var="firstPhoto" value="${car.car_photo}" />
     			</c:if>
-				<div class="col-2 border mt-3 text-center">
-					<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:170px; height:100px;" class="img-fluid img-thumbnail rounded"></a>
-					<p>${car.car_maker} / ${car.car_name}</p>
-					<p><b>${car.car_price}</b>만원</p>
-					<p><b>${car.car_mile}</b>KM</p>
+				<div class="col-3 border mt-3 text-center p-3">
+					<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:200px; height:150px;" class="img img-fluid img-thumbnail rounded"></a>
+					<p><b class="fs-5"><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="car-name-link">${car.car_maker} ${car.car_name}</a></b></p>
+					<p><b><fmt:formatNumber value="${car.car_price}" type="number"/></b>만원</p>
+					<p><b><fmt:formatNumber value="${car.car_mile}" type="number"/></b>km</p>
 				</div>
 			</c:forEach>
-			<div class="col-1 align-self-center"><a href="#">다음</a></div>
+			</div>
+		</div>
+		<!-- 판매 후기 -->
+		<div class="my-5">
+			<h2 class="text-center"><b>판매 후기</b></h2>
+			<div class="row justify-content-between text-center p-4">
+				<div class="border rounded col-3">
+					1<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
+				<div class="border rounded col-3">
+					2<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
+				<div class="border rounded col-3">
+					3<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
+			</div>
+			<div class="row justify-content-between text-center p-4">
+				<div class="border rounded col-3">
+					4<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
+				<div class="border rounded col-3">
+					5<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
+				<div class="border rounded col-3">
+					6<br>
+					판매 후기 사진<br>
+					판매 차량<br>
+					판매 후기 제목<br>
+					판매 후기 내용<br>
+				</div>
 			</div>
 		</div>
 	</div>

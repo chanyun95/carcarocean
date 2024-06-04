@@ -25,7 +25,7 @@ public class WriteAction implements Action{
 		QaVo qa = new QaVo();
 		qa.setQa_title(request.getParameter("qa_title"));
 		qa.setQa_content(request.getParameter("qa_content"));
-		qa.setQa_photo(FileUtil.createFile(request, "qa_photo"));
+		qa.setQa_photo(FileUtil.createFiles(request));
 		qa.setMem_num(user_num);
 		QaDao dao = QaDao.getDao();
 		dao.insertQa(qa);

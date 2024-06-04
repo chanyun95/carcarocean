@@ -8,7 +8,7 @@ import kr.buy.dao.BuyDao;
 import kr.car.dao.CarDao;
 import kr.controller.Action;
 
-public class DeleteBuyAction implements Action{
+public class DeleteReservationAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,14 +20,14 @@ public class DeleteBuyAction implements Action{
 		int car_num = Integer.parseInt(request.getParameter("car_num"));
 		
 		BuyDao buyDao = BuyDao.getDao();
-		buyDao.deleteBuy(user_num, car_num);
+		buyDao.deleteReservation(user_num, car_num);
 		
 		CarDao carDao = CarDao.getDao();
-		carDao.updateCarStatus(car_num);
+		carDao.updateCarStatus(car_num,0);
 		request.setAttribute("car_num", car_num);
 		
-		return "/WEB-INF/views/buy/deleteBuyResult.jsp?car_num="+car_num;
-		
+		return "/WEB-INF/views/buy/deleteReservationResult.jsp?car_num="+car_num;
+		 
 	}
 
 }

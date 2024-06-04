@@ -120,6 +120,7 @@ public class EventDao {
 				event.setEvent_num(rs.getInt("event_num"));
 				event.setEvent_title(StringUtil.useNoHTML(rs.getString("event_title")));
 				event.setEvent_reg(rs.getString("event_reg"));
+				event.setEvent_modify(rs.getString("event_modify"));
 				list.add(event);
 			}
 		}catch(Exception e) {

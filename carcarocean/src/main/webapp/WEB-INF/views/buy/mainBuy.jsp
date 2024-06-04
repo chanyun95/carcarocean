@@ -15,7 +15,7 @@
 	<style>
         /* 검색 창의 너비 조절*/
         #keyword {
-            width: 250px;
+            width: 400px;
             height: 50px;
         }
         /* 판매 완료 차량 사진 흑백 */
@@ -34,6 +34,11 @@
             height: 100%;
             object-fit: cover; /* 이미지가 부모 div를 덮도록 설정 */
         }
+        /* 이미지에 마우스 갖다 대면 흑백 */
+        .image-container:hover{
+        	filter: brightness(85%);
+        }
+        
         /* 하트 아이콘 */
         .overlay-icon {
             position: absolute;
@@ -42,6 +47,15 @@
             font-size: 25px;
             color: red;
         }
+        .menu-name:link{
+        	color:black;
+        }
+        .menu-name:visited{
+        	color:black;
+        }
+        .menu-name{
+        	text-decoration-line: none;
+        }
     </style>
 </head>
 <body>
@@ -49,40 +63,162 @@
  <div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
-         <nav class="col-md-2 bg-light sidebar pt-5 pb-5">
-             <ul class="nav flex-column">
-                 <li class="nav-item">
-                     <a class="nav-link active" href="#">Menu Item 1</a>
+         <nav class="col-md-2 sidebar mt-5">
+             <ul class="nav flex-column bg-light rounded">
+             	<!-- 첫번째 토글 -->
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
+						차종
+					</a>
+					 <div class="collapse mt-3" id="collapseExample1">
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">경차</button>
+							<button class="col-5 btn btn-outline-secondary">소형차</button>
+						</div>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">준중형차</button>
+							<button class="col-5 btn btn-outline-secondary">중형차</button>
+						</div>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">준대형차</button>
+							<button class="col-5 btn btn-outline-secondary">대형차</button>
+						</div>
+					 </div>
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 2</a>
+                 <!-- 절취선 -->
+                 <li>
+                 	<hr size="1" noshade width="100%">
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 3</a>
+                 
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="text-secondary fs-5 menu-name">
+						연식
+					</a>
+					 <div class="collapse mt-3" id="collapseExample2">
+						<form>
+							<div>
+								<input type="number" id="minBirth" name="minBirth" placeholder="최소" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxBirth" name="maxBirth" placeholder="최대" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Menu Item 4</a>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="text-secondary fs-5 menu-name">
+						주행거리
+					</a>
+					 <div class="collapse mt-3" id="collapseExample3">
+						<form>
+							<div>
+								<input type="number" id="minMile" name="minMile" placeholder="최소" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxMile" name="maxMile" placeholder="최대" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="text-secondary fs-5 menu-name">
+						가격
+					</a>
+					 <div class="collapse mt-3" id="collapseExample4">
+						<form>
+							<div>
+								<input type="number" id="minPrice" name="minPrice" placeholder="최소(만원)" style="width: 80px; height: 30px;" class="form-control d-inline">
+								<b class="d-inline"> ~ </b>
+								<input type="number" id="maxPrice" name="maxPrice" placeholder="최대(만원)" style="width: 80px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="text-secondary fs-5 menu-name">
+						색상
+					</a>
+					 <div class="collapse mt-3" id="collapseExample5">
+						<form>
+							<div>
+								<input type="text" id="color" name="color" placeholder="색상 검색" style="width: 160px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="text-secondary fs-5 menu-name">
+						옵션
+					</a>
+					 <div class="collapse mt-3" id="collapseExample6">
+						<form>
+							<div>
+								<input type="text" id="option" name="option" placeholder="옵션 검색" style="width: 160px; height: 30px;" class="form-control d-inline">
+							</div>
+						</form>
+					 </div>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="text-secondary fs-5 menu-name">
+						연료
+					</a>
+					 <div class="collapse mt-3" id="collapseExample7">
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">가솔린</button>
+							<button class="col-5 btn btn-outline-secondary">디젤</button>
+						</div>
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">전기</button>
+							<button class="col-5 btn btn-outline-secondary">수소</button>
+						</div>
+					 </div>
+                 </li>
+                 <li>
+                 	<hr size="1" noshade width="100%">
+                 </li>
+                 <li class="my-3 text-center fw-bold">
+					<a data-bs-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="text-secondary fs-5 menu-name">
+						변속기
+					</a>
+					 <div class="collapse mt-3" id="collapseExample8">
+						<div class="row justify-content-center">
+							<button class="col-5 btn btn-outline-secondary">오토</button>
+							<button class="col-5 btn btn-outline-secondary">수동</button>
+						</div>
+					 </div>
                  </li>
              </ul>
          </nav>
          <!-- 사이드바 제외 메인 컨텐츠 -->
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
-         	<div class="d-flex justify-content-center bg-light p-5 mb-5">
+         	<div class="d-flex justify-content-center rounded bg-light p-5 mb-5">
 				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
 					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
 						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
 						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning ms-2" value="검색">
+					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
+					<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
 				</form>
 			</div>
-	
+			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
 			<!-- 차량 리스트 -->
              <div class="container">
              	<div class="row mb-3">
-
              	<c:forEach var="car" items="${carList}" begin="0" end="11" varStatus="status">
    					<c:if test="${fn:contains(car.car_photo, ',')}">
            				<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -95,17 +231,25 @@
 		                <div class="p-3 border bg-light">
 		                	<!-- 사진 상자 -->
 		                	<div class="image-container ps-3">
+			                	<!-- 
+			                		car.car_status : 판매중인가 아닌가
+			                		car.mem_num : 누가 샀는지
+			                		user_auth : 관리자인지 아닌지
+			                	 -->
 			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
-			                	<c:if test="${car.car_status==0 or user_auth==9}">
+			                	<%-- <c:if test="${(car.car_status==0 or user_auth==9) and empty car.mem_num}"> --%>
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
-			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded img-fluid">
+			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
 		                		</a>
-			                	</c:if>
-			                	<!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐-->
-			                	<c:if test="${car.car_status==1 and user_auth!=9}">
-			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:180px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
-			                	</c:if>
+			                	<%-- </c:if> --%>
+			                	<%-- <!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐 또는 내가 구매한 차량이 아닐때 -->
+			                	<c:if test="${(car.car_status==1 and user_auth!=9) or (!empty car.mem_num and car.mem_num!=user_num)}">
+			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
+			                	</c:if> --%>
+			                	
+			                	
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
+              	     			<!-- 관심차량 아이콘 체크 -->
               	     			<c:if test="${!car.fav_check}">
 		                		<i id="${favIconId}" class="bi bi-heart overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
 		                		</c:if>
@@ -115,13 +259,28 @@
 		                	</div>
 		                	<!-- 설명 -->
 		                	<div>
-			                	<p class="fs-5 mt-3">${car.car_maker} ${car.car_name}<c:if test="${car.car_status==1}"><b style="color:red;"> 예약완료</b></c:if></p>
-			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/>만원</b></p>
-			                	<p class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식 · ${car.car_mile}km · 
-			                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
-			                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
-			                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
-			                	<c:if test="${car.car_fuel_type==4}">수소</c:if></p>
+		                		<!-- 판매 중 -->
+		                		<%-- <c:if test="${car.car_status==0}"> --%>
+			                	<p class="fs-5 mt-3 fw-bold"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a> <c:if test="${car.car_status==1}">
+																																			                		<c:if test="${empty car.mem_num or car.mem_num!=user_num}"><b class="text-danger"> 예약완료</b></c:if>
+																																			                		<c:if test="${!empty car.mem_num and car.mem_num==user_num}"><b class="text-warning"> 내가 예약한 차량</b></c:if>
+																														                						  </c:if>
+			                	<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
+			                	<%-- </c:if> --%>
+			                	<%-- <!-- 판매 완료 링크제거 및 예약완료 표시-->
+			                	<c:if test="${car.car_status==1}">
+			                	<p class="fs-5 mt-3 fw-bold">${car.car_maker} ${car.car_name}<b class="text-danger"> 예약완료</b></p>
+			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></p>
+			                	</c:if> --%>
+			                	
+			                	<div class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식
+			                	<div class="vr mx-1"></div>${car.car_mile}km
+			                	<div class="vr mx-1"></div>
+				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
+				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
+				                	<c:if test="${car.car_fuel_type==3}">전기</c:if>
+				                	<c:if test="${car.car_fuel_type==4}">수소</c:if>
+				                </div>
 		                	</div>
 		                </div>
 		            </div>
@@ -135,35 +294,35 @@
   </div>
 <!-- 푸터 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-		
-	    function favCar(carnum,favIconId) {
-	        $.ajax({
-	        	url:'favCar.do',
-	        	type:'post',
-	        	data:{car_num:carnum},
-	        	dataType:'json',
-	        	success:function(param){
-	        		if(param.result=='success'){
-	    	    		if(param.action=='insertFav'){
-	    	    			alert('관심차량 등록 완료');
-	    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
-	    				} else if(param.action=='removeFav'){
-	    					alert('관심차량 삭제 완료');
-	    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
-	    				}
-	    	    	} else if(param.result=='logout'){
-	     				alert('로그인 후 이용해주세요!');
-	     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
-	    	    	}else {
-	    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
-	    	    	}
-	        	},
-	        	error:function(){
-	        		alert('네트워크에 오류가 발생했습니다!');
-	        	}
-	        });
-	    };
-    </script>
+    function favCar(carnum,favIconId) {
+        $.ajax({
+        	url:'favCar.do',
+        	type:'post',
+        	data:{car_num:carnum},
+        	dataType:'json',
+        	success:function(param){
+        		if(param.result=='success'){
+    	    		if(param.action=='insertFav'){
+    	    			alert('관심차량 등록 완료');
+    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
+    				} else if(param.action=='removeFav'){
+    					alert('관심차량 삭제 완료');
+    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
+    				}
+    	    	} else if(param.result=='logout'){
+     				alert('로그인 후 이용해주세요!');
+     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
+    	    	}else {
+    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
+    	    	}
+        	},
+        	error:function(){
+        		alert('네트워크에 오류가 발생했습니다!');
+        	}
+        });
+    };
+</script>
+</body>
 </html>

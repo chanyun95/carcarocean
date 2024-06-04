@@ -11,12 +11,12 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-    <div class="container">
+    <div class="container" style = "margin-bottom:100px">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mt-5 mb-3">비밀번호 찾기</h2>
+                <h2 class="text-center mt-5 mb-3 text-warning">비밀번호 찾기</h2>
                 <!-- 로그인 폼 -->
-                <form id="findPasswd_form" action="findPasswd.do" method="post" class="border border-warning p-3">
+                <form id="findPasswd_form" action="findPasswd.do" method="post" class="shadow p-3 rounded-4 bg-light">
                     <div class="form-group">
                         <label for="mem_name">이름</label>
                         <input type="text" class="form-control" name="mem_name" id="mem_name" maxlength="12">
@@ -33,15 +33,16 @@
                         <label for="mem_phone">전화번호</label>
                         <input type="text" class="form-control" name="mem_phone" id="mem_phone">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">비밀번호찾기</button>
+                    <button type="submit" class="btn btn-warning btn-block text-white">비밀번호찾기</button>
                 </form>
                 <br>
 	            <div class="d-grid gap-2 d-md-block">
-	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/loginForm.do'">로그인</button>
-	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/modifyUserForm.do'">회원가입</button>
+	 				 <button class="btn btn-warning text-white" type="button" onclick="location.href='${pageContext.request.contextPath}/member/loginForm.do'">로그인</button>
+	 				 <button class="btn btn-warning text-white" type="button" onclick="location.href='${pageContext.request.contextPath}/member/registerUserForm.do'">회원가입</button>
 				</div>
             </div>
         </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -53,6 +53,10 @@ public class PagingUtil {
 			
 			// 이전 block 페이지
 			page = new StringBuffer();
+			// 부트스트랩 추가
+			page.append("<nav aria-label=\"Page navigation example\">");
+			page.append("<ul class=\"pagination justify-content-center\">");
+			
 			if(pageCount > 0) {
 				// 시작 페이지와 마지막 페이지 값 구하기.
 				int startPage = (int) ((currentPage - 1) / pageCount) * pageCount + 1;
@@ -63,37 +67,46 @@ public class PagingUtil {
 				}
 				
 				if (currentPage > pageCount) {
-					page.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
-					page.append("[이전]");
+					page.append("<li class=\"page-item\">");
+					page.append("<a class=\"page-link\" href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
+					page.append("이전");
 					page.append("</a>");
+					page.append("</li>");
 				}
-				//페이지 번호.현재 페이지는 빨간색으로 강조하고 링크를 제거.
+				//페이지 번호.현재 페이지는 disabled
 				for (int i = startPage; i <= endPage; i++) {
 					if (i > totalPage) {
 						break;
 					}
 					if (i == currentPage) {
-						page.append("&nbsp;<b><span style='color:red;'>");
+						page.append("<li class=\"page-item disabled\">");
+						page.append("<a class=\"page-link\">");
 						page.append(i);
-						page.append("</span></b>");
+						page.append("</a>");
+						page.append("</li>");
 					} else {
-						page.append("&nbsp;<a href='"+pageUrl+"?pageNum=");
+						page.append("<li class=\"page-item\">");
+						page.append("<a class=\"page-link\" href='"+pageUrl+"?pageNum=");
 						page.append(i);
 						page.append(sub_url+"'>");
 						page.append(i);
 						page.append("</a>");
 					}
-					page.append("&nbsp;");
 				}
 				// 다음 block 페이지
 				if (totalPage - startPage >= pageCount) {
-					page.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
-					page.append("[다음]");
+					page.append("<li class=\"page-item\">");
+					page.append("<a class=\"page-link\" href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
+					page.append("다음");
 					page.append("</a>");
+					page.append("</li>");
 				}
 			}else {
 				page.append("<b>[warning]</b>pageCount는 1이상 지정해야 페이지수가 표시됩니다.");
 			}
+			
+			page.append("</ul>");
+			page.append("</nav>");
 		}
 	}
 	public StringBuffer getPage() {

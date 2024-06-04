@@ -18,6 +18,7 @@ public class DetailAction implements Action{
 		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
 		
 		NoticeDao dao = NoticeDao.getDao();
+		//조회수 증가
 		dao.updateReadCount(notice_num);
 		
 		NoticeVo notice = dao.getNotice(notice_num);
@@ -27,7 +28,6 @@ public class DetailAction implements Action{
 		String[] photo = notice.getNotice_photo().split(",");
 		*/
 		
-		request.setAttribute("notice_photo", notice.getNotice_photo());
 		request.setAttribute("notice", notice);
 		request.setAttribute("user_num", user_num);
 		

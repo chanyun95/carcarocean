@@ -87,6 +87,7 @@ $(function(){
 			data: {pageNum:pageNum,rowCount:rowCount,qa_num:$('#qa_num').val()},
 			dataType: 'json',
 			success:function(param){
+				
 				//로딩 이미지 감추기
 				$('#loading').hide();
 				count = param.count;
@@ -102,16 +103,14 @@ $(function(){
 					output += '<p>' + item.qa_comm_content + '</p>';
 					
 					if(item.qa_comm_modify){
-						output += '<span class="modify-date">최근 수정일: ' + item.qa_comm_modify + '</span>';
+						output += '<span class="modify-date mb-5">' + item.qa_comm_modify.substring(0,10) + '</span><br>';
 					}else{
-						output += '<span class="modify-date">최근 등록일: ' + item.qa_comm_reg + '</span>';
+						output += '<span class="modify-date mb-5">' + item.qa_comm_reg.substring(0,10) + '</span><br>';
 					}
 					if(param.auth==9){
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn btn btn-warning mt-2">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn btn btn-warning mt-2">';
 					}	
-					
-					output += '<hr size="1" noshade width="100%">';
 					output += '</div>';
 					output += '</div>';
 					
@@ -151,11 +150,11 @@ $(function(){
 		//댓글 수정폼 UI
 		let modifyUI = '<form id="mre_form">';
 		modifyUI += '<input type="hidden" name="qa_comm_num" id="mre_num" value="'+ qa_comm_num +'">';
-		modifyUI += '<textarea rows="3" cols="50" name="qa_comm_content" id="mre_content" class="rep-content">'+ qa_comm_content +'</textarea>';
+		modifyUI += '<textarea rows="7" cols="100" name="qa_comm_content" id="mre_content" class="rep-content">'+ qa_comm_content +'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mer_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += ' <input type="submit" class="btn btn-warning" value="수정">';
+		modifyUI += ' <input type="button" value="취소" class="btn btn-warning re-reset">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';
@@ -239,7 +238,7 @@ $(function(){
 		$.ajax({
 			url: 'deleteQa_Comment.do',
 			type: 'post',
-			data: {qa_comm_num:qa_comm_num},
+			data: {qa_comm_num:qa_comm_num,qa_num:$('#qa_num').val()},
 			dataType: 'json',
 			success:function(param){
 				if(param.result == 'logout'){

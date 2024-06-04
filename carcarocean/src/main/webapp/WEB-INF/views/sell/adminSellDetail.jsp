@@ -24,7 +24,7 @@
 	<div class="container">
 		<hr size="1" width="100%" noshade>
 		<h1 class="text-center p-4">검수 대기 차량 상세 정보</h1>
-		<span class="fs-3 float-start">${sell.sell_maker} ${sell.sell_cname}</span><br>
+		<span class="fs-3 float-start fw-bold">${sell.sell_maker} ${sell.sell_cname}</span><br>
 		<span class="float-end p-4"><b>${sell.sell_name} | ${sell.sell_reg}</b></span><br>
 		<div class="mt-3 p-4">
 			<ul class="list-unstyled">
@@ -57,15 +57,16 @@
                             	  <c:when test="${sell.sell_date == 0}">즉시</c:when>
                             	  <c:when test="${sell.sell_date == 1}">7일 이내</c:when>
                             	  <c:when test="${sell.sell_date == 2}">30일 이내</c:when>
-                            	  <c:otherwise>알 수 없음</c:otherwise>
                         	  </c:choose>
 				</li>
 				<li>
-					검수 진행 상황 : <strong class="fs-3"><c:choose>
-								 	 <c:when test="${sell.sell_check == 0}">미검수</c:when>
-								     <c:when test="${sell.sell_check == 1}">검수중</c:when>
-									 <c:when test="${sell.sell_check == 2}">검수 완료</c:when>
-								 </c:choose></strong>
+					검수 진행 상황 : <strong class="fs-3">
+								<c:choose>
+								 	 <c:when test="${sell.sell_check == 0}"><span class="text-dark">미검수</span></c:when>
+								     <c:when test="${sell.sell_check == 1}"><span class="text-primary">검수중</span></c:when>
+									 <c:when test="${sell.sell_check == 2}"><span class="text-danger">검수 완료</span></c:when>
+								 </c:choose>
+								 </strong>
 				</li>
 				<c:if test="${!empty sell.sell_modify_check}">검수 상태 변경일 : ${sell.sell_modify_check}</c:if>
 			</ul>
