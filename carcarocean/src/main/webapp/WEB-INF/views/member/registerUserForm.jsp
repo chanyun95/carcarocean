@@ -21,7 +21,7 @@ $(function(){
 		$.ajax({
 			url:'checkDuplicatedId.do',
 			type:'post',
-			data:{id:$('#mem_id').val()},
+			data:{mem_id:$('#mem_id').val()},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'idNotFound'){
@@ -30,7 +30,7 @@ $(function(){
 				}else if(param.result=='idDuplicated'){
 					idChecked = 0;
 					$('#message_mem_id').css('color','red').text('중복된 ID');
-					$('#message_mem_id').val('').focus();
+					$('#mem_id').val('').focus();
 				}else{
 					idChecked = 0;
 					alert('아이디 중복 체크 오류 발생');
@@ -47,7 +47,7 @@ $(function(){
 	//아이디 중복 안내 메시지 초기화 및 아이디 중복 값 초기화 (등록가능한 ID 입력 후 재입력시 안내 메시지가 사라지게함)
 	$('#register_form #mem_id').keydown(function(){
 		idChecked = 0;
-		$('#message_id').text('');
+		$('#message_mem_id').text('');
 	});//end of keydown
 	//회원 정보 등록 유효성 체크
 	$('#register_form').submit(function(){
@@ -62,7 +62,7 @@ $(function(){
 			}
 			if(items[i].id =='mem_id'&&!/^[A-Za-z0-9]{4,12}$/.test($('#mem_id').val())){
 				alert('영문 또는 숫자 사용, 최소 4자 ~ 최대 12자 사용');
-				$('#id').val('').focus();
+				$('#mem_id').val('').focus();
 				return false;
 			}
 			if(items[i].id == 'mem_id' && idChecked ==0) {
@@ -80,7 +80,6 @@ $(function(){
 	
 });
 </script>
-
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -95,7 +94,7 @@ $(function(){
 			<div class="form-group">
 				<label for="mem_id">아이디</label>
 				 <input type="text" id="mem_id" name="mem_id" maxlength="12" autocomplete="off" class="input-check form-control">
-    			<input type="button" value="중복확인" id="mem_id_check" class="btn btn-warning text-white">	
+    			<input type="button" value="ID중복체크" id="mem_id_check" class="btn btn-warning text-white">	
 				<span id="message_mem_id"></span>
 				<div class="form-notice">*영문 또는 숫자(4자~12자)</div><br>
 			</div>
