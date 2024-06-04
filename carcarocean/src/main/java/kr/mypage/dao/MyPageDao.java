@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import kr.b_re.vo.B_ReVo;
 import kr.board.vo.BoardVo;
 import kr.buy.vo.BuyVo;
@@ -326,5 +328,6 @@ public class MyPageDao {
 			}
 			return list;
 		}
-		
+		//검수중인 항목 숫자
+
 }
