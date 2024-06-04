@@ -81,6 +81,7 @@ public class NoticeDao {
 		}
 		return count;
 	}
+
 	//공지사항 글 목록, 검색 글 목록
 	public List<NoticeVo> getListNotice(int start,int end,String keyfield,String keyword)throws Exception{
 		Connection conn = null;
@@ -126,6 +127,46 @@ public class NoticeDao {
 		}
 		return list;
 	}
+	//(메인)공지사항 글 목록, 검색 글 목록
+		public List<NoticeVo> getListNoticeMain(int start,int end)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql =null;
+			List<NoticeVo> list = null;
+			int cnt = 0;
+			try {
+				conn = DBUtil.getConnection();
+				
+				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM notice ORDER BY "
+						+ "notice_impt DESC,notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
+
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(++cnt, start);
+				pstmt.setInt(++cnt, end);
+
+				rs = pstmt.executeQuery();
+				list = new ArrayList<NoticeVo>();
+				while(rs.next()) {
+					NoticeVo notice = new NoticeVo();
+					notice.setNotice_num(rs.getInt("notice_num"));
+					notice.setNotice_photo(rs.getString("notice_photo"));
+					notice.setNotice_title(StringUtil.useNoHTML(rs.getString("notice_title")));
+					notice.setNotice_content(StringUtil.useNoHTML(rs.getString("notice_content")));
+					notice.setNotice_reg(rs.getString("notice_reg"));
+					notice.setNotice_hit(rs.getInt("notice_hit"));
+					notice.setNotice_impt(rs.getInt("notice_impt"));
+					notice.setNotice_modify(rs.getString("notice_modify"));
+					list.add(notice);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 	//공지사항 글 상세
 	public NoticeVo getNotice(int notice_num)throws Exception{
 		Connection conn = null;
