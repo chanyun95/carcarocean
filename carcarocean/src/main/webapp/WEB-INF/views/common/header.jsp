@@ -75,7 +75,7 @@
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
-                        <a class="dropdown-item" href="#">내 판매 현황</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mySellList.do">내 판매 현황</a>
                      </div>
                   </li>
                   <!-- 세번째 메뉴 -->

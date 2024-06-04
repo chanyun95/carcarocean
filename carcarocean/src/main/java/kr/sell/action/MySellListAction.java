@@ -11,23 +11,14 @@ import kr.sell.dao.SellDao;
 import kr.sell.vo.SellVo;
 import kr.util.PagingUtil;
 
-public class AdminSellListAction implements Action{
+public class MySellListAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//관리자인지 확인
-		//로그인 체크&관리자 체크
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
-		Integer user_auth = (Integer)session.getAttribute("user_auth");
-		//로그인 안되어 있을 시 로그인 폼으로 이동
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/member/loginForm.jsp";
 		}
-		//관리자아닌데 잘못된 접근시 main.do로 이동
-		if(user_auth!=9) {
-			return "/WEB-INF/views/common/warningPage.jsp";
-		}
-		
 		request.setCharacterEncoding("utf-8");
 		
 		// 확인 끝
@@ -44,15 +35,15 @@ public class AdminSellListAction implements Action{
 			sell_check="0";
 		}
 		
-		SellDao dao = SellDao.getDao();
-		int count = dao.getSellListCount(keyfield, keyword, sell_check,null);
+		SellDao sellDao = SellDao.getDao();
+		int count = sellDao.getSellListCount(keyfield, keyword, sell_check, user_num);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum),count,15,10,"adminSellList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum),count,10,10,"mySellList.do");
 		
 		List<SellVo> list = null;
 		if(count > 0) {
-			list = dao.getSellList(page.getStartRow(), page.getEndRow(), keyfield, keyword, sell_check ,null);
+			list = sellDao.getSellList(page.getStartRow(), page.getEndRow(), keyfield, keyword, sell_check, user_num);
 		}
 		
 		request.setAttribute("count", count);
@@ -61,7 +52,8 @@ public class AdminSellListAction implements Action{
 		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("sell_check", sell_check);
 		
-		return "/WEB-INF/views/sell/adminSellList.jsp";
+		
+		return "/WEB-INF/views/sell/mySellList.jsp";
 	}
 
 }
