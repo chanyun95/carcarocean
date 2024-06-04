@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.info_board.vo.InfoBoardVo;
+import kr.info_board.vo.ReportInfoVo;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
 
@@ -203,7 +204,6 @@ public class InfoBoardDao {
 		}
 	}
 	//글 삭제
-	/*
 	public void deleteBoard(int info_board_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -244,7 +244,7 @@ public class InfoBoardDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	*/
+
 	//파일 삭제
 	public void deleteFile(int info_board_num) throws Exception{
 		Connection conn = null;
@@ -264,8 +264,84 @@ public class InfoBoardDao {
 		}
 	}
 	//신고 등록
-	
+	public void insertReport(ReportInfoVo reportVo) throws Exception {
+	    Connection conn = null;
+	    PreparedStatement pstmtInsert = null;
+	    PreparedStatement pstmtUpdate = null;
+	    String sqlInsertReport = "INSERT INTO report_info_board (report_info_board_num, info_board_num, mem_num) VALUES (report_info_board_seq.nextval, ?, ?)";
+	    String sqlUpdateBoard = "UPDATE info_board SET info_board_report = info_board_report + 1 WHERE info_board_num = ?";
+	    try {
+	        conn = DBUtil.getConnection();
+	        
+	        // 첫 번째 PreparedStatement 준비
+	        pstmtInsert = conn.prepareStatement(sqlInsertReport);
+	        pstmtInsert.setInt(1, reportVo.getInfo_board_num());
+	        pstmtInsert.setInt(2, reportVo.getMem_num());
+	        pstmtInsert.executeUpdate();
+	        
+	        // clearParameters() 메서드 사용
+	        pstmtInsert.clearParameters();
+	        
+	        // 두 번째 PreparedStatement 준비
+	        pstmtUpdate = conn.prepareStatement(sqlUpdateBoard);
+	        pstmtUpdate.setInt(1, reportVo.getInfo_board_num());
+	        pstmtUpdate.executeUpdate();
+	    } catch (Exception e) {
+	        throw new Exception(e);
+	    } finally {
+	        // 리소스 해제
+	        DBUtil.executeClose(null, pstmtInsert, null);
+	        DBUtil.executeClose(null, pstmtUpdate, conn);
+	    }
+	}
+
 	//회원번호와 게시물 번호를 이용한 신고 정보
-	
+	public ReportInfoVo checkReport(ReportInfoVo reportVo) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReportInfoVo check = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM report_info_board WHERE info_board_num=? AND mem_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reportVo.getInfo_board_num());
+			pstmt.setInt(2, reportVo.getMem_num());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				check = new ReportInfoVo();
+				check.setInfo_board_num(rs.getInt("info_board_num"));
+				check.setMem_num(rs.getInt("mem_num"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return check;
+	}
 	//신고수
+	public int checkReportCount(int info_board_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count = 0;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT info_board_report FROM info_board WHERE info_board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, info_board_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("info_board_report");
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return count;
+	}
 }

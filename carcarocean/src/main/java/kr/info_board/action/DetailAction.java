@@ -23,9 +23,10 @@ public class DetailAction implements Action{
 		info.setInfo_board_title(StringUtil.useNoHTML(info.getInfo_board_title()));
 		info.setInfo_board_content(StringUtil.useBrNoHTML(info.getInfo_board_content()));
 		
-		/* int count = dao.checkReportCount(info_board_num); */
-		/* request.setAttribute("check_redirect", count); */
+		int count = dao.checkReportCount(info_board_num);
+		request.setAttribute("check_redirect", count);
 		request.setAttribute("info", info);
+		
 		return "/WEB-INF/views/info_board/detail.jsp";
 	}
 

@@ -24,13 +24,17 @@ public class UpdateFormAction implements Action{
 		InfoBoardDao dao = InfoBoardDao.getDao();
 		InfoBoardVo info = dao.getInfo(info_board_num);
 		if (info == null) {
-            // 게시물이 존재하지 않는 경우 처리
-            return "/WEB-INF/views/common/error.jsp"; // 또는 적절한 오류 페이지로 리다이렉트
+			request.setAttribute("notice_msg", "게시물이 존재하지 않습니다.");
+			request.setAttribute("notice_url", request.getContextPath() + "/main/main.do");
+			
+			return "/WEB-INF/views/common/alert_view.jsp";
         }
 
         if (user_num != info.getMem_num()) {
-            // 로그인된 사용자와 게시물 작성자가 다른 경우 처리
-            return "/WEB-INF/views/common/notice.jsp"; // 또는 적절한 안내 페이지로 리다이렉트
+        	request.setAttribute("notice_msg", "잘못된 접근입니다.");
+			request.setAttribute("notice_url", request.getContextPath() + "/main/main.do");
+			
+			return "/WEB-INF/views/common/alert_view.jsp";
         }
 
         // 수정 폼으로 이동

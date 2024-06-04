@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.report.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.reply.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -32,11 +35,24 @@
 		<div class="text-center">
 			<img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="rounded" width="200px" height="200px">
 		</div>
+
 		</c:if>
+
 		<p class="fs-4">
+
 			${board.board_content}
 		</p>
 		<hr size="1" noshade="noshade" width="100%">
+
+		<ul class="detail-sub">
+			<li>
+				<!-- 신고 -->
+				<p id="report_status_text"></p>
+				<%-- <img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}"> --%>
+				<button class="btn btn-outline-danger" onclick="" id="output_report" data-num="${board.board_num}" data-checkRedirect="${check_redirect}"><i id="reportIcon" class="bi bi-exclamation-octagon-fill">신고</i></button>
+			</li>
+		</ul>
+
 		<div class="text-end">
 			<div>
 				<c:if test="${!empty board.board_modify}">

@@ -24,7 +24,10 @@ public class DeleteAction implements Action{
 		BoardVo db_board = dao.getBoard(board_num);
 		
 		if(user_num != db_board.getMem_num()) {
-			return "/WEB-INF/views/common/notice.jsp";
+			request.setAttribute("notice_msg", "잘못된 접근입니다.");
+			request.setAttribute("notice_url", request.getContextPath() + "/main/main.do");
+			
+			return "/WEB-INF/views/common/alert_view.jsp";
 		}
 		dao.deleteBoard(board_num);
 		

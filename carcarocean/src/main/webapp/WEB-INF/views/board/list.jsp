@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <script type="text/javascript">
 window.onload=function(){
 	const myForm = document.getElementById('search_form');
@@ -26,6 +26,57 @@ window.onload=function(){
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
+		<h1 class="text-center">게시판 목록</h1>
+		<form  action="list.do" method="get">
+			<div class="d-flex justify-content-between">
+					<select name="keyfield" class="form-select" style="width:auto;">
+						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
+					</select>
+				
+						<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+						<input type="submit" value="검색" class="btn btn-primary">
+					 </div>
+		</form>
+		<div class="float-end">
+			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
+				<c:if test="${empty user_num}">disabled="disabled"</c:if>>
+			<input type="button" value="목록" onclick="location.href='list.do'">
+			<input type="button" value="홈으로" onclick="${pageContext.request.contextPath}/main/main.do">
+		</div>
+		<c:if test="${count == 0}">
+		<div class="result-display">
+			표시할 게시물이 없습니다.
+		</div>
+		</c:if>
+		<c:if test="${count > 0}">
+		<table class="table table-hover">
+			<thead class="table-light">
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="board" items="${list}">
+			<c:if test="${board.board_report < 10}">
+			<tr>
+				<td>${board.board_num}</td>
+				<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+				<td>${board.mem_id}</td>
+				<td>${board.board_reg}</td>
+				<td>${board.board_hit}</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+						</tbody>
+		</table>
+		<div class="text-center">${page}</div>
+		</c:if>
 	<h1 class="text-center">게시판 목록</h1>
 	<hr size="1" width="100%" noshade="noshade">
 	<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
@@ -43,6 +94,7 @@ window.onload=function(){
 		<input type="button" value="목록" class="btn btn-warning text-white" onclick="location.href='list.do'">
 		<input type="button" value="홈으로" class="btn btn-warning text-white" onclick="${pageContext.request.contextPath}/main/main.do">
 	</div>
+
 	<c:if test="${count == 0}">
 	<div class="result-display">
 		표시할 게시물이 없습니다.

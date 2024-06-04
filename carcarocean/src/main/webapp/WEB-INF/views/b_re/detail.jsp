@@ -185,6 +185,7 @@ $(function(){
 					//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
 					$('#output').empty();
 				}
+
 			    $(param.list).each(function(index, item) {
 			        let output = '<div class="card mb-3 border-0">';
 			        output += '<div class="card-body">';

@@ -30,8 +30,8 @@ $(function(){
 					let output = '<div class="item">';
 					output += '<h4>' + item.mem_id + '</h4>';
 					output += '<div class="sub-item">';
-					output += '<p>' + item.info_board_content + '</p>';
-					output += '<span>등록일 : ' + item.info_board_reg + '</span>';
+					output += '<p>' + item.info_board_comm_content + '</p>';
+					output += '<span>등록일 : ' + item.info_board_comm_reg + '</span>';
 					/*output += '<input type="button" data-renum="' + item.bor_comm_num + '" value="신고" class="report-btn">';*/
 					output += '<hr size="1" noshade width="100%">';
 					output += '</div>';
