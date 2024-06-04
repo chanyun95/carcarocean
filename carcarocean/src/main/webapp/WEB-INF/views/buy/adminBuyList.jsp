@@ -30,13 +30,13 @@
 		<table class="table table-hover text-center align-content-center fw-bold mt-3">
 			<thead>
 				<tr class="table-light">
-					<td>#</td>
-					<td>차량</td>
-					<td>이름</td>
-					<td>아이디</td>
-					<td>이메일</td>
-					<td>차량사진</td>
-					<td></td>
+					<th>#</th>
+					<th>차량</th>
+					<th>이름</th>
+					<th>아이디</th>
+					<th>이메일</th>
+					<th>차량사진</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,7 +47,7 @@
 						<td>${item.member.mem_name}</td>
 						<td>${item.member.mem_id}</td>
 						<td>${item.member.mem_email}</td>
-						<td><img src="${pageContext.request.contextPath}/upload/${item.car.car_photo}" width="100px" height="100px"></td>
+						<td><img src="${pageContext.request.contextPath}/upload/${item.car.car_photo}" width="100px" height="100px" class="rounded"></td>
 						<td><button class="btn btn-danger" onclick="insertBuy_btn(this)" data-carnum="${item.car.car_num}" data-memnum="${item.member.mem_num}">구매확정</button></td>
 					</tr>
 				</c:forEach>

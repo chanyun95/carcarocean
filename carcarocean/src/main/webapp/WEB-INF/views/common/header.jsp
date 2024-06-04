@@ -55,7 +55,7 @@
          <div class="container">
             <!-- 로고 시작 -->
             <div class="pe-3">
-            	<a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/mainlogo.png" width="200"></a>  
+            	<a href="${pageContext.request.contextPath}/main/main.do" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/logo.png" width="200"></a>  
             </div>
             <!-- 로고 끝 -->
             <!-- 메뉴 시작 -->
@@ -75,15 +75,15 @@
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
-                        <a class="dropdown-item" href="#">내 판매 현황</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mySellList.do">내 판매 현황</a>
                      </div>
                   </li>
                   <!-- 세번째 메뉴 -->
                   <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>커뮤니티</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
-                        <a class="dropdown-item" href="#">정보공유 게시판</a>
-                        <a class="dropdown-item" href="#">자동차 뉴스</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/info_board/list.do">정보공유 게시판</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/new/list.do">자동차 뉴스</a>
                      </div>
                   </li>
                   <!-- 네번째 메뉴 -->

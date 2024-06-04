@@ -48,13 +48,14 @@ public class SellDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	// 전체 판매 목록 (검수 대기 중) - 관리자가 보는 목록
-	public List<SellVo> getSellList(int start, int end, String keyfield, String keyword, String sell_check) throws Exception{
+	// 전체 판매 목록 (검수 대기 중)
+	public List<SellVo> getSellList(int start, int end, String keyfield, String keyword, String sell_check, Integer mem_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
 		String sub_sql = "";
+		String sub_sql2 = "";
 		List<SellVo> list = null;
 		int cnt = 0;
 		
@@ -70,13 +71,19 @@ public class SellDao {
 					sub_sql += "AND sell_cname LIKE '%' || ? || '%'";
 				}
 			}
-			sql = "SELECT * FROM (SELECT a.*,rownum rnum from (select * from sell WHERE sell_check=? " + sub_sql + " ORDER BY sell_reg DESC)a) WHERE rnum>=? AND rnum<=?";
+			if(mem_num!=null) {
+				sub_sql2 = " AND MEM_NUM=?";
+			}
+			sql = "SELECT * FROM (SELECT a.*,rownum rnum from (select * from sell WHERE sell_check=? " + sub_sql + sub_sql2 + " ORDER BY sell_reg DESC)a) WHERE rnum>=? AND rnum<=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(++cnt, sell_check);
 			if(keyword!=null&&!"".equals(keyword)) {
 				//검색 처리? 바운딩
 				pstmt.setString(++cnt, keyword);
+			}
+			if(mem_num!=null) {
+				pstmt.setInt(++cnt, mem_num);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
@@ -98,6 +105,7 @@ public class SellDao {
 				sell.setSell_check(rs.getInt("sell_check"));
 				sell.setSell_reg(rs.getString("sell_reg"));
 				sell.setSell_modify(rs.getString("sell_modify"));
+				sell.setSell_modify_check(rs.getString("sell_modify_check"));
 				sell.setMem_num(rs.getInt("mem_num"));
 				list.add(sell);
 			}
@@ -109,12 +117,13 @@ public class SellDao {
 		return list;
 	}
 		// 전체 판매 목록 갯수(검수 대기 중) - 관리자가 보는 목록
-		public int getSellListCount(String keyfield, String keyword, String sell_check) throws Exception{
+		public int getSellListCount(String keyfield, String keyword, String sell_check, Integer mem_num) throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = null;
 			String sub_sql = "";
+			String sub_sql2 = "";
 			//sql문에 쓰는 cnt
 			int cnt = 0;
 			//return값
@@ -131,11 +140,17 @@ public class SellDao {
 						sub_sql += "AND sell_cname LIKE '%' || ? || '%'";
 					}
 				}
-				sql = "SELECT COUNT(*) FROM sell WHERE sell_check=? " + sub_sql;
+				if(mem_num!=null) {
+					sub_sql2 = " AND mem_num=?";
+				}
+				sql = "SELECT COUNT(*) FROM sell WHERE sell_check=? " + sub_sql + sub_sql2;
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(++cnt, sell_check);
 				if(keyword!=null&&!"".equals(keyword)) {
 					pstmt.setString(++cnt, keyword);
+				}
+				if(mem_num!=null) {
+					pstmt.setInt(++cnt, mem_num);
 				}
 				
 				rs = pstmt.executeQuery();
