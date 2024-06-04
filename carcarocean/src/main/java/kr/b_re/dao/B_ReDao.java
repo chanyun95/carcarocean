@@ -136,10 +136,10 @@ public class B_ReDao {
 				b_re.setB_re_num(rs.getInt("b_re_num"));
 				b_re.setBuy_num(rs.getInt("buy_num"));
 				b_re.setCar_num(rs.getInt("car_num"));
+				b_re.setCar_maker(rs.getString("car_maker"));
 				b_re.setCar_name(rs.getString("car_name"));
 				b_re.setCar_photo(rs.getString("car_photo"));
 				b_re.setB_re_title(rs.getString("b_re_title"));
-				b_re.setB_re_content(rs.getString("b_re_content"));
 				b_re.setB_re_reg(rs.getString("b_re_reg"));
 				
 				list.add(b_re);
@@ -164,6 +164,8 @@ public class B_ReDao {
 			
 			sql = "SELECT * FROM b_re r "
 				+ "JOIN buy b ON r.buy_num = b.buy_num "
+				+ "JOIN member m ON b.mem_num = m.mem_num "
+				+ "JOIN member_detail d ON m.mem_num = d.mem_num "
 				+ "JOIN car c ON b.car_num = c.car_num "
 				+ "JOIN checker k ON c.checker_num = k.checker_num "
 				+ "WHERE b_re_num=?";
@@ -175,6 +177,8 @@ public class B_ReDao {
 			if(rs.next()) {
 				b_re = new B_ReVo();
 				b_re.setMem_num(rs.getInt("mem_num"));
+				b_re.setMem_id(rs.getString("mem_id"));
+				b_re.setMem_photo(rs.getString("mem_photo"));
 				b_re.setB_re_num(rs.getInt("b_re_num"));
 				b_re.setB_re_title(rs.getString("b_re_title"));
 				b_re.setB_re_reg(rs.getString("b_re_reg"));

@@ -14,8 +14,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div style="background-color:#f5f6f9;">
 <div class="container">
-	<div class="row">
-	<main class="col-md-10 pt-5 pb-5">
+	<main class="pt-5 pb-5">
 		<h2>판매후기게시판 목록</h2>
 		<div class="d-flex justify-content-center p-5 mb-5">
 		<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
@@ -27,10 +26,6 @@
 					</select>
 				<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
 				<input type="submit" class="btn btn-warning text-white ms-2" value="검색">
-				
-			
-				
-			
 		</form>
 		</div>
 		<div class="row justify-content-end"> 
@@ -84,7 +79,6 @@
 		</c:if>
 		</main>
 	</div>
-</div>
 </div>
 <!--챗봇 끝  -->
     <jsp:include page="/WEB-INF/views/common/chatbot.jsp" />
