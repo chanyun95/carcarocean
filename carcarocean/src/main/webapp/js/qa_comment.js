@@ -244,7 +244,7 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인해야 삭제할 수 있습니다.');
 				}else if(param.result == 'success'){
-					alert('삭제 완료!');
+					alert('답변이 삭제되었습니다.');
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 삭제할 수 없습니다.');

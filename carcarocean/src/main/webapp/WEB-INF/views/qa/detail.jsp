@@ -16,7 +16,14 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<h2>${qa.qa_title}</h2>
-			<div class="col text-end mt-2 pr-3"> ${qa.mem_id} |
+			<div class="col text-end mt-2 pr-3"> 
+				<c:if test="${!empty qa.mem_photo}">
+				<img src="${pageContext.request.contextPath}/upload/${qa.mem_photo}" width="50" height="50" class="my-photo">
+				</c:if>
+				<c:if test="${empty qa.mem_photo}">
+				<img src="${pageContext.request.contextPath}/images/face.png" width="50" height="50" class="my-photo">
+				</c:if>
+					${qa.mem_id} |
 				<c:if test="${!empty qa.qa_modify}">
 					${fn:substring(qa.qa_modify,0,10)}
 				</c:if>
@@ -26,9 +33,9 @@
 			</div>
 			<hr size="1" noshade="noshade" width="100%">
 			<c:if test="${!empty qa.qa_photo}">
-				<div class="text-center">
+				<div class="text-center mb-5">
 				<c:forEach var="photo" items="${fn:split(qa.qa_photo,',')}">
-				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img">
+				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img" width="600px" height="400px"><br>
 				</c:forEach>
 				</div>
 			</c:if>
@@ -60,6 +67,11 @@
 			</div>
 			<!-- 댓글 목록 출력 시작 -->
 			<h4>관리자 답변</h4>
+			<c:if test="${count == 0}">
+				<div class="result-display">
+					아직 답변이 등록되지 않았습니다.
+				</div>
+			</c:if>
 			<div id="output">
 			<!-- ajax로 답변 정보가 추가되는 공간 -->
 			</div>

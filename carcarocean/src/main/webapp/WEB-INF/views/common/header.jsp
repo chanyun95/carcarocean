@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap 아이콘 cdn 링크 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/logo.png"/>
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
@@ -83,7 +84,7 @@
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/info_board/list.do">정보공유 게시판</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/new/list.do">자동차 뉴스</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/news/list.do">자동차 뉴스</a>
                      </div>
                   </li>
                   <!-- 네번째 메뉴 -->

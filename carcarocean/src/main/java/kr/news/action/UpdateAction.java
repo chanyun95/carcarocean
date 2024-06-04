@@ -23,21 +23,27 @@ public class UpdateAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//전송된 데이터 반환
 		int news_num = Integer.parseInt(request.getParameter("news_num"));
-		
+
 		NewsDao dao = NewsDao.getDao();
 		//수정전 데이터
 		NewsVo db_news = dao.detailNews(news_num);
-		
+
 		NewsVo news = new NewsVo();
 		news.setNews_num(news_num);
 		news.setNews_title(request.getParameter("news_title"));
 		news.setNews_content(request.getParameter("news_content"));
 		news.setNews_photo(FileUtil.createFiles(request));
 		dao.updateNews(news);
-		
+
 		if(news.getNews_photo() != null && !"".equals(news.getNews_photo())) {
 			//새 파일로 교체할 때 원래 파일 제거
-			FileUtil.removeFile(request, db_news.getNews_photo());
+			if(db_news.getNews_photo() != null) {
+				//사진 삭제
+				String[] photos = db_news.getNews_photo().split(",");
+				for(String pho : photos) {
+					FileUtil.removeFile(request, pho);
+				}
+			}
 		}
 		return "redirect:/news/detail.do?news_num=" + news_num;
 	}

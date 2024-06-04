@@ -25,9 +25,9 @@
 			</div>
 			<hr size="1" noshade="noshade" width="100%">
 			<c:if test="${!empty news.news_photo}">
-				<div class="text-center">
+				<div class="text-center mb-5">
 				<c:forEach var="photo" items="${fn:split(news.news_photo,',')}">
-				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img">
+				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img" width="600px" height="400px"><br>
 				</c:forEach>
 				</div>
 			</c:if>

@@ -29,8 +29,11 @@ public class DeleteAction implements Action{
 		}
 		//로그인한 회원번호와 작성자 회원번호 일치
 		dao.deleteQa(qa_num);
-		//파일 삭제
-		FileUtil.removeFile(request, db_qa.getQa_photo());
+		//사진 삭제
+		String[] photos = db_qa.getQa_photo().split(",");
+		for(String pho : photos) {
+			FileUtil.removeFile(request, pho);
+		}
 		request.setAttribute("notice_msg", "글 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/qa/list.do");
 		return "/WEB-INF/views/common/alert_view.jsp";

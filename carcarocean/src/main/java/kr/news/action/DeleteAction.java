@@ -22,10 +22,13 @@ public class DeleteAction implements Action{
 		int news_num = Integer.parseInt(request.getParameter("news_num"));
 		NewsDao dao = NewsDao.getDao();
 		NewsVo db_news = dao.detailNews(news_num);
-		
+
 		dao.deleteNews(news_num);
-		//파일 삭제
-		FileUtil.removeFile(request, db_news.getNews_photo());
+		//사진 삭제
+		String[] photos = db_news.getNews_photo().split(",");
+		for(String pho : photos) {
+			FileUtil.removeFile(request, pho);
+		}
 		request.setAttribute("notice_msg", "뉴스 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/news/list.do");
 		return "/WEB-INF/views/common/alert_view.jsp";
