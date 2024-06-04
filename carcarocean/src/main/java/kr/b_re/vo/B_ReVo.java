@@ -13,6 +13,9 @@ public class B_ReVo {
 	private Date buy_reg;
 	
 	private int mem_num;
+	private String mem_id;
+	private String mem_photo;
+	
 	//차량의 차명,차 사진,제조사,주행거리,차량번호,가격
 	private int car_num;
 	private String car_name;
@@ -25,6 +28,18 @@ public class B_ReVo {
 	private String checker_name;
 	private String checker_photo;
 	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getMem_photo() {
+		return mem_photo;
+	}
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
+	}
 	public int getCar_price() {
 		return car_price;
 	}

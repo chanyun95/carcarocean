@@ -21,38 +21,38 @@
 				</div>
 			</c:if>
 			<c:if test="${count > 0}">
-					<table class="table table-hover">
-					<thead>
+					<table class="table table-hover text-center mt-5">
+					<thead class="table-light">
 						<tr>
+							<th>제조사</th>
 							<th>차명</th>
 							<th>제목</th>
-							<th>내용</th>
 							<th>등록일</th>
 							<th>차사진</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach var="b_re" items="${list}">
-						<tr>
-							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}">${b_re.car_name}</a></td>
-							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}">${b_re.b_re_title}</a></td>
-							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}">${b_re.b_re_content}</a></td>
+						<tr class="align-middle">
+							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}"><b>${b_re.car_maker}</b></a></td>
+							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}"><b>${b_re.car_name}</b></a></td>
+							<td><a class="text-decoration-none text-dark" href="detail.do?b_re_num=${b_re.b_re_num}"><b>${b_re.b_re_title}</b></a></td>
 							<td>
 								<c:if test="${empty b_re.b_re_modify}">
-									  <a class="text-decoration-none text-dark" href="detail.do?b_re_num=?${b_re.b_re_num}">${fn:substring(b_re.b_re_reg, 0, 10)}</a>
+									  <a class="text-decoration-none text-dark" href="detail.do?b_re_num=?${b_re.b_re_num}"><b>${fn:substring(b_re.b_re_reg, 0, 10)}</b></a>
 								</c:if>
 								<c:if test="${!empty b_re.b_re_modify}">
-									 <a class="text-decoration-none text-dark" href="detail.do?b_re_num=?${b_re.b_re_num}">${fn:substring(b_re.b_re_modify, 0, 10)}</a>
+									 <a class="text-decoration-none text-dark" href="detail.do?b_re_num=?${b_re.b_re_num}"><b>${fn:substring(b_re.b_re_modify, 0, 10)}</b></a>
 								</c:if>
 							</td>
 							<c:if test="${fn:contains(b_re.car_photo, ',')}">
 								<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
 								<c:set var="firstPhoto" value="${photoList[0]}"/>
-								<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}"></a></td>
+								<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></a></td>
 							</c:if>
 							<c:if test="${!fn:contains(b_re.car_photo, ',')}">
 								<c:set var="firstPhoto" value="${b_re.car_photo}" />
-								<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}"></a></td>
+								<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></a></td>
 							</c:if>
 						</tr>
 					</c:forEach>

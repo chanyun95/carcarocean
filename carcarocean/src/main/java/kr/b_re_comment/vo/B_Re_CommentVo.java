@@ -8,9 +8,16 @@ public class B_Re_CommentVo {
 	private int b_re_comm_report;
 	private String b_re_comm_reg;
 	
-	//작성자ID
+	//작성자ID, 프로필 사진
 	private String mem_id;
+	private String mem_photo;
 	
+	public String getMem_photo() {
+		return mem_photo;
+	}
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}
