@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.info_board.vo.InfoBoardVo;
+import kr.info_board.vo.InfoFavVo;
 import kr.info_board.vo.ReportInfoVo;
 import kr.util.DBUtil;
 import kr.util.StringUtil;
@@ -344,4 +345,91 @@ public class InfoBoardDao {
 		}
 		return count;
 	}
+	
+	//좋아요 등록
+	public void insertFav(InfoFavVo favVo) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "INSERT INTO info_fav (info_board_num, mem_num) VALUES (?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, favVo.getInfo_board_num());
+			pstmt.setInt(2, favVo.getMem_num());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	//좋아요 개수
+	public int selectFavCount(int info_board_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count = 0;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT COUNT(*) FROM info_fav WHERE info_board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, info_board_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return count;
+	}
+	//회원번호와 게시물 번호를 이용한 좋아요 정보
+	public InfoFavVo selectFav(InfoFavVo favVo) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		InfoFavVo fav = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM info_fav WHERE info_board_num=? AND mem_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, favVo.getInfo_board_num());
+			pstmt.setInt(2, favVo.getMem_num());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				fav = new InfoFavVo();
+				fav.setInfo_board_num(rs.getInt("info_board_num"));
+				fav.setMem_num(rs.getInt("mem_num"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return fav;
+	}
+	//좋아요 삭제
+	public void deleteFav(InfoFavVo favVo) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM info_fav WHERE info_board_num=? AND mem_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, favVo.getInfo_board_num());
+			pstmt.setInt(2, favVo.getMem_num());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	//내가 좋아요 한 목록
 }

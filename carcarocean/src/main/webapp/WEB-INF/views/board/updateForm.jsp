@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,22 @@ window.onload = function(){
 					<input type="file" name="board_photo" id="board_photo" accept="image/gif, image/png, image/jpeg" multiple>
 					<c:if test="${!empty board.board_photo}">
 					<div id="file_detail">
-					<img src="${pageContext.request.contextPath}/upload/${board.board_photo}" width="100">
+					<c:if test="${fn:contains(board_photo, ',')}">
+									<c:set var="photoList"
+										value="${fn:split(board_photo, ',')}" />
+									<li><c:forEach var="photoList" items="${photoList}">
+											<img
+												src="${pageContext.request.contextPath}/upload/${photoList}"
+												id="board_photo2" name="board_photo2"
+												class="detail-img">
+										</c:forEach></li>
+								</c:if>
+								<c:if test="${!fn:contains(board_photo, ',')}">
+									<li><img
+										src="${pageContext.request.contextPath}/upload/${board_photo}"
+										id="board_photo2" name="board_photo2"
+										class="detail-img"></li>
+								</c:if>
 					<br>
 					<input type="button" value="파일 삭제" id="file_del">
 					</div>

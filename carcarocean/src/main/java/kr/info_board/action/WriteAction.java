@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.info_board.dao.InfoBoardDao;
 import kr.info_board.vo.InfoBoardVo;
+import kr.util.FileUtil;
 
 public class WriteAction implements Action{
 
@@ -23,7 +24,7 @@ public class WriteAction implements Action{
 		InfoBoardVo info = new InfoBoardVo();
 		info.setInfo_board_title(request.getParameter("info_board_title"));
 		info.setInfo_board_content(request.getParameter("info_board_content"));
-		info.setInfo_board_photo(request.getParameter("info_board_photo"));
+		info.setInfo_board_photo(FileUtil.createFiles(request));
 		info.setMem_num(user_num);
 		
 		InfoBoardDao dao = InfoBoardDao.getDao();

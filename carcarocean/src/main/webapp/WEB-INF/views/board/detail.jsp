@@ -33,6 +33,9 @@
 		</div>
 		<c:if test="${!empty board.board_photo}">
 		<div class="text-center">
+				<c:forEach var="photo" items="${fn:split(board.board_photo, ',')}">
+					<img src="${pageContext.request.contextPath}/upload/${photo}">
+				</c:forEach>
 			<img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="rounded" width="200px" height="200px">
 		</div>
 

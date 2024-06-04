@@ -36,7 +36,7 @@ public class UpdateAction implements Action{
 		info.setInfo_board_num(info_board_num);
 		info.setInfo_board_title(request.getParameter("info_board_title"));
 		info.setInfo_board_content(request.getParameter("info_board_content"));
-		info.setInfo_board_photo(FileUtil.createFile(request, "info_board_photo"));
+		info.setInfo_board_photo(FileUtil.createFiles(request));
 		
 		dao.updateInfo(info);
 		
