@@ -82,8 +82,8 @@
                   <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>커뮤니티</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
-                        <a class="dropdown-item" href="#">정보공유 게시판</a>
-                        <a class="dropdown-item" href="#">자동차 뉴스</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/info_board/list.do">정보공유 게시판</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/new/list.do">자동차 뉴스</a>
                      </div>
                   </li>
                   <!-- 네번째 메뉴 -->
