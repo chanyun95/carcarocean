@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/info.report.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/info.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/info.reply.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
@@ -38,7 +39,7 @@
 		<div class="align-center">
 		<c:if test="${!empty info.info_board_photo}">
 			<div>
-				<c:forEach var="photo" items="${fn:split(info.info_board_photo,',')}">
+				<c:forEach var="photo" items="${fn:split(info.info_board_photo, ',')}">
 					<img src="${pageContext.request.contextPath}/upload/${photo}">
 				</c:forEach>
 			</div>
@@ -72,6 +73,13 @@
 					};
 				</script>
 				</c:if>
+			</li>
+			<li>
+			<!-- 좋아요 -->
+			<img id="output_fav" data-num="${info.info_board_num}"
+			src="${pageContext.request.contextPath}/images/fav01.gif" width="50">
+			좋아요
+			<span id="output_fcount"></span>
 			</li>
 		</ul>
 		<div id="reply_div">

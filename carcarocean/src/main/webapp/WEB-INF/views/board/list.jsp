@@ -65,11 +65,11 @@ window.onload=function(){
 			<c:forEach var="board" items="${list}">
 			<c:if test="${board.board_report < 10}">
 			<tr>
-				<td>${board.board_num}</td>
+				<td><a href="detail.do?board_num=${board.board_num}">${board.board_num}</a></td>
 				<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
-				<td>${board.mem_id}</td>
-				<td>${board.board_reg}</td>
-				<td>${board.board_hit}</td>
+				<td><a href="detail.do?board_num=${board.board_num}">${board.mem_id}</a></td>
+				<td><a href="detail.do?board_num=${board.board_num}">${board.board_reg}</a></td>
+				<td><a href="detail.do?board_num=${board.board_num}">${board.board_hit}</a></td>
 			</tr>
 			</c:if>
 			</c:forEach>

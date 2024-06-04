@@ -38,3 +38,12 @@ create table report_s_re_comment (
 	constraint report_s_re_comment_fk1 foreign key (s_re_comm_num) references s_re_comment (s_re_comm_num), 
 	constraint report_s_re_comment_fk2 foreign key (mem_num) references member (mem_num)
 );
+--좋아요
+create table info_fav(
+ info_board_num number not null,
+ mem_num number not null,
+ constraint info_fav_fk1 foreign key (info_board_num) 
+                        references info_board (info_board_num),
+ constraint info_fav_fk2 foreign key (mem_num)
+                        references member (mem_num)    
+);
