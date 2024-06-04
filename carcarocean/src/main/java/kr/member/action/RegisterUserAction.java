@@ -2,6 +2,7 @@ package kr.member.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
@@ -16,6 +17,7 @@ public class RegisterUserAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//자바빈(VO)생성
 		MemberVo member = new MemberVo();
+		
 		member.setMem_id(request.getParameter("mem_id"));
 		member.setMem_name(request.getParameter("mem_name"));
 		member.setMem_passwd(request.getParameter("mem_passwd"));
@@ -29,10 +31,22 @@ public class RegisterUserAction implements Action{
 		MemberDao dao = MemberDao.getDao();
 		dao.insertMember(member);
 		
-		request.setAttribute("result_title", "회원 가입 완료");
-		request.setAttribute("result_msg", "회원 가입이 완료되었습니다.");
-		request.setAttribute("result_url", request.getContextPath()+"/main/main.do");
-		return "/WEB-INF/views/common/result_view.jsp";
+		//회원 등록 후에 회원 번호 다시 가져오기
+        member = dao.getMemberByMemId(member.getMem_id());
+		
+		
+		//로그인 처리
+        HttpSession session = request.getSession();
+        session.setAttribute("user_num", member.getMem_num());
+        session.setAttribute("user_name",member.getMem_name());
+        session.setAttribute("user_id", member.getMem_id());
+        session.setAttribute("user_auth", member.getMem_auth());
+        session.setAttribute("user_photo", member.getMem_photo());
+		System.out.println(member.getMem_num());
+		
+		request.setAttribute("notice_msg", "회원 가입이 완료되었습니다.");
+		request.setAttribute("notice_url", request.getContextPath()+"/main/main.do");
+		return "/WEB-INF/views/common/alert_view.jsp";
 	}
 
 }

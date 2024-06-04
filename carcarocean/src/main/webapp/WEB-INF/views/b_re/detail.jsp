@@ -14,22 +14,23 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
 	<div>
-		<ul>
+		<!-- 차 썸네일 사진 노출 -->
+		<ul class="list-unstyled d-flex flex-wrap justify-content-between align-items-center">
 			<c:if test="${fn:contains(b_re.car_photo, ',')}">
 				<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
 				<c:set var="firstPhoto" value="${photoList[0]}"/>
-				<li>
-					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img">
+				<li class="mr-3">
+					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" style="width: 250px; height: 200;">
 				</li>
 			</c:if>
 			<c:if test="${!fn:contains(b_re.car_photo, ',')}">
 				<c:set var="firstPhoto" value="${b_re.car_photo}" />
-				<li>
-					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img">
+				<li class="mr-3">
+					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" style="width: 250px; height: 200;">
 				</li>
 			</c:if>
-			<h2>${b_re.b_re_title}</h2>
-			<li>
+			<h2 class="text-center">${b_re.b_re_title}</h2>
+			<li class="text-end">
 				<c:if test="${!empty b_re.b_re_modify}">
 					${b_re.b_re_modify}
 				</c:if>
@@ -38,65 +39,113 @@
 				</c:if>
 			</li>
 		</ul>
+		<!-- 구매후기게시판 첨부 사진 노출 -->
 		<hr size="1" noshade="noshade" width="100%">
-		<div>
+		<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+					<c:if test="${fn:contains(b_re.b_re_photo, ',')}">
+						<c:set var="photoList" value="${fn:split(b_re.b_re_photo, ',')}" />
+						<c:set var="firstPhoto" value="${photoList[0]}"/>
+						<div class="carousel-item active">
+							<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img" style="width: 550px; height: 300;">
+						</div>
+						<c:forEach var="photoList" items="${photoList}">
+							<div class="carousel-item">
+								<img src="${pageContext.request.contextPath}/upload/${photoList}" class="detail-img" style="width: 550px; height: 300;">
+							</div>
+						</c:forEach>
+					</c:if>
+					<c:if test="${!fn:contains(b_re.b_re_photo, ',')}">
+						<div class="carousel-item active">
+						<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" class="detail-img" style="width: 550px; height: 300;">
+						</div>
+					</c:if>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+		   		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    	<span class="visually-hidden">Previous</span>
+		 	</button>
+		 	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+		   		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		   		<span class="visually-hidden">Next</span>
+		  	</button>
+		</div>
+		<%-- <div>
 			<c:if test="${fn:contains(b_re.b_re_photo, ',')}">
 				<c:set var="photoList2" value="${fn:split(b_re.b_re_photo, ',')}" />
 					<c:forEach var="photoList3" items="${fn:split(b_re.b_re_photo, ',')}">
-						<img src="${pageContext.request.contextPath}/upload/${photoList3}" class="detail-img">
+						<img src="${pageContext.request.contextPath}/upload/${photoList3}" class="detail-img" style="width: 250px; height: 200;">
 					</c:forEach>
 			</c:if>
 			<c:if test="${!fn:contains(b_re.b_re_photo, ',')}">
-					<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" class="detail-img">
+					<img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" class="detail-img" style="width: 250px; height: 200;">
 			</c:if>
-		</div>
-		<ul>
-			<h2>기본정보</h2>
+		</div> --%>
+		<hr size="1" noshade="noshade" width="100%">
+		<!-- 기본정보 -->
+		<ul class="list-unstyled">
+			<h3 class="mt-5" style="color: #dbcf30;">기본정보</h3>
 			<li>주행거리 : ${b_re.car_mile} km</li>
 			<li>차량번호 : ${b_re.car_cnumber}</li>
 			<li>제조사 : ${b_re.car_maker}</li>
 			<li>차명 : ${b_re.car_name}</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
-		<p>
-			<h2>고객 후기</h2>
-			${b_re.b_re_content}
-		</p>
+		<!-- 고객후기 -->
+		<div class="row">
+		    <div class="col">
+		        <h3 style="color: #dbcf30;">고객 후기</h3>
+		        <div class="d-flex align-items-center">
+		            <i class="bi bi-chat-dots" style="font-size:40px; margin-right:15px;"></i>
+		            <span>${b_re.b_re_content}</span>
+		        </div>
+		    </div>
+		</div>
 		<hr size="1" noshade="noshade" width="100%">
-		<ul class="detail-sub">
-			<li>
-				<img src="${pageContext.request.contextPath}/upload/${b_re.checker_photo}"
-						width="40" height="40" class="my-photo">
-			</li>
-			<li>${b_re.checker_name} 검수자</li>
-			<li>
-				<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정 가능 -->
-				<c:if test="${user_num == b_re.mem_num}">
-				<input type="button" value="수정"
-				  onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
-				</c:if>
-			</li>
-		</ul>
+		<!-- 검수자 정보 -->
+		<div class="row">
+		    <div class="col">
+		        <h3 style="color: #dbcf30;">검수자 정보</h3>
+		        <ul class="list-unstyled">
+		            <li class="d-inline-block align-middle">
+		                <img src="${pageContext.request.contextPath}/upload/${b_re.checker_photo}" width="40" height="40">
+		            </li>
+		            <li class="d-inline-block align-middle">${b_re.checker_name} 검수자</li>
+		        </ul>
+		    </div>
+		</div>
+		<hr size="1" noshade="noshade" width="100%">
+		<div class="text-end">
+			<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정 가능 -->
+			<c:if test="${user_num == b_re.mem_num}">
+			<input type="button" class="btn btn-warning" value="글 수정" onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
+			</c:if>
+		</div>
 		<!-- 댓글 시작 -->
 		<div id="reply_div">
-			<span class="re-title">댓글 달기</span>
-			<form id="b_re_comm_form">
-				<input type="hidden" name="b_re_num" value="${b_re.b_re_num}" id="b_re_num">
-				<textarea rows="3" cols="50" name="b_re_comm_content"
-				<c:if test="${empty user_num}">disabled="disabled"</c:if>	
-				  id="b_re_comm_content" class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>    
-				<c:if test="${!empty user_num}">
-				<div id="b_re_comm_first">
-					<span class="letter-count">300/300</span>
-				</div>
-				<div id="b_re_comm_second">
-					<input type="submit" value="전송">
-				</div>
-				</c:if>
-			</form>
+	    <span class="re-title">댓글 달기</span>
+	    	<form id="b_re_comm_form" class="mt-3">
+		        <input type="hidden" name="b_re_num" value="${b_re.b_re_num}" id="b_re_num">
+		        <div class="input-group">
+		            <textarea rows="3" cols="50" name="b_re_comm_content" id="b_re_comm_content" class="form-control rep-content" 
+		                <c:if test="${empty user_num}">disabled="disabled"</c:if>>
+		                <c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if>
+		            </textarea>
+		        <c:if test="${!empty user_num}">
+		            <div id="b_re_comm_second" class="input-group-append">
+		            	<button type="submit" class="btn btn-warning pt-5 pb-5">등록</button>
+		            </div>
+		        </c:if>
+		        </div>
+		        <c:if test="${!empty user_num}">
+		            <div id="b_re_comm_first" class="mt-2">
+		            	<span class="letter-count">300/300</span>
+		            </div>
+		        </c:if>
+		    </form>
 		</div>
 		<!-- 댓글 목록 출력 시작 -->
-		<div id="output"></div>
+		<div id="output" class="mt-5"></div>
 		<div class="paging-button" style="display:none;">
 			<input type="button" value="다음글 보기">
 		</div>
@@ -136,21 +185,21 @@ $(function(){
 					//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
 					$('#output').empty();
 				}
-				
-				$(param.list).each(function(index,item){
-					let output = '<div class="item">';
-					output += '<h4>' + item.mem_id + '</h4>';
-					output += '<div class="sub-item">';
-					output += '<p>' + item.b_re_comm_content + '</p>';
-					output += '<span>등록일 : ' + item.b_re_comm_reg + '</span>';
-					output += ' <input type="button" data-renum="' + item.b_re_comm_num + '" value="신고" class="report-btn">';
-					output += '<hr size="1" noshade width="100%">';
-					output += '</div>';
-					output += '</div>';
-					
-					//문서 객체에 추가
-					$('#output').append(output);
-				});
+
+			    $(param.list).each(function(index, item) {
+			        let output = '<div class="card mb-3 border-0">';
+			        output += '<div class="card-body">';
+			        output += '<img class="rounded-circle" width="50" height="50" src="'+item.member_photo+'">';
+			        output += '<h5 class="card-title">' + item.mem_id + '</h5>';
+			        output += '<p class="card-text">' + item.b_re_comm_content + '</p>';
+			        output += '<p class="card-text"><small class="text-muted">등록일: ' + item.b_re_comm_reg + '</small></p>';
+			        output += '</div>';
+			        output += '</div>';
+			        output += '<hr>';
+			        
+			        // 문서 객체에 추가
+			        $('#output').append(output);
+			    });
 				
 				//page button 처리
 				if(currentPage>=Math.ceil(count/rowCount)){

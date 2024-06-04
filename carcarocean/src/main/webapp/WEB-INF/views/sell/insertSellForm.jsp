@@ -42,11 +42,11 @@
 				</li>
 				<li>
 					<label for="sell_name">신청자명</label>
-					<input type="text" id="sell_name" name="sell_name" class="sell-data form-control" maxlength="4" placeholder="예) 홍길동">
+					<input type="text" id="sell_name" name="sell_name" class="sell-data form-control" maxlength="4" placeholder="예) 홍길동" value="${member.mem_name}">
 				</li>
 				<li>
 					<label for="sell_phone">휴대폰번호</label>
-					<input type="text" id="sell_phone" name="sell_phone" class="sell-data form-control" maxlength="11" placeholder="예) '-'없이 숫자만 입력. 예)01012345678">
+					<input type="text" id="sell_phone" name="sell_phone" class="sell-data form-control" maxlength="11" placeholder="예) '-'없이 숫자만 입력. 예)01012345678" value="${member.mem_phone}">
 				</li>
 			</ul>
 			<ul class="list-unstyled">

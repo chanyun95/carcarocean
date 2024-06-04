@@ -23,6 +23,7 @@
 					<th>판매 여부</th>
 					<th>가격</th>
 					<th>사진</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,18 +36,11 @@
      				<c:set var="firstPhoto" value="${car.car_photo}" />
      			</c:if>
 				<tr class="align-middle">
-					<c:if test="${car.car_status==0}">
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark">${car.car_maker} ${car.car_name}</a></td>
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark">구매 가능</a></td>
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark"><fmt:formatNumber value="${car.car_price}" type="number"/>만원</a></td>
 					<td><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="text-decoration-none text-dark"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded"></a></td>
-					</c:if>
-					<c:if test="${car.car_status==1}">
-					<td>${car.car_maker} ${car.car_name}</td>
-					<td>예약 완료</td>
-					<td><fmt:formatNumber value="${car.car_price}" type="number"/>만원</td>
-					<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></td>
-					</c:if>
+					<td><button class="btn btn-danger btn-lg" onclick="removeFav_btn(this)" data-carnum="${car.car_num}">관심차량 삭제</button></td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -54,5 +48,14 @@
 		<div class="text-center">${page}</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+		function removeFav_btn(button){
+			if(confirm('관심차량을 삭제하시겠습니까?')){
+				const car_num = button.getAttribute('data-carnum');
+				location.href='removeFavAction.do?car_num='+car_num;
+			}
+		}
+	
+	</script>
 </body>
 </html>

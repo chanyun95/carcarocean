@@ -10,6 +10,7 @@ import kr.buy.vo.BuyVo;
 import kr.car.vo.CarVO;
 import kr.member.vo.MemberVo;
 import kr.util.DBUtil;
+import kr.util.ShopUtil;
 
 public class BuyDao {
 	// 싱글톤
@@ -285,5 +286,52 @@ public class BuyDao {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 	}
-	
+   //구매내역
+   public List<BuyVo> getMyBought(int mem_num, String keyfield, String keyword) throws Exception {
+       Connection conn = null;
+       PreparedStatement pstmt = null;
+       ResultSet rs = null;
+       String sql = null;
+       String sub_sql = "";
+       List<BuyVo> buyList = new ArrayList<>();
+       int cnt = 0;
+       try {
+           conn = DBUtil.getConnection();
+           if (keyword != null && !keyword.isEmpty()) {
+               // 검색어가 있는 경우 sub_sql 조건 추가
+               sub_sql += " AND (c.car_maker LIKE '%' || ? || '%' OR c.car_name LIKE '%' || ? || '%')";
+           }
+           
+           // 내가 구매한 차량 정보 조회 쿼리
+           sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT b.buy_num, c.car_name, c.car_price,md.mem_grade, b.buy_reg "
+                   + "FROM buy b JOIN car c ON b.car_num = c.car_num "
+                   + "JOIN member_detail md ON b.mem_num = md.mem_num " // member_detail 테이블과 조인
+                   + "WHERE b.buy_status = 1 AND b.mem_num = ?"
+                   + sub_sql + " ORDER BY b.buy_num DESC) a WHERE rownum <= 10) WHERE rnum >= 1";
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setInt(++cnt, mem_num);
+           if (keyword != null && !keyword.isEmpty()) {
+               // 검색어 바인딩
+               pstmt.setString(++cnt, keyword);
+               pstmt.setString(++cnt, keyword);
+           }
+           
+           rs = pstmt.executeQuery();
+           while (rs.next()) {
+               BuyVo buy = new BuyVo();
+               // BuyVo에 데이터 설정
+               buy.setBuy_num(rs.getInt("buy_num"));
+               buy.setCar_name(rs.getString("car_name"));
+            buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
+               buy.setBuy_reg(rs.getString("buy_reg"));
+               // 나머지 필요한 데이터를 설정합니다.
+               buyList.add(buy);
+           }
+       } catch (Exception e) {
+           throw new Exception(e);
+       } finally {
+           DBUtil.executeClose(rs, pstmt, conn);
+       }
+       return buyList;
+   }
 }

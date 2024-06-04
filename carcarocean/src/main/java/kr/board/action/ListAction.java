@@ -38,6 +38,8 @@ public class ListAction implements Action{
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 		request.setAttribute("board_report", boardReport);
+		request.setAttribute("keyfield", keyfield);
+		
 		
 		return "/WEB-INF/views/board/list.jsp";
 	}
