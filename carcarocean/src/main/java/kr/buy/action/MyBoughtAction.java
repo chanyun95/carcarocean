@@ -17,6 +17,9 @@ public class MyBoughtAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         Integer mem_num = (Integer) session.getAttribute("user_num");
+        if(mem_num==null) {
+        	return "redirect:/member/loginForm.do";
+        }
 
         request.setCharacterEncoding("utf-8");
 

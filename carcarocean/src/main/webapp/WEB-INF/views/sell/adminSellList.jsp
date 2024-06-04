@@ -23,20 +23,31 @@
 	<div class="container">
 		<hr size="1" width="100%" noshade> 
 		<h1 class="text-center mt-3">차량 검수 신청 목록</h1>
-		<form id="check_form" action="adminSellList.do" method="get" class="d-flex justify-content-center">
-			<select id="sell_check" name="sell_check" class="form-select" style="width:auto;">
-				<option value="0" <c:if test="${sell_check == 0}">selected</c:if>>미검수</option>
-				<option value="1" <c:if test="${sell_check == 1}">selected</c:if>>검수중</option>
-				<option value="2" <c:if test="${sell_check == 2}">selected</c:if>>검수완료</option>
-			</select>
-			<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-				<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>신청자명</option>
-				<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
-				<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
-			</select>
-			<input type="search" id="keyword" name="keyword" class="form-control rounded"
-			 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:500px;">
-			<input type="submit" class="btn btn-primary" value="검색">
+		<form id="check_form" action="mySellList.do" method="get" class="d-flex justify-content-between mb-3">
+			<div class="align-self-center">
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="sell_check" id="sell_check1" value="0" <c:if test="${sell_check == 0}">checked</c:if>>
+				  <label class="form-check-label" for="sell_check1">미검수</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="sell_check" id="sell_check2" value="1" <c:if test="${sell_check == 1}">checked</c:if>>
+				  <label class="form-check-label" for="sell_check2"><span class="text-primary">검수중</span></label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="sell_check" id="sell_check3" value="2" <c:if test="${sell_check == 2}">checked</c:if>>
+				  <label class="form-check-label" for="sell_check3"><span class="text-danger">검수완료</span></label>
+				</div>
+			</div>
+			<div class="d-flex justify-content-center">
+				<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
+					<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>신청자명</option>
+					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
+					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
+				</select>
+				<input type="search" id="keyword" name="keyword" class="form-control rounded"
+				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:500px;">
+				<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
+			</div>
 		</form>
 		<table class="table table-hover mt-3 text-center fw-bold">
 			<thead class="table-light">
