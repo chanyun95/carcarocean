@@ -14,6 +14,13 @@
 		width: 100vw;
 		margin-left: calc(-50vw + 50%);
 	}
+	.card-text{
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	display: -webkit-box; 
+	-webkit-line-clamp: 3; 
+	-webkit-box-orient: vertical;
+	}
 </style>
 </head>
 <body>
@@ -72,97 +79,155 @@
 		</section>
 		<!-- 모델검색 끝 -->
 		 
-		<!-- 공지사항 시작 -->
+		<!-- 공지사항시작 -->
 		<section id="notice">
-			<div class="container p-4">
-				<h2>공지사항</h2>
-					<div class="card" style="width: 18rem;">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">An item</li>
-							<li class="list-group-item">A second item</li>
-							<li class="list-group-item">A third item</li>
-						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">Card link</a> <a href="#"
-								class="card-link">Another link</a>
-						</div>
-					</div>	
-			</div>
-		</section>
-		<!-- 공지사항 끝 -->
-		
-		<!-- 이벤트 시작 -->
-		<section id="notice">
-			<div class="container p-4">
-				<h2>이벤트</h2>
-					<div class="card" style="width: 18rem;">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">An item</li>
-							<li class="list-group-item">A second item</li>
-							<li class="list-group-item">A third item</li>
-						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">Card link</a> <a href="#"
-								class="card-link">Another link</a>
-						</div>
-					</div>	
-			</div>
-		</section>
-		<!-- 이벤트 끝 -->
-		<!-- 임시 -->
 		<div class="row row-cols-1 row-cols-md-4 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-</div>
-		<!-- 임시 끝 -->
+			<div class="col">
+				<h2>공지사항</h2>
+				<c:forEach var="notice" items="${noticeList}" varStatus="status">
+					<c:if test="${status.index == 0}">
+						<div class="card" style="width: 18rem;">
+							<c:if test="${fn:contains(notice.notice_photo, ',')}">
+                            <c:set var="photoList" value="${fn:split(notice.notice_photo, ',')}" />
+                            <c:set var="firstPhoto" value="${photoList[0]}" />
+                            <a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+                        <c:if test="${!fn:contains(notice.notice_photo, ',')}">
+                            <c:set var="firstPhoto" value="${notice.notice_photo}" />
+                            <a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${notice.notice_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+							<div class="card-body">
+								<h5 class="card-title text-truncate">
+								<a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}" class="text-decoration-none text-dark">
+								${notice.notice_title}</a></h5>
+								<p class="card-text" style="max-width:500px;">${notice.notice_content}</p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<c:forEach var="notice" items="${noticeList}" varStatus="status">
+									<c:if test="${status.index > 0}">
+										<li class="list-group-item text-truncate">
+										<a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}" class="text-decoration-none text-dark">
+										${notice.notice_title}
+										</a>
+										</li>
+									</c:if>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<!-- 공지사항 끝 -->
+			<!-- 이벤트 시작 -->
+			<div class="col">
+				<h2>이벤트</h2>
+				<c:forEach var="event" items="${EventList}" varStatus="status">
+					<c:if test="${status.index == 0}">
+						<div class="card" style="width: 18rem;">
+							<c:if test="${fn:contains(event.event_photo, ',')}">
+                            <c:set var="photoList" value="${fn:split(event.event_photo, ',')}" />
+                            <c:set var="firstPhoto" value="${photoList[0]}" />
+                            <a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+                        <c:if test="${!fn:contains(event.event_photo, ',')}">
+                            <c:set var="firstPhoto" value="${event.event_photo}" />
+                            <a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${event.event_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+							<div class="card-body">
+								<h5 class="card-title text-truncate">
+								<a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark">
+								${event.event_title}</a></h5>
+								<span class="card-text" style="max-width:500px;">
+								${event.event_content}</span>
+							</div>
+							<ul class="list-group list-group-flush">
+								<c:forEach var="event" items="${EventList}" varStatus="status">
+									<c:if test="${status.index > 0}">
+										<li class="list-group-item text-truncate">
+										<a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark">
+										${event.event_title}
+										</a>
+										</li>
+									</c:if>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<!-- 이벤트 끝 -->
+			<!-- 뉴스 시작 -->
+			<div class="col">
+				<h2>뉴스</h2>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">제목1</h5>
+						<p class="card-text">제목1의 내용</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">제목2</li>
+						<li class="list-group-item">제목3</li>
+						<li class="list-group-item">제목4</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 뉴스 끝 -->
+			<!-- 자유게시판 시작 -->
+         <div class="col">
+            <h2>자유게시판</h2>
+            <c:forEach var="board" items="${BoardList}" varStatus="status">
+               <c:if test="${status.index == 0}">
+                  <div class="card" style="width: 18rem;">
+                     <c:if test="${fn:contains(board.board_photo, ',')}">
+                            <c:set var="photoList" value="${fn:split(board.board_photo, ',')}" />
+                            <c:set var="firstPhoto" value="${photoList[0]}" />
+                            <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+                        <c:if test="${!fn:contains(board.board_photo, ',')}">
+                            <c:set var="firstPhoto" value="${board.board_photo}" />
+                            <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            </a>
+                        </c:if>
+                     <div class="card-body">
+                        <h5 class="card-title text-truncate">
+                        <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}" class="text-decoration-none text-dark">
+                        ${board.board_title}</a></h5>
+                        <span class="card-text" style="max-width:500px;">
+                        ${board.board_content}</span>
+                     </div>
+                     <ul class="list-group list-group-flush">
+                        <c:forEach var="board" items="${BoardList}" varStatus="status">
+                           <c:if test="${status.index > 0}">
+                              <li class="list-group-item text-truncate">
+                              <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}" class="text-decoration-none text-dark">
+                              ${board.board_title}
+                              </a>
+                              </li>
+                           </c:if>
+                        </c:forEach>
+                     </ul>
+                  </div>
+               </c:if>
+            </c:forEach>
+         </div>
+         <!-- 자유게시판 끝 -->
+		</div>
+		</section>
+		
 		<!-- 이용후기 시작 -->
-		<section id="notice">
+<section id="b_re">
     <div class="container p-4 position-relative">
         <h2>구매 이용후기</h2>
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -178,13 +243,13 @@
                             <c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
                             <c:set var="firstPhoto" value="${photoList[0]}" />
                             <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:397.81px; height:200px;">
                             </a>
                         </c:if>
                         <c:if test="${!fn:contains(b_re.car_photo, ',')}">
                             <c:set var="firstPhoto" value="${b_re.car_photo}" />
                             <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${b_re.car_photo}" class="card-img-top">
+                            <img src="${pageContext.request.contextPath}/upload/${b_re.car_photo}" class="card-img-top" style="width:397.81px; height:200px;">
                             </a>
                         </c:if>
                         <div class="card-body">
@@ -215,9 +280,11 @@
                 <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
-    </div>
+        
+    
 </section>
+</div>
+</div>
 <!-- 이용후기 끝 -->
 
 		<%-- <h2>이용후기2</h2>

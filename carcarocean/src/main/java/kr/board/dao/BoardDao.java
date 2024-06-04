@@ -120,6 +120,46 @@ public class BoardDao {
 		}
 		return list;
 	}
+	//(메인)글 목록, 검색 글 목록
+		public List<BoardVo> getListBoardMain(int start, int end) throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<BoardVo> list = null;
+			String sql = null;
+			int cnt = 0;
+			try {
+				conn  = DBUtil.getConnection();
+				
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
+						+ "(SELECT * FROM board JOIN member USING(mem_num) "
+						+ " ORDER BY board_num DESC)a) WHERE rnum >=? AND rnum <=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(++cnt, start);
+				pstmt.setInt(++cnt, end);
+		        
+				rs = pstmt.executeQuery();
+				list = new ArrayList<BoardVo>();
+				while(rs.next()) {
+					BoardVo board = new BoardVo();
+					board.setBoard_num(rs.getInt("board_num"));
+					board.setBoard_Photo(rs.getString("board_photo"));
+					board.setBoard_title(StringUtil.useBrNoHTML(rs.getString("board_title")));
+					board.setBoard_content(StringUtil.useBrNoHTML(rs.getString("board_content")));
+					board.setBoard_hit(rs.getInt("board_hit"));
+					board.setBoard_reg(rs.getString("board_reg"));
+					board.setMem_id(rs.getString("mem_id"));
+					board.setBoard_report(rs.getInt("board_report"));
+					list.add(board);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 	//글 상세
 	public BoardVo getBoard(int board_num) throws Exception{
 		Connection conn = null;
