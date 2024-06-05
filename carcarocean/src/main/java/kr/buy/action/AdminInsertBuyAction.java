@@ -8,6 +8,7 @@ import kr.buy.dao.BuyDao;
 import kr.car.dao.CarDao;
 import kr.car.vo.CarVO;
 import kr.controller.Action;
+import kr.favorite_car.dao.Favorite_carDao;
 
 public class AdminInsertBuyAction implements Action{
 	@Override
@@ -34,6 +35,9 @@ public class AdminInsertBuyAction implements Action{
 		
 		BuyDao buyDao = BuyDao.getDao();
 		buyDao.insertBuy(car_num, mem_num,car.getCar_price());
+		
+		Favorite_carDao favDao = Favorite_carDao.getDao();
+		favDao.removeAllFav(car_num);
 		
 		return "redirect:/buy/adminBuyList.do";
 	}

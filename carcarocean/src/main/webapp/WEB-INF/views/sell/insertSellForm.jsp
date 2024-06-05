@@ -144,15 +144,6 @@
 				return false;
 			}
 			
-			/* 차량 번호는 9자리(띄어쓰기 포함) */
-			if(data[i].id=='sell_cnumber'){
-				if(data[i].value.length!=9){
-					alert('차량번호는 000가 0000 형식으로 적어주세요!');
-					data[i].value = '';
-					data[i].focus();
-					return false;
-				}
-			}
 			/* 신청자명은 2자에서 4자까지 인정 */
 			if(data[i].id=='sell_name'){
 				if(data[i].value.length<2 || data[i].value.length>5){

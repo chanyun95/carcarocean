@@ -48,7 +48,7 @@
 				</div>
 				<c:if test="${user_auth==9}">
 				<div>
-					<button class="btn btn-primary" onclick="update_car()" id="update_btn">수정하기</button>
+					<button class="btn btn-warning text-white fw-bold" onclick="update_car()" id="update_btn">수정하기</button>
 				</div>
 				</c:if>
 			</div>
@@ -216,14 +216,14 @@
 	            	<div class="mt-5">
 	            		<h4>CarCarOcean이 직접 확인한 진단 결과</h4>
 	            		<div class="border border-warning rounded-top p-5">
-            				${car.car_checker_opinion}
+            				<p>${car.car_checker_opinion}</p>
 	            		</div>
 	            		<div class="d-flex justify-content-between border-bottom border-warning rounded-bottom bg-warning p-2">
             				<div class="align-self-center">
            						<b>CarCarOcean ${checker.checker_name} 차량평가사</b>
            					</div>
             				<div>
-            					<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" class="img-circle" width="50" height="50">
+            					<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" class="rounded-circle" width="50" height="50">
            					</div>
             			</div>
 	            	</div>
@@ -240,7 +240,7 @@
 		            			</div>
 		            			<div class="col-4 align-self-center">
 		            				<c:if test="${car.car_accident=='없음'}"><b class="text-danger fs-4">무사고</b></c:if>
-		            				<c:if test="${car.car_accident!='없음'}"><b class="text-danger fs-5">${car.car_accident}</b> 이력 있음</c:if>
+		            				<c:if test="${car.car_accident!='없음'}"><b class="text-danger fs-5">${car.car_accident}</b><span class="small"> 이력 있음</span></c:if>
 		            			</div>
 		            		</div>
 		            		<hr size="1" width="100%" noshade>
@@ -304,13 +304,13 @@
 	            		<h4>차량평가사 정보</h4>
 		            	<div class="border rounded p-5">
 		            		<div class="row mb-4 text-center">
-			            		<div class="col-4"><b>${checker.checker_name}</b></div>
+			            		<div class="col-4"><i class="bi bi-file-earmark-person-fill"><b> ${checker.checker_name}</b></i></div>
 			            		<div class="col-4"><i class="bi bi-telephone-fill"> ${checker.checker_phone}</i></div>
-			            		<div class="col-4">${checker.checker_company}</div>
+			            		<div class="col-4"><i class="bi bi-buildings-fill"> ${checker.checker_company}</i></div>
 		            		</div>
 		            		<hr size="1" width="100%" noshade>
 		            		<div class="text-center">
-		            			<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250" height="150">
+		            			<img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250" height="150" class="rounded-circle">
 		            		</div>
 		            	</div>
 	            	</div>
@@ -328,10 +328,10 @@
 	            				</div>
 	            				<div>
 		            				<c:if test="${car.car_status==0}">
-	            					<button class="btn btn-outline-danger fw-bold px-5 py-3" onclick="insertReservation_btn()">예약하기</button>
+	            					<button class="btn btn-outline-warning fw-bold px-5 py-3" onclick="insertReservation_btn()">예약하기</button>
 	            					</c:if>
 	            					<c:if test="${car.car_status==1}">
-	            					<button class="btn btn-outline-danger fw-bold px-5 py-3" onclick="insertReservation_btn()" disabled="disabled">예약하기</button>
+	            					<button class="btn btn-outline-warning fw-bold px-5 py-3" onclick="insertReservation_btn()" disabled="disabled">예약하기</button>
 	            					</c:if>
             					</div>
             				</div>
@@ -380,7 +380,7 @@
 								<li><span class="float-start">이전등록비</span><span class="float-end">${firstPrice}만원</span><br></li>
 								<li><span class="float-start">관리비용</span><span class="float-end">${secondPrice}만원</span><br></li>
 								<li><span class="float-start">등록신청대행수수료</span><span class="float-end">${thirdPrice}만원</span><br></li>
-								<c:if test="${!empty user_grade}"><li><span class="float-start">등급수수료</span><span class="float-end">${user_discountFee}만원</span><br></li></c:if>
+								<c:if test="${!empty user_grade}"><li><span class="float-start">등급수수료</span><span class="float-end">${getDiscountFee}만원</span><br></li></c:if>
 								<!-- 회원 별 수수료 할인가 적용하면 좋음 -->
 							</ul>
 						</div>
@@ -390,17 +390,17 @@
 						<div class="text-center pt-3">
 							<!-- 예약 안 되었을 때 -->
 							<c:if test="${car.car_status==0}">
-							<input type="button" class="btn btn-danger fw-bold" id="buy_btn" value="구매 예약" onclick="insertReservation_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
+							<input type="button" class="btn btn-warning fw-bold text-white" id="buy_btn" value="구매 예약" onclick="insertReservation_btn()" style="padding: 1.5rem 3.0rem; font-size: 2rem;">
 							</c:if>
 							<!-- 예약 되었을 때-->
 							<c:if test="${car.car_status==1}">
 								<!-- 로그인된 회원이 예약한 차량일 때 -->
 								<c:if test="${car.mem_num==user_num}">
-								<input type="button" class="btn btn-danger fw-bold" value="구매예약 취소" onclick="deleteReservation_btn()" style="padding: 1.5rem 2rem; font-size: 1.75rem;">
+								<input type="button" class="btn btn-warning fw-bold text-white" value="구매예약 취소" onclick="deleteReservation_btn()" style="padding: 1.5rem 2rem; font-size: 1.75rem;">
 								</c:if>
 								<!-- 로그인된 회원이 예약한 차량이 아닐 때 -->
 								<c:if test="${car.mem_num!=user_num}">
-								<input type="button" class="btn btn-danger fw-bold" value="예약 완료" style="padding: 1.5rem 3.0rem; font-size: 2rem;" disabled>
+								<input type="button" class="btn btn-warning fw-bold text-white" value="예약 완료" style="padding: 1.5rem 3.0rem; font-size: 2rem;" disabled>
 								</c:if>
 							</c:if>
 						</div>
@@ -411,7 +411,7 @@
 							<c:if test="${!empty fav}">
 							<button class="btn btn-outline-danger fw-bold" id="fav_btn" onclick="favCar(${car.car_num})"><i class="fav_icon bi bi-heart-fill">찜하기</i></button>
 							</c:if>
-							<button class="btn btn-outline-success fw-bold" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
+							<button class="btn btn-outline-primary fw-bold" id="share_btn" onclick="share_btn()"><i class="bi bi-share">공유하기</i></button>
 							<div class="text-center bg-light pt-1" id="share_div" style="display:none; position:absolute; transform:translate(85px,0)">
 								<button class="btn btn-sm" style="background-color: #3b5998; color:white;" onclick="shareFacebook()"><i class="bi bi-facebook"> 페이스북</i></button>
 								<button class="btn btn-sm" style="background-color: #00acee; color:white;" onclick="shareTwitter()"><i class="bi bi-twitter-x"> 트위터 X</i></button>

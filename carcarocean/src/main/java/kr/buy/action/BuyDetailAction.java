@@ -40,7 +40,7 @@ public class BuyDetailAction implements Action{
 		
 		Integer user_grade = (Integer)session.getAttribute("user_grade");
 		if(user_grade!=null) {
-			request.setAttribute("user_discount", ShopUtil.getDiscount(user_grade, car.getCar_price()));
+			request.setAttribute("getDiscountFee", ShopUtil.getDiscountFee(user_grade, car.getCar_price()));
 		}
 		
 		return "/WEB-INF/views/buy/buyDetail.jsp";

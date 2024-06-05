@@ -13,6 +13,7 @@ import kr.car.vo.CarVO;
 import kr.controller.Action;
 import kr.sell.dao.SellDao;
 import kr.util.FileUtil;
+import kr.util.StringUtil;
 
 public class CarWriteAction implements Action{
 
@@ -65,7 +66,7 @@ public class CarWriteAction implements Action{
 		car.setCar_con_op(request.getParameter("car_con_op"));
 		car.setCar_drive_op(request.getParameter("car_drive_op"));
 		car.setChecker_num(Integer.parseInt(request.getParameter("checker_num")));
-		car.setCar_checker_opinion(request.getParameter("car_checker_opinion"));
+		car.setCar_checker_opinion(StringUtil.useBrNoHTML(request.getParameter("car_checker_opinion")));
 		
 		CarDao dao = CarDao.getDao();
 		dao.insertCar(car);

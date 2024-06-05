@@ -36,6 +36,16 @@ window.onload = function(){
 			}
 			
 			/* 차량가격은 숫자만 입력 */
+			if(items[i].id == 'car_owner_change'){
+				if(items[i].value<0){
+					alert('(-)는 입력하실 수 없습니다.');
+					items[i].value = '0';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 차량가격은 숫자만 입력 */
 			if(items[i].id == 'car_price'){
 				if(isNaN(items[i].value)){
 					alert('차량가격은 숫자만 입력해주세요.');
@@ -74,8 +84,8 @@ window.onload = function(){
 			
 			/* 연식 양식 체크 */
 			if(items[i].id == 'car_birth'){
-				if(items[i].value.length!=9){
-					alert('연식은 공백을 기준으로 년도와 월을 입력해주세요. 예) 0000년 00월');
+				if(items[i].value.length!=8){
+					alert('연식은 년도와 월을 입력해주세요. 예) 0000년00월');
 					items[i].value = '';
 					items[i].focus();
 					return false;
