@@ -77,21 +77,7 @@
 										<h3>다음 등급까지</h3>
 									</div>
 									<div style="height: 100px">
-										<c:if test="${member.mem_grade == 1}">
-											
-										</c:if>
-										<c:if test="${member.mem_grade == 2}">
-											<h3>Silver</h3>
-										</c:if>
-										<c:if test="${member.mem_grade == 3}">
-											<h3>Gold</h3>
-										</c:if>
-										<c:if test="${member.mem_grade == 4}">
-											<h3>Platinum</h3>
-										</c:if>
-										<c:if test="${member.mem_grade == 5}">
-											<h3>Diamond</h3>
-										</c:if>
+										${price}
 									</div>
 								</div>
 							</div>

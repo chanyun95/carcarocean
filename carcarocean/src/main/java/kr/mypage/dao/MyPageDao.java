@@ -328,6 +328,36 @@ public class MyPageDao {
 			}
 			return list;
 		}
-		//검수중인 항목 숫자
-
+		//다음 등급까지 남은 금액
+		public int getMyGradeUpCost(int mem_num) throws Exception {
+		    Connection conn = null;
+		    PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = null;
+		    int Price = 0;
+		    int cnt = 0;
+		    try {
+		        conn = DBUtil.getConnection();
+		        // 내가 구매한 차량 정보 조회 쿼리
+		        sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT b.buy_num, c.car_name, c.car_price, md.mem_grade, b.buy_reg "
+		            + "FROM buy b JOIN car c ON b.car_num = c.car_num "
+		            + "JOIN member_detail md ON b.mem_num = md.mem_num " // member_detail 테이블과 조인
+		            + "WHERE b.buy_status = 1 AND b.mem_num = ?"
+		            + " ORDER BY b.buy_num DESC) a WHERE rownum <= 10) WHERE rnum >= 1";
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(++cnt, mem_num);
+		        rs = pstmt.executeQuery();
+		        while (rs.next()) {
+		            int mem_grade = rs.getInt("mem_grade");
+		            int car_price = rs.getInt("car_price");
+		            Price = ShopUtil.getGradeUp(mem_grade, car_price);
+		        }
+		    } catch (Exception e) {
+		        throw new Exception(e);
+		    } finally {
+		        DBUtil.executeClose(rs, pstmt, conn);
+		    }
+		    return Price;
+		}
+		
 }
