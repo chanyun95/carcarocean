@@ -34,7 +34,7 @@
       .overlay-icon {
           position: absolute;
           bottom: 10px; /* 원하는 위치에 따라 조정 가능 */
-          right: 10px;  /* 원하는 위치에 따라 조정 가능 */
+          right: 60px;  /* 원하는 위치에 따라 조정 가능 */
           font-size: 25px;
           color: red;
       }
@@ -51,9 +51,10 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<div class="row mb-3 p-5">
-			<c:forEach var="car" items="${carList}" begin="0" end="11"  varStatus="status">
+	<h1 class="text-center">내 관심차량 목록</h1>
+	<div class="container border rounded">
+		<div class="row mb-3 p-4">
+			<c:forEach var="car" items="${carList}">
 				<c:if test="${fn:contains(car.car_photo, ',')}">
 					<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
 					<c:set var="firstPhoto" value="${photoList[0]}"/>
@@ -64,13 +65,12 @@
 				<div class="col-4 mt-3">
 			   		<div class="p-3 border bg-light">
 			   			<!-- 사진 상자 -->
-						<div class="image-container ps-3">
-							<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}" class="ps-3">
+						<div class="image-container d-flex justify-content-center">
+							<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}">
 								<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
 							</a>
-							<c:set var="favIconId" value="fav_icon_${status.index}" />
 							<!-- 관심차량 아이콘 체크 -->
-							<i id="${favIconId}" class="bi bi-heart-fill overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
+							<i class="bi bi-heart-fill overlay-icon" style="cursor:pointer;" onclick="removeFav_btn(${car.car_num})"></i>
 						</div>
 						<!-- 설명 -->
 						<div>
@@ -100,42 +100,11 @@
 	<div class="text-center">${page}</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-		function removeFav_btn(button){
+		function removeFav_btn(car_num){
 			if(confirm('관심차량을 삭제하시겠습니까?')){
-				const car_num = button.getAttribute('data-carnum');
 				location.href='removeFavAction.do?car_num='+car_num;
 			}
 		}
-		function favCar(carnum,favIconId) {
-			let hostIndex = location.href.indexOf( location.host ) + location.host.length;
-			let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-			$.ajax({
-	        	url:contextPath+'/buy/favCar.do',
-	        	type:'post',
-	        	data:{car_num:carnum},
-	        	dataType:'json',
-	        	success:function(param){
-	        		if(param.result=='success'){
-	    	    		if(param.action=='insertFav'){
-	    	    			alert('관심차량 등록 완료');
-	    	    			$("#" + favIconId).removeClass("bi-heart").addClass("bi-heart-fill");
-	    				} else if(param.action=='removeFav'){
-	    					alert('관심차량 삭제 완료');
-	    					$("#" + favIconId).removeClass("bi-heart-fill").addClass("bi-heart");
-	    				}
-	    	    	} else if(param.result=='logout'){
-	     				alert('로그인 후 이용해주세요!');
-	     				location.href = '${pageContext.request.contextPath}/member/loginForm.do';
-	    	    	}else {
-	    	    		alert('관심차량을 등록/삭제하는 과정에서 오류가 발생했습니다.');
-	    	    	}
-	        	},
-	        	error:function(){
-	        		alert('네트워크에 오류가 발생했습니다!');
-	        	}
-	        });
-	    };
-	
 	</script>
 </body>
 </html>

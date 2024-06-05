@@ -8,14 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>차량 검수 신청 목록(관리자)</title>
-<script>
-	window.onload = function(){
-		const checkForm = document.getElementById('check_form');
-		checkForm.onchange = function(){
-			checkForm.submit();
-		};
-	};
-</script>
 </head>
 <body>
 	<!-- 헤더 고정 -->
@@ -45,8 +37,9 @@
 					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 				</select>
 				<input type="search" id="keyword" name="keyword" class="form-control rounded"
-				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:500px;">
-				<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
+				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</div>
 		</form>
 		<table class="table table-hover mt-3 text-center fw-bold">
@@ -89,5 +82,13 @@
 		</table>
 		<div class="text-center">${page}</div>
 	</div>
+	<script>
+		window.onload = function(){
+			const checkForm = document.getElementById('check_form');
+			checkForm.onchange = function(){
+				checkForm.submit();
+			};
+		};
+	</script>
 </body>
 </html>
