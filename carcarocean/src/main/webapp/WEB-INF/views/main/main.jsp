@@ -29,6 +29,8 @@
 	<!-- 헤더 시작 -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<!-- 헤더 끝 -->
+	<!-- 배경색 -->
+	<div style="background-color:#f7f7f7;">
 	<!-- 메인 컨텐츠 시작 -->
 	<div class="container">
 		<!-- 표지화면 시작 -->
@@ -81,24 +83,32 @@
 		 
 		<!-- 공지사항시작 -->
 		<section id="notice">
+		<div class="container">
 		<div class="row row-cols-1 row-cols-md-4 g-4">
 			<div class="col">
-				<h2>공지사항</h2>
+			<a href="${pageContext.request.contextPath}/notice/list.do" class="text-decoration-none text-dark">
+				<strong class="fs-3">공지사항</strong></a>
 				<c:forEach var="notice" items="${noticeList}" varStatus="status">
 					<c:if test="${status.index == 0}">
 						<div class="card" style="width: 18rem;">
-							<c:if test="${fn:contains(notice.notice_photo, ',')}">
+							<c:if test="${!empty notice.notice_photo && fn:contains(notice.notice_photo, ',')}">
                             <c:set var="photoList" value="${fn:split(notice.notice_photo, ',')}" />
                             <c:set var="firstPhoto" value="${photoList[0]}" />
                             <a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
                         </c:if>
-                        <c:if test="${!fn:contains(notice.notice_photo, ',')}">
+                        <c:if test="${!empty notice.notice_photo && !fn:contains(notice.notice_photo, ',')}">
                             <c:set var="firstPhoto" value="${notice.notice_photo}" />
                             <a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${notice.notice_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${notice.notice_photo}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
+                        </c:if>
+                        <!-- 사진이 없는경우 -->
+						<c:if test="${empty notice.notice_photo}">
+                        	<a href="${pageContext.request.contextPath}/notice/detail.do?event_num=${notice.notice_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        	<i class="bi bi-megaphone" style="font-size: 5rem;"></i>
+                        	</a>
                         </c:if>
 							<div class="card-body">
 								<h5 class="card-title text-truncate">
@@ -124,22 +134,31 @@
 			<!-- 공지사항 끝 -->
 			<!-- 이벤트 시작 -->
 			<div class="col">
-				<h2>이벤트</h2>
+			<a href="${pageContext.request.contextPath}/event/list.do" class="text-decoration-none text-dark">
+				<strong class="fs-3">이벤트</strong></a>
 				<c:forEach var="event" items="${EventList}" varStatus="status">
 					<c:if test="${status.index == 0}">
 						<div class="card" style="width: 18rem;">
-							<c:if test="${fn:contains(event.event_photo, ',')}">
+                        <!-- 사진이 여러장일 경우 -->
+						<c:if test="${!empty event.event_photo && fn:contains(event.event_photo, ',')}">
                             <c:set var="photoList" value="${fn:split(event.event_photo, ',')}" />
                             <c:set var="firstPhoto" value="${photoList[0]}" />
                             <a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
                         </c:if>
-                        <c:if test="${!fn:contains(event.event_photo, ',')}">
+                        <!-- 사진이 한 장일 경우 -->
+                        <c:if test="${!empty event.event_photo && !fn:contains(event.event_photo, ',')}">
                             <c:set var="firstPhoto" value="${event.event_photo}" />
                             <a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${event.event_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${event.event_photo}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
+                        </c:if>
+                        <!-- 사진이 없는경우 -->
+						<c:if test="${empty event.event_photo}">
+                        	<a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        	<i class="bi bi-calendar-event" style="font-size: 5rem;"></i>
+                        	</a>
                         </c:if>
 							<div class="card-body">
 								<h5 class="card-title text-truncate">
@@ -166,39 +185,78 @@
 			<!-- 이벤트 끝 -->
 			<!-- 뉴스 시작 -->
 			<div class="col">
-				<h2>뉴스</h2>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">제목1</h5>
-						<p class="card-text">제목1의 내용</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">제목2</li>
-						<li class="list-group-item">제목3</li>
-						<li class="list-group-item">제목4</li>
-					</ul>
-				</div>
+			<a href="${pageContext.request.contextPath}/news/list.do" class="text-decoration-none text-dark">
+				 <strong class="fs-3">뉴스</strong></a>
+            <c:forEach var="news" items="${NewsList}" varStatus="status">
+               <c:if test="${status.index == 0}">
+                  <div class="card" style="width: 18rem;">
+                     <c:if test="${!empty news.news_photo && fn:contains(news.news_photo, ',')}">
+                            <c:set var="photoList" value="${fn:split(news.news_photo, ',')}" />
+                            <c:set var="firstPhoto" value="${photoList[0]}" />
+                            <a href="${pageContext.request.contextPath}/news/detail.do?news_num=${news.news_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:260px; height:200px;">
+                            </a>
+                        </c:if>
+                        <c:if test="${!empty news.news_photo && !fn:contains(news.news_photo, ',')}">
+                            <c:set var="firstPhoto" value="${news.news_photo}" />
+                            <a href="${pageContext.request.contextPath}/news/detail.do?news_num=${news.news_num}">
+                            <img src="${pageContext.request.contextPath}/upload/${news.news_photo}" class="card-img-top" style="width:286px; height:200px;">
+                            </a>
+                        </c:if>
+                         <!-- 사진이 없는경우 -->
+						<c:if test="${empty news.news_photo}">
+                        	<a href="${pageContext.request.contextPath}/news/detail.do?news_num=${news.news_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        	<i class="bi bi-newspaper" style="font-size: 5rem;"></i>
+                        	</a>
+                        </c:if>
+                     <div class="card-body">
+                        <h5 class="card-title text-truncate">
+                        <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${news.news_num}" class="text-decoration-none text-dark">
+                        ${news.news_title}</a></h5>
+                        <span class="card-text" style="max-width:500px;">
+                        ${news.news_content}</span>
+                     </div>
+                     <ul class="list-group list-group-flush">
+                        <c:forEach var="news" items="${NewsList}" varStatus="status">
+                           <c:if test="${status.index > 0}">
+                              <li class="list-group-item text-truncate">
+                              <a href="${pageContext.request.contextPath}/news/detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark">
+                              ${news.news_title}
+                              </a>
+                              </li>
+                           </c:if>
+                        </c:forEach>
+                     </ul>
+                  </div>
+               </c:if>
+            </c:forEach>
 			</div>
 			<!-- 뉴스 끝 -->
 			<!-- 자유게시판 시작 -->
          <div class="col">
-            <h2>자유게시판</h2>
+         <a href="${pageContext.request.contextPath}/board/list.do" class="text-decoration-none text-dark">
+            <strong class="fs-3">자유게시판</strong></a>
             <c:forEach var="board" items="${BoardList}" varStatus="status">
                <c:if test="${status.index == 0}">
                   <div class="card" style="width: 18rem;">
-                     <c:if test="${fn:contains(board.board_photo, ',')}">
+                     <c:if test="${!empty board.board_photo && fn:contains(board.board_photo, ',')}">
                             <c:set var="photoList" value="${fn:split(board.board_photo, ',')}" />
                             <c:set var="firstPhoto" value="${photoList[0]}" />
                             <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
                         </c:if>
-                        <c:if test="${!fn:contains(board.board_photo, ',')}">
+                        <c:if test="${!empty board.board_photo && !fn:contains(board.board_photo, ',')}">
                             <c:set var="firstPhoto" value="${board.board_photo}" />
                             <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">
-                            <img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="card-img-top" style="width:280px; height:200px;">
+                            <img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="card-img-top" style="width:286px; height:200px;">
                             </a>
+                        </c:if>
+                         <!-- 사진이 없는경우 -->
+						<c:if test="${empty board.board_photo}">
+                        	<a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        	<i class="bi bi-people-fill" style="font-size: 5rem;"></i>
+                        	</a>
                         </c:if>
                      <div class="card-body">
                         <h5 class="card-title text-truncate">
@@ -224,12 +282,14 @@
          </div>
          <!-- 자유게시판 끝 -->
 		</div>
+		</div>
 		</section>
 		
-		<!-- 이용후기 시작 -->
-<section id="b_re">
+		<!-- 구매 이용후기 시작 -->
+	<section id="b_re">
     <div class="container p-4 position-relative">
-        <h2>구매 이용후기</h2>
+    <a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark">
+        <strong class="fs-3">구매 이용후기</strong></a>
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <c:forEach var="b_re" items="${list}" varStatus="status">
@@ -253,9 +313,9 @@
                             </a>
                         </c:if>
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title text-truncate">
                             <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark">${b_re.car_name}</a></h5>
-                            <p class="card-text">
+                            <p class="card-title text-truncate">
                             <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark">${b_re.b_re_title}</a></p>
                             <p class="card-text">
                              <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="btn btn-warning text-white">구매후기</a>
@@ -284,59 +344,105 @@
     
 </section>
 </div>
-</div>
-<!-- 이용후기 끝 -->
+	<!-- 구매 이용후기 끝-->
+    <!-- 판매 이용후기 시작 -->
+	<section id="s_re1">
+    <div class="container pb-5">
+       <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
+    <strong class="fs-3">판매이용후기</strong>
+    <span class="float-end">더보기<i class="bi bi-chevron-right"></i></span>
+</a>
+         <div class="table-responsive rounded-4 border border-secondary-subtle">
+            <table class="table table-borderless mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">순서</th>
+                    <th scope="col" class="col-2">차종</th>
+					<th scope="col" class="col-6">제목</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+ 
+                <c:if test="${loop.index ==0}">
+                    <tr>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>
+                    </tr>
+                </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+<section id="s_re2">
+    <div class="container pb-5">
+         <div class="table-responsive rounded-4 border border-secondary-subtle">
+            <table class="table table-borderless mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">순서</th>
+                    <th scope="col" class="col-2">차종</th>
+					<th scope="col" class="col-6">제목</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+                <c:if test="${loop.index ==1}">
+                    <tr>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>
+                    </tr>
+                </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
 
-		<%-- <h2>이용후기2</h2>
-	    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-	        <div class="carousel-indicators">
-	            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
-	            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-	            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
-	            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3"></button>
-	        </div>
-	        <div class="carousel-inner">
-	            <div class="carousel-item active">
-	                <img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-100" alt="First slide">
-	                <div class="carousel-caption">
-	                    <h5>First slide label</h5>
-	                    <p>코알라 이미지~~</p>
-	                </div>
-	            </div>
-	            <div class="carousel-item">
-	                <img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-100" alt="Second slide">
-	                <div class="carousel-caption">
-	                    <h5>Second slide label</h5>
-	                    <p>펭귄 이미지~~</p>
-	                </div>
-	            </div>
-	            <div class="carousel-item">
-	                <img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-100" alt="Third slide">
-	                <div class="carousel-caption">
-	                    <h5>Third slide label</h5>
-	                    <p>Lighthouse 이미지~~</p>
-	                </div>
-	            </div>
-	            <div class="carousel-item">
-	                <img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-100" alt="Fourth slide">
-	                <div class="carousel-caption">
-	                    <h5>Fourth slide label</h5>
-	                    <p>Tulip 이미지~~</p>
-	                </div>
-	            </div>
-	        </div>
-	        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	            <span class="visually-hidden">Previous</span>
-	        </button>
-	        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	            <span class="visually-hidden">Next</span>
-	        </button>
-		</div> --%>
-	<!-- 이용후기 끝-->
-    
+<section id="s_re3">
+    <div class="container pb-5">
+         <div class="table-responsive rounded-4 border border-secondary-subtle">
+            <table class="table table-borderless mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">순서</th>
+                    <th scope="col" class="col-2">차종</th>
+					<th scope="col" class="col-6">제목</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+                <c:if test="${loop.index ==2}">
+                    <tr>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
+                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>
+                    </tr>
+                </c:if>
+                </c:forEach>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+
+
+	<!-- 판매 이용후기 끝 -->
     <!-- 메인 컨텐츠 끝 -->
+    
+    </div>
+    <!-- 배경색 끝 -->
     <!-- 챗봇 시작-->
     <!--챗봇 끝  -->
     <jsp:include page="/WEB-INF/views/common/chatbot.jsp" />
