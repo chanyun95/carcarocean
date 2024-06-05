@@ -12,6 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
+		<hr size="1" noshade width="100%">
 		<h2 class="pt-5 pb-3">공지사항</h2>
 			<div class="d-flex justify-content-between align-items-center rounded" style="background-color:#f5f6f9;">
 			    <div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
@@ -25,8 +26,8 @@
 			            </select>
 			            <input type="search" size="20" name="keyword" id="keyword" class="form-control rounded" placeholder="검색할 정보를 입력하세요" 
 			                    value="${param.keyword}" style="width: 400px;">
-			            <input type="submit" class="btn btn-warning ms-2" value="검색">
-			            <input type="button" class="btn btn-warning ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
+			            <input type="submit" class="btn btn-warning text-white ms-2" value="검색">
+			            <input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
 			        </div>
 			    </form>
 			</div>
@@ -54,14 +55,14 @@
 								<td><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}"><b>${notice.notice_title}</b></a></td>
 								<td class="text-center">
 								<c:if test="${empty notice.notice_modify}">
-									  <a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a>
+									  <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a>
 								</c:if>
 								<c:if test="${!empty notice.notice_modify}">
-									 <a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${fn:substring(notice.notice_modify, 0, 10)}</a>
+									 <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_modify, 0, 10)}</a>
 								</c:if>
 								</td>
 								<td class="text-center">
-									<a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_hit}</a>
+									<a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_hit}</a>
 								</td>
 							</tr>
 					</c:if>				
@@ -70,7 +71,7 @@
 					<c:if test="${notice.notice_impt != 1}">
 						<tr >
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_num}</a></td>
-							<td><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+							<td ><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_hit}</a></td>
 						</tr>
