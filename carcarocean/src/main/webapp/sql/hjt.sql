@@ -4,7 +4,8 @@ CREATE TABLE event(
 event_num NUMBER NOT NULL,            -- 이벤트 식별자
 event_title VARCHAR2(150) NOT NULL,         
 event_content CLOB NOT NULL,            
-event_photo VARCHAR2(400),                
+event_photo VARCHAR2(400),
+event_hit NUMBER DEFAULT 0 NOT NULL,
 event_reg DATE DEFAULT SYSDATE NOT NULL,    
 event_modify DATE,
 CONSTRAINT event_pk PRIMARY KEY (event_num)

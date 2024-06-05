@@ -35,7 +35,7 @@
 				${news.news_content}
 			</p>
 			<hr size="1" noshade="noshade" width="100%">
-			<div class="text-end mb-5">
+			<div class="text-center mb-5">
 			<ul class="detail-sub list-unstyled">
 				<li>
 						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">

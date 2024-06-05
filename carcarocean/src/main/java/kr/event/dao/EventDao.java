@@ -29,14 +29,15 @@ public class EventDao {
 			//커넥션풀로 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "INSERT INTO event (event_num, event_title, event_content, event_photo)"
-					+ " VALUES (event_seq.nextval, ?, ?, ?)";
+			sql = "INSERT INTO event (event_num, event_title, event_content, event_photo, event_hit)"
+					+ " VALUES (event_seq.nextval, ?, ?, ?, ?)";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
 			pstmt.setString(++cnt, event.getEvent_title());
 			pstmt.setString(++cnt, event.getEvent_content());
 			pstmt.setString(++cnt, event.getEvent_photo());
+			pstmt.setInt(++cnt, event.getEvent_hit());
 			//SQL문 실행
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -119,6 +120,7 @@ public class EventDao {
 				EventVo event = new EventVo();
 				event.setEvent_num(rs.getInt("event_num"));
 				event.setEvent_title(StringUtil.useNoHTML(rs.getString("event_title")));
+				event.setEvent_hit(rs.getInt("event_hit"));
 				event.setEvent_reg(rs.getString("event_reg"));
 				event.setEvent_modify(rs.getString("event_modify"));
 				list.add(event);
@@ -160,6 +162,7 @@ public class EventDao {
 					event.setEvent_photo(rs.getString("event_photo"));
 					event.setEvent_title(StringUtil.useNoHTML(rs.getString("event_title")));
 					event.setEvent_content(StringUtil.useNoHTML(rs.getString("event_content")));
+					event.setEvent_hit(rs.getInt("event_hit"));
 					event.setEvent_reg(rs.getString("event_reg"));
 					event.setEvent_modify(rs.getString("event_modify"));
 					list.add(event);
@@ -196,6 +199,7 @@ public class EventDao {
 				event.setEvent_num(rs.getInt("event_num"));
 				event.setEvent_title(rs.getString("event_title"));
 				event.setEvent_content(rs.getString("event_content"));
+				event.setEvent_hit(rs.getInt("event_hit"));
 				event.setEvent_reg(rs.getString("event_reg"));
 				event.setEvent_modify(rs.getString("event_modify"));
 				event.setEvent_photo(rs.getString("event_photo"));
@@ -207,6 +211,31 @@ public class EventDao {
 		}
 		return event;
 	}
+	
+	//상세 글 확인 시 조회 수 증가
+	public void updateReadCount(int event_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int cnt = 0;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "UPDATE event SET event_hit = event_hit + 1 WHERE event_num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(++cnt, event_num);
+			//SQL문 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	//파일 삭제
 	public void deletePhoto(int event_num)throws Exception{
 		Connection conn = null;
