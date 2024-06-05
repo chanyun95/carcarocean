@@ -129,6 +129,48 @@ public class NewsDao {
 		}
 		return list;
 	}
+	//(메인)글 목록
+		public List<NewsVo> getListNewsMain(int start, int end)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<NewsVo> list = null;
+			String sql = null;
+			int cnt = 0;
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				
+				
+				//SQL문 작성
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM news "
+					+ " ORDER BY news_num DESC)a) WHERE rnum >=? AND rnum <=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(++cnt, start);
+				pstmt.setInt(++cnt, end);
+				
+				rs = pstmt.executeQuery();
+				list = new ArrayList<NewsVo>();
+				while(rs.next()) {
+					NewsVo news = new NewsVo();
+					news.setNews_num(rs.getInt("news_num"));
+					news.setNews_title(StringUtil.useNoHTML(rs.getString("news_title")));
+					news.setNews_photo(rs.getString("news_photo"));
+					news.setNews_content(StringUtil.useNoHTML(rs.getString("news_content")));
+					news.setNews_reg(rs.getString("news_reg"));
+					news.setNews_hit(rs.getInt("news_hit"));
+					news.setNews_modify(rs.getString("news_modify"));
+					list.add(news);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 	
 	//글 상세
 	public NewsVo detailNews(int news_num)throws Exception{
