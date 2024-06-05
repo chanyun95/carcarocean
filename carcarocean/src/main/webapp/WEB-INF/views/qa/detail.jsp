@@ -43,7 +43,7 @@
 				${qa.qa_content} 
 			</p>
 			<hr size="1" noshade="noshade" width="100%">
-			<div class="text-end mb-1">
+			<div class="text-center mb-1">
 			<ul class="detail-sub list-unstyled">
 				<li>
 						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">	
@@ -55,7 +55,7 @@
 							const delete_btn = document.getElementById('delete_btn');
 							//이벤트 연결
 							delete_btn.onclick = function(){
-								let choice = confirm('삭제하시겠습니까?');
+								let choice = confirm('정말 삭제하시겠습니까?');
 								if(choice){
 									location.replace('delete.do?qa_num=${qa.qa_num}');
 								}

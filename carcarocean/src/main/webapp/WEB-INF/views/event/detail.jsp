@@ -21,6 +21,7 @@
 				<c:if test="${empty event.event_modify}">
 					${fn:substring(event.event_reg,0,10)}
 				</c:if>
+				| ${event.event_hit}
 			</div>
 			<hr size="1" noshade="noshade" width="100%">
 			<c:if test="${!empty event.event_photo}">
@@ -34,7 +35,7 @@
 				${event.event_content}
 			</p>
 			<hr size="1" noshade="noshade" width="100%">
-			<div class="text-end mb-5">
+			<div class="text-center mb-5">
 			<ul class="detail-sub list-unstyled">
 				<li>
 						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">

@@ -5,6 +5,7 @@ public class EventVo {
 	private String event_title;			//제목
 	private String event_content;		//내용
 	private String event_photo;			//사진
+	private int event_hit;
 	private String event_reg;			//등록일
 	private String event_modify;		//수정일
 	
@@ -31,6 +32,12 @@ public class EventVo {
 	}
 	public void setEvent_photo(String event_photo) {
 		this.event_photo = event_photo;
+	}
+	public int getEvent_hit() {
+		return event_hit;
+	}
+	public void setEvent_hit(int event_hit) {
+		this.event_hit = event_hit;
 	}
 	public String getEvent_reg() {
 		return event_reg;

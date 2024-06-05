@@ -36,7 +36,7 @@ public class DeleteAction implements Action{
 				FileUtil.removeFile(request, pho);
 			}
 		}
-		request.setAttribute("notice_msg", "글 삭제 완료");
+		request.setAttribute("notice_msg", "문의글이 정상적으로 삭제되었습니다.");
 		request.setAttribute("notice_url", request.getContextPath() + "/qa/list.do");
 		return "/WEB-INF/views/common/alert_view.jsp";
 	}

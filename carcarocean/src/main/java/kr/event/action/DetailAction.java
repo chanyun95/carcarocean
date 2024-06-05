@@ -16,6 +16,7 @@ public class DetailAction implements Action{
 		//글번호 반환
 				int event_num = Integer.parseInt(request.getParameter("event_num"));
 				EventDao dao = EventDao.getDao();
+				dao.updateReadCount(event_num);
 				
 				EventVo event = dao.detailEvent(event_num);
 				

@@ -28,37 +28,34 @@
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-		<hr size="1" noshade="noshade" width="100%">
-		<h2 class="pt-5">자동차 뉴스 게시판 목록</h2>
-		<!-- 검색바 -->
-			<div>
-			<form id="search_form" action="list.do" method="get">
-				<div>
-					<div class="text-start mt-3" style="font-size: 15pt;">
+		<h2 class="pt-5 pb-3">자동차 뉴스 게시판 목록</h2>
+		<!-- 검색바 -->		
+				<div class="d-flex justify-content-between align-items-center rounded" style="background-color: #f5f6f9;">
+					<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
 						총 ${count}건의 글이 있습니다.
 					</div>
-					<div class="d-flex justify-content-end mb-4">
-					<select name="keyfield" class="form-select" style="width: auto;">
+					<form id="search_form" action="list.do" method="get">
+					<div class="d-flex align-items-center">
+					<select name="keyfield" class="form-select" style="width: auto; margin-right: 10px;">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 					</select>
 					<input type="search" size="20" name="keyword" class="form-control rounded" id="keyword" placeholder="Search"
 							value="${param.keyword}" style="width: 200px;">
 					<input type="submit" class="btn btn-warning ms-2" value="검색">
-					<input type="button" class="btn btn-warning ms-2" value="검색초기화" onclick="location.href='list.do'">
+					<input type="button" class="btn btn-warning ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
 					
 					</div>
+					</form>
 				</div>	
-			</form>
-		</div>
 		<!-- 목록 표 -->
 		<c:if test="${count == 0}">
-		<div class="result-display">
+		<div class="text-center border rounded m-5">
 			표시할 게시물이 없습니다.
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-			<table class="table table-hover text-center">
+			<table class="table table-hover text-center mt-4">
 				<thead class="table-light">
 				<tr>
 					<th>뉴스 번호</th>
@@ -83,9 +80,9 @@
 				</c:forEach>
 				</tbody>
 			</table>
-			<div class="text-center mb-3">${page}</div>
+			<div class="text-center mt-3 mb-3">${page}</div>
 				<!-- 버튼 -->
-			<div class="text-end mb-5">
+			<div class="text-end mb-4">
 				<c:if test="${!empty user_num && user_auth == 9}">
 					<input type="button" class="btn btn-warning" value="글쓰기" onclick="location.href='writeForm.do'">			
 				</c:if>
