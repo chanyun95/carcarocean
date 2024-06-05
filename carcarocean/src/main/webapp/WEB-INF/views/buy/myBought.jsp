@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,15 +47,20 @@
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${list}">
+				<c:if test="${fn:contains(car.car_photo, ',')}">
+					<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
+					<c:set var="firstPhoto" value="${photoList[0]}"/>
+				</c:if>
+				<c:if test="${!fn:contains(car.car_photo, ',')}">
+					<c:set var="firstPhoto" value="${car.car_photo}" />
+				</c:if>
+
 					<tr class="align-middle">
 						<td>${item.buy_num}</td>
 						<td>${item.car_name}</td>
 						<td><fmt:formatNumber type="number" value="${item.car_price}" pattern="#,###" />만원</td>
        					<td>${item.buy_reg}</td>
-						<td><img
-							src="${pageContext.request.contextPath}/upload/${item.car.car_photo}"
-							width="100px" height="100px">
-						</td>
+						<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></td>
 					</tr>
 				</c:forEach>
 			</tbody>

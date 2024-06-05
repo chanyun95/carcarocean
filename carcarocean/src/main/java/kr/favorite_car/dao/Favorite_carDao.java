@@ -139,4 +139,22 @@ public class Favorite_carDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
+	
+	public void removeAllFav (int car_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM favorite_car WHERE car_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, car_num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 }
