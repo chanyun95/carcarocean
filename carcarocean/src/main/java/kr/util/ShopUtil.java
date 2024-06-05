@@ -24,4 +24,16 @@ public class ShopUtil {
     	}
     	return (int)discount;
     }
+    
+    public static int getGradeUp(int mem_grade, int car_price) {
+    	double discount;
+        switch(mem_grade) {
+            case 1: discount = 2000 - (car_price * 0.9341); break;
+            case 2: discount = 4000 - (car_price * 0.9441); break;
+            case 3: discount = 6000 - (car_price * 0.9541); break;
+            case 4: discount = 8000 - (car_price * 0.9641); break;
+            default: discount = 10000 - (car_price * 0.9741);
+        }
+        return (int)discount;
+    }
 }
