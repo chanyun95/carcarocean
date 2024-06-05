@@ -82,11 +82,9 @@
 			<form id="s_re_form">
 				<input type="hidden" name="s_re_num" value="${s_re.s_re_num}" id="s_re_num">
 				<!-- disabled는 댓글을 달지 못하도록 비활설화 시키는 역할 -->
-				<textarea rows="3" cols="50" name="s_re_comm_content" class="form-control" placeholder="Leave a comment here"
-				<c:if test="${empty user_num}">disabled="disabled"</c:if> 
-				id="s_re_comm_content" class="s_re_comm_content">
-				<c:if test="${empty user_num}">로그인해야 작성할 수 있습니다</c:if>
-				</textarea>
+				<textarea rows="3" cols="50" name="s_re_comm_content" id="s_re_comm_content"
+				class="form-control" placeholder="Leave a comment here"<c:if test="${empty user_num}">disabled="disabled"</c:if> 
+				class="s_re_comm_content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다</c:if></textarea>
 				<c:if test="${!empty user_num}">
 				<div id="s_re_first">
 					<span class="s_re_letter-count">300/300</span><!-- 글자수 제한  -->

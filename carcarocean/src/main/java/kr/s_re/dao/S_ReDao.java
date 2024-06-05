@@ -126,7 +126,7 @@ public class S_ReDao {
 		
 	
 
-	//판매 후기 게시판 글 목록, 검색 글 목록
+	
 	// 판매 후기 게시판 글 목록, 검색 글 목록
 	public List<S_ReVo> getListSellReview(int start, int end, String keyfield, String keyword) throws Exception {
 	    Connection conn = null;
@@ -192,6 +192,60 @@ public class S_ReDao {
 	    }
 	    return list;
 	}
+	//(메인) 판매 후기 게시판 글 목록, 검색 글 목록
+		public List<S_ReVo> getListSellReviewMain(int start, int end) throws Exception {
+		    Connection conn = null;
+		    PreparedStatement pstmt = null;
+		    String sql = null;
+		    List<S_ReVo> list = null;
+		  
+		    ResultSet rs = null;
+		    int cnt = 0;
+		    try {
+		        // 커넥션풀로부터 커넥션 할당
+		        conn = DBUtil.getConnection();
+		        
+
+		        // SQL문 작성
+		        sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
+		        	    + "(SELECT s.s_re_num, s.s_re_title, s.s_re_content, s.sell_num, s.s_re_reg, s.s_re_modify, "
+		        	    + "m.mem_id, sell.sell_cname, sell.sell_maker "
+		        	    + "FROM s_re s JOIN member m ON s.mem_num = m.mem_num "
+		        	    + "JOIN sell ON s.sell_num = sell.sell_num "
+		        	    + " ORDER BY s.s_re_num DESC) a) "
+		        	    + "WHERE rnum >= ? AND rnum <= ?";
+
+
+		        // PreparedStatement 객체 생성
+		        pstmt = conn.prepareStatement(sql);
+
+		        // ?에 데이터 바인딩
+		        pstmt.setInt(++cnt, start);
+		        pstmt.setInt(++cnt, end);
+
+		        rs = pstmt.executeQuery();
+		        list = new ArrayList<S_ReVo>();
+		        while (rs.next()) {
+		            S_ReVo s_re = new S_ReVo();
+		            s_re.setS_re_num(rs.getInt("s_re_num"));
+		            s_re.setS_re_title(rs.getString("s_re_title"));
+		            s_re.setS_re_content(rs.getString("s_re_content"));
+		            s_re.setSell_num(rs.getInt("sell_num"));
+		            s_re.setS_re_reg(rs.getString("s_re_reg"));
+		            s_re.setS_re_modify(rs.getString("s_re_modify"));
+		            s_re.setMem_id(rs.getString("mem_id"));
+		            s_re.setSell_cname(rs.getString("sell_cname"));
+		            s_re.setSell_maker(rs.getString("sell_maker"));
+
+		            list.add(s_re);
+		        }
+		    } catch (Exception e) {
+		        throw new Exception(e);
+		    } finally {
+		        DBUtil.executeClose(rs, pstmt, conn);
+		    }
+		    return list;
+		}
 
 	//판매 후기 게시판 글 상세
 	public S_ReVo getSellReview(int s_re_num)throws Exception{

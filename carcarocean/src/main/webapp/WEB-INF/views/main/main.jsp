@@ -42,13 +42,13 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-20" style="height: 450px;" alt="1화면">
+					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="1화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/service.jpg" class="d-block w-20" style="height: 450px;" alt="2화면">
+					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="2화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/mainlogo.png" class="d-block w-20" style="height: 450px;" alt="3화면">
+					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="3화면">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -346,37 +346,145 @@
 </div>
 	<!-- 구매 이용후기 끝-->
     <!-- 판매 이용후기 시작 -->
-	<section id="s_re1">
-    <div class="container pb-5">
-       <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
-    <strong class="fs-3">판매이용후기</strong>
-    <span class="float-end">더보기<i class="bi bi-chevron-right"></i></span>
-</a>
-         <div class="table-responsive rounded-4 border border-secondary-subtle">
+		<section id="s_re1">
+    <div class="container pb-1">
+        <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
+            <strong class="fs-3">판매이용후기</strong>
+            <span class="float-end">더보기<i class="bi bi-chevron-right"></i></span>
+        </a>
+        <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
-            <tbody>
-                <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
- 
-                <c:if test="${loop.index ==0}">
-                    <tr>
-                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
-                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>  
-                    </tr>
-                    <tr>
-                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
-                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.mem_id}</a></td>
-                    </tr>
-                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark card-body">${s_re.s_re_content}</a></td>
-                    <tr>
-                    </tr>
-                </c:if>
-                </c:forEach>
-            </tbody>
-        </table>
+                <tbody>
+                    <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+                        <c:if test="${loop.index == 0}">
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <strong>${s_re.s_re_title}</strong>
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        ${s_re.s_re_reg}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
+                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
+                                        ${s_re.mem_id}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center m-5 p-5" >
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
+                                        ${s_re.s_re_content}
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="container pb-1">
+        <div class="table-responsive rounded-4 border border-secondary-subtle">
+            <table class="table table-borderless mb-0">
+                <tbody>
+                    <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+                        <c:if test="${loop.index == 1}">
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <strong>${s_re.s_re_title}</strong>
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        ${s_re.s_re_reg}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
+                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
+                                        ${s_re.mem_id}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center m-5 p-5" >
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
+                                        ${s_re.s_re_content}
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="container pb-5">
+        <div class="table-responsive rounded-4 border border-secondary-subtle">
+            <table class="table table-borderless mb-0">
+                <tbody>
+                    <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
+                        <c:if test="${loop.index == 2}">
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <strong>${s_re.s_re_title}</strong>
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        ${s_re.s_re_reg}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
+                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
+                                        ${s_re.mem_id}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center m-5 p-5" >
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
+                                        ${s_re.s_re_content}
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
-<section id="s_re2">
+
+		<%-- <section id="s_re2">
     <div class="container pb-5">
          <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
@@ -432,7 +540,7 @@
         </table>
         </div>
     </div>
-</section>
+</section> --%>
 
 
 	<!-- 판매 이용후기 끝 -->
