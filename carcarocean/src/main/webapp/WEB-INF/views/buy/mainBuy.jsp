@@ -212,7 +212,8 @@
 						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 					</select>
 					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+					<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
@@ -304,6 +305,9 @@
         		alert('네트워크에 오류가 발생했습니다!');
         	}
         });
+    };
+    function reset_btn(){
+    	location.href='redirect:/buy/mainBuy.do';
     };
 </script>
 </body>

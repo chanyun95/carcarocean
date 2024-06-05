@@ -22,15 +22,13 @@
 		<hr size="1" width="100%" noshade="noshade">
 		<h1 class="text-center">구매 내역</h1>
 		<div class="d-flex flex-row justify-content-end">
-			<form id="search_form" action="myBought.do" method="get"
-				class="d-flex">
-				<select id="keyfield" name="keyfield" class="form-select"
-					style="width: auto;">
+			<form id="search_form" action="myBought.do" method="get" class="d-flex">
+				<select id="keyfield" name="keyfield" class="form-select" style="width: auto;">
 					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
-				</select> <input type="search" id="keyword" name="keyword"
-					class="form-control rounded" placeholder="Search"
-					aria-label="Search" aria-describedby="search-addon"> <input
-					type="submit" class="btn btn-warning text-white btn-lg" value="검색">
+				</select>
+				<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</form>
 		</div>
 		
@@ -77,6 +75,9 @@
 			let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 			location.href = contextPath+'/b_re/writeForm.do';
 		}
+	}
+	function reset_btn(){
+		location.href = 'redirect:/buy/myBought.do';
 	}
 	</script>
 </body>

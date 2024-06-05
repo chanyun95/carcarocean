@@ -24,7 +24,8 @@
 					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
 				</select>
 				<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-				<input type="submit" class="btn btn-warning btn-lg fw-bold text-white" value="검색">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</form>
 		</div>
 		<table class="table table-hover text-center align-content-center fw-bold mt-3">
@@ -64,6 +65,9 @@
 				location.href='adminInsertBuy.do?car_num='+car_num+'&mem_num='+mem_num;
 			}
 		}
-	}
+	};
+	function reset_btn(){
+		location.href='redirect:/buy/adminBuyList.do';
+	};
 </script>
 </html>

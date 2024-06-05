@@ -58,7 +58,7 @@
 					<p class="small"><b class="text-danger"><i class="bi bi-exclamation-circle-fill"> </i>당일 판매</b>에 한함</p>
 				</div>
 				<div class="mt-5">
-					<button onclick="openPopup()" class="btn btn-danger" style="padding: 0.8rem 5rem; font-size: 1.75rem;"><b>간편 신청 ></b></button>
+					<button onclick="openPopup()" class="btn btn-warning text-white fw-bold" style="padding: 0.8rem 5rem; font-size: 1.75rem;"><b>간편 신청 ></b></button>
 				</div>
 			</div>
 		</div>
@@ -239,54 +239,19 @@
 			</c:forEach>
 			</div>
 		</div>
+		
 		<!-- 판매 후기 -->
 		<div class="my-5">
 			<h2 class="text-center"><b>판매 후기</b></h2>
-			<div class="row justify-content-between text-center p-4">
-				<div class="border rounded col-3">
-					1<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					2<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					3<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-			</div>
-			<div class="row justify-content-between text-center p-4">
-				<div class="border rounded col-3">
-					4<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					5<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					6<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
+			<div class="row justify-content-start text-center p-4">
+				<c:forEach var="s_re" items="${s_reList}">
+					<div class="border rounded col-4">
+						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.sell_maker} ${s_re.sell_cname}</div>
+						${s_re.mem_id}<br>
+						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.s_re_title}</div>
+						<div class="mt-3" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.s_re_content}</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

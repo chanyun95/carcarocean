@@ -37,8 +37,9 @@
 					<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 				</select>
 				<input type="search" id="keyword" name="keyword" class="form-control rounded"
-				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:500px;">
-				<input type="submit" class="btn btn-warning fw-bold btn-lg text-white" value="검색">
+				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</div>
 		</form>
 		<table class="table table-hover text-center mt-3">
@@ -82,5 +83,13 @@
 		<div>${page}</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	window.onload = function(){
+		const checkForm = document.getElementById('check_form');
+		checkForm.onchange = function(){
+			checkForm.submit();
+		};
+	};
+	</script>
 </body>
 </html>
