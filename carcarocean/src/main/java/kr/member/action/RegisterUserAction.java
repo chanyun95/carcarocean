@@ -42,7 +42,6 @@ public class RegisterUserAction implements Action{
         session.setAttribute("user_id", member.getMem_id());
         session.setAttribute("user_auth", member.getMem_auth());
         session.setAttribute("user_photo", member.getMem_photo());
-		System.out.println(member.getMem_num());
 		
 		request.setAttribute("notice_msg", "회원 가입이 완료되었습니다.");
 		request.setAttribute("notice_url", request.getContextPath()+"/main/main.do");
