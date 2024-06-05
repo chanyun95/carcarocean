@@ -14,7 +14,10 @@
 	<div class="container">
 		<hr size="1" width="100%" noshade="noshade">
 		<h2 class="pt-5 pb-3">자유 게시판</h2>
-		<div class="d-flex justify-content-center align-items-center rounded" style="background-color:#f5f6f9;">
+		<div class="d-flex justify-content-between align-items-center rounded" style="background-color:#f5f6f9;">
+			<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
+			        총 ${count}건의 글이 있습니다.
+			</div>
 			<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
 				<div class="d-flex align-items-center ms-4 mt-5 mb-5">
 					<select name="keyfield" class="form-select" style="width:auto; margin-right: 10px;">
@@ -22,10 +25,12 @@
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					</select>
-					<input type="search" size="20" name="keyword" id="keyword" class="form-control rounded" placeholder="검색할 정보를 입력하세요" 
+					<input type="search" size="20" name="keyword" id="keyword" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" 
 			                    value="${param.keyword}" style="width: 400px;">
-			        <input type="submit" class="btn btn-warning text-white ms-2" value="검색">
-			        <input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
+			        <button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+					<a href="../board/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4">
+					    <i class="bi bi-arrow-clockwise"></i>
+					</a>
 				</div>
 			</form>
 		</div>
@@ -70,9 +75,10 @@
 		</c:if>
 		<div class="list-space float-end">
 			<input type="button" value="글쓰기" class="btn btn-warning text-white" onclick="location.href='writeForm.do'"
-				<c:if test="${empty user_num}">disabled="disabled"</c:if>>
+			<c:if test="${empty user_num}">disabled="disabled"</c:if>>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script type="text/javascript">
 	window.onload=function(){

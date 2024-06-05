@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -18,18 +19,22 @@
 			    <div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
 			        총 ${count}건의 글이 있습니다.
 			    </div>
+			    <!-- 검색 폼 시작 -->
 			    <form id="search_form" action="list.do" method="get">
 			        <div class="d-flex align-items-center">
 			            <select name="keyfield" class="form-select" style="width: auto; margin-right: 10px;">
 			                <option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 			                <option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 			            </select>
-			            <input type="search" size="20" name="keyword" id="keyword" class="form-control rounded" placeholder="검색할 정보를 입력하세요" 
+			            <input type="search" size="20" name="keyword" id="keyword" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" 
 			                    value="${param.keyword}" style="width: 400px;">
-			            <input type="submit" class="btn btn-warning text-white ms-2" value="검색">
-			            <input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
-			        </div>
+			            <button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+						<a href="../notice/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4">
+						    <i class="bi bi-arrow-clockwise"></i>
+						</a>
+					 </div>
 			    </form>
+			    <!-- 검색 폼 끝 -->
 			</div>
 			<c:if test="${count == 0}">
 				<div class="text-center border rounded m-5">
@@ -81,11 +86,11 @@
 				</table>
 			</div>
 				<div class="text-center mt-3 mb-3">${page}</div>
-				<c:if test="${user_auth == 9}">
-				<div class="text-end mb-4">
-					<input type="button" class="btn btn-warning" value="글 쓰기" onclick="location.href='writeForm.do'">
-				</div>
-				</c:if>
+			</c:if>
+			<c:if test="${user_auth == 9}">
+			<div class="text-end mb-4">
+				<input type="button" class="btn btn-warning" value="글 쓰기" onclick="location.href='writeForm.do'">
+			</div>
 			</c:if>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
