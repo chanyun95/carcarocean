@@ -22,17 +22,19 @@ public class DeleteAction implements Action{
 		int qa_num = Integer.parseInt(request.getParameter("qa_num"));
 		QaDao dao = QaDao.getDao();
 		QaVo db_qa = dao.detailQa(qa_num);
-		
+
 		//로그인한 회원번호와 작성자 회원번호 일치 여부 체크
 		if(user_num != db_qa.getMem_num()) {
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		//로그인한 회원번호와 작성자 회원번호 일치
 		dao.deleteQa(qa_num);
-		//사진 삭제
-		String[] photos = db_qa.getQa_photo().split(",");
-		for(String pho : photos) {
-			FileUtil.removeFile(request, pho);
+		if(db_qa.getQa_photo() != null) {
+			//사진 삭제
+			String[] photos = db_qa.getQa_photo().split(",");
+			for(String pho : photos) {
+				FileUtil.removeFile(request, pho);
+			}
 		}
 		request.setAttribute("notice_msg", "글 삭제 완료");
 		request.setAttribute("notice_url", request.getContextPath() + "/qa/list.do");
