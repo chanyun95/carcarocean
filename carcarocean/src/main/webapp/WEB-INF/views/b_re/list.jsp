@@ -7,14 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>구매 후기</title>
+<title>차량 구매 후기</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<hr size="1" noshade width="100%">
-		<h1 class="pt-5">구매 후기 목록</h1>
+		<h2 class="pt-5">차량 구매 후기</h2>
 			<c:if test="${count == 0}">
 				<div>
 					표시할 게시물이 없습니다.

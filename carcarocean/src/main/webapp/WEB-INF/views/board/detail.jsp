@@ -17,58 +17,64 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="container">
-		<h1 class="text-center">글 상세</h1>
-		<hr size="1" width="100%" noshade>
-		<h2 class="text-center">${board.board_title}</h2>
-		<div class="text-end">
-			<span>${board.mem_id}</span>
-			<c:if test="${!empty board.mem_photo}">
-			<img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="60" height="60">
-			</c:if>
-			<c:if test="${empty board.mem_photo}">
-			<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="60" height="60">
-			</c:if>
-			<p class="fw-bold">조회 : ${board.board_hit}</p>
-		</div>
-		<c:if test="${!empty board.board_photo}">
-		<div class="text-center">
-				<c:forEach var="photo" items="${fn:split(board.board_photo, ',')}">
-					<img src="${pageContext.request.contextPath}/upload/${photo}">
-				</c:forEach>
-			<img src="${pageContext.request.contextPath}/upload/${board.board_photo}" class="rounded" width="200px" height="200px">
-		</div>
-
-		</c:if>
-
-		<p class="fs-4">
-
-			${board.board_content}
-		</p>
+	<div class="container">
+		<h2 class="pt-5 pb-3">자유 게시판</h2>
 		<hr size="1" noshade="noshade" width="100%">
-
-		<ul class="detail-sub">
-			<li>
+		<div class="mt-4 mb-4">
+			<div class="text-start fs-3 mt-2">
+				${board.board_title}
+			</div>
+			<div class="text-end mt-2">
+				<c:if test="${!empty board.mem_photo}">
+					<div class="me-3 d-inline">
+					<img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="50" height="50">
+					</div>
+				</c:if>
+				<c:if test="${empty board.mem_photo}">
+					<div class="me-4 d-inline">
+					<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="50" height="50">
+					</div>
+				</c:if>
+				<div class="me-4 d-inline">${board.mem_id}</div>
+				<div class="me-4 d-inline">
+					<c:if test="${empty board.board_modify}">
+						${fn:substring(board.board_reg, 0, 10)} 
+					</c:if>
+					<c:if test="${!empty board.board_modify}">
+						${fn:substring(board.board_modify, 0, 10)}
+					</c:if>
+				</div>
+				<div class="d-inline">${board.board_hit}</div>
+			</div>
+		</div>
+		<hr size="1" noshade="noshade" width="100%">
+		<c:if test="${!empty board.board_photo}">
+			<div class="text-center">
+				<c:forEach var="photo" items="${fn:split(board.board_photo, ',')}">
+					<div class="col-12 text-center mb-2">
+						<img src="${pageContext.request.contextPath}/upload/${photo}" width="600" height="400">
+					</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<p class="fs-5">${board.board_content}</p>
+		<hr size="1" noshade="noshade" width="100%">
+		<ul class="detail-sub list-unstyled text-end">
+			<li class="text-end">
 				<!-- 신고 -->
 				<p id="report_status_text"></p>
 				<%-- <img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}"> --%>
-				<button class="btn btn-outline-danger" onclick="" id="output_report" data-num="${board.board_num}" data-checkRedirect="${check_redirect}"><i id="reportIcon" class="bi bi-exclamation-octagon-fill">신고</i></button>
+				<button class="btn btn-outline-danger text-end" onclick="" id="output_report" data-num="${board.board_num}" data-checkRedirect="${check_redirect}"><i id="reportIcon" class="bi bi-exclamation-octagon-fill">신고</i></button>
 			</li>
 		</ul>
-
 		<div class="text-end">
 			<div>
 				<c:if test="${!empty board.board_modify}">
 					최근 수정일 : ${fn:substring(board.board_modify,0,10)}
 				</c:if>
-				작성일 : ${fn:substring(board.board_reg,0,10)}
+				/작성일 : ${fn:substring(board.board_reg,0,10)}
 			</div>
-			<div>
-				<!-- 신고 -->
-				<span id="report_status_text" class="fw-bold"></span>
-				<i class="bi bi-emoji-dizzy-fill d-inlign" id="output_report" data-num="${board.board_num}" data-checkRedirect="${check_redirect}" style="font-size:50px;"></i>
-			</div>
-			<div>
+			<div class="mt-3">
 				<c:if test="${user_num == board.mem_num}">
 					<input type="button" class="btn btn-warning text-white fw-bold" value="수정" onclick="location.href='updateForm.do?board_num=${board.board_num}'">
 					<input type="button" class="btn btn-warning text-white fw-bold" value="삭제" id="delete_btn">
@@ -84,28 +90,37 @@
 				</c:if>
 			</div>
 		</div>
+		<!-- 댓글 시작 -->
 		<div id="reply_div">
 			<span class="fw-bold">댓글 달기</span>
-			<form id="bor_comm_form">
+			<form id="bor_comm_form" class="mt-3">
 				<input type="hidden" name="board_num" value="${board.board_num}" id="board_num">
-				<textarea rows="3" cols="50" name="bor_comm_content" class="form-control"
-					<c:if test="${empty user_num}">disabled="disabled"</c:if> id="bor_comm_content" class="rep-content">
-					<c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if>
-				</textarea>
+				<div class="input-group">
+					<textarea rows="3" cols="50" name="bor_comm_content" id="bor_comm_content" 
+					class="form-control rep-content"<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+					<c:if test="${!empty user_num}">
+						<div id="bor_comm_second" class="input-group-append">
+							<input type="submit" value="전송" class="btn btn-warning text-white pt-5 pb-5">
+						</div>
+					</c:if>
+				</div>
 				<c:if test="${!empty user_num}">
-					<div id="bor_comm_first">
+					<div id="bor_comm_first" class="mt-2">
 					<span class="letter-count">300/300</span>
-					</div>
-					<div id="bor_comm_second" class="align-right">
-						<input type="submit" value="전송" class="btn btn-warning text-white">
 					</div>
 				</c:if>
 			</form>
 		</div>
-		<div id="output"></div>
+		<!-- 댓글 목록 출력 시작 -->
+		<div id="output" class="mt-5"></div>
 		<div class="paging-button" style="display:none;">
 			<input type="button" value="다음글 보기">
 		</div>
+		<div id="loading" style="display:none;">
+			<img src="${pageContext.request.contextPath}/images/loading.gif" width="50" height="50">
+		</div>
+		<!-- 댓글 목록 출력 끝 -->
+		<!-- 댓글 끝 -->
 </div>
 </body>
 </html>

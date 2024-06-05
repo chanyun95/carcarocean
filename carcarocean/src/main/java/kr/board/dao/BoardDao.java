@@ -109,6 +109,7 @@ public class BoardDao {
 				board.setBoard_title(StringUtil.useBrNoHTML(rs.getString("board_title")));
 				board.setBoard_hit(rs.getInt("board_hit"));
 				board.setBoard_reg(rs.getString("board_reg"));
+				board.setBoard_modify(rs.getString("board_modify"));
 				board.setMem_id(rs.getString("mem_id"));
 				board.setBoard_report(rs.getInt("board_report"));
 				list.add(board);

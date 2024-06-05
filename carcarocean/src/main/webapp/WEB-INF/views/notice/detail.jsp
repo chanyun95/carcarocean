@@ -13,7 +13,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<div>
-			<h1>공지사항</h1>
+			<h2 class="pt-5 pb-3">공지사항</h2>
 			<br>
 			<div class="text-center fs-8 text-secondary">카카오션의 새로운 소식을 전달받으실 수 있습니다.</div>
 		</div>
@@ -37,9 +37,11 @@
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
 		<c:if test="${!empty notice.notice_photo}">
-			<div>
+			<div class="row">
 			<c:forEach var="photoList" items="${fn:split(notice.notice_photo,',')}">
-				<img src="${pageContext.request.contextPath}/upload/${photoList}">
+				<div class="col-12 text-center mb-2">
+					<img src="${pageContext.request.contextPath}/upload/${photoList}" width="600" height="400">
+				</div>
 			</c:forEach>
 			</div>
 		</c:if>

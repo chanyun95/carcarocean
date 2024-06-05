@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글상세</title>
+<title>구매 후기 글</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -14,62 +14,82 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
 	<div>
-		<!-- 차 썸네일 사진 노출 -->
-		<div class="mb-4">
+		<div class="mt-4 mb-4">
+			<!-- 차 썸네일 사진 노출 -->
 			<div class="text-start mt-2">
 				<c:if test="${fn:contains(b_re.car_photo, ',')}">
 					<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
 					<c:set var="firstPhoto" value="${photoList[0]}"/>
 					<div class="fs-3 d-inline">
-						<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" width="100px" height="100px">
+						<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" width="150px" height="100px">
 					</div>
 				</c:if>
 				<c:if test="${!fn:contains(b_re.car_photo, ',')}">
 					<c:set var="firstPhoto" value="${b_re.car_photo}" />
 					<li class="mr-3 d-inline">
-						<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" width="100px" height="100px">
+						<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" width="150px" height="100px">
 					</li>
 				</c:if>
-				<div class="fs-3 d-inline">${b_re.b_re_title}</div>
+				<div class="fs-3 d-inline ms-5">${b_re.car_maker} / ${b_re.car_name}</div>
 			</div>
-			<div class="text-end mt-2">
-				<c:if test="${!empty b_re.mem_photo}">
-					<div class="me-3 d-inline">
-					<img src="${pageContext.request.contextPath}/upload/${user_photo}" width="50" height="50" class="my-photo">
+			<div>
+				<div class="text-start fs-4 d-inline">${b_re.b_re_title}</div>
+				<div class="text-end mt-1">
+					<c:if test="${!empty b_re.mem_photo}">
+						<div class="me-3 d-inline">
+						<img src="${pageContext.request.contextPath}/upload/${user_photo}" width="50" height="50" class="my-photo">
+						</div>
+					</c:if>
+					<c:if test="${empty b_re.mem_photo}">
+						<div class="me-3 d-inline">
+							<img src="${pageContext.request.contextPath}/images/face.png" width="50" height="50" class="my-photo">
+						</div>
+					</c:if>
+					<div class="me-3 d-inline">${b_re.mem_id} | </div>
+					<c:if test="${!empty b_re.b_re_modify}">
+						<div class="me-3 d-inline">
+						${b_re.b_re_modify}
 					</div>
-				</c:if>
-				<c:if test="${empty b_re.mem_photo}">
-					<div class="me-3 d-inline">
-						<img src="${pageContext.request.contextPath}/images/face.png" width="50" height="50" class="my-photo">
+					</c:if>
+					<c:if test="${empty b_re.b_re_modify}">
+						<div class="me-3 d-inline">
+						${b_re.b_re_reg}
 					</div>
-				</c:if>
-				<div class="me-3 d-inline">${b_re.mem_id} | </div>
-				<c:if test="${!empty b_re.b_re_modify}">
-					<div class="me-3 d-inline">
-					${b_re.b_re_modify}
+					</c:if>
 				</div>
-				</c:if>
-				<c:if test="${empty b_re.b_re_modify}">
-					<div class="me-3 d-inline">
-					${b_re.b_re_reg}
-				</div>
-				</c:if>
 			</div>
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
 		<!-- 구매후기게시판 첨부 사진 노출 -->
+		<div id="imageModal" class="modal fade" tabindex="-1">
+		  <div class="modal-dialog modal-lg modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        <img id="modalImage" class="img-fluid" alt="Preview Image" width="900" height="900">
+		        <script type="text/javascript">
+			        function previewImage(image) {
+			        	  var modalImage = document.getElementById('modalImage');
+			        	  modalImage.src = image.src;
+			        	}
+		        </script>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 		    <div class="carousel-inner">
 		        <c:if test="${fn:contains(b_re.b_re_photo, ',')}">
 		            <c:set var="photoList" value="${fn:split(b_re.b_re_photo, ',')}" />
 		            <c:set var="firstPhoto" value="${photoList[0]}"/>
 		            <div class="carousel-item active">
-		                <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img mx-auto d-block" style="width: 550px; height: 400px;" alt="First Photo">
+		                <img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img mx-auto d-block" 
+		                style="width: 550px; height: 400px;" alt="First Photo" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="previewImage(this)">
 		            </div>
 		            <c:forEach var="photo" items="${photoList}" varStatus="status">
 		                <c:if test="${status.index != 0}">
 		                    <div class="carousel-item">
-		                        <img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img mx-auto d-block" style="width: 550px; height: 400px;" alt="Photo">
+		                        <img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img mx-auto d-block" 
+		                        style="width: 550px; height: 400px;" alt="Photo" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="previewImage(this)">
 		                    </div>
 		                </c:if>
 		            </c:forEach>
@@ -131,7 +151,7 @@
 		</div>
 		<!-- 댓글 시작 -->
 		<div id="reply_div">
-	    <span class="re-title">댓글 달기</span>
+	    <span class="fw-bold">댓글 달기</span>
 	    	<form id="b_re_comm_form" class="mt-3">
 		        <input type="hidden" name="b_re_num" value="${b_re.b_re_num}" id="b_re_num">
 		        <div class="input-group">
@@ -139,7 +159,7 @@
 		            class="form-control rep-content"<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 		        <c:if test="${!empty user_num}">
 		            <div id="b_re_comm_second" class="input-group-append">
-		            	<button type="submit" class="btn btn-warning pt-5 pb-5">등록</button>
+		            	<button type="submit" class="btn btn-warning text-white pt-5 pb-5">등록</button>
 		            </div>
 		        </c:if>
 		        </div>
@@ -204,7 +224,7 @@ $(function(){
 			        }
 			        output += '<h5 class="card-title mb-0">' + item.mem_id + '</h5>';
 			        output += '</div>';
-			        output += '<p class="card-text mb-2">' + item.b_re_comm_content + '</p>';
+			        output += '<p class="card-text mt-2 mb-2">' + item.b_re_comm_content + '</p>';
 			        output += '<p class="card-text mb-0"><small class="text-muted">등록일: ' + item.b_re_comm_reg + '</small></p>';
 			        output += '</div>';
 			        output += '</div>';
