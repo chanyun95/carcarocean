@@ -22,7 +22,7 @@
 					<li class="mb-2">
 						<label for="board_content" class="fs-4 mb-2">내용(필수)</label>
 						<br>
-						<textarea rows="5" cols="40" class="form-control" name="board_content" id="board_content"></textarea>
+						<textarea rows="20" cols="70" class="form-control" name="board_content" id="board_content"></textarea>
 					</li>
 					<li class="mb-2">
 						<input type="file" class="form-control mt-3 mb-2" onchange="displaySelectedFiles(this)" name="board_photo" accept="image/gif,image/png,image/jpeg" multiple>

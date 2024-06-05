@@ -32,17 +32,18 @@
 				</c:if>
 				<div class="fs-3 d-inline ms-5">${b_re.car_maker} / ${b_re.car_name}</div>
 			</div>
+			<hr size="1" noshade="noshade" width="100%">
 			<div>
 				<div class="text-start fs-4 d-inline">${b_re.b_re_title}</div>
 				<div class="text-end mt-1">
 					<c:if test="${!empty b_re.mem_photo}">
 						<div class="me-3 d-inline">
-						<img src="${pageContext.request.contextPath}/upload/${user_photo}" width="50" height="50" class="my-photo">
+						<img src="${pageContext.request.contextPath}/upload/${user_photo}" class="rounded-circle me-1" width="50" height="50" class="my-photo">
 						</div>
 					</c:if>
 					<c:if test="${empty b_re.mem_photo}">
 						<div class="me-3 d-inline">
-							<img src="${pageContext.request.contextPath}/images/face.png" width="50" height="50" class="my-photo">
+							<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle me-1" width="50" height="50" class="my-photo">
 						</div>
 					</c:if>
 					<div class="me-3 d-inline">${b_re.mem_id} | </div>
@@ -96,7 +97,8 @@
 		        </c:if>
 		        <c:if test="${!fn:contains(b_re.b_re_photo, ',')}">
 		            <div class="carousel-item active">
-		                <img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" class="detail-img mx-auto d-block" style="width: 550px; height: 300px;" alt="Single Photo">
+		                <img src="${pageContext.request.contextPath}/upload/${b_re.b_re_photo}" class="detail-img mx-auto d-block" style="width: 550px; height: 300px;" alt="Single Photo" 
+		                data-bs-toggle="modal" data-bs-target="#imageModal" onclick="previewImage(this)">
 		            </div>
 		        </c:if>
 		    </div>
@@ -136,7 +138,7 @@
 		        <h3 style="color: #dbcf30;">검수자 정보</h3>
 		        <ul class="list-unstyled mt-4">
 		            <li class="d-inline-block align-middle">
-		                <img src="${pageContext.request.contextPath}/upload/${b_re.checker_photo}" width="50" height="50">
+		                <img src="${pageContext.request.contextPath}/upload/${b_re.checker_photo}" class="rounded-circle me-1" width="50" height="50">
 		            </li>
 		            <li class="d-inline-block align-middle">${b_re.checker_name} 검수자</li>
 		        </ul>
@@ -146,7 +148,7 @@
 		<div class="text-end">
 			<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정 가능 -->
 			<c:if test="${user_num == b_re.mem_num}">
-			<input type="button" class="btn btn-warning" value="글 수정" onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
+			<input type="button" class="btn btn-warning text-white" value="글 수정" onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
 			</c:if>
 		</div>
 		<!-- 댓글 시작 -->
