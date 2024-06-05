@@ -46,8 +46,8 @@
 					</select>
 					<input type="search" size="20" name="keyword" class="form-control rounded" id="keyword" placeholder="Search"
 						value="${param.keyword}" style="width:200px;">
-					<input type="submit" class="btn btn-warning ms-2" value="검색">
-					<input type="button" class="btn btn-warning ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
+					<input type="submit" class="btn btn-warning text-white ms-2" value="검색">
+					<input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
 				</div>
 				</form>
 				</div>
@@ -80,7 +80,7 @@
 									</c:if>
 									<c:if test="${qa.qa_status == 2}">
 										<td><a href="detail.do?qa_num=${qa.qa_num}"
-											class="text-decoration-none text-dark fw-bold">처리</a></td>
+											class="text-decoration-none text-blue fw-bold">처리</a></td>
 									</c:if>
 									<td><a href="detail.do?qa_num=${qa.qa_num}"
 										class="text-decoration-none text-dark fw-bold">${qa.qa_title}</a></td>
@@ -98,10 +98,10 @@
 								<c:if test="${empty user_num || (user_auth != 9 && user_num != qa.mem_num)}">
 									<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.qa_num}</b></td>
 									<c:if test="${qa.qa_status == 1}">
-										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>미처리</b></td>
+										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><a class="text-decoration-none text-dark fw-bold">미처리</a></td>
 									</c:if>
 									<c:if test="${qa.qa_status == 2}">
-										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>처리</b></td>
+										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><a class="text-decoration-none text-blue fw-bold">처리</a></td>
 									</c:if>
 									<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.qa_title}</b></td>
 									<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.mem_id}</b></td>
@@ -118,13 +118,13 @@
 			</table>
 			<div class="text-center mt-3 mb-3">${page}</div>
 			<!-- 버튼 -->
+		</c:if>
 			<div class="text-end mb-4">
 				<c:if test="${!empty user_num && user_auth == 2}">
-					<input type="button" class="btn btn-warning" value="글쓰기" onclick="location.href='writeForm.do'">
+					<input type="button" class="btn btn-warning text-white" value="글쓰기" onclick="location.href='writeForm.do'">
 				</c:if>		
-					<input type="button" class="btn btn-warning" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+					<input type="button" class="btn btn-warning text-white" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 			</div>
-		</c:if>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</div>

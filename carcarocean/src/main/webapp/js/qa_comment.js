@@ -54,6 +54,7 @@ $(function(){
 					initForm();
 					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서 첫 번째 페이지의 게시글 목록을 다시 호출함
 					selectList(1);
+					$('#answer').hide();
 				}else{
 					alert('댓글 등록 오류');
 				}
@@ -245,6 +246,7 @@ $(function(){
 					alert('로그인해야 삭제할 수 있습니다.');
 				}else if(param.result == 'success'){
 					alert('답변이 삭제되었습니다.');
+					$('#answer').show();
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 삭제할 수 없습니다.');
