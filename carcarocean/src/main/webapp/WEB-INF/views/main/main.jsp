@@ -354,23 +354,20 @@
 </a>
          <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
-            <thead>
-                <tr>
-                    <th scope="col">순서</th>
-                    <th scope="col" class="col-2">차종</th>
-					<th scope="col" class="col-6">제목</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
             <tbody>
                 <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
  
                 <c:if test="${loop.index ==0}">
                     <tr>
-                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
-                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
-                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
-                        <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>
+                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark float-end">${s_re.s_re_reg} </a></td>  
+                    </tr>
+                    <tr>
+                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.mem_id}</a></td>
+                    </tr>
+                    <td><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark card-body">${s_re.s_re_content}</a></td>
+                    <tr>
                     </tr>
                 </c:if>
                 </c:forEach>

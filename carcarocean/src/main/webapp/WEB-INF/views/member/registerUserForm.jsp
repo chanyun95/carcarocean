@@ -65,6 +65,12 @@ $(function(){
 				$('#mem_id').val('').focus();
 				return false;
 			}
+			if(items[i].id =='mem_phone'&&!/^[0-9]{11}$/.test($('#mem_phone').val())){
+				alert('전화번호는 "-"를 제외하고 숫자만 입력하세요(11자)');
+				$('#mem_phone').val('').focus();
+				return false;
+			}
+			
 			if(items[i].id == 'mem_id' && idChecked ==0) {
 				alert('아이디 중복 체크 필수');
 				return false;
@@ -112,7 +118,7 @@ $(function(){
 				</div>
 				<div class="form-group">
 					<label for="mem_phone">전화번호</label>
-					<input type="text" id="mem_phone" name="mem_phone" maxlength="15" class="input-check form-control">
+					<input type="text" id="mem_phone" name="mem_phone" maxlength="11" class="input-check form-control">
 				</div>
 					<label for="mem_email">이메일</label>
 					<input type="email" id="mem_email" name="mem_email" maxlength="50" class="input-check form-control">
