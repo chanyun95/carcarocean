@@ -45,6 +45,10 @@ public class MainAction implements Action{
 		 NewsDao Newsdao = NewsDao.getDao();
 		 List<NewsVo> NewsList = Newsdao.getListNewsMain(1,4);
 		 
+		//페이지 처리(판매후기)
+		 S_ReDao S_redao = S_ReDao.getDao();
+		 List<S_ReVo> S_relist = S_redao.getListSellReviewMain(1,9);
+		
 		//페이지 처리(구매후기)
 		B_ReDao dao = B_ReDao.getDao();
 		int count = dao.getB_reCount();
@@ -54,17 +58,7 @@ public class MainAction implements Action{
 		if(count > 0) {
 			list = dao.getListB_re(page.getStartRow(), page.getEndRow());
 		}
-		//페이지 처리(판매후기)
-		String keyfield = request.getParameter("keyfield");
-		String keyword = request.getParameter("keyword");
-		S_ReDao S_redao = S_ReDao.getDao();
-		int S_recount = S_redao.getSellReviewCount(keyfield, keyword);
 		
-		List<S_ReVo> S_relist = null;
-		if(count > 0) {
-			S_relist=S_redao.getListSellReview(page.getStartRow(),page.getEndRow(),
-								keyfield,keyword);
-		}
 		
 		
 		//공지사항 저장
@@ -83,7 +77,6 @@ public class MainAction implements Action{
 		request.setAttribute("page", page.getPage());
 		
 		//판매후기 저장
-		request.setAttribute("S_recount", S_recount);
 		request.setAttribute("S_relist", S_relist);
 				
 				
