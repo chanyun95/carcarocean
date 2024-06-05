@@ -68,7 +68,7 @@
 			<!-- 댓글 목록 출력 시작 -->
 			<h4>관리자 답변</h4>
 			<c:if test="${count == 0}">
-				<div class="result-display">
+				<div class="result-display" id="answer">
 					아직 답변이 등록되지 않았습니다.
 				</div>
 			</c:if>
@@ -83,16 +83,16 @@
 			</div>			
 			<!-- 댓글 목록 출력 끝 -->	
 			<!-- 답글 시작 -->		
-			<div id="reply_div" class="text-end mt-5 mb-5">
+			<div id="reply_div" class="text-center mt-5 mb-5">
 				<form id="re_form">
 					<input type="hidden" name="qa_num" value="${qa.qa_num}" id="qa_num">
 					<c:if test="${user_auth == 9}">
 					<textarea rows="7" cols="150" placeholder="관리자 답변" name="qa_comm_content" <c:if test="${user_auth != 9}">disabled="disabled"</c:if> id="re_content" 
 					class="rep-content"></textarea>		
-						<div id="re_first">
+						<div id="re_first" class="text-end" style="margin-right: 40px;">
 							<span class="letter-count">300/300</span>
 						</div>
-						<div id="re_second" class="align-right">
+						<div id="re_second" class="text-end" style="margin-right: 40px;">
 							<input type="submit" value="전송" class="btn btn-warning">
 						</div>
 					</c:if>
