@@ -65,11 +65,11 @@
         		<div id="carouselExample" class="carousel slide">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="d-block" width="1296px" height="700px" alt="...">
+							<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="d-block rounded-bottom" width="1296px" height="700px" alt="...">
 						</div>
 					<c:forEach var="photo" items="${photoList}" begin="1">
 						<div class="carousel-item">
-							<img src="${pageContext.request.contextPath}/upload/${photo}" class="d-block" width="1296px" height="700px" alt="...">
+							<img src="${pageContext.request.contextPath}/upload/${photo}" class="d-block rounded-bottom" width="1296px" height="700px" alt="...">
 						</div>
 					</c:forEach>
 					</div>
