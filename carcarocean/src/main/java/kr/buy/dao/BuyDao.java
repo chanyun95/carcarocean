@@ -270,6 +270,29 @@ public class BuyDao {
 		}
 		return buy;
 	}
+	public boolean checkBuy(int car_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int cnt = 0;
+		boolean check = false;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM BUY WHERE CAR_NUM=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, car_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				check=true;
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return check;
+	}
 	
 	//구매 확정 정보
 	public BuyVo getBuy(int mem_num, int car_num) throws Exception{

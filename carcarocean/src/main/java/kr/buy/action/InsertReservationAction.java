@@ -24,19 +24,25 @@ public class InsertReservationAction implements Action{
 		if(user_num==null) {
 			mapAjax.put("result", "logout");
 		}else {
-			int car_num = Integer.parseInt(request.getParameter("car_num"));
-			// 차량 예약 완료로 변경
-			CarDao carDao = CarDao.getDao();
-			carDao.updateCarStatus(car_num,1);
-			
-			// 구매 예약 정보 등록
 			BuyVo buy = new BuyVo();
-			buy.setMem_num(user_num);
-			buy.setCar_num(car_num);
 			BuyDao dao = BuyDao.getDao();
-			dao.insertReservation(buy);
-			
-			mapAjax.put("result","success");
+			int car_num = Integer.parseInt(request.getParameter("car_num"));
+			if(dao.checkBuy(car_num)) {
+				// 차량 예약 완료로 변경
+				CarDao carDao = CarDao.getDao();
+				carDao.updateCarStatus(car_num,1);
+				
+				// 구매 예약 정보 등록
+				
+				buy.setMem_num(user_num);
+				buy.setCar_num(car_num);
+				
+				dao.insertReservation(buy);
+				
+				mapAjax.put("result","success");
+			}else {
+				mapAjax.put("result","fail");
+			}
 		}  
 		
 		ObjectMapper mapper = new ObjectMapper();
