@@ -496,6 +496,9 @@ function insertReservation_btn (){
 				if(param.result=='success'){
 					alert('예약이 완료되셨습니다!');
 					location.href = '${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}';
+				} else if(param.result=='fail'){
+					alert('이미 예약/구매 된 상품입니다!');
+					location.href = '${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}';
 				} else if(param.result=='logout'){
 					alert('로그인 후 이용해주세요!');
 					location.href = '${pageContext.request.contextPath}/member/loginForm.do';
