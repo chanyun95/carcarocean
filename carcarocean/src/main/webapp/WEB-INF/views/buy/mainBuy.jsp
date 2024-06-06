@@ -13,11 +13,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>내 차 구매 메인</title>
 	<style>
-        /* 검색 창의 너비 조절*/
-        #keyword {
-            width: 400px;
-            height: 50px;
-        }
         /* 사진 흑백 */
         .brightness {
         	filter: brightness(50%);
@@ -65,6 +60,9 @@
          <!-- 사이드바 메뉴 -->
          <nav class="col-md-2 sidebar mt-5">
              <ul class="nav flex-column bg-light rounded">
+             	<li>
+             		<hr width="0%">
+             	</li>
              	<!-- 첫번째 토글 -->
                  <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
@@ -200,6 +198,9 @@
 						</div>
 					 </div>
                  </li>
+                 <li>
+             		<hr width="0%">
+             	</li>
              </ul>
          </nav>
          <!-- 사이드바 제외 메인 컨텐츠 -->
@@ -211,7 +212,7 @@
 						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
 						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
+					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하시는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width:400px; height: 50px;">
 					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 					<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 				</form>
@@ -233,7 +234,7 @@
 		                	<!-- 사진 상자 -->
 		                	<div class="image-container ps-3">
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
-			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
+			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded-4 img-fluid">
 		                		</a>
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
               	     			<!-- 관심차량 아이콘 체크 -->

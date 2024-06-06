@@ -63,7 +63,7 @@
             <div class="collapse navbar-collapse justify-content-between" id="nav">
                <ul class="navbar-nav">
                	  <!-- 첫번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>차량 구매</b></a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4 fw-bold" data-toggle="dropdown">차량 구매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/b_re/list.do">차량 구매 후기</a>
@@ -72,7 +72,7 @@
                      </div>
                   </li>
                   <!-- 두번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>차량 판매</b></a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4 fw-bold" data-toggle="dropdown">차량 판매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
@@ -80,7 +80,7 @@
                      </div>
                   </li>
                   <!-- 세번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>커뮤니티</b></a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4 fw-bold" data-toggle="dropdown">커뮤니티</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/info_board/list.do">정보공유 게시판</a>
@@ -88,15 +88,18 @@
                      </div>
                   </li>
                   <!-- 네번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>고객 센터</b></a>
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4 fw-bold" data-toggle="dropdown">고객 센터</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/event/list.do">이벤트</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/qa/list.do">고객 문의</a>
                      </div>
                   </li>
-                  <c:if test="${!empty user_num && user_auth ==9}">
+                  <!-- 다섯번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4 fw-bold" data-toggle="dropdown" href="${pageContext.request.contextPath}/item/itemList.do">중고거래</a>
+                  </li>
                   
+                  <c:if test="${!empty user_num && user_auth ==9}">
                    <li class="nav-item dropdown"><a class="nav-link text-dark px-3 fs-4" data-toggle="dropdown"><b>관리자</b></a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/adminSellList.do">검수 요청 관리</a>
