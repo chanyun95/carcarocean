@@ -8,15 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>검수 대기 차량 상세 정보</title>
-<script>
-	function delete_btn() {
-		if(confirm("정말 삭제하시겠습니까?")){
-			alert("삭제되었습니다.");
-			location.href= "deleteSell.do?sell_num=${sell.sell_num}";
-		}
-	};
-
-</script>
 </head>
 <body>
 	<!-- 헤더 고정 -->
@@ -102,5 +93,13 @@
 			</div>
 		</div>
 	</div>
+<script>
+	function delete_btn() {
+		if(confirm("정말 삭제하시겠습니까?")){
+			alert("삭제되었습니다.");
+			location.href= "deleteSell.do?sell_num=${sell.sell_num}";
+		}
+	};
+</script>
 </body>
 </html>

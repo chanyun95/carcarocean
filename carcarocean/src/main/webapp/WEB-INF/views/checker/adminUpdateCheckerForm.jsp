@@ -7,14 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>검수자 정보 수정 폼</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script>
-	function submit_btn (){
-		if(!confirm('수정하시겠습니까?')){
-			return false;
-		}
-		alert('수정되었습니다!');
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -49,5 +41,13 @@
 			</div>
 		</form>
 	</div>
+	<script>
+		function submit_btn (){
+			if(!confirm('수정하시겠습니까?')){
+				return false;
+			}
+			alert('수정되었습니다!');
+		}
+	</script>
 </body>
 </html>

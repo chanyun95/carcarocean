@@ -11,11 +11,6 @@
 <title>내 차 팔기 메인</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<script>
-    	function openPopup() {
-    		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
-    	}
-	</script>
 	<style>
         .background-image1 {
             background-image: url('../images/logo.png');
@@ -256,5 +251,10 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+    	function openPopup() {
+    		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
+    	}
+	</script>
 </body>
 </html>
