@@ -25,13 +25,13 @@ public class ItemListAction implements Action{
 		String keyword = request.getParameter("keyword");
 		
 		ItemDao itemDao = ItemDao.getDao();
-		int count = itemDao.getItemListCount(keyfield, keyword);
+		int count = itemDao.getItemListCount(keyfield, keyword,0);
 
 		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum),count,12,10,"itemList.do");
 		
 		List<ItemVo> itemList = null;
 		if(count>0) {
-			itemList = itemDao.getItemList(page.getStartRow(), page.getEndRow(), keyfield, keyword);
+			itemList = itemDao.getItemList(page.getStartRow(), page.getEndRow(), keyfield, keyword,0);
 		}
 		
 		for(ItemVo item : itemList) {
