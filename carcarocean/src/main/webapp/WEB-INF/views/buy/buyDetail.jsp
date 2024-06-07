@@ -424,7 +424,6 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 <script>
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
@@ -516,4 +515,5 @@ function deleteReservation_btn(){
 	}
 };
 </script>
+</body>
 </html>

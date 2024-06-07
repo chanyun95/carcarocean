@@ -12,6 +12,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>상품 상세</title>
+<style>
+	.carousel-item img{
+		width:700px;
+		height:500px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -20,7 +26,8 @@
 		<hr>
 		<div class="text-end">
 			<c:if test="${user_num==item.member.mem_num}">
-				<button class="btn btn-warning fw-bold text-white" onclick="location.href='updateItemForm.do?item_num=${item.item_num}'">수정</button>
+				<button class="btn btn-warning fw-bold text-white" onclick="updateStatus_btn()">판매 확정</button>
+				<button class="btn btn-warning fw-bold text-white" onclick="update_btn()">수정</button>
 				<button class="btn btn-warning fw-bold text-white" onclick="delete_btn()">삭제</button>
 			</c:if>
 		</div>
@@ -33,12 +40,45 @@
 				<c:if test="${!fn:contains(item.item_photo, ',')}">
 					<c:set var="firstPhoto" value="${item.item_photo}" />
 				</c:if>
-				<c:if test="${!empty item.item_photo}">
-					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="border rounded">
-				</c:if>
-				<c:if test="${empty item.item_photo}">
-					<img src="${pageContext.request.contextPath}/images/logo.png" class="border rounded">
-				</c:if>
+				
+				<div id="itemPhoto" class="carousel carousel-dark slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<c:if test="${!empty item.item_photo}">
+							<c:if test="${fn:contains(item.item_photo, ',')}">
+								<c:forEach var="photo" items="${photoList}" varStatus="status">
+									<c:if test="${status.first}">
+										<div class="carousel-item active">
+											<img src="${pageContext.request.contextPath}/upload/${photo}" class="border rounded">
+										</div>
+									</c:if>
+									<c:if test="${!status.first}">
+										<div class="carousel-item">
+											<img src="${pageContext.request.contextPath}/upload/${photo}" class="border rounded">
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
+							<c:if test="${!fn:contains(item.item_photo, ',')}">
+								<div class="carousel-item active">
+									<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="border rounded">
+								</div>
+							</c:if>
+						</c:if>
+						<c:if test="${empty item.item_photo}">
+							<div class="carousel-item active">
+								<img src="${pageContext.request.contextPath}/images/logo.png" class="border rounded">
+							</div>
+						</c:if>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#itemPhoto" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">이전</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#itemPhoto" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">다음</span>
+					</button>
+				</div>
 			</div>
 			<div class="d-flex justify-content-between my-3">
 				<div class="d-flex justify-content-start ms-2">
@@ -56,7 +96,8 @@
 					</div>
 				</div>
 				<div class="d-flex align-items-center">
-					등급: ${item.member.mem_grade}
+					<div><img src="${pageContext.request.contextPath}/images/grade.png" width="45px" height="45px"></div>
+					<div class="fw-bold text-secondary">${mem_grade}</div>
 				</div>
 			</div>
 			<hr>
@@ -80,6 +121,17 @@
 				location.href='deleteItem.do?item_num=${item.item_num}';
 			}
 		};
+		function update_btn(){
+			if(confirm('정말 상품을 수정하시겠습니까?')){
+				location.href='updateItemForm.do?item_num=${item.item_num}';
+			}
+		};
+		function updateStatus_btn(){
+			if(confirm('정말 상품 판매를 확정하시겠습니까?')){
+				location.href='updateItemStatus.do?item_num=${item.item_num}';
+			}
+		};
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

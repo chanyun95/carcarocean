@@ -77,16 +77,16 @@ public class ItemDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	public void updateItemCheck(int item_num, int item_check) throws Exception{
+	public void updateItemStatus(int item_num, int item_status) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "UPDATE ITEM SET item_check=? WHERE item_num=?";
+			sql = "UPDATE ITEM SET item_status=? WHERE item_num=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, item_check);
+			pstmt.setInt(++cnt, item_status);
 			pstmt.setInt(++cnt, item_num);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -143,7 +143,7 @@ public class ItemDao {
 		}
 		return item;
 	}
-	public int getItemListCount(String keyfield, String keyword) throws Exception{
+	public int getItemListCount(String keyfield, String keyword, int item_status) throws Exception{
 		int count = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -154,12 +154,13 @@ public class ItemDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("0")) sub_sql += "WHERE item_name LIKE '%' || ? || '%'";
-				else if(keyfield.equals("1")) sub_sql += "WHERE item_detail LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
+				if(keyfield.equals("0")) sub_sql += "item_name LIKE '%' || ? || '%'";
+				else if(keyfield.equals("1")) sub_sql += "item_detail LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "mem_id LIKE '%' || ? || '%'";
 			}
-			sql = "SELECT COUNT(*) FROM ITEM JOIN MEMBER USING (MEM_NUM) JOIN MEMBER_DETAIL USING (MEM_NUM) "+sub_sql;
+			sql = "SELECT COUNT(*) FROM ITEM JOIN MEMBER USING (MEM_NUM) JOIN MEMBER_DETAIL USING (MEM_NUM) WHERE ITEM_STATUS=? "+sub_sql;
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, item_status);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);
 			}
@@ -174,7 +175,7 @@ public class ItemDao {
 		}
 		return count;
 	}
-	public List<ItemVo> getItemList(int start, int end, String keyfield, String keyword) throws Exception{
+	public List<ItemVo> getItemList(int start, int end, String keyfield, String keyword, int item_status) throws Exception{
 		List<ItemVo> list = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -185,12 +186,13 @@ public class ItemDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("0")) sub_sql += "WHERE item_name LIKE '%' || ? || '%'";
-				else if(keyfield.equals("1")) sub_sql += "WHERE item_detail LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
+				if(keyfield.equals("0")) sub_sql += "item_name LIKE '%' || ? || '%'";
+				else if(keyfield.equals("1")) sub_sql += "item_detail LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "mem_id LIKE '%' || ? || '%'";
 			}
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM ITEM JOIN MEMBER USING (MEM_NUM) JOIN MEMBER_DETAIL USING (MEM_NUM) "+ sub_sql + " ORDER BY item_reg DESC)a) WHERE rnum >=? AND rnum <=?";
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM ITEM JOIN MEMBER USING (MEM_NUM) JOIN MEMBER_DETAIL USING (MEM_NUM) WHERE item_status=? "+ sub_sql + " ORDER BY item_reg DESC)a) WHERE rnum >=? AND rnum <=?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, item_status);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);
 			}

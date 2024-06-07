@@ -16,7 +16,7 @@ public class InsertSellFormAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {
-			return "/WEB-INF/views/common/logout.jsp";
+			return "/WEB-INF/views/common/logoutPopUp.jsp";
 		}
 		MemberDao memberDao = MemberDao.getDao();
 		MemberVo member = memberDao.getMember(user_num);

@@ -1,6 +1,21 @@
 package kr.util;
 
 public class ShopUtil {
+	public static String getGrade(int mem_grade) {
+		String grade = "";
+		if(mem_grade==1) {
+			grade = "Bronze";
+		} else if (mem_grade==2) {
+			grade = "Silver";
+		} else if (mem_grade==3) {
+			grade = "Gold";
+		} else if (mem_grade==4) {
+			grade = "Platinum";
+		} else if (mem_grade==5) {
+			grade = "Diamond";
+		}
+		return grade;
+	}
     public static int getDiscount(int mem_grade, int car_price) {
     	double discount;
         switch(mem_grade) {

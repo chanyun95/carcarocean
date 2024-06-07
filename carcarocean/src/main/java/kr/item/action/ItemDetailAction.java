@@ -9,6 +9,7 @@ import kr.item.vo.ItemVo;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
 import kr.util.DurationFromNow;
+import kr.util.ShopUtil;
 import kr.util.StringUtil;
 
 public class ItemDetailAction implements Action{
@@ -20,7 +21,8 @@ public class ItemDetailAction implements Action{
 		ItemVo item = itemDao.getItem(item_num);
 		item.setItem_detail(item.getItem_detail());
 		item.setItem_reg(DurationFromNow.getTimeDiffLabel(item.getItem_reg()));
-
+		
+		request.setAttribute("mem_grade", ShopUtil.getGrade(item.getMember().getMem_grade()));
 		request.setAttribute("item", item);
 		return "/WEB-INF/views/item/itemDetail.jsp";
 	}
