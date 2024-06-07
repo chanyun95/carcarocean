@@ -18,7 +18,7 @@ public class MyBoughtAction implements Action {
         HttpSession session = request.getSession();
         Integer mem_num = (Integer) session.getAttribute("user_num");
         if(mem_num==null) {
-        	return "redirect:/member/loginForm.do";
+        	return "/WEB-INF/views/common/logout.jsp";
         }
 
         request.setCharacterEncoding("utf-8");

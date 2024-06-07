@@ -13,7 +13,7 @@ public class InsertItemFormAction implements Action{
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		
 		//탈퇴 or 정지회원 금지

@@ -15,7 +15,7 @@ public class DeleteReservationAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		int car_num = Integer.parseInt(request.getParameter("car_num"));
 		

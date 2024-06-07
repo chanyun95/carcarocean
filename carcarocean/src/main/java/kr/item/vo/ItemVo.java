@@ -10,7 +10,14 @@ public class ItemVo {
 	private String item_photo;
 	private String item_reg;
 	private int item_status;
+	private int item_views;
 	
+	public int getItem_views() {
+		return item_views;
+	}
+	public void setItem_views(int item_views) {
+		this.item_views = item_views;
+	}
 	private MemberVo member;
 	
 	public int getItem_num() {

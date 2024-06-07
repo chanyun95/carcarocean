@@ -62,11 +62,12 @@ public class ItemDao {
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "UPDATE ITEM SET item_name=?, item_price=?, item_detail=?, item_photo=? WHERE ITEM_NUM=?";
+			sql = "UPDATE ITEM SET item_name=?, item_price=?, item_detail=?, item_views=?, item_photo=? WHERE ITEM_NUM=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(++cnt, item.getItem_name());
 			pstmt.setInt(++cnt, item.getItem_price());
 			pstmt.setString(++cnt, item.getItem_detail());
+			pstmt.setInt(++cnt, item.getItem_views());
 			pstmt.setString(++cnt, item.getItem_photo());
 			pstmt.setInt(++cnt, item.getItem_num());
 			pstmt.executeUpdate();
@@ -116,6 +117,7 @@ public class ItemDao {
 				item.setItem_photo(rs.getString("item_photo"));
 				item.setItem_reg(rs.getString("item_reg"));
 				item.setItem_status(rs.getInt("item_status"));
+				item.setItem_views(rs.getInt("item_views"));
 				MemberVo member = new MemberVo();
 				member.setMem_num(rs.getInt("mem_num"));
 				member.setMem_name(rs.getString("mem_name"));
@@ -206,6 +208,7 @@ public class ItemDao {
 				item.setItem_photo(rs.getString("item_photo"));
 				item.setItem_reg(rs.getString("item_reg"));
 				item.setItem_status(rs.getInt("item_status"));
+				item.setItem_views(rs.getInt("item_views"));
 				MemberVo member = new MemberVo();
 				member.setMem_num(rs.getInt("mem_num"));
 				member.setMem_name(rs.getString("mem_name"));
@@ -232,5 +235,24 @@ public class ItemDao {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 		return list;
+	}
+	public void viewItem(int item_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE item SET item_views=item_views+1 WHERE item_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, item_num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+
 	}
 }

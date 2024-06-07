@@ -3,13 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:if test="${fn:contains(item.item_photo, ',')}">
-	<c:set var="photoList" value="${fn:split(item.item_photo, ',')}" />
-	<c:set var="firstPhoto" value="${photoList[0]}"/>
-</c:if>
-<c:if test="${!fn:contains(item.item_photo, ',')}">
-	<c:set var="firstPhoto" value="${item.item_photo}" />
-</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,16 +20,23 @@
 		<hr>
 		<div class="text-end">
 			<c:if test="${user_num==item.member.mem_num}">
-				<button class="btn btn-warning fw-bold text-white">수정</button>
-				<button class="btn btn-warning fw-bold text-white">삭제</button>
+				<button class="btn btn-warning fw-bold text-white" onclick="location.href='updateItemForm.do?item_num=${item.item_num}'">수정</button>
+				<button class="btn btn-warning fw-bold text-white" onclick="delete_btn()">삭제</button>
 			</c:if>
 		</div>
 		<div class="border rounded">
 			<div class="text-center">
-				<c:if test="${!empty photoList}">
+				<c:if test="${fn:contains(item.item_photo, ',')}">
+					<c:set var="photoList" value="${fn:split(item.item_photo, ',')}" />
+					<c:set var="firstPhoto" value="${photoList[0]}"/>
+				</c:if>
+				<c:if test="${!fn:contains(item.item_photo, ',')}">
+					<c:set var="firstPhoto" value="${item.item_photo}" />
+				</c:if>
+				<c:if test="${!empty item.item_photo}">
 					<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="border rounded">
 				</c:if>
-				<c:if test="${empty photoList}">
+				<c:if test="${empty item.item_photo}">
 					<img src="${pageContext.request.contextPath}/images/logo.png" class="border rounded">
 				</c:if>
 			</div>
@@ -69,10 +69,17 @@
 				${item.item_detail}
 			</div>
 			<div class="my-4 text-secondary small">
-				관심 2 ∙ 채팅 15 ∙ 조회242
+				채팅 0 ∙ 조회 ${item.item_views}
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+		function delete_btn(){
+			if(confirm('정말 상품을 삭제하시겠습니까?')){
+				location.href='deleteItem.do?item_num=${item.item_num}';
+			}
+		};
+	</script>
 </body>
 </html>
