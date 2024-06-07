@@ -8,109 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>차량 등록 폼</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript">
-window.onload = function(){
-	const myForm = document.getElementById('write_form');
-	//이벤트 연결
-	myForm.onsubmit = function(){	
-		const items = document.querySelectorAll('.input-check');
-		for(let i=0; i<items.length; i++){
-			if(items[i].value.trim()==''){
-				const label = document.querySelector(
-						       'label[for="'+items[i].id+'"]');
-				alert(label.textContent + ' 항목은 필수 입력');
-				items[i].value = '';
-				items[i].focus();
-				return false;
-			}
-			
-			/* 주행거리는 숫자만 입력 */
-			if(items[i].id == 'car_mile'){
-				var regex = /^\d+(\.\d+)?$/; //소수점을 허용하는 정규표현식
-				if(isNaN(items[i].value)){
-					alert('주행거리는 숫자만 입력해주세요.');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-			/* 차량가격은 숫자만 입력 */
-			if(items[i].id == 'car_owner_change'){
-				if(items[i].value<0){
-					alert('(-)는 입력하실 수 없습니다.');
-					items[i].value = '0';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-			/* 차량가격은 숫자만 입력 */
-			if(items[i].id == 'car_price'){
-				if(isNaN(items[i].value)){
-					alert('차량가격은 숫자만 입력해주세요.');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-			/* 차량 색상은 한글만 입력 */
-			if (items[i].id == 'car_color') {
-    			var koreanRegex = /^[가-힣\s]+$/; // 한글만 허용하는 정규표현식
-   				 if (!koreanRegex.test(items[i].value)) {
-       			 alert('색상을 다시 입력해주세요. 예) 검은색');
-       			 items[i].value = '';
-       			 items[i].focus();
-      			  return false;
-  			  }
-			}
-
-			/* 사용기간은 1자에서 3자까지 숫자만 입력 (개월) */
-			if(items[i].id == 'car_use'){
-				if(isNaN(items[i].value)){
-					alert('사용기간은 숫자만 입력해주세요.');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-				if(items[i].value.length < 1 || items[i].value.length > 3){
-					alert('사용기간은 개월수로 입력해주세요. 예)30');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-			/* 연식 양식 체크 */
-			if(items[i].id == 'car_birth'){
-				if(items[i].value.length!=8){
-					alert('연식은 년도와 월을 입력해주세요. 예) 0000년00월');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-			/* 소유주 변경 이력(회) */
-			if(items[i].id == 'car_owner_change'){
-				if(isNaN(items[i].value)){
-					alert('숫자만 입력해주세요. (없으면 0)');
-					items[i].value = '';
-					items[i].focus();
-					return false;
-				}
-			}
-			
-		}
-		if(!confirm('정말 제출하시겠습니까?')){
-			return false;
-		}else {
-			alert('등록되었습니다!');
-		}
-	};
-};
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -238,5 +135,108 @@ window.onload = function(){
 		</c:if>
 	</form>
 </div>
+<script type="text/javascript">
+window.onload = function(){
+	const myForm = document.getElementById('write_form');
+	//이벤트 연결
+	myForm.onsubmit = function(){	
+		const items = document.querySelectorAll('.input-check');
+		for(let i=0; i<items.length; i++){
+			if(items[i].value.trim()==''){
+				const label = document.querySelector(
+						       'label[for="'+items[i].id+'"]');
+				alert(label.textContent + ' 항목은 필수 입력');
+				items[i].value = '';
+				items[i].focus();
+				return false;
+			}
+			
+			/* 주행거리는 숫자만 입력 */
+			if(items[i].id == 'car_mile'){
+				var regex = /^\d+(\.\d+)?$/; //소수점을 허용하는 정규표현식
+				if(isNaN(items[i].value)){
+					alert('주행거리는 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 차량가격은 숫자만 입력 */
+			if(items[i].id == 'car_owner_change'){
+				if(items[i].value<0){
+					alert('(-)는 입력하실 수 없습니다.');
+					items[i].value = '0';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 차량가격은 숫자만 입력 */
+			if(items[i].id == 'car_price'){
+				if(isNaN(items[i].value)){
+					alert('차량가격은 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 차량 색상은 한글만 입력 */
+			if (items[i].id == 'car_color') {
+    			var koreanRegex = /^[가-힣\s]+$/; // 한글만 허용하는 정규표현식
+   				 if (!koreanRegex.test(items[i].value)) {
+       			 alert('색상을 다시 입력해주세요. 예) 검은색');
+       			 items[i].value = '';
+       			 items[i].focus();
+      			  return false;
+  			  }
+			}
+
+			/* 사용기간은 1자에서 3자까지 숫자만 입력 (개월) */
+			if(items[i].id == 'car_use'){
+				if(isNaN(items[i].value)){
+					alert('사용기간은 숫자만 입력해주세요.');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+				if(items[i].value.length < 1 || items[i].value.length > 3){
+					alert('사용기간은 개월수로 입력해주세요. 예)30');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 연식 양식 체크 */
+			if(items[i].id == 'car_birth'){
+				if(items[i].value.length!=8){
+					alert('연식은 년도와 월을 입력해주세요. 예) 0000년00월');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+			/* 소유주 변경 이력(회) */
+			if(items[i].id == 'car_owner_change'){
+				if(isNaN(items[i].value)){
+					alert('숫자만 입력해주세요. (없으면 0)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}
+			
+		}
+		if(!confirm('정말 제출하시겠습니까?')){
+			return false;
+		}else {
+			alert('등록되었습니다!');
+		}
+	};
+};
+</script>
 </body>
 </html>

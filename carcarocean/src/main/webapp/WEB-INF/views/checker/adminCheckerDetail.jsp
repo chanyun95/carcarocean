@@ -7,14 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>검수자 세부정보</title>
-<script>
-function delete_btn() {
-	if(confirm("정말 삭제하시겠습니까?")){
-		location.href= "adminDeleteChecker.do?checker_num=${checker.checker_num}";
-		alert("삭제되었습니다!");
-	}
-}
-</script>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <body>
@@ -45,5 +37,13 @@ function delete_btn() {
 			<input type="button" value="삭제" class="btn btn-danger" onclick="delete_btn()" <c:if test="${count>0}">disabled</c:if>>
 		</div>
 	</div>
+	<script>
+		function delete_btn() {
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href= "adminDeleteChecker.do?checker_num=${checker.checker_num}";
+				alert("삭제되었습니다!");
+			}
+		}
+	</script>
 </body>
 </html>
