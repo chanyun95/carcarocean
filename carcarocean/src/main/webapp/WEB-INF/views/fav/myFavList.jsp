@@ -84,7 +84,7 @@
 								</c:if>
 								<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
 								<div class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식
-								<div class="vr mx-1"></div>${car.car_mile}km
+								<div class="vr mx-1"></div><fmt:formatNumber value="${car.car_mile}" type="number"/>km
 								<div class="vr mx-1"></div>
 								<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
 								<c:if test="${car.car_fuel_type==2}">디젤</c:if>

@@ -235,5 +235,11 @@
 		</c:if>
 	</form>
 </div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			let car_checker_opinion = "${car.car_checker_opinion}".replace(/<br\s*\/?>/gi, "\n");
+			document.getElementById("car_checker_opinion").value = car_checker_opinion;
+		});
+	</script>
 </body>
 </html>

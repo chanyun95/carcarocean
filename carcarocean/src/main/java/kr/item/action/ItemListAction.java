@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
 import kr.item.vo.ItemVo;
+import kr.util.DurationFromNow;
 import kr.util.PagingUtil;
 
 public class ItemListAction implements Action{
@@ -31,6 +32,10 @@ public class ItemListAction implements Action{
 		List<ItemVo> itemList = null;
 		if(count>0) {
 			itemList = itemDao.getItemList(page.getStartRow(), page.getEndRow(), keyfield, keyword);
+		}
+		
+		for(ItemVo item : itemList) {
+			item.setItem_reg(DurationFromNow.getTimeDiffLabel(item.getItem_reg()));
 		}
 		
 		request.setAttribute("count", count);

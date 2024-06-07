@@ -94,6 +94,7 @@ create table item(
     item_photo CLOB,
     item_reg DATE DEFAULT SYSDATE NOT NULL,
     item_status NUMBER DEFAULT 0 NOT NULL,
+    item_views NUMBER DEFAULT 0 NOT NULL,
     constraint item_pk primary key (item_num),
     constraint item_fk foreign key (mem_num) references member (mem_num)
 );

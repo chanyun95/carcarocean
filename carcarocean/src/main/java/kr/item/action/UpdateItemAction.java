@@ -7,36 +7,42 @@ import javax.servlet.http.HttpSession;
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
 import kr.item.vo.ItemVo;
-import kr.member.dao.MemberDao;
 import kr.util.FileUtil;
 import kr.util.StringUtil;
 
-public class InsertItemAction implements Action{
+public class UpdateItemAction implements Action{
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
-		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		if(user_num==null) {
 			return "/WEB-INF/views/common/logout.jsp";
 		}
-		
-		//탈퇴 or 정지회원 금지
-		if(user_auth<2) {
-			return "redirect:/main/main.do";
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
+		ItemDao itemDao = ItemDao.getDao();
+		ItemVo item = itemDao.getItem(item_num);
+		if(item.getMember().getMem_num()!=user_num) {
+			return "/WEB-INF/views/common/warningPage.jsp";
 		}
 
-		ItemVo item = new ItemVo();
-		ItemDao itemDao = ItemDao.getDao();
-		
 		item.setItem_name(request.getParameter("item_name"));
-		item.setItem_photo(FileUtil.createFiles(request));
-		item.setItem_price(Integer.parseInt(request.getParameter("item_price")));
 		item.setItem_detail(StringUtil.useBrNoHTML(request.getParameter("item_detail")));
-		MemberDao memberDao = MemberDao.getDao();
-		item.setMember(memberDao.getMember(user_num));
-		itemDao.insertItem(item);		
-		return "redirect:/item/itemList.do";
+		item.setItem_price(Integer.parseInt(request.getParameter("item_price")));
+		
+		if(item.getItem_photo()!=null) {
+			String[] fileArr = item.getItem_photo().split(",");
+			for (String fileName : fileArr) {
+				FileUtil.removeFile(request, fileName);
+			}
+		}
+		
+		item.setItem_photo(FileUtil.createFiles(request));
+		
+		itemDao.updateItem(item);
+		
+		return "redirect:/item/itemDetail.do?item_num="+item.getItem_num();
 	}
+
 }
