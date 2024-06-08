@@ -24,9 +24,11 @@ public class DeleteItemAction implements Action{
 			return "/WEB-INF/views/common/warningPage.jsp";
 		}
 		
-		String[] fileArr = item.getItem_photo().split(",");
-		for(String fileName:fileArr) {
-			FileUtil.removeFile(request, fileName);
+		if (item.getItem_photo()!=null) {
+			String[] fileArr = item.getItem_photo().split(",");
+			for(String fileName:fileArr) {
+				FileUtil.removeFile(request, fileName);
+			}
 		}
 		
 		itemDao.deleteItem(item_num);
