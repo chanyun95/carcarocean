@@ -40,22 +40,12 @@
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 					</select>
-					<input type="search" size="20" name="keyword" class="form-control rounded" id="keyword" placeholder="Search"
-							value="${param.keyword}" style="width: 200px;">
-					<input type="submit" class="btn btn-warning text-white ms-2" value="검색">
-					<input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
-					
+					<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+					<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="location.href='list.do'"><i class="bi bi-arrow-clockwise"></i></button>
 					</div>
 					</form>
 				</div>	
-		<!-- 목록 표 / 게시물이 없을 경우-->
-		<c:if test="${count == 0}">
-		<div class="text-center border rounded m-5">
-			표시할 게시물이 없습니다.
-		</div>
-		</c:if>
-		<!-- 목록 표 / 게시물이 있을 경우-->
-		<c:if test="${count > 0}">
 			<table class="table table-hover text-center mt-4">
 				<thead class="table-light">
 				<tr>
@@ -83,7 +73,6 @@
 			</table>
 			<div class="text-center mt-3 mb-3">${page}</div>
 				<!-- 버튼 -->
-		</c:if>
 		<div class="text-end mb-4">
 				<c:if test="${!empty user_num && user_auth == 9}">
 					<input type="button" class="btn btn-warning text-white" value="글쓰기" onclick="location.href='writeForm.do'">			

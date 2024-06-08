@@ -238,13 +238,12 @@
 		<!-- 판매 후기 -->
 		<div class="my-5">
 			<h2 class="text-center"><b>판매 후기</b></h2>
-			<div class="row justify-content-start text-center p-4">
-				<c:forEach var="s_re" items="${s_reList}">
-					<div class="border rounded col-4">
-						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.sell_maker} ${s_re.sell_cname}</div>
-						${s_re.mem_id}<br>
-						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.s_re_title}</div>
-						<div class="mt-3" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">${s_re.s_re_content}</div>
+			<div class="p-4">
+				<c:forEach var="s_re" items="${s_reList}" begin="0" end="2">
+					<div class="border rounded m-3 bg-light p-3">
+						<div class="fs-5 mt-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold fs-4">${s_re.sell_maker} ${s_re.sell_cname}</a></div>
+						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold">${s_re.s_re_title}</a></div>
+						<div class="mt-3" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-secondary">${s_re.s_re_content}</a></div>
 					</div>
 				</c:forEach>
 			</div>

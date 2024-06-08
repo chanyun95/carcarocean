@@ -51,8 +51,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h1 class="text-center">내 관심차량 목록</h1>
-	<div class="container border rounded">
+	<div class="container">
+		<h2 class="pb-3 pt-5">내 관심차량 목록</h2>
 		<div class="row mb-3 p-4">
 			<c:forEach var="car" items="${carList}">
 				<c:if test="${fn:contains(car.car_photo, ',')}">
@@ -63,7 +63,7 @@
 					<c:set var="firstPhoto" value="${car.car_photo}" />
 				</c:if>
 				<div class="col-4 mt-3">
-			   		<div class="p-3 border bg-light">
+			   		<div class="p-3 border rounded bg-light">
 			   			<!-- 사진 상자 -->
 						<div class="image-container d-flex justify-content-center">
 							<a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${car.car_num}">

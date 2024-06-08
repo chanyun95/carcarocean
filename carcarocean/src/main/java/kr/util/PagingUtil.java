@@ -68,7 +68,7 @@ public class PagingUtil {
 				
 				if (currentPage > pageCount) {
 					page.append("<li class=\"page-item\">");
-					page.append("<a class=\"page-link\" href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
+					page.append("<a class=\"page-link text-dark\" href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
 					page.append("이전");
 					page.append("</a>");
 					page.append("</li>");
@@ -80,13 +80,13 @@ public class PagingUtil {
 					}
 					if (i == currentPage) {
 						page.append("<li class=\"page-item disabled\">");
-						page.append("<a class=\"page-link\">");
+						page.append("<a class=\"page-link text-dark\">");
 						page.append(i);
 						page.append("</a>");
 						page.append("</li>");
 					} else {
 						page.append("<li class=\"page-item\">");
-						page.append("<a class=\"page-link\" href='"+pageUrl+"?pageNum=");
+						page.append("<a class=\"page-link text-dark\" href='"+pageUrl+"?pageNum=");
 						page.append(i);
 						page.append(sub_url+"'>");
 						page.append(i);
@@ -96,7 +96,7 @@ public class PagingUtil {
 				// 다음 block 페이지
 				if (totalPage - startPage >= pageCount) {
 					page.append("<li class=\"page-item\">");
-					page.append("<a class=\"page-link\" href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
+					page.append("<a class=\"page-link text-dark\" href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
 					page.append("다음");
 					page.append("</a>");
 					page.append("</li>");

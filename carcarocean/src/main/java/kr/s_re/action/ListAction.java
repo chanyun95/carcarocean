@@ -38,6 +38,7 @@ public class ListAction implements Action{
 		
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
+		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("page", page.getPage());
 		
 		

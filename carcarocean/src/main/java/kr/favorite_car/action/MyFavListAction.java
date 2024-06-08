@@ -22,7 +22,7 @@ public class MyFavListAction implements Action{
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		//로그인 안되어 있을 시 로그인 폼으로 이동
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		
 		request.setCharacterEncoding("utf-8");

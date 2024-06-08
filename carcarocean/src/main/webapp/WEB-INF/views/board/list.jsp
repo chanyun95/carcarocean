@@ -12,7 +12,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<hr size="1" width="100%" noshade="noshade">
 		<h2 class="pt-5 pb-3">자유 게시판</h2>
 		<div class="d-flex justify-content-between align-items-center rounded" style="background-color:#f5f6f9;">
 			<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
@@ -34,50 +33,43 @@
 				</div>
 			</form>
 		</div>
-		<c:if test="${count == 0}">
-			<div class="text-center border rounded m-5">
-				표시할 게시물이 없습니다.
-			</div>
-		</c:if>
-		<c:if test="${count > 0}">
-			<table class="table table-hover mt-4">
-				<thead class="table-light text-center">
-					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="board" items="${list}">
-					<c:if test="${board.board_report < 10}">
-					<tr>
-						<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_num}</a></td>
-						<td><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_title}</a></td>
-						<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.mem_id}</a></td>
-						<td class="text-center">
-							<c:if test="${empty board.board_modify}">
-								  <a class="text-decoration-none text-dark" href="detail.do?board_num=${board.board_num}">${fn:substring(board.board_reg, 0, 10)}</a>
-							</c:if>
-							<c:if test="${!empty board.board_modify}">
-								 <a class="text-decoration-none text-dark" href="detail.do?board_num=${board.board_num}">${fn:substring(board.board_modify, 0, 10)}</a>
-							</c:if>
-						</td>
-						<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_hit}</a></td>
-					</tr>
-					</c:if>
-					</c:forEach>
-				</tbody>
-			</table>
-		<div class="align-center">${page}</div>
-		</c:if>
-		<div class="list-space float-end">
+		<div class="text-end my-3">
 			<input type="button" value="글쓰기" class="btn btn-warning text-white" onclick="location.href='writeForm.do'"
 			<c:if test="${empty user_num}">disabled="disabled"</c:if>>
 		</div>
-	</div>
+		<table class="table table-hover text-center mt-4">
+			<thead class="table-light">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="board" items="${list}">
+				<c:if test="${board.board_report < 10}">
+				<tr>
+					<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_num}</a></td>
+					<td><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_title}</a></td>
+					<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.mem_id}</a></td>
+					<td class="text-center">
+						<c:if test="${empty board.board_modify}">
+							  <a class="text-decoration-none text-dark" href="detail.do?board_num=${board.board_num}">${fn:substring(board.board_reg, 0, 10)}</a>
+						</c:if>
+						<c:if test="${!empty board.board_modify}">
+							 <a class="text-decoration-none text-dark" href="detail.do?board_num=${board.board_num}">${fn:substring(board.board_modify, 0, 10)}</a>
+						</c:if>
+					</td>
+					<td class="text-center"><a href="detail.do?board_num=${board.board_num}" class="text-dark text-decoration-none">${board.board_hit}</a></td>
+				</tr>
+				</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+	<div class="align-center">${page}</div>
+</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script type="text/javascript">
