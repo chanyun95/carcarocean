@@ -19,9 +19,8 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
-		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="text-center">구매 내역</h1>
-		<div class="d-flex flex-row justify-content-end">
+		<h2 class="pt-5 pb-3">구매 내역</h2>
+		<div class="d-flex flex-row justify-content-center rounded bg-light p-5 my-3">
 			<form id="search_form" action="myBought.do" method="get" class="d-flex">
 				<select id="keyfield" name="keyfield" class="form-select" style="width: auto;">
 					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
@@ -31,8 +30,9 @@
 				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</form>
 		</div>
-		
-		<button onclick="writeForm_btn()" class="btn btn-warning text-white">후기 작성</button>
+		<div class="d-flex justify-content-end">
+			<button onclick="writeForm_btn()" class="btn btn-warning text-white">후기 작성</button>
+		</div>
 		<table class="table text-center align-content-center fw-bold mt-3">
 			<thead>
 				<tr class="table-light">
@@ -75,10 +75,10 @@
 			let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 			location.href = contextPath+'/b_re/writeForm.do';
 		}
-	}
+	};
 	function reset_btn(){
 		location.href = 'redirect:/buy/myBought.do';
-	}
+	};
 	</script>
 </body>
 

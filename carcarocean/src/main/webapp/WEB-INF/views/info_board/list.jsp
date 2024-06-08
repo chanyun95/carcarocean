@@ -7,50 +7,33 @@
 <meta charset="UTF-8">
 <title>정보공유 게시판 목록</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<script type="text/javascript">
-window.onload=function(){
-	const myForm = document.getElementById('search_form');
-	//이벤트 연결
-	myForm.onsubmit=function(){
-		const keyword = document.getElementById('keyword');
-		if(keyword.value.trim() == ''){
-			alert('검색어를 입력하세요.');
-			keyword.value = '';
-			keyword.focus();
-			return false;
-		}
-	};
-};
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
-	<h1 class="text-center">게시판 목록</h1>
-	<form action="list.do" method="post">
-		<div class="d-flex justify-content-between">
-			<select name="keyfield" class="form-select" style="width:auto;">
-				<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-				<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
-				<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-			</select>
-			<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-			<input type="submit" value="검색" class="btn btn-primary">
+	<h2 class="pt-5 pb-3">정보공유 게시판 목록</h2>
+	<div class="d-flex justify-content-between align-items-center roudned bg-light">
+		<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
+	        총 ${count}건의 글이 있습니다.
 		</div>
-	</form>
-	<div class="float-end">
-		<input type="button" value="글쓰기" onclick="location.href='writeForm.do'"
+		<form action="list.do" method="get" class="d-flex justify-content-center rounded bg-light p-5">
+			<div class="d-flex justify-content-center">
+				<select name="keyfield" class="form-select" style="width:auto;">
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
+					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
+				</select>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+			</div>
+		</form>
+	</div>
+	<div class="text-end">
+		<input type="button" class="btn btn-warning fw-bold text-white my-3" value="글쓰기" onclick="location.href='writeForm.do'"
 			<c:if test="${empty user_num}">disabled="disabled"</c:if>>
-		<input type="button" value="목록" onclick="location.href='list.do'">
-		<input type="button" value="홈으로" onclick="${pageContext.request.contextPath}/main/main.do">
 	</div>
-	<c:if test="${count == 0}">
-	<div class="result-display">
-		표시할 게시물이 없습니다.
-	</div>
-	</c:if>
-	<c:if test="${count > 0}">
-	<table class="table table-hover">
+	<table class="table table-hover text-center">
 		<thead class="table-light">
 		<tr>
 			<th>글번호</th>
@@ -75,7 +58,21 @@ window.onload=function(){
 		</tbody>
 	</table>
 	<div class="text-center">${page}</div>
-	</c:if>
 </div>
+<script type="text/javascript">
+	window.onload=function(){
+		const myForm = document.getElementById('search_form');
+		//이벤트 연결
+		myForm.onsubmit=function(){
+			const keyword = document.getElementById('keyword');
+			if(keyword.value.trim() == ''){
+				alert('검색어를 입력하세요.');
+				keyword.value = '';
+				keyword.focus();
+				return false;
+			}
+		};
+	};
+</script>
 </body>
 </html>

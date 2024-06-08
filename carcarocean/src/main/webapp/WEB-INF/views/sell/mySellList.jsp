@@ -14,8 +14,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="mb-3">내 판매 신청 현황</h1>
+		<h2 class="pb-3 pt-5">내 판매 신청 현황</h2>
 		<form id="check_form" action="mySellList.do" method="get" class="d-flex justify-content-between mb-3">
 			<div class="align-self-center">
 				<div class="form-check form-check-inline">
@@ -84,12 +83,15 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	window.onload = function(){
-		const checkForm = document.getElementById('check_form');
-		checkForm.onchange = function(){
-			checkForm.submit();
+		window.onload = function(){
+			const checkForm = document.getElementById('check_form');
+			checkForm.onchange = function(){
+				checkForm.submit();
+			};
 		};
-	};
+		function reset_btn(){
+			location.href = 'redirect:/sell/mySellList.do';
+		};
 	</script>
 </body>
 </html>

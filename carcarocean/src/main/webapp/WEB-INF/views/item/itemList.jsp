@@ -34,10 +34,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h1>중고거래</h1>
-		<div class="text-end"><button class="btn btn-warning text-white fw-bold" onclick="location.href='insertItemForm.do'">상품 등록</button></div>
-		<hr>
-		<form class="form-control d-flex justify-content-center bg-light" action="itemList.do" method="get">
+		<h2 class="pt-5 pb-3">중고거래</h2>
+		<div class="text-end"><button class="btn btn-warning text-white fw-bold mb-3" onclick="location.href='insertItemForm.do'">상품 등록</button></div>
+		<form class="form-control d-flex justify-content-center bg-light p-5" action="itemList.do" method="get">
 			<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
 				<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>상품명</option>
 				<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>상품내용</option>
