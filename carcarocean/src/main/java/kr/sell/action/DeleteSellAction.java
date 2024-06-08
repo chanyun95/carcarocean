@@ -27,7 +27,7 @@ public class DeleteSellAction implements Action{
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
 		SellDao dao = SellDao.getDao();
 		dao.deleteSell(sell_num);
-		 
+		
 		return "redirect:/sell/adminSellList.do";
 	}
 }
