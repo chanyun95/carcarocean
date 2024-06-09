@@ -340,16 +340,14 @@
 	            	
 	            	<div class="my-5">
 	            		<h4>구매후기 정보</h4>
-		            	<div class="border rounded p-5">
-		            		<div class="row">
-		            			<div class="col-6">
-		            				첫번째 구매후기 정보
-		            			</div>
-		            			<div class="col-6">
-		            				두번째 구매후기 정보
-		            			</div>
+		            	<c:forEach var="b_re" items="${b_reList}">
+		            		<div class="border rounded-3 p-3 my-2">
+    				            <p class="text-start fw-bold m-0 fs-5">${b_re.b_re_title}</p>
+		            			<p class="text-start fw-bold small">${b_re.car_maker} ${b_re.car_name}</p>
+		            			<p class="text-end small text-secondary m-0">${fn:substring(b_re.b_re_reg,0,11)}</p>
+		            			<p class="text-start px-4">${b_re.b_re_content}</p>
 		            		</div>
-		            	</div>
+		            	</c:forEach>
 	            	</div>
 	            </main>
 	            <!-- 구매 버튼 공간 -->

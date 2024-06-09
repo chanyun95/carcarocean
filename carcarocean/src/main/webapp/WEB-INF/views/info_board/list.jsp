@@ -47,11 +47,11 @@
 		<c:forEach var="info" items="${list}">
 		<c:if test="${info.info_board_report < 10}">
 		<tr>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}">${info.info_board_num}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}">${info.info_board_title}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}">${info.mem_id}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}">${info.info_board_reg}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}">${info.info_board_hit}</a></td>
+			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_num}</a></td>
+			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_title}</a></td>
+			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.mem_id}</a></td>
+			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_reg}</a></td>
+			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_hit}</a></td>
 		</tr>
 		</c:if>
 		</c:forEach>
