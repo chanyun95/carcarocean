@@ -140,6 +140,7 @@ public class B_ReDao {
 				b_re.setCar_name(rs.getString("car_name"));
 				b_re.setCar_photo(rs.getString("car_photo"));
 				b_re.setB_re_title(rs.getString("b_re_title"));
+				b_re.setB_re_content(rs.getString("b_re_content"));
 				b_re.setB_re_reg(rs.getString("b_re_reg"));
 				
 				list.add(b_re);

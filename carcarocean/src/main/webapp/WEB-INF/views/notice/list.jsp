@@ -57,7 +57,7 @@
 					<c:if test="${notice.notice_impt == 1}">
 							<tr>
 								<td class="text-center"><a class="text-decoration-none text-danger" href="detail.do?notice_num=${notice.notice_num}"><b>[중요]</b></a></td>
-								<td><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}"><b>${notice.notice_title}</b></a></td>
+								<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}"><b>${notice.notice_title}</b></a></td>
 								<td class="text-center">
 								<c:if test="${empty notice.notice_modify}">
 									  <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a>
@@ -76,7 +76,7 @@
 					<c:if test="${notice.notice_impt != 1}">
 						<tr >
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_num}</a></td>
-							<td ><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_hit}</a></td>
 						</tr>

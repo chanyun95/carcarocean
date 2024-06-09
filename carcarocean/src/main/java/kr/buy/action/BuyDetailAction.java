@@ -1,9 +1,13 @@
 package kr.buy.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.b_re.dao.B_ReDao;
+import kr.b_re.vo.B_ReVo;
 import kr.car.dao.CarDao;
 import kr.car.vo.CarVO;
 import kr.checker.dao.CheckerDao;
@@ -11,8 +15,6 @@ import kr.checker.vo.CheckerVo;
 import kr.controller.Action;
 import kr.favorite_car.dao.Favorite_carDao;
 import kr.favorite_car.vo.Favorite_carVo;
-import kr.member.dao.MemberDao;
-import kr.member.vo.MemberVo;
 import kr.util.ShopUtil;
 
 public class BuyDetailAction implements Action{
@@ -42,6 +44,10 @@ public class BuyDetailAction implements Action{
 		if(user_grade!=null) {
 			request.setAttribute("getDiscountFee", ShopUtil.getDiscountFee(user_grade, car.getCar_price()));
 		}
+		
+		B_ReDao b_reDao = B_ReDao.getDao();
+		List<B_ReVo> b_reList = b_reDao.getListB_re(0, 3);
+		request.setAttribute("b_reList", b_reList);
 		
 		return "/WEB-INF/views/buy/buyDetail.jsp";
 	}
