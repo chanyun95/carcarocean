@@ -11,6 +11,14 @@ public class InfoBoardVo {
 	private String info_board_reg;
 	private String info_board_modify;
 	
+	private int likes; //좋아요 수 
+	
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 	private String mem_id;
 	private String mem_photo;
 	
