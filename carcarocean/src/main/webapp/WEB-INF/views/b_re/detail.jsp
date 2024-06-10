@@ -46,15 +46,15 @@
 							<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle me-1" width="50" height="50" class="my-photo">
 						</div>
 					</c:if>
-					<div class="me-3 d-inline">${b_re.mem_id} | </div>
+					<div class="me-3 d-inline">${b_re.mem_id}</div>
 					<c:if test="${!empty b_re.b_re_modify}">
 						<div class="me-3 d-inline">
-						${b_re.b_re_modify}
+						${fn:substring(b_re.b_re_modify, 0, 10)}
 					</div>
 					</c:if>
 					<c:if test="${empty b_re.b_re_modify}">
 						<div class="me-3 d-inline">
-						${b_re.b_re_reg}
+						${fn:substring(b_re.b_re_reg, 0, 10)}
 					</div>
 					</c:if>
 				</div>
@@ -113,8 +113,8 @@
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
 		<!-- 기본정보 -->
-		<ul class="list-unstyled">
-			<h3 class="mt-5" style="color:#dbcf30;">기본정보</h3>
+		<ul class="list-unstyled mt-4 mb-4">
+			<h3 style="color:#dbcf30;">기본정보</h3>
 			<li>주행거리 : ${b_re.car_mile} km</li>
 			<li>차량번호 : ${b_re.car_cnumber}</li>
 			<li>제조사 : ${b_re.car_maker}</li>
@@ -122,7 +122,7 @@
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
 		<!-- 고객후기 -->
-		<div class="row">
+		<div class="row mt-4 mb-4">
 		    <div class="col">
 		        <h3 style="color: #dbcf30;">고객 후기</h3>
 		        <div class="d-flex align-items-center">
@@ -133,7 +133,7 @@
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
 		<!-- 검수자 정보 -->
-		<div class="row">
+		<div class="row mt-4 mb-4">
 		    <div class="col">
 		        <h3 style="color: #dbcf30;">검수자 정보</h3>
 		        <ul class="list-unstyled mt-4">
@@ -146,6 +146,7 @@
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
 		<div class="text-end">
+			<input type="button" class="btn btn-warning text-white me-1" value="목록" onclick="location.href='list.do'">
 			<!-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정 가능 -->
 			<c:if test="${user_num == b_re.mem_num}">
 			<input type="button" class="btn btn-warning text-white" value="글 수정" onclick="location.href='modifyForm.do?b_re_num=${b_re.b_re_num}'">
