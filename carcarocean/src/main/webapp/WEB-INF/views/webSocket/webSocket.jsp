@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Web Socket Example</title>
+<title>채팅</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container p-5">
+	<div class="container p-5" style="width:600px;">
 		<h1 class="text-center">채팅 연습장</h1>
 		<div id="chatting" style="height: 700px; overflow: auto; overflow-x:hidden;" class="border">
 			<ul class="list-unstyled">

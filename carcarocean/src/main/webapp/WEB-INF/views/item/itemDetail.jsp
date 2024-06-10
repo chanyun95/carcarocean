@@ -101,6 +101,16 @@
 				</div>
 			</div>
 			<hr>
+			<div class="float-end">
+				<!-- 내가 올린 상품일 때 -->
+				<c:if test="${item.member.mem_num==user_num}">
+					<button class="btn btn-warning btn-lg text-white fw-bold me-3" onclick="location.href='${pageContext.request.contextPath}/chat/chatList.do?item_num=${item.item_num}'">나에게 온 채팅 보기</button>
+				</c:if>
+				<!-- 내가 올린 상품이 아닐 때 -->
+				<c:if test="${item.member.mem_num!=user_num}">
+					<button class="btn btn-warning btn-lg text-white fw-bold me-3" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item.item_num}'">1:1채팅</button>
+				</c:if>
+			</div>
 			<div class="my-4">
 				<div class="fw-bold fs-4">${item.item_name}</div>
 				<div class="small text-secondary">${item.item_reg}</div>
