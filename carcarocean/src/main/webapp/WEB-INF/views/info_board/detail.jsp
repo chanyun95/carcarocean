@@ -15,96 +15,115 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="content-main">
-		<h2>${info.info_board_title}</h2>
-		<ul class="detail.info">
-			<li>
+	<div class="container">
+		<h2 class="pt-5 pb-3">정보공유 게시판</h2>
+		<hr size="1" noshade="noshade" width="100%">
+		<div class="mt-4 mb-4">
+			<div class="text-start fs-3 mt-2">
+				${info.info_board_title}
+			</div>
+			<div class="text-end mt-2">
 				<c:if test="${!empty info.mem_photo}">
-				<img src="${pageContext.request.contextPath}/upload/${info.mem_photo}"
-									width="40" height="40" class="my-photo">
+					<div class="me-3 d-inline">
+					<img src="${pageContext.request.contextPath}/upload/${info.mem_photo}" class="rounded-circle" width="50" height="50">
+					</div>
 				</c:if>
 				<c:if test="${empty info.mem_photo}">
-				<img src="${pageContext.request.contextPath}/images/face.png"
-									width="40" height="40" class="my-photo">
+					<div class="me-4 d-inline">
+					<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="50" height="50">
+					</div>
 				</c:if>
-			</li>
-			<li>
-				${info.mem_id}<br>
-				조회 : ${info.info_board_hit}
-			</li>
-		</ul>
+				<div class="me-4 d-inline">${info.mem_id}</div>
+				<div class="me-4 d-inline">
+					<c:if test="${empty info.info_board_modify}">
+						${fn:substring(info.info_board_reg, 0, 10)}
+					</c:if>
+					<c:if test="${!empty info.info_board_modify}">
+						${fn:substring(info.info_board_modify, 0, 10)}
+					</c:if>
+				</div>
+				<div class="d-inline">${info.info_board_hit}</div>
+			</div>
+		</div>
 		<hr size="1" noshade="noshade" width="100%">
-		<div class="align-center">
 		<c:if test="${!empty info.info_board_photo}">
-			<div>
+			<div class="text-center">
 				<c:forEach var="photo" items="${fn:split(info.info_board_photo, ',')}">
-					<img src="${pageContext.request.contextPath}/upload/${photo}">
+					<div class="col-12 text-center mb-2">
+						<img src="${pageContext.request.contextPath}/upload/${photo}" width="600" height="400">
+					</div>
 				</c:forEach>
 			</div>
 		</c:if>
-		</div>
-		<p>
-			${info.info_board_content}
-		</p>
+		<p class="fs-5">${info.info_board_content}</p>
 		<hr size="1" noshade="noshade" width="100%">
-		<ul class="detail-sub">
-			<li>
+		<ul class="detail-sub list-unstyled text-end">
+			<li class="text-end">
 				<!-- 신고 -->
 				<p id="report_status_text"></p>
 				<button class="btn btn-outline-danger" onclick="" id="output_report" data-num="${info.info_board_num}" data-checkRedirect="${check_redirect}"><i id="reportIcon" class="bi bi-exclamation-octagon-fill">신고</i></button>
 			</li>
-			<li>
+			</ul>
+			<div class="text-end">
+			<div>
 				<c:if test="${!empty info.info_board_modify}">
-				최근 수정일 : ${info.info_board_modify}
+					최근 수정일 : ${fn:substring(info.info_board_modify,0,10)}
 				</c:if>
-				작성일 : ${info.info_board_reg}
+				/작성일 : ${fn:substring(info.info_board_reg,0,10)}
+			</div>
+			<div class="mt-3">
 				<c:if test="${user_num == info.mem_num}">
-				<input type="button" value="수정" onclick="location.href='updateForm.do?info_board_num=${info.info_board_num}'">
-				<input type="button" value="삭제" id="delete_btn">
-				<script type="text/javascript">
-					const delete_btn = document.getElementById('delete_btn');
-					delete_btn.onclick=function(){
-						let choice = confirm('삭제하시겠습니까?');
-						if(choice){
-							location.replace('delete.do?info_board_num=${info.info_board_num}');
-						}
-					};
-				</script>
+					<input type="button" class="btn btn-warning text-white fw-bold" value="수정" onclick="location.href='updateForm.do?info_board_num=${info.info_board_num}'">
+					<input type="button" class="btn btn-warning text-white fw-bold" value="삭제" id="delete_btn">
+					<script type="text/javascript">
+						const delete_btn = document.getElementById('delete_btn');
+						delete_btn.onclick=function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								location.replace('delete.do?info_board_num=${info.info_board_num}');
+							}
+						};
+					</script>
 				</c:if>
-			</li>
-			<li>
+			</div>
+		</div>
 			<!-- 좋아요 -->
 			<img id="output_fav" data-num="${info.info_board_num}"
 			src="${pageContext.request.contextPath}/images/fav01.gif" width="50">
 			좋아요
 			<span id="output_fcount"></span>
-			</li>
-		</ul>
 		<div id="reply_div">
-			<span class="re-title">댓글 달기</span>
-			<form id="info_board_comm_form">
+			<span class="fw-bold">댓글 달기</span>
+			<form id="info_board_comm_form" class="mt-3">
 				<input type="hidden" name="info_board_num" value="${info.info_board_num}" id="info_board_num">
-				<textarea rows="3" cols="50" name="info_board_comm_content"
-					<c:if test="${empty user_num}">disabled="disabled"</c:if>
-					id="info_board_comm_content"
-					class="rep-content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
-						<c:if test="${!empty user_num}">
-						<div id="info_board_comm_first">
-						<span class="letter-count">300/300</span>
+				<div class="input-group">
+					<textarea rows="3" cols="50" name="info_comm_content" id="info_board_comm_content" 
+					class="form-control rep-content"<c:if test="${empty user_num}">disabled="disabled"</c:if>><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+					<c:if test="${!empty user_num}">
+						<div id="info_board_comm_second" class="input-group-append">
+							<input type="submit" value="전송" class="btn btn-warning text-white pt-5 pb-5">
 						</div>
-						<div id="info_board_comm_second" class="align-right">
-							<input type="submit" value="전송">
-						</div>
-						</c:if>
+					</c:if>
+				</div>
+				<c:if test="${!empty user_num}">
+					<div id="info_board_comm_first" class="mt-2">
+					<span class="letter-count">300/300</span>
+					</div>
+				</c:if>
 			</form>
 		</div>
-		<div id="output"></div>
+		<!-- 댓글 목록 출력 시작 -->
+		<div id="output" class="mt-5"></div>
 		<div class="paging-button" style="display:none;">
 			<input type="button" value="다음글 보기">
 		</div>
+		<div id="loading" style="display:none;">
+			<img src="${pageContext.request.contextPath}/images/loading.gif" width="50" height="50">
+		</div>
+		<!-- 댓글 목록 출력 끝 -->
+		<!-- 댓글 끝 -->
 	</div>
-</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

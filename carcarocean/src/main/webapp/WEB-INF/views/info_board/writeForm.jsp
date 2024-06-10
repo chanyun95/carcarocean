@@ -4,8 +4,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정보공유 게시판 글쓰기</title>
+<title>정보공유 게시판 글 쓰기</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<div>
+			<h2 class="mt-5 mb-5">정보공유 게시판 글 쓰기</h2>
+			<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
+				<ul class="list-unstyled">
+					<li class="mb-2">
+						<label for="info_board_title" class="fs-4 mb-2">제목(필수)</label>
+						<br>
+						<input type="text" class="form-control" name="info_board_title" id="info_board_title" maxlength="50">
+					</li>
+					<li class="mb-2">
+						<label for="info_board_content" class="fs-4 mb-2">내용(필수)</label>
+						<br>
+						<textarea rows="20" cols="70" class="form-control" name="info_board_content" id="info_board_content"></textarea>
+					</li>
+					<li class="mb-2">
+						<input type="file" class="form-control mt-3 mb-2" onchange="displaySelectedFiles(this)" name="info_board_photo" accept="image/gif,image/png,image/jpeg" multiple>
+					    <div class="mt-3 mb-3 border rounded">
+					   		<div id="fileNames" class="mt-3 mb-3 fs-5"></div>
+						</div>
+					</li>
+				</ul>
+				<div class="mt-3 mb-5 row justify-content-center">
+					<div class="col-auto">
+						<input type="submit" class="btn btn-warning" value="글 쓰기">
+					</div>		
+					<div class="col-auto">
+						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
 <script type="text/javascript">
 window.onload = function(){
 	const myForm = document.getElementById('write_form');
@@ -28,33 +65,4 @@ window.onload = function(){
 	};
 };
 </script>
-</head>
-<body>
-<div class="page-main">
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="content-main">
-		<h2>글쓰기</h2>
-		<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
-			<ul>
-				<li>
-					<label for="info_board_title">제목</label>
-					<input type="text" name="info_board_title" id="info_board_title" maxlength="50">
-				</li>
-				<li>
-					<label for="info_board_content">내용</label>
-					<textarea rows="5" cols="40" name="info_board_content" id="info_board_content"></textarea>
-				</li>
-				<li>
-					<label for="info_board_photo">사진</label>
-					<input type="file" name="info_board_photo" id="info_board_photo" accept="image/gif, image/png, image/jpeg" multiple>
-				</li>
-			</ul>
-			<div class="align-center">
-				<input type="submit" value="글쓰기">
-				<input type="button" value="목록" onclick="location.href='list.do'">
-			</div>
-		</form>
-	</div>
-</div>
-</body>
 </html>
