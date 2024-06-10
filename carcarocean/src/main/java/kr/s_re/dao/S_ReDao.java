@@ -261,7 +261,9 @@ public class S_ReDao {
 	         
 	         //SQL문 작성
 	         sql="SELECT * FROM sell JOIN s_re r USING(sell_num) "
-	         		+ "JOIN member m ON r.mem_num=m.mem_num WHERE s_re_num = ?";
+	         		+ "JOIN member m ON r.mem_num=m.mem_num "
+	         		+ "JOIN member_detail d ON m.mem_num = d.mem_num "
+	         		+ "WHERE s_re_num = ?";
 	         
 	         //PreparedStatment 객체 생성
 	         pstmt = conn.prepareStatement(sql);
@@ -279,7 +281,8 @@ public class S_ReDao {
 	        	 s_Re.setS_re_modify(rs.getString("s_re_modify"));
 	        	 s_Re.setSell_num(rs.getInt("sell_num"));
 	        	 s_Re.setMem_num(rs.getInt("mem_num"));
-	        	 
+	        	 s_Re.setMem_id(rs.getString("mem_id"));
+	        	 s_Re.setMem_photo(rs.getString("mem_photo"));
 	         }
 	      }catch(Exception e) {
 	         throw new Exception(e);

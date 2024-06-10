@@ -1,6 +1,7 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,21 +35,21 @@
 		<table class="table table-hover my-3 text-center fw-bold">
 			<thead class="table-light">
 				<tr>
-					<th>글번호</th>
+					<th>제조사</th>
+					<th>차명</th>
 					<th>제목</th>
 					<th>작성자</th>
-					<th>차명/제조사</th>
 					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="s_re" items="${list}">
 				<tr>
-					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_num}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_maker}</a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname}</a></td>
 					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.s_re_title}</a></td>
 					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.mem_id}</a></td>
-					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.sell_cname} / ${s_re.sell_maker}</a></td>
-					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark"> ${s_re.s_re_reg} </a></td>
+					<td><a href="detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark"> ${fn:substring(s_re.s_re_reg, 0, 10)} </a></td>
 				</tr>
 			</c:forEach>
 			</tbody>

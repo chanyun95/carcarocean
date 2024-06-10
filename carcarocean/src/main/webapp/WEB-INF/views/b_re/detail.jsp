@@ -15,7 +15,7 @@
 <div class="container">
 	<div>
 		<div class="mt-4 mb-4">
-			<!-- 차 썸네일 사진 노출 -->
+			<!-- 차 썸네일 사진 -->
 			<div class="text-start mt-2">
 				<c:if test="${fn:contains(b_re.car_photo, ',')}">
 					<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
@@ -30,32 +30,35 @@
 						<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="detail-img img-thumbnail" width="150px" height="100px">
 					</li>
 				</c:if>
+				<!-- 제조사 / 차 이름 -->
 				<div class="fs-3 d-inline ms-5">${b_re.car_maker} / ${b_re.car_name}</div>
 			</div>
 			<hr size="1" noshade="noshade" width="100%">
-			<div>
-				<div class="text-start fs-4 d-inline">${b_re.b_re_title}</div>
-				<div class="text-end mt-1">
+			<!-- 제목 -->
+			<div class="text-start fs-4 mt-1">${b_re.b_re_title}</div>
+			<hr size="1" noshade="noshade" width="100%">
+			<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
+				<!-- 작성자 정보 -->
+				<div class="d-flex align-items-center">
 					<c:if test="${!empty b_re.mem_photo}">
 						<div class="me-3 d-inline">
-						<img src="${pageContext.request.contextPath}/upload/${user_photo}" class="rounded-circle me-1" width="50" height="50" class="my-photo">
+						<img src="${pageContext.request.contextPath}/upload/${b_re.mem_photo}" class="rounded-circle me-1" width="30" height="30">
 						</div>
 					</c:if>
 					<c:if test="${empty b_re.mem_photo}">
 						<div class="me-3 d-inline">
-							<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle me-1" width="50" height="50" class="my-photo">
+							<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle me-1" width="30" height="30">
 						</div>
 					</c:if>
-					<div class="me-3 d-inline">${b_re.mem_id}</div>
+					<div class="me-4 d-inline">${b_re.mem_id}</div>
+				</div>
+				<!-- 작성일 -->
+				<div class="text-end">
 					<c:if test="${!empty b_re.b_re_modify}">
-						<div class="me-3 d-inline">
 						${fn:substring(b_re.b_re_modify, 0, 10)}
-					</div>
 					</c:if>
 					<c:if test="${empty b_re.b_re_modify}">
-						<div class="me-3 d-inline">
 						${fn:substring(b_re.b_re_reg, 0, 10)}
-					</div>
 					</c:if>
 				</div>
 			</div>
@@ -126,7 +129,7 @@
 		    <div class="col">
 		        <h3 style="color: #dbcf30;">고객 후기</h3>
 		        <div class="d-flex align-items-center">
-		            <i class="bi bi-chat-dots" style="font-size:40px; margin-right:15px;"></i>
+		            <i class="bi bi-chat-dots" style="font-size:40px; margin-right:20px;"></i>
 		            <span>${b_re.b_re_content}</span>
 		        </div>
 		    </div>
@@ -220,7 +223,7 @@ $(function(){
 			        output += '<div class="card-body">';
 			        output += '<div class="d-flex align-items-center">';
 			        if (item.mem_photo != null) {
-			            output += '<img class="rounded-circle me-3" width="50" height="50" src="' + item.mem_photo + '">';
+			            output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
 			        } else {
 			            // 만약 mem_photo가 null인 경우, 기본 이미지를 사용
 			            output += '<img class="rounded-circle me-3" width="50" height="50" src="../images/face.png">';
