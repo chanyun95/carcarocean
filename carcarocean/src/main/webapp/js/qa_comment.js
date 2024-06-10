@@ -55,6 +55,7 @@ $(function(){
 					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서 첫 번째 페이지의 게시글 목록을 다시 호출함
 					selectList(1);
 					$('#answer').hide();
+					$('#re_form').hide();
 				}else{
 					alert('댓글 등록 오류');
 				}
@@ -109,8 +110,8 @@ $(function(){
 						output += '<span class="modify-date mb-5">' + item.qa_comm_reg.substring(0,10) + '</span><br>';
 					}
 					if(param.auth==9){
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn btn btn-warning mt-2">';
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn btn btn-warning mt-2">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn btn btn-warning text-white mt-2">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn btn btn-warning text-white mt-2">';
 					}	
 					output += '</div>';
 					output += '</div>';
@@ -247,6 +248,7 @@ $(function(){
 				}else if(param.result == 'success'){
 					alert('답변이 삭제되었습니다.');
 					$('#answer').show();
+					$('#re_form').show();
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 삭제할 수 없습니다.');

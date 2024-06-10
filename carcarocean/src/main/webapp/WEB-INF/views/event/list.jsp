@@ -35,19 +35,21 @@
 						총 ${count}건의 글이 있습니다.
 					</div>
 					<form id="search_form" action="list.do" method="get">
-					<div class="d-flex align-items-center">
-					<select name="keyfield" class="form-select" style="width: auto; margin-right: 10px;">
+					<div class="d-flex justify-content-center">
+					<select name="keyfield" class="form-select" style="width: auto;">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 					</select>
-					<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
-					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
-					<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="location.href='list.do'"><i class="bi bi-arrow-clockwise"></i></button>
+					<input type="search" size="20" name="keyword" id="keyword" value="${param.keyword}" class="form-control text-center" placeholder="검색할 정보를 입력하세요" style="width:300px;">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+					<a href="../event/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4">
+						<i class="bi bi-arrow-clockwise"></i>
+					</a>
 					</div>
 					</form>
 				</div>	
-			<table class="table table-hover text-center mt-4">
-				<thead class="table-light">
+			<table class="table table-hover mt-4">
+				<thead class="table-light text-center">
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
@@ -58,15 +60,15 @@
 				<tbody>
 				<c:forEach var="event" items="${list}">
 					<tr>
-						<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_num}</a></td>
+						<td class="text-center"><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_num}</a></td>
 						<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_title}</a></td>
 						<c:if test="${!empty event.event_modify}">
-							<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_modify,0,10)}</a></td>
+							<td class="text-center"><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_modify,0,10)}</a></td>
 						</c:if>
 						<c:if test="${empty event.event_modify}">
-							<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_reg,0,10)}</a></td>
+							<td class="text-center"><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${fn:substring(event.event_reg,0,10)}</a></td>
 						</c:if>	
-						<td><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_hit}</a></td>	
+						<td class="text-center"><a href="detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark fw-bold">${event.event_hit}</a></td>	
 					</tr>
 				</c:forEach>
 				</tbody>
