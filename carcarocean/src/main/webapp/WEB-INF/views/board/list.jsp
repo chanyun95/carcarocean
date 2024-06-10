@@ -37,8 +37,8 @@
 			<input type="button" value="글쓰기" class="btn btn-warning text-white" onclick="location.href='writeForm.do'"
 			<c:if test="${empty user_num}">disabled="disabled"</c:if>>
 		</div>
-		<table class="table table-hover text-center mt-4">
-			<thead class="table-light">
+		<table class="table table-hover mt-4">
+			<thead class="table-light text-center">
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>

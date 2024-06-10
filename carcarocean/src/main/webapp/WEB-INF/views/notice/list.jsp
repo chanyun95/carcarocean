@@ -55,28 +55,28 @@
 				<tbody>
 					<c:forEach var="notice" items="${list}">
 					<c:if test="${notice.notice_impt == 1}">
-							<tr>
-								<td class="text-center"><a class="text-decoration-none text-danger" href="detail.do?notice_num=${notice.notice_num}"><b>[중요]</b></a></td>
-								<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}"><b>${notice.notice_title}</b></a></td>
-								<td class="text-center">
-								<c:if test="${empty notice.notice_modify}">
-									  <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a>
-								</c:if>
-								<c:if test="${!empty notice.notice_modify}">
-									 <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_modify, 0, 10)}</a>
-								</c:if>
-								</td>
-								<td class="text-center">
-									<a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_hit}</a>
-								</td>
-							</tr>
+						<tr>
+							<td class="text-center"><a class="text-decoration-none text-danger" href="detail.do?notice_num=${notice.notice_num}"><b>[중요]</b></a></td>
+							<td><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}"><b>${notice.notice_title}</b></a></td>
+							<td class="text-center">
+							<c:if test="${empty notice.notice_modify}">
+								  <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a>
+							</c:if>
+							<c:if test="${!empty notice.notice_modify}">
+								 <a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${fn:substring(notice.notice_modify, 0, 10)}</a>
+							</c:if>
+							</td>
+							<td class="text-center">
+								<a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_hit}</a>
+							</td>
+						</tr>
 					</c:if>				
 					</c:forEach>
 					<c:forEach var="notice" items="${list}">
 					<c:if test="${notice.notice_impt != 1}">
 						<tr >
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_num}</a></td>
-							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+							<td><a class="text-decoration-none text-dark" href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${fn:substring(notice.notice_reg, 0, 10)}</a></td>
 							<td class="text-center"><a class="text-decoration-none text-dark" href="detail.do?notice_num=?${notice.notice_num}">${notice.notice_hit}</a></td>
 						</tr>
@@ -89,7 +89,7 @@
 			</c:if>
 			<c:if test="${user_auth == 9}">
 			<div class="text-end mb-4">
-				<input type="button" class="btn btn-warning" value="글 쓰기" onclick="location.href='writeForm.do'">
+				<input type="button" class="btn btn-warning text-white" value="글 쓰기" onclick="location.href='writeForm.do'">
 			</div>
 			</c:if>
 		</div>
