@@ -14,18 +14,21 @@
 <title>나에게 온 채팅 보기</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container border rounded my-5">
+		<h2 class="text-center p-3">채팅 목록</h2>
 		<c:forEach var="chat" items="${chatList}">
-		
-		<div class="d-flex justify-content-between">
+		<div class="d-flex justify-content-between bg-light border rounded my-3">
 			<div>
 				${chat.chat_message}
 			</div>
 			<div>
-				<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${chat.item_num}&chat_giver=${chat.chat_giver }'">${chat.chat_giver}님의 대화</button>
+				<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${chat.giver.mem_num}&chat_receiver=${chat.receiver.mem_num}'">${chat.giver.mem_id}님의 대화</button>
 			</div>
 		</div>
 		</c:forEach>
+		<div class="d-flex justify-content-center">
+			<button class="btn btn-warning bnt-lg text-white fw-bold my-3" onclick="history.back()">이전으로</button>
+		</div>
 	</div>
 </body>
 </html>

@@ -1,10 +1,13 @@
 package kr.chat.vo;
 
+import kr.item.vo.ItemVo;
+import kr.member.vo.MemberVo;
+
 public class ChatVo {
 	private int chat_num;
-	private int item_num; 			//상품
-	private int chat_receiver;		//받는사람
-	private int chat_giver;		//보낸사람
+	private ItemVo item; 			//상품
+	private MemberVo receiver;		//받는사람
+	private MemberVo giver;		//보낸사람
 	private String chat_message;
 	private String chat_reg;
 	private int chat_check;
@@ -14,24 +17,23 @@ public class ChatVo {
 	public void setChat_num(int chat_num) {
 		this.chat_num = chat_num;
 	}
-	
-	public int getItem_num() {
-		return item_num;
+	public ItemVo getItem() {
+		return item;
 	}
-	public void setItem_num(int item_num) {
-		this.item_num = item_num;
+	public void setItem(ItemVo item) {
+		this.item = item;
 	}
-	public int getChat_receiver() {
-		return chat_receiver;
+	public MemberVo getReceiver() {
+		return receiver;
 	}
-	public void setChat_receiver(int chat_receiver) {
-		this.chat_receiver = chat_receiver;
+	public void setReceiver(MemberVo receiver) {
+		this.receiver = receiver;
 	}
-	public int getChat_giver() {
-		return chat_giver;
+	public MemberVo getGiver() {
+		return giver;
 	}
-	public void setChat_giver(int chat_giver) {
-		this.chat_giver = chat_giver;
+	public void setGiver(MemberVo giver) {
+		this.giver = giver;
 	}
 	public String getChat_message() {
 		return chat_message;

@@ -10,6 +10,8 @@ import kr.chat.dao.ChatDao;
 import kr.chat.vo.ChatVo;
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
+import kr.item.vo.ItemVo;
+import kr.member.dao.MemberDao;
 
 public class ChatListAction implements Action{
 
@@ -22,14 +24,18 @@ public class ChatListAction implements Action{
 		}
 		
 		int item_num = Integer.parseInt(request.getParameter("item_num"));
-		ItemDao itemDao = ItemDao.getDao();
-		int chat_receiver = itemDao.getItem(item_num).getMember().getMem_num();
+
 		ChatDao chatDao = ChatDao.getDao();
-		List<ChatVo> chatList = chatDao.getListChat(item_num, chat_receiver);
+		List<ChatVo> chatList = chatDao.getAllListChat(item_num, user_num);
+		MemberDao memberDao = MemberDao.getDao();
 		
+		for(int i=0; i<chatList.size(); i++) {
+			ChatVo chat = chatList.get(i);
+			chat.setReceiver(memberDao.getMember(chat.getReceiver().getMem_num()));
+			chat.setGiver(memberDao.getMember(chat.getGiver().getMem_num()));
+		}
 		
 		request.setAttribute("item_num", item_num);
-		request.setAttribute("chat_receiver", chat_receiver);
 		request.setAttribute("chatList", chatList);
 		
 		return "/WEB-INF/views/chat/chatList.jsp";
