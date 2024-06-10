@@ -31,9 +31,7 @@ $(function(){
 					output +='<h4>' + item.mem_id + '</h4>';
 					output += '<div class="sub-item">';
 					output += '<p>' + item.s_re_comm_content + '</p>';
-					output += '<span class="modify-date">최근 등록일 : ' + item.s_re_comm_reg + '</span>';
-					
-					
+					output += '<span class="modify-date">등록일 : ' + item.s_re_comm_reg + '</span>';
 					output +='<hr size="1" noshade width="100%">'
 					output += '</div>';
 					output += '</div>';

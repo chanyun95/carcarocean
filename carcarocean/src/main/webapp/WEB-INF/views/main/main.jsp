@@ -18,7 +18,7 @@
 	overflow:hidden; 
 	text-overflow:ellipsis; 
 	display: -webkit-box; 
-	-webkit-line-clamp: 3; 
+	-webkit-line-clamp: 4; 
 	-webkit-box-orient: vertical;
 	}
 </style>
@@ -321,7 +321,7 @@
                              <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="btn btn-warning text-white">구매후기</a>
                              <p>
                             <p class="card-text">
-                                <small class="text-body-secondary">${b_re.b_re_reg}</small>
+                                <small class="text-body-secondary"> ${fn:substring(b_re.b_re_reg, 0, 10)}</small>
                             </p>
                         </div>
                     </div>
@@ -347,7 +347,7 @@
 	<!-- 구매 이용후기 끝-->
     <!-- 판매 이용후기 시작 -->
 		<section id="s_re1">
-    <div class="container pb-1">
+    <div class="container pb-3">
         <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
             <strong class="fs-3">판매이용후기</strong>
             <span class="float-end">더보기<i class="bi bi-chevron-right"></i></span>
@@ -358,33 +358,44 @@
                     <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
                         <c:if test="${loop.index == 0}">
                             <tr>
-                                <td>
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <strong>${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        ${s_re.s_re_reg}
-                                    </a>
-                                </td>
+                                <td colspan="2">
+                                   
+                                    <div class="d-inline-block border rounded bg-light p-2">
+													<ul class="list-unstyled">
+														<li>
+														<span class="float-start"> 
+															<a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+																<small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
+															</a>
+														</span>
+														</li>
+													</ul>
+												</div> 
+                                </td>   
                             </tr>
                             <tr>
-                                <td>
+                                <td class=" m-1 p-1">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                       <strong class="fs-5">${s_re.s_re_title}</strong>
                                     </a>
                                 </td>
-                                <td class="text-end">
+                                <td colspan="2" class="text-end">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        ${s_re.mem_id}
+                                        [${s_re.mem_id}]
                                     </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="text-center m-5 p-5" >
+                                <td colspan="2" class=" me-5 pe-5" >
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        ${s_re.s_re_content}
+                                        <b>${s_re.s_re_content}</b>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2" class=" ms-5 ps-5">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <small class="text-body-secondary"> ${fn:substring(s_re.s_re_reg, 0, 10)}</small>
                                     </a>
                                 </td>
                             </tr>
@@ -395,40 +406,51 @@
         </div>
     </div>
     
-    <div class="container pb-1">
+    <div class="container pb-3">    
         <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
                 <tbody>
                     <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
                         <c:if test="${loop.index == 1}">
                             <tr>
-                                <td>
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <strong>${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        ${s_re.s_re_reg}
-                                    </a>
-                                </td>
+                                <td colspan="2">
+                                   
+                                    <div class="d-inline-block border rounded bg-light p-2">
+													<ul class="list-unstyled">
+														<li>
+														<span class="float-start"> 
+															<a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+																<small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
+															</a>
+														</span>
+														</li>
+													</ul>
+												</div> 
+                                </td>   
                             </tr>
                             <tr>
-                                <td>
+                                <td class=" m-1 p-1">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                       <strong class="fs-5">${s_re.s_re_title}</strong>
                                     </a>
                                 </td>
-                                <td class="text-end">
+                                <td colspan="2" class="text-end">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        ${s_re.mem_id}
+                                        [${s_re.mem_id}]
                                     </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="text-center m-5 p-5" >
+                                <td colspan="2" class=" me-5 pe-5" >
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        ${s_re.s_re_content}
+                                        <b>${s_re.s_re_content}</b>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2" class=" ms-5 ps-5">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <small class="text-body-secondary"> ${fn:substring(s_re.s_re_reg, 0, 10)}</small>
                                     </a>
                                 </td>
                             </tr>
@@ -440,39 +462,52 @@
     </div>
     
     <div class="container pb-5">
+        
         <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
                 <tbody>
                     <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
                         <c:if test="${loop.index == 2}">
                             <tr>
-                                <td>
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <strong>${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        ${s_re.s_re_reg}
-                                    </a>
-                                </td>
+                                <td colspan="2">
+                                   
+                                    <div class="d-inline-block border rounded bg-light p-2">
+													<ul class="list-unstyled">
+														<li>
+														<span class="float-start"> 
+															<a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+																<small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
+															</a>
+														</span>
+														</li>
+													</ul>
+												</div> 
+                                </td>   
                             </tr>
                             <tr>
-                                <td>
+                                <td class=" m-1 p-1">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        ${s_re.sell_cname} / ${s_re.sell_maker}
+                                       <strong class="fs-5">${s_re.s_re_title}</strong>
                                     </a>
                                 </td>
-                                <td class="text-end">
+                                <td colspan="2" class="text-end">
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        ${s_re.mem_id}
+                                        [${s_re.mem_id}]
                                     </a>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="text-center m-5 p-5" >
+                                <td colspan="2" class=" me-5 pe-5" >
                                     <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        ${s_re.s_re_content}
+                                        <b>${s_re.s_re_content}</b>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2" class=" ms-5 ps-5">
+                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
+                                        <small class="text-body-secondary"> ${fn:substring(s_re.s_re_reg, 0, 10)}</small>
+                                       
                                     </a>
                                 </td>
                             </tr>

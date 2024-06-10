@@ -15,7 +15,7 @@
 <div style="background-color:#f5f6f9;"> 
 <div class="p-5">
 	<div class="container mt-2" style="background-color:white;" > 
-		<h3>${s_re.s_re_title}</h3>
+		<h3 class="pt-5">${s_re.s_re_title}</h3>
 		<ul class="list-unstyled">
 			<li>
 				<c:if test="${!empty s_re.s_re_modify}">
@@ -27,7 +27,7 @@
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
 		
-		<h4>기본정보</h4><br>
+		<h3 class="mt-5" style="color:#dbcf30;">기본정보</h3><br>
 		<div class="d-inline-block border rounded bg-light p-3">
 		<ul class="list-unstyled">
 			<li><span class="float-start">주행거리 : </span> <span class="float-start">${sellvo.sell_mile} km</span><br></li> 
@@ -49,9 +49,10 @@
 			
 			 
 		<hr size="1" noshade="noshade" width="100%">
-		<h4>고객 후기</h4><br>
+		<h3 style="color: #dbcf30;">고객 후기</h3><br>
 		<div class="d-inline-block border rounded bg-light p-3">
 		<ul class="list-unstyled">
+			<li><i class="bi bi-chat-dots" style="font-size:40px; margin-right:15px;"></i></li>
 				<li><span class="float-start">${s_re.s_re_content}</span></li>
 		</ul>
 		</div>
@@ -78,19 +79,24 @@
 		</ul>
 		<!-- 댓글 시작 -->
 		<div id = "reply_div">
-			<span class="re-title">댓글 달기</span>
-			<form id="s_re_form">
+			<span class="fw-bold">댓글 달기</span>
+			<form id="s_re_form" class="mt-3">
 				<input type="hidden" name="s_re_num" value="${s_re.s_re_num}" id="s_re_num">
 				<!-- disabled는 댓글을 달지 못하도록 비활설화 시키는 역할 -->
-				<textarea rows="3" cols="50" name="s_re_comm_content" id="s_re_comm_content"
-				class="form-control" placeholder="Leave a comment here"<c:if test="${empty user_num}">disabled="disabled"</c:if> 
-				class="s_re_comm_content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다</c:if></textarea>
+				<div class="input-group">
+					<textarea rows="3" cols="50" name="s_re_comm_content" id="s_re_comm_content"
+					class="form-control" placeholder="Leave a comment here"<c:if test="${empty user_num}">disabled="disabled"</c:if> 
+					class="s_re_comm_content"><c:if test="${empty user_num}">로그인해야 작성할 수 있습니다</c:if></textarea>
+				
 				<c:if test="${!empty user_num}">
-				<div id="s_re_first">
-					<span class="s_re_letter-count">300/300</span><!-- 글자수 제한  -->
+					<div id="re_second" class="align-right">
+						<input type="submit" class="btn btn-warning text-white pt-5 pb-5" value="등록">
+					</div>
+				</c:if>
 				</div>
-				<div id="re_second" class="align-right">
-					<input type="submit" class="btn btn-warning text-white" value="전송">
+				<c:if test="${!empty user_num}">
+				<div id="s_re_first" class="mt-2">
+					<span class="s_re_letter-count">300/300</span><!-- 글자수 제한  -->
 				</div>
 				</c:if>
 			</form>
