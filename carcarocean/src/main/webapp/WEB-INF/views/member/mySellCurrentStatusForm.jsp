@@ -17,7 +17,7 @@
             <main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
                 	<h2>내 차 팔기 신청현황</h2>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -31,14 +31,16 @@
                                 <tr>
                                     <td width = "250px">${sell.sell_num}</td>
                                     <!-- 링크 추가해야함 -->
-                                    <td width = "250px"><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
                                     <c:if test = "${sell.sell_check==0}">
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=0&keyfield=1&keyword=" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
                                     <td>검수전</td>
                                     </c:if>
                                     <c:if test = "${sell.sell_check==1}">
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=1&keyfield=1&keyword=" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
                                     <td>검수중</td>
                                     </c:if>
                                     <c:if test = "${sell.sell_check==2}">
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=2&keyfield=1&keyword=" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
                                     <td>검수완료</td>
                                     </c:if>
                                     <c:if test = "${!empty sell.sell_modify_check}">

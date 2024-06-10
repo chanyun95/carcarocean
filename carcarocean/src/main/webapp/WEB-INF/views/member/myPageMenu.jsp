@@ -27,7 +27,7 @@
 			<li><br><br></li>
 			<li class="nav-item"><a class="nav-link active" href="modifyUserForm.do">회원정보
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/fav/myFavList.do">관심차량
+			<li class="nav-item"><a class="nav-link" href="myFavoriteCar.do">관심차량
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="mySellCurrentStatusForm.do">내차팔기신청현황
 					</a></li>

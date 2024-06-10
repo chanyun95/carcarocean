@@ -67,9 +67,8 @@
 									</div>
 								</div>
 								<div class="col-2">
-									<div class="row">
-										<div class="row-6 bg-primary" style="height: 100px;"></div>
-										<div class="row-6 bg-danger" style="height: 100px;"></div>
+									<div>
+										<div style="height: 200px;"><img src = "${pageContext.request.contextPath}/images/diamond.jpeg" class = "rounded-circle" width = "180"></div>
 									</div>
 								</div>
 								<div class="col-3 text-center align-text-middle">
@@ -77,7 +76,7 @@
 										<h3>다음 등급까지</h3>
 									</div>
 									<div style="height: 100px">
-										${price}
+										<h3>${cost}만원</h3>
 									</div>
 								</div>
 							</div>
@@ -85,7 +84,7 @@
 					</div>
 					<div class="p-3 bg-right w-80 mx-auto">
 						<h3>자유게시판</h3>
-						<table class="table">
+						<table class="table text-center align-content-center fw-bold mt-3">
 							<thead>
 								<tr>
 									<th>#</th>

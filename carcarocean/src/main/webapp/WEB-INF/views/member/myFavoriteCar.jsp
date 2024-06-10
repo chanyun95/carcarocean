@@ -6,40 +6,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 문의내역</title>
+<title>나의 관심차량</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님 문의내역"
+			<c:set var="sub_title" value="${member.mem_name}님 관심차량"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
-                	<h2>내 문의내역</h2>
+                	<h2>내 관심차량</h2>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>제목</th>
-                                <th>작성일</th>
-                                <th>수정일</th>
+                                <th>차량명</th>
+                                <th>차량번호</th>
+                                <th>차량가격</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="qa" items="${list}">
+                            <c:forEach var="list" items="${list}">
                                 <tr>
-                                    <td width = "250px">${qa.qa_num}</td>
-                                    <td width = "250px"><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
-                                   	<td>${fn:substring(qa.qa_reg,0,10)}</td>
-                                    <c:if test = "${!empty qa.qa_modify}">
-									<td>${fn:substring(qa.qa_modify,0,10)}</td>
-									</c:if>
-									<c:if test = "${empty qa.qa_modify}">
-                                    <td>데이터없음</td>
-                                    </c:if>
-                                </tr>
+                                    <td width = "250px">${list.car.car_num}</td>
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/buy/buyDetail.do?car_num=${list.car.car_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${list.car.car_name}</a></td>
+                                    <td width = "250px">${list.car.car_cnumber}</td>
+                                    <td width = "250px">${list.car.car_price}만원</td>
+                           	    </tr>
                             </c:forEach>
                         </tbody>
                     </table>

@@ -19,10 +19,10 @@
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
                 	<div>
-                	<h4>구매내역</h4>
+                	<h3>구매내역</h3>
                 	<a href="${pageContext.request.contextPath}/b_re/list.do" class="btn btn-warning text-white">구매후기</a>
                     </div>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -44,10 +44,10 @@
                     </table> 
                     <br><br><br>
                     <div>
-                    <h4>판매내역</h4>
+                    <h3>판매내역</h3>
                     <a href="${pageContext.request.contextPath}/s_re/list.do" class="btn btn-warning text-white">판매후기</a>
                     </div>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -60,7 +60,7 @@
                             <c:forEach var="sell" items="${sellList}">
                                 <tr>
                                     <td width = "250px">${sell.sell_num}</td>
-                                    <td width = "250px"><a href="${pageContext.request.contextPath}/sell/sellDetail.do?sell_num=${sell.sell_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
+                                    <td width = "250px">${sell.sell_cname}</td>
                                     <td>${fn:substring(sell.sell_reg,0,10)}</td>
 									<td>${fn:substring(sell.sell_modify_check,0,10)}</td>
                                 </tr>
