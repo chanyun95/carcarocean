@@ -49,8 +49,12 @@ $(function(){
 		 let output;
         if(param.status === 'yesFav'){
             $("#favIcon").removeClass( "bi bi-hand-thumbs-up").addClass("bi bi-hand-thumbs-up-fill");
+            $("#output_fav").removeClass( "btn btn-outline-warning").addClass("btn btn-warning");
+            /* $("#output_fav").css({"border": "none", "background": "none", "padding": "0"});*/
         } else {
             $("#favIcon").removeClass("bi bi-hand-thumbs-up-fill").addClass("bi bi-hand-thumbs-up");
+            $("#output_fav").removeClass( "btn btn-warning").addClass("btn btn-outline-warning");
+            /*$("#output_fav").css({"border": "none", "background": "none", "padding": "0"});*/
         }
 		//문서 객체에 설정
 		$('#output_fav').attr('src',output);
