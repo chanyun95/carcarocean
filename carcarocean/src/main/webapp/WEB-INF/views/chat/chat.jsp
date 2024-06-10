@@ -31,60 +31,46 @@
 	</div>
 	<script>
 		window.onload = function(){
-			getChat();
+			getChat(${item_num},${chat_receiver},${chat_giver});
 		};
 		
 		function submit_btn(){
-			if(${chat_giver}==null){
-				$.ajax({
-					url:'chatAjax.do',
-					type:'get',
-					data:{item_num:"${item_num}",message:$('#message').val()},
-					dataType:'json',
-					success:function(param){
-						$('#message').val('').focus();
-						getChat();
-					}
-				});
-			}else {
-				$.ajax({
-					url:'chatAjax.do',
-					type:'get',
-					data:{item_num:"${item_num}", chat_giver:"${chat_giver}",message:$('#message').val()},
-					dataType:'json',
-					success:function(param){
-						$('#message').val('').focus();
-						getChat();
-					}
-				});
-			}
+			$.ajax({
+				url:'chatAjax.do',
+				type:'get',
+				data:{item_num:"${item_num}",message:$('#message').val()},
+				dataType:'json',
+				success:function(param){
+					$('#message').val('').focus();
+					getChat(param.item_num, param.chat_receiver, param.chat_giver);
+				}
+			});
 		};
-		function getChat(){
+		function getChat(item_num,chat_receiver,chat_giver){
 			const chatRoom = document.getElementById('chatRoom');
 			$('#chatRoom').empty();
 			$.ajax({
 				url:'getChatAjax.do',
 				type:'get',
-				data:{item_num:"${item_num}",chat_giver:"${chat_giver}"},
+				data:{item_num:item_num,chat_receiver:chat_receiver,chat_giver:chat_giver},
 				dataType:'json',
 				success:function(param){
 					for(let i=0; i<param.chatList.length; i++){
 						const chat = param.chatList[i];
 						//내가 받은 채팅임
-						if(chat.chat_receiver==${user_num}){
+						if(chat.receiver.mem_num==${user_num}){
 							const newDiv = document.createElement('div');
 							newDiv.className = 'border rounded-4 bg-warning text-white fw-bold text-start';
-							const newText = document.createTextNode(param.giver.mem_id+'님 : ' + chat.chat_message);
+							const newText = document.createTextNode(param.receiver.mem_id+'님 : ' + chat.chat_message);
 							newDiv.appendChild(newText);
 							chatRoom.appendChild(newDiv);
 						}
 						
-						
 						//내가 보낸 채팅임
-						else if(chat.chat_giver==${user_num}){ // 내가 채팅을 보낸 입장일 때
+						else if(chat.giver.mem_num==${user_num}){ // 내가 채팅을 보낸 입장일 때
 							const newDiv = document.createElement('div');
 							newDiv.className = 'border rounded-4 bg-warning text-white fw-bold text-end';
-							const newText = document.createTextNode(param.receiver.mem_id+'님 : ' + chat.chat_message);
+							const newText = document.createTextNode(param.giver.mem_id+'님 : ' + chat.chat_message);
 							newDiv.appendChild(newText);
 							chatRoom.appendChild(newDiv);
 						}
