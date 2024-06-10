@@ -120,7 +120,7 @@
 				${item.item_detail}
 			</div>
 			<div class="my-4 text-secondary small">
-				채팅 0 ∙ 조회 ${item.item_views}
+				채팅 ${itemChatCount} ∙ 조회 ${item.item_views}
 			</div>
 		</div>
 		<hr>

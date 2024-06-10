@@ -38,7 +38,7 @@
 			$.ajax({
 				url:'chatAjax.do',
 				type:'get',
-				data:{item_num:"${item_num}",message:$('#message').val()},
+				data:{item_num:"${item_num}",message:$('#message').val(),chat_receiver:"${chat_receiver}",chat_giver:"${chat_giver}"},
 				dataType:'json',
 				success:function(param){
 					$('#message').val('').focus();

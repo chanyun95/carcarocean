@@ -18,7 +18,6 @@ public class ChatDao {
 		return dao;
 	};
 	
-	
 	public void insertChat(ChatVo chat) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -84,7 +83,7 @@ public class ChatDao {
 		}
 		return list;
 	}
-	
+	//특정 대상이 받은 모든 채팅
 	public List<ChatVo> getAllListChat(int item_num, int chat_receiver) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -124,5 +123,30 @@ public class ChatDao {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 		return list;
+	}
+	
+	//해당 아이템의 채팅 개수
+	public int itemChatCount(int item_num) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int cnt = 0;
+		int count = 0;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT COUNT(distinct chat_giver) FROM CHAT WHERE ITEM_NUM=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, item_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return count;
 	}
 }

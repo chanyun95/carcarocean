@@ -22,7 +22,7 @@
 				${chat.chat_message}
 			</div>
 			<div>
-				<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${chat.giver.mem_num}&chat_receiver=${chat.receiver.mem_num}'">${chat.giver.mem_id}님의 대화</button>
+				<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${chat.receiver.mem_num}&chat_receiver=${chat.giver.mem_num}'">${chat.giver.mem_id}님의 대화</button>
 			</div>
 		</div>
 		</c:forEach>

@@ -12,6 +12,14 @@ public class ItemVo {
 	private int item_status;
 	private int item_views;
 	
+	private int item_chatCount;
+	
+	public int getItem_chatCount() {
+		return item_chatCount;
+	}
+	public void setItem_chatCount(int item_chatCount) {
+		this.item_chatCount = item_chatCount;
+	}
 	public int getItem_views() {
 		return item_views;
 	}

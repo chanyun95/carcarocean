@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.chat.dao.ChatDao;
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
 import kr.item.vo.ItemVo;
@@ -33,6 +34,12 @@ public class ItemListAction implements Action{
 		if(count>0) {
 			itemList = itemDao.getItemList(page.getStartRow(), page.getEndRow(), keyfield, keyword,0);
 		}
+		
+		ChatDao chatDao = ChatDao.getDao();
+		for(int i=0; i<itemList.size(); i++) {
+			itemList.get(i).setItem_chatCount(chatDao.itemChatCount(itemList.get(i).getItem_num()));
+		}
+		
 		
 		for(ItemVo item : itemList) {
 			item.setItem_reg(DurationFromNow.getTimeDiffLabel(item.getItem_reg()));
