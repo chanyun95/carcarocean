@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.chat.dao.ChatDao;
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
 import kr.item.vo.ItemVo;
@@ -32,6 +33,10 @@ public class ItemDetailAction implements Action{
 
 		List<ItemVo> itemList =	itemDao.getItemListfavored(1,9,0);
 		
+		ChatDao chatDao = ChatDao.getDao();
+		int itemChatCount = chatDao.itemChatCount(item_num);
+		
+		request.setAttribute("itemChatCount", itemChatCount);
 		//중고거래 저장(인기매물순서)
 		request.setAttribute("itemList", itemList);
 		request.setAttribute("mem_grade", ShopUtil.getGrade(item.getMember().getMem_grade()));

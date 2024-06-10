@@ -32,7 +32,8 @@ public class ChatAjaxAction implements Action{
 		
 		
 		//받는 사람
-		int chat_receiver = item.getMember().getMem_num();
+		/* int chat_receiver = item.getMember().getMem_num(); */
+		int chat_receiver = Integer.parseInt(request.getParameter("chat_receiver")); // 새로 작성
 				
 		//보내는 사람
 		HttpSession session = request.getSession();
@@ -47,7 +48,8 @@ public class ChatAjaxAction implements Action{
 		chat.setReceiver(receiver);
 		//보내는 사람
 		MemberVo giver = new MemberVo();
-		giver.setMem_num(user_num);
+		/* giver.setMem_num(user_num); */
+		giver.setMem_num(Integer.parseInt(request.getParameter("chat_giver"))); // 새로 작성
 		chat.setGiver(giver);
 		
 		chat.setChat_message(message);
