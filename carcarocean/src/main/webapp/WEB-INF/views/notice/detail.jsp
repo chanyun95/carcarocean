@@ -18,21 +18,26 @@
 			<div class="text-center fs-8 text-secondary">카카오션의 새로운 소식을 전달받으실 수 있습니다.</div>
 		</div>
 		<hr size="1" noshade="noshade" width="100%">
-		<div class="mb-4">
-			<div class="fs-3">
-				<b>${notice.notice_title}</b>
+		<div class="mt-4 mb-4 d-flex justify-content-between align-items-center">
+			<!-- 제목 -->
+			<div class="text-start fs-3 mt-1">${notice.notice_title}</div>
+			<!-- 작성일 -->
+			<div class="text-end me-3">
+				<c:if test="${empty notice.notice_modify}">
+					${fn:substring(notice.notice_reg, 0, 10)} 
+				</c:if>
+				<c:if test="${!empty notice.notice_modify}">
+					${fn:substring(notice.notice_modify, 0, 10)}
+				</c:if>
 			</div>
-			<div class="text-end mt-2">
-				<div class="me-3 d-inline">관리자</div>
-				<div class="me-3 d-inline">
-					<c:if test="${empty notice.notice_modify}">
-						${fn:substring(notice.notice_reg, 0, 10)} 
-					</c:if>
-					<c:if test="${!empty notice.notice_modify}">
-						${fn:substring(notice.notice_modify, 0, 10)}
-					</c:if>
-				</div>
-				<div class="d-inline">${notice.notice_hit}</div>
+		</div>
+		<hr size="1" noshade="noshade" width="100%">
+		<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
+			<div class="d-flex align-items-center">
+				<div class="me-4 d-inline">관리자</div>
+			</div>
+			<div class="text-end">
+				<div class="d-inline">조회수 : ${notice.notice_hit}</div>
 			</div>
 		</div>
 		<hr size="1" noshade="noshade" width="100%">

@@ -9,6 +9,8 @@ import kr.b_re.vo.B_ReVo;
 import kr.car.dao.CarDao;
 import kr.car.vo.CarVO;
 import kr.controller.Action;
+import kr.member.dao.MemberDao;
+import kr.member.vo.MemberVo;
 
 public class DetailAction implements Action{
 	@Override
@@ -22,21 +24,14 @@ public class DetailAction implements Action{
 		B_ReDao dao = B_ReDao.getDao();
 		
 		B_ReVo b_re = dao.getB_Re(b_re_num);
-		/*int buy_num = b_re.getBuy_num();
 		
-		 * BuyDao buyDao = BuyDao.getDao(); 
-		 * BuyVo buy = buyDao.getBuy(buy_num);
-		 * 
-		 * CarDao carDao = CarDao.getDao(); 
-		 * CarVO car = carDao.getCar(buy.getCar_num());
-		 */
+		MemberDao memdao = MemberDao.getDao();
+		/* MemberVo mem = memdao.getMember(user_num); */
+		
 		request.setAttribute("user_num", user_num);
 		request.setAttribute("b_re", b_re);
-		/*
-		 * request.setAttribute("buy", buy); 
-		 * request.setAttribute("car", car);
-		 */
-		
+		/* request.setAttribute("mem", mem); */
+
 		return "/WEB-INF/views/b_re/detail.jsp";
 	}
 
