@@ -33,11 +33,11 @@ public class MyPageAction implements Action{
 		MyPageDao dao1 = MyPageDao.getDao();
 		//리스트 정보
 		
-		
+		int cost = dao1.getMyGradeUpCost(user_num);
 		List<BoardVo> list = MyPageDao.MyWrite(user_num);
 		List<SellVo> slist = MyPageDao.getSellCurrent(user_num);
 		
-
+		request.setAttribute("cost", cost);
 		request.setAttribute("slist", slist);
 		request.setAttribute("list", list);
 		request.setAttribute("member", member);

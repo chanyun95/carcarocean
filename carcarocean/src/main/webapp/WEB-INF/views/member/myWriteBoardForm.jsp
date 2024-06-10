@@ -18,7 +18,7 @@
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
              	    <h3>자유게시판</h3>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -44,7 +44,7 @@
                         </tbody>
                     </table>
                 	<h3>판매후기</h3>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -52,6 +52,7 @@
                                 <th>작성일</th>
                                 <th>수정일</th>
                             </tr>
+                           
                         </thead>
                         <tbody>
                             <c:forEach var="s_re" items="${slist}">
@@ -70,7 +71,7 @@
                         </tbody>
                     </table>
                     <h3>구매후기</h3>
-                    <table class="table">
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>

@@ -32,12 +32,12 @@
                 <div class="col-md-4">
                     <h4><b>팀 정보</b></h4>
                     <ul class = "list-unstyled text-secondary">
-                        <li>김승연: 인스타 주소</li>
-                        <li>구승회: 인스타 주소</li>
-                        <li>김찬윤: 인스타 주소</li>
-                        <li>박근휘: 인스타 주소</li>
-                        <li>윤찬호: 인스타 주소</li>
-                        <li>함종태: 인스타 주소</li>
+                        <li>김승연: 98kksy</li>
+                        <li>구승회: 9_win_h</li>
+                        <li>김찬윤: u_nee._</li>
+                        <li>박근휘: geunzzang22</li>
+                        <li>윤찬호: chanho__</li>
+                        <li>함종태: h_whdxx</li>
                     </ul>
                 </div>
             </div> 
