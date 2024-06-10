@@ -20,33 +20,40 @@
 	<div class="container">
 		<h2 class="pt-5 pb-3">자유 게시판</h2>
 		<hr size="1" noshade="noshade" width="100%">
-		<div class="mt-4 mb-4">
-			<div class="text-start fs-3 mt-2">
-				${board.board_title}
-			</div>
-			<div class="text-end mt-2">
-				<c:if test="${!empty board.mem_photo}">
-					<div class="me-3 d-inline">
-					<img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="50" height="50">
-					</div>
+		<div class="mt-4 mb-4 d-flex justify-content-between align-items-center">
+			<!-- 제목 -->
+			<div class="text-start fs-3 mt-1">${board.board_title}</div>
+			<!-- 작성일 -->
+			<div class="text-end">
+				<c:if test="${empty board.board_modify}">
+					${fn:substring(board.board_reg, 0, 10)}
 				</c:if>
-				<c:if test="${empty board.mem_photo}">
-					<div class="me-4 d-inline">
-					<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="50" height="50">
-					</div>
+				<c:if test="${!empty board.board_modify}">
+					${fn:substring(board.board_modify, 0, 10)}
 				</c:if>
-				<div class="me-4 d-inline">${board.mem_id}</div>
-				<div class="me-4 d-inline">
-					<c:if test="${empty board.board_modify}">
-						${fn:substring(board.board_reg, 0, 10)} 
-					</c:if>
-					<c:if test="${!empty board.board_modify}">
-						${fn:substring(board.board_modify, 0, 10)}
-					</c:if>
-				</div>
-				<div class="d-inline">${board.board_hit}</div>
 			</div>
 		</div>
+    	<hr size="1" noshade="noshade" width="100%">
+    	<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
+    	  <!-- 작성자 정보 -->
+        <div class="d-flex align-items-center">
+            <c:if test="${!empty board.mem_photo}">
+                <div class="me-3 d-inline">
+                    <img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="30" height="30">
+                </div>
+            </c:if>
+            <c:if test="${empty board.mem_photo}">
+                <div class="me-4 d-inline">
+                    <img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="30" height="30">
+                </div>
+            </c:if>
+            <div class="me-4 d-inline">${board.mem_id}</div>
+        </div>
+        <!-- 조회수 -->
+        <div class="text-end">
+            <div class="d-inline">조회수 : ${board.board_hit}</div>
+        </div>
+    </div>
 		<hr size="1" noshade="noshade" width="100%">
 		<c:if test="${!empty board.board_photo}">
 			<div class="text-center">

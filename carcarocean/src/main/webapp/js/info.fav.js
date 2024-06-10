@@ -1,4 +1,5 @@
 $(function(){
+	let favCount = $('#output_fav').attr('data-checkRedirect');
 	/*============================
 	 * 좋아요 선택 여부와 선택한 총 개수 읽기
 	 * =========================== */
@@ -45,12 +46,12 @@ $(function(){
 	 * 좋아요 표시 함수
 	 * =========================== */
 	function displayFav(param){
-		let output;
-		if(param.status == 'yesFav'){//좋아요 선택
-			output = '../images/fav02.gif';
-		}else{//좋아요 미선택
-			output = '../images/fav01.gif';
-		}
+		 let output;
+        if(param.status === 'yesFav'){
+            $("#favIcon").removeClass( "bi bi-hand-thumbs-up").addClass("bi bi-hand-thumbs-up-fill");
+        } else {
+            $("#favIcon").removeClass("bi bi-hand-thumbs-up-fill").addClass("bi bi-hand-thumbs-up");
+        }
 		//문서 객체에 설정
 		$('#output_fav').attr('src',output);
 		$('#output_fcount').text(param.count);

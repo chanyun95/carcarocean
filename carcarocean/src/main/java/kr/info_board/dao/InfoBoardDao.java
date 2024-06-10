@@ -89,9 +89,10 @@ public class InfoBoardDao {
 				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '&' || ? || '%'";
 				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '&' || ? || '%'";
 			}
-			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
-					+ "(SELECT * FROM info_board JOIN member USING(mem_num) " + sub_sql
-					+ " ORDER BY info_board_num DESC)a) WHERE rnum >=? AND rnum <= ?";
+			sql = "SELECT a.*, (SELECT COUNT(*) FROM info_fav WHERE info_fav.info_board_num = a.info_board_num) AS likes " +
+		              "FROM (SELECT * FROM info_board JOIN member USING(mem_num) " + sub_sql +
+		              " ORDER BY info_board_num DESC) a " +
+		              "WHERE rownum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);
@@ -109,6 +110,7 @@ public class InfoBoardDao {
 				info.setInfo_board_reg(rs.getString("info_board_reg"));
 				info.setMem_id(rs.getString("mem_id"));
 				info.setInfo_board_report(rs.getInt("info_board_report"));
+				info.setLikes(rs.getInt("likes"));
 				list.add(info);
 				
 			}
@@ -210,6 +212,7 @@ public class InfoBoardDao {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 =null;
+		PreparedStatement pstmt4 = null;
 		String sql = null;
 		int cnt = 0;
 		try {
@@ -230,16 +233,24 @@ public class InfoBoardDao {
 			
 			cnt = 0;
 			
-			sql="DELETE FROM info_board WHERE info_board_num=?";
+			sql= "DELETE FROM info_fav WHERE info_board_num=?";
 			pstmt3 = conn.prepareStatement(sql);
 			pstmt3.setInt(++cnt, info_board_num);
 			pstmt3.executeUpdate();
+			
+			cnt = 0;
+			
+			sql = "DELETE FROM info_board WHERE info_board_num=?";
+			pstmt4 = conn.prepareStatement(sql);
+			pstmt4.setInt(++cnt, info_board_num);
+			pstmt4.executeUpdate();
 			
 			conn.commit();
 		}catch(Exception e) {
 			conn.rollback();
 			throw new Exception(e);
 		}finally {
+			DBUtil.executeClose(null, pstmt4, null);
 			DBUtil.executeClose(null, pstmt3, null);
 			DBUtil.executeClose(null, pstmt2, null);
 			DBUtil.executeClose(null, pstmt, conn);

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>게시물 목록</title>
 <meta charset="UTF-8">
 <title>정보공유 게시판 목록</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -33,25 +34,41 @@
 		<input type="button" class="btn btn-warning fw-bold text-white my-3" value="글쓰기" onclick="location.href='writeForm.do'"
 			<c:if test="${empty user_num}">disabled="disabled"</c:if>>
 	</div>
-	<table class="table table-hover text-center">
-		<thead class="table-light">
+	<table class="table table-hover">
+		<thead class="table-light text-center">
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
+			<th>추천수</th>
 		</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="info" items="${list}">
 		<c:if test="${info.info_board_report < 10}">
 		<tr>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_num}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_title}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.mem_id}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_reg}</a></td>
-			<td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark fw-bold">${info.info_board_hit}</a></td>
+		<c:choose>
+                <c:when test="${info.likes >= 10}">
+                	<tr>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_num}</a></td>
+                    <td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-warning fw-bold">${info.info_board_title}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.mem_id}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_reg}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_hit}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-warning fw-bold">${info.likes}</a></td>
+                	</tr>
+                </c:when>
+                <c:otherwise>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_num}</a></td>
+                    <td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_title}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.mem_id}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_reg}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_hit}</a></td>
+                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.likes}</a></td>
+                </c:otherwise>
+            </c:choose>
 		</tr>
 		</c:if>
 		</c:forEach>
