@@ -53,9 +53,9 @@ public class InfoBoardDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("1")) sub_sql += "WHERE title LIKE '&' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '&' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '&' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += "WHERE info_board_title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += "WHERE info_board_content LIKE '%' || ? || '%'";
 			}
 		sql = "SELECT COUNT(*) FROM info_board JOIN member USING (mem_num)" + sub_sql;
 		pstmt = conn.prepareStatement(sql);
@@ -85,14 +85,15 @@ public class InfoBoardDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("1")) sub_sql += "WHERE title LIKE '&' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE id LIKE '&' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE content LIKE '&' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += "WHERE info_board_title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += "WHERE info_board_content LIKE '%' || ? || '%'";
 			}
-			sql = "SELECT a.*, (SELECT COUNT(*) FROM info_fav WHERE info_fav.info_board_num = a.info_board_num) AS likes " +
-		              "FROM (SELECT * FROM info_board JOIN member USING(mem_num) " + sub_sql +
-		              " ORDER BY info_board_num DESC) a " +
-		              "WHERE rownum BETWEEN ? AND ?";
+			
+			  sql = "SELECT a.*, (SELECT COUNT(*) FROM info_fav WHERE info_fav.info_board_num = a.info_board_num) AS likes "
+					+ "FROM (SELECT * FROM info_board JOIN member USING(mem_num) " + sub_sql 
+					+ " ORDER BY info_board_num DESC) a " + "WHERE rownum BETWEEN ? AND ?";
+			 
 			pstmt = conn.prepareStatement(sql);
 			if(keyword != null && !"".equals(keyword)) {
 				pstmt.setString(++cnt, keyword);

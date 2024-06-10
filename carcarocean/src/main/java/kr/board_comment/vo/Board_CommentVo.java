@@ -9,7 +9,14 @@ public class Board_CommentVo {
 	private String bor_comm_reg;
 	
 	private String mem_id;		//회원 아이디
+	private String mem_photo;
 	
+	public String getMem_photo() {
+		return mem_photo;
+	}
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +18,16 @@
 		<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
 	        총 ${count}건의 글이 있습니다.
 		</div>
-		<form action="list.do" method="get" class="d-flex justify-content-center rounded bg-light p-5">
-			<div class="d-flex justify-content-center">
-				<select name="keyfield" class="form-select" style="width:auto;">
+		<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
+			<div class="d-flex justify-content-center ms-4 mt-5 mb-5">
+				<select name="keyfield" class="form-select" style="width:auto; margin-right: 10px;">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 				</select>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
-				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
-				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				<input type="search" size="20" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder=" 검색할 정보를 입력하세요" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+				<a href="../info_board/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4"><i class="bi bi-arrow-clockwise"></i></a>
 			</div>
 		</form>
 	</div>
@@ -55,7 +56,14 @@
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_num}</a></td>
                     <td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-warning fw-bold">${info.info_board_title}</a></td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.mem_id}</a></td>
-                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_reg}</a></td>
+                    <td class="text-center">
+						<c:if test="${empty info.info_board_modify}">
+							  <a class="text-decoration-none text-dark" href="detail.do?info_board_num=?${info.info_board_num}">${fn:substring(info.info_board_reg, 0, 10)}</a>
+						</c:if>
+						<c:if test="${!empty info.info_board_modify}">
+							 <a class="text-decoration-none text-dark" href="detail.do?info_board_num=?${info.info_board_num}">${fn:substring(info.info_board_modify, 0, 10)}</a>
+						</c:if>
+					</td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_hit}</a></td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-warning fw-bold">${info.likes}</a></td>
                 	</tr>
@@ -64,7 +72,14 @@
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_num}</a></td>
                     <td><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_title}</a></td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.mem_id}</a></td>
-                    <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_reg}</a></td>
+                     <td class="text-center">
+						<c:if test="${empty info.info_board_modify}">
+							  <a class="text-decoration-none text-dark" href="detail.do?info_board_num=?${info.info_board_num}">${fn:substring(info.info_board_reg, 0, 10)}</a>
+						</c:if>
+						<c:if test="${!empty info.info_board_modify}">
+							 <a class="text-decoration-none text-dark" href="detail.do?info_board_num=?${info.info_board_num}">${fn:substring(info.info_board_modify, 0, 10)}</a>
+						</c:if>
+					</td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.info_board_hit}</a></td>
                     <td class="text-center"><a href="detail.do?info_board_num=${info.info_board_num}" class="text-decoration-none text-dark">${info.likes}</a></td>
                 </c:otherwise>
