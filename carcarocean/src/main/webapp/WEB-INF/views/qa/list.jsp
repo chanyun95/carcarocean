@@ -38,16 +38,17 @@
 						총 ${count}건의 글이 있습니다.
 					</div>
 				<form id="search_form" action="list.do" method="get">
-				<div class="d-flex align-items-center">
-					<select name="keyfield" class="form-select" style="width:auto; margin-right: 10px;">
+				<div class="d-flex justify-content-center">
+					<select name="keyfield" class="form-select" style="width:auto;">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					</select>
-					<input type="search" size="20" name="keyword" class="form-control rounded" id="keyword" placeholder="Search"
-						value="${param.keyword}" style="width:200px;">
-					<input type="submit" class="btn btn-warning text-white ms-2" value="검색">
-					<input type="button" class="btn btn-warning text-white ms-2 me-4" value="검색초기화" onclick="location.href='list.do'">
+					<input type="search" size="20" name="keyword" class="form-control text-center" id="keyword" placeholder="검색할 정보를 입력하세요" value="${param.keyword}" style="width:300px;">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+					<a href="../event/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4">
+						<i class="bi bi-arrow-clockwise"></i>
+					</a>
 				</div>
 				</form>
 				</div>

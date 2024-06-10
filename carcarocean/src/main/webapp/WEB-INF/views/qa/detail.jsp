@@ -46,11 +46,11 @@
 			<div class="text-center mb-1">
 			<ul class="detail-sub list-unstyled">
 				<li>
-						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">	
+						<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">	
 						<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 						<c:if test="${user_num == qa.mem_num}">
-						<input type="button" class="btn btn-warning" value="수정" onclick="location.href='updateForm.do?qa_num=${qa.qa_num}'">
-						<input type="button" class="btn btn-warning" value="삭제" id="delete_btn" >
+						<input type="button" class="btn btn-warning text-white" value="수정" onclick="location.href='updateForm.do?qa_num=${qa.qa_num}'">
+						<input type="button" class="btn btn-warning text-white" value="삭제" id="delete_btn" >
 						<script type="text/javascript">
 							const delete_btn = document.getElementById('delete_btn');
 							//이벤트 연결
@@ -83,17 +83,19 @@
 			</div>			
 			<!-- 댓글 목록 출력 끝 -->	
 			<!-- 답글 시작 -->		
-			<div id="reply_div" class="text-center mt-5 mb-5">
+			<div id="reply_div"  class="mt-3 mb-5">
 				<form id="re_form">
 					<input type="hidden" name="qa_num" value="${qa.qa_num}" id="qa_num">
-					<c:if test="${user_auth == 9}">
-					<textarea rows="7" cols="150" placeholder="관리자 답변" name="qa_comm_content" <c:if test="${user_auth != 9}">disabled="disabled"</c:if> id="re_content" 
-					class="rep-content"></textarea>		
-						<div id="re_first" class="text-end" style="margin-right: 40px;">
-							<span class="letter-count">300/300</span>
+					<c:if test="${user_auth == 9 && count == 0}">
+					<div class="input-group">
+					<textarea rows="3" cols="150" placeholder="답변을 등록해주세요" name="qa_comm_content" <c:if test="${user_auth != 9}">disabled="disabled"</c:if> id="re_content" 
+					class="form-control rep-content"></textarea>								
+						<div id="re_second" class="input-group-append">
+							<input type="submit" value="답변 등록" class="btn btn-warning text-white pt-5 pb-5">
 						</div>
-						<div id="re_second" class="text-end" style="margin-right: 40px;">
-							<input type="submit" value="전송" class="btn btn-warning">
+					</div>
+						<div id="re_first" class="text-end mt-2" style="margin-right: 90px;">
+							<span class="letter-count">300/300</span>
 						</div>
 					</c:if>
 				</form>	
