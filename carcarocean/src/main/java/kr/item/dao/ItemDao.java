@@ -238,6 +238,62 @@ public class ItemDao {
 		}
 		return list;
 	}
+	public List<ItemVo> getItemListfavored(int start, int end, int item_status) throws Exception{
+		List<ItemVo> list = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM ITEM JOIN MEMBER USING (MEM_NUM) JOIN MEMBER_DETAIL USING (MEM_NUM) WHERE item_status=? ORDER BY item_views DESC)a) WHERE rnum >=? AND rnum <=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, item_status);
+			pstmt.setInt(++cnt, start);
+			pstmt.setInt(++cnt, end);
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				ItemVo item = new ItemVo();
+				item.setItem_num(rs.getInt("item_num"));
+				item.setItem_name(rs.getString("item_name"));
+				item.setItem_price(rs.getInt("item_price"));
+				item.setItem_detail(rs.getString("item_detail"));
+				item.setItem_photo(rs.getString("item_photo"));
+				item.setItem_reg(rs.getString("item_reg"));
+				item.setItem_status(rs.getInt("item_status"));
+				item.setItem_views(rs.getInt("item_views"));
+				MemberVo member = new MemberVo();
+				member.setMem_num(rs.getInt("mem_num"));
+				member.setMem_name(rs.getString("mem_name"));
+				member.setMem_id(rs.getString("mem_id"));
+				member.setMem_email(rs.getString("mem_email"));
+				member.setMem_auth(rs.getInt("mem_auth"));
+				member.setMem_grade(rs.getInt("mem_grade"));
+				member.setMem_name(rs.getString("mem_name"));
+				member.setMem_phone(rs.getString("mem_phone"));
+				member.setMem_zipcode(rs.getString("mem_zipcode"));
+				member.setMem_address1(rs.getString("mem_address1"));
+				member.setMem_address2(rs.getString("mem_address2"));
+				member.setMem_photo(rs.getString("mem_photo"));
+				member.setMem_reg(rs.getString("mem_reg"));
+				member.setMem_modify(rs.getString("mem_modify"));
+
+				item.setMember(member);
+				
+				list.add(item);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
+	}
 	public void viewItem(int item_num) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;

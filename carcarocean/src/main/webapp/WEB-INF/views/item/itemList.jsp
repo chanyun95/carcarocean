@@ -69,7 +69,7 @@
 					<div class="text-end"><a href="itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold small">${item.member.mem_id}</a></div>
 					<div class="overflow-hidden my-1"><c:if test="${fn:contains(item.item_reg,'초미만') or fn:contains(item.item_reg,'초 전') or fn:contains(item.item_reg,'분 전')}"><span class="badge bg-danger me-2">New</span></c:if><a href="itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark">${item.item_name}</a></div>
 					<div class="my-1"><a href="itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold"><fmt:formatNumber value="${item.item_price}" type="number"/>원</a></div>
-					<div class="small mt-2">${item.member.mem_address1} ${item.member.mem_address2}</div>
+					<div class="small mt-2">${item.member.mem_address1}</div>
 					<div class="small text-secondary">채팅 0 ∙ 조회 ${item.item_views}</div>
 				</div>
 			</div>

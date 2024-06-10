@@ -13,6 +13,8 @@ import kr.board.vo.BoardVo;
 import kr.controller.Action;
 import kr.event.dao.EventDao;
 import kr.event.vo.EventVo;
+import kr.item.dao.ItemDao;
+import kr.item.vo.ItemVo;
 import kr.news.dao.NewsDao;
 import kr.news.vo.NewsVo;
 import kr.notice.dao.NoticeDao;
@@ -53,6 +55,10 @@ public class MainAction implements Action{
 		B_ReDao dao = B_ReDao.getDao();
 		int count = dao.getB_reCount();
 		
+		//중고거래 인기매물
+		ItemDao itemDao = ItemDao.getDao();
+		List<ItemVo> itemList =	itemDao.getItemListfavored(1,6,0);
+		
 		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, 10, 1, "list.do");
 		List<B_ReVo> list = null;
 		if(count > 0) {
@@ -78,7 +84,9 @@ public class MainAction implements Action{
 		
 		//판매후기 저장
 		request.setAttribute("S_relist", S_relist);
-				
+		
+		//중고거래 저장(인기매물순서)
+		request.setAttribute("itemList", itemList);
 				
 		return "/WEB-INF/views/main/main.jsp";
 	}
