@@ -6,46 +6,67 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의 글 상세 보기</title>
+<title>고객 문의 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/qa_comment.js"></script>
 </head>
 <body>
-	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-			<h2>${qa.qa_title}</h2>
-			<div class="col text-end mt-2 pr-3"> 
-				<c:if test="${!empty qa.mem_photo}">
-				<img src="${pageContext.request.contextPath}/upload/${qa.mem_photo}" width="50" height="50" class="my-photo">
-				</c:if>
-				<c:if test="${empty qa.mem_photo}">
-				<img src="${pageContext.request.contextPath}/images/face.png" width="50" height="50" class="my-photo">
-				</c:if>
-					${qa.mem_id} |
-				<c:if test="${!empty qa.qa_modify}">
-					${fn:substring(qa.qa_modify,0,10)}
-				</c:if>
-				<c:if test="${empty qa.qa_modify}">
-					${fn:substring(qa.qa_reg,0,10)}
-				</c:if>
+			<h2 class="pt-5 pb-3">고객 문의</h2>
+			
+		<hr size="1" noshade="noshade" width="100%">
+			<div class="mt-4 mb-4 d-flex justify-content-between align-items-center">
+				<!-- 제목 -->
+				<div class="text-start fs-3 mt-1">${qa.qa_title}</div>					
+			</div>	
+		
+		<hr size="1" noshade="noshade" width="100%">
+			<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
+				<!-- 작성자 정보 -->
+        		<div class="d-flex align-items-center">
+        			<c:if test="${!empty qa.mem_photo}">
+						<div class="me-3 d-inline">
+							<img src="${pageContext.request.contextPath}/upload/${qa.mem_photo}" width="30" height="30" class="my-photo rounded-circle me-1">
+						</div>
+					</c:if>
+					<c:if test="${empty qa.mem_photo}">
+						<div class="me-4 d-inline">	
+							<img src="${pageContext.request.contextPath}/images/face.png" width="30" height="30" class="my-photo rounded-circle me-1">
+						</div>
+					</c:if>
+					<div class="me-4 d-inline">${qa.mem_id}</div>
+				</div>	
+				<!-- 작성일 -->
+				<div class="text-end" style="margin-right: 30px;">
+					<c:if test="${!empty qa.qa_modify}">
+						${fn:substring(qa.qa_modify,0,10)}
+					</c:if>
+					<c:if test="${empty qa.qa_modify}">
+						${fn:substring(qa.qa_reg,0,10)}
+					</c:if>
+				</div>	
 			</div>
-			<hr size="1" noshade="noshade" width="100%">
+			
+		<hr size="1" noshade="noshade" width="100%">
+			<!-- 사진 첨부 -->
 			<c:if test="${!empty qa.qa_photo}">
 				<div class="text-center mb-5">
-				<c:forEach var="photo" items="${fn:split(qa.qa_photo,',')}">
-				<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img" width="600px" height="400px"><br>
-				</c:forEach>
+					<c:forEach var="photo" items="${fn:split(qa.qa_photo,',')}">
+						<img src="${pageContext.request.contextPath}/upload/${photo}" class="detail-img" width="600px" height="400px"><br>
+					</c:forEach>
 				</div>
 			</c:if>
+			<!-- 상세 내용 -->
 			<p>
 				${qa.qa_content} 
 			</p>
-			<hr size="1" noshade="noshade" width="100%">
-			<div class="text-center mb-1">
+		<hr size="1" noshade="noshade" width="100%">
+			<!-- 내용 하단 버튼 -->
+			<div class="text-end mb-1">
 			<ul class="detail-sub list-unstyled">
-				<li>
+					<li>
 						<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">	
 						<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정, 삭제 가능 --%>
 						<c:if test="${user_num == qa.mem_num}">
@@ -103,6 +124,5 @@
 			<!-- 답글 끝 -->	
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	</div>
 </body>
 </html>

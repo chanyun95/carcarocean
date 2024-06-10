@@ -28,7 +28,7 @@
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-		<h2 class="pt-5 pb-3">자동차 뉴스 게시판 목록</h2>
+		<h2 class="pt-5 pb-3">자동차 뉴스</h2>
 		<!-- 검색바 -->		
 				<div class="d-flex justify-content-between align-items-center rounded" style="background-color: #f5f6f9;">
 					<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
