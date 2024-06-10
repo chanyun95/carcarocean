@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -518,7 +519,46 @@
         </div>
     </div>
 </section>
-
+<!-- 중고거래 인기매물순 시작 -->
+<section id="item">
+	<div class="container pb-3">
+		<strong class="fs-3">중고거래 인기매물</strong>
+            <a href="${pageContext.request.contextPath}/item/itemList.do" class="text-decoration-none text-warning">
+            	<span class="float-end">더 구경하기<i class="bi bi-chevron-right"></i>
+            	</span>
+            </a>
+		<div class="row justify-content-start my-3 px-3 rounded" style="background-color:white; border: 1px solid #c5c7c9;">
+		<c:forEach var="item" items="${itemList}" varStatus="loop">
+			<c:if test="${fn:contains(item.item_photo, ',')}">
+				<c:set var="photoList" value="${fn:split(item.item_photo, ',')}" />
+				<c:set var="firstPhoto" value="${photoList[0]}"/>
+			</c:if>
+			<c:if test="${!fn:contains(item.item_photo, ',')}">
+				<c:set var="firstPhoto" value="${item.item_photo}" />
+			</c:if>
+			<div class="col-3 mx-5 my-3">
+				<div class="text-center px-3">
+					<c:if test="${empty firstPhoto}">
+						<a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}"><img src="${pageContext.request.contextPath}/images/logo.png" style="width:270px; height:200px;" class="border rounded-4 image-container"></a>
+					</c:if>
+					<c:if test="${!empty firstPhoto}">
+						<a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="border rounded-4 image-container"></a>
+					</c:if>
+				</div>
+				<div class="px-3">
+					<div class="float-start"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-secondary fw-bold small">${item.item_reg}</a></div>
+					<div class="text-end"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold small">${item.member.mem_id}</a></div>
+					<div class="overflow-hidden my-1"><c:if test="${fn:contains(item.item_reg,'초미만') or fn:contains(item.item_reg,'초 전') or fn:contains(item.item_reg,'분 전')}"><span class="badge bg-danger me-2">New</span></c:if><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark">${item.item_name}</a></div>
+					<div class="my-1"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold"><fmt:formatNumber value="${item.item_price}" type="number"/>원</a></div>
+					<div class="small mt-2">${item.member.mem_address1}</div>
+					<div class="small text-secondary">채팅 0 ∙ 조회 ${item.item_views}</div>
+				</div>
+			</div>
+		</c:forEach>
+		</div>
+	</div>
+</section>
+		<!-- 중고거래 인기매물순 끝 -->
 		<%-- <section id="s_re2">
     <div class="container pb-5">
          <div class="table-responsive rounded-4 border border-secondary-subtle">
