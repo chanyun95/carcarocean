@@ -52,7 +52,7 @@
 								<div id="photo_detail">
 									<img src="${pageContext.request.contextPath}/upload/${news.news_photo}" width="100">
 									<br>
-									<input type="button" class="btn btn-warning mb-4" value="사진 삭제" id="photo_del">
+									<input type="button" class="btn btn-warning mb-4 text-white" value="사진 삭제" id="photo_del">
 								</div>
 								<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 								<script type="text/javascript">
@@ -90,10 +90,10 @@
 					</ul>
 					<div class="mt-3 mb-5 row justify-content-center">
 					  <div class="col-auto">	
-						<input type="submit" class="btn btn-warning" value="수정">
+						<input type="submit" class="btn btn-warning text-white" value="수정">
 					  </div>
 					  <div class="col-auto">
-						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+						<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">
 					  </div>
 					</div>
 				</form>
