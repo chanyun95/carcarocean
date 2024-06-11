@@ -30,15 +30,15 @@
 				  <label class="form-check-label" for="sell_check3"><span class="text-danger">검수완료</span></label>
 				</div>
 			</div>
-			<div class="d-flex justify-content-center">
-				<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
+			<div class="d-flex align-items-center ms-4 mt-5 mb-5">
+				<select id="keyfield" name="keyfield" class="form-select me-2" style="width:auto;">
 					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
 					<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
 				</select>
-				<input type="search" id="keyword" name="keyword" class="form-control rounded"
-				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
-				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
-				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				<input type="search" id="keyword" name="keyword" class="form-control rounded me-2"
+				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
+				<button class="btn btn-warning fw-bold text-white btn-lg me-4" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
 			</div>
 		</form>
 		<table class="table table-hover text-center mt-3">
