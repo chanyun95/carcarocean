@@ -69,12 +69,12 @@
 				<h2>모델검색</h2>
 				<div class="row" style="border: 2px solid #000; padding: 50px; margin: 50px 0;">
 					<div class="input-group mb-3 row">
-						<form id="search_form" action="${pageContext.request.contextPath}/buy/mainBuy.do" method="get" class="d-flex justify-content-around">
+						<form id="search_form" action="${pageContext.request.contextPath}/buy/mainBuy.do" method="get" class="d-flex justify-content-center">
 							<select id="keyfield" name="keyfield" class="form-select" style="width: auto;">
 								<option value="1">제조사</option>
 								<option value="2">차량</option>
 							</select>
-							<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
+							<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width: 500px;">
 							<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 						</form>
 					</div>
@@ -96,7 +96,7 @@
 							<a href="${pageContext.request.contextPath}/notice/list.do" class="d-flex justify-content-center align-items-center" style="height: 200px;">
 	                        <i class="bi bi-megaphone" style="font-size: 5rem;"></i>
 	                        </a>
-	                        <div class="card-body">
+	                        <div class="card-body" style="height: 160px;">
 	                         	<h5 class="card-title text-truncate">공지사항이 없습니다</h5>
                             	<p class="card-text">현재 공지사항이 없습니다.</p> 
 	                        </div>
@@ -126,7 +126,7 @@
                         	<i class="bi bi-megaphone" style="font-size: 5rem;"></i>
                         	</a>
                         </c:if>
-							<div class="card-body">
+							<div class="card-body" style="height: 160px;">
 								<h5 class="card-title text-truncate">
 								<a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}" class="text-decoration-none text-dark">
 								${notice.notice_title}</a></h5>
@@ -160,7 +160,7 @@
 							<a href="${pageContext.request.contextPath}/event/list.do" class="d-flex justify-content-center align-items-center" style="height: 200px;">
 	                        <i class="bi bi-calendar-event" style="font-size: 5rem;"></i>
 	                        </a>
-	                        <div class="card-body">
+	                        <div class="card-body" style="height: 160px;">
 	                         	<h5 class="card-title text-truncate">이벤트가 없습니다</h5>
                             	<p class="card-text">현재 이벤트가 없습니다.</p> 
 	                        </div>
@@ -192,7 +192,7 @@
                         	<i class="bi bi-calendar-event" style="font-size: 5rem;"></i>
                         	</a>
                         </c:if>
-							<div class="card-body">
+							<div class="card-body" style="height: 160px;">
 								<h5 class="card-title text-truncate">
 								<a href="${pageContext.request.contextPath}/event/detail.do?event_num=${event.event_num}" class="text-decoration-none text-dark">
 								${event.event_title}</a></h5>
@@ -226,7 +226,7 @@
 							<a href="${pageContext.request.contextPath}/news/list.do" class="d-flex justify-content-center align-items-center" style="height: 200px;">
 	                        <i class="bi bi-newspaper" style="font-size: 5rem;"></i>
 	                        </a>
-	                        <div class="card-body">
+	                        <div class="card-body" style="height: 160px;">
 	                         	<h5 class="card-title text-truncate">뉴스가 없습니다</h5>
                             	<p class="card-text">현재 뉴스가 없습니다.</p> 
 	                        </div>
@@ -256,7 +256,7 @@
 		                        	<i class="bi bi-newspaper" style="font-size: 5rem;"></i>
 		                        	</a>
 		                        </c:if>
-		                     <div class="card-body">
+		                     <div class="card-body" style="height: 160px;">
 		                        <h5 class="card-title text-truncate">
 		                        <a href="${pageContext.request.contextPath}/news/detail.do?news_num=${news.news_num}" class="text-decoration-none text-dark">
 		                        ${news.news_title}</a></h5>
@@ -290,7 +290,7 @@
 							<a href="${pageContext.request.contextPath}/board/list.do" class="d-flex justify-content-center align-items-center" style="height: 200px;">
 	                        <i class="bi bi-people-fill" style="font-size: 5rem;"></i>
 	                        </a>
-	                        <div class="card-body">
+	                        <div class="card-body" style="height: 160px;">
 	                         	<h5 class="card-title text-truncate">자유게시판이 없습니다</h5>
                             	<p class="card-text">현재 자유게시판이 없습니다.</p> 
 	                        </div>
@@ -320,7 +320,7 @@
 		                        	<i class="bi bi-people-fill" style="font-size: 5rem;"></i>
 		                        	</a>
 		                        </c:if>
-		                     <div class="card-body">
+		                     <div class="card-body" style="height: 160px;">
 		                        <h5 class="card-title text-truncate">
 		                        <a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}" class="text-decoration-none text-dark">
 		                        ${board.board_title}</a></h5>
@@ -410,7 +410,7 @@
 	                                    class="card-img-top" style="width: 397.81px; height: 200px;">
 	                            </a>
 	                        </c:if>
-	                        <div class="card-body">
+	                        <div class="card-body" style="height: 160px;">
 	                            <h5 class="card-title text-truncate">
 	                                <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}"
 	                                    class="text-decoration-none text-dark">${b_re.car_name}</a>
@@ -451,203 +451,55 @@
 
    <!-- 판매 이용후기 시작 -->
 <section id="s_re1">
-    <div class="container p-4 position-relative">
+    <div class="p-4">
         <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
             <strong class="fs-3">판매이용후기</strong>
             <span class="float-end text-warning">더보기<i class="bi bi-chevron-right text-warning"></i></span>
         </a>
         <!-- 판매 이용후기가 없을 때 -->
         <c:if test="${empty S_relist}">
-	        <div class="table-responsive rounded-4 border border-secondary-subtle">
-	                <table class="table table-borderless mb-0">
-	                    <tbody>
-	                    	<tr>
-                                <td class="m-1 p-1">
-                                    <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark ms-5">
-                                        <strong class="fs-5">판매이용 후기가 없습니다</strong>
-                                    </a>
-                                </td>
-                                <td colspan="2" class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark me-5">
-                                        [판매이용 후기 작성자가 없습니다]
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="me-5 pe-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark ms-5 card-text">
-                                        <b>판매이용 후기가 없습니다</b>
-                                    </a>
-                                </td>
-                            </tr>
-	                    </tbody>
-	                </table>
+	       <div class="border rounded-4 bg-white">
+	        	<div class="d-flex justify-content-start">
+	        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-light p-2" style="font-size:13px;">&nbsp</p>
+	        	</div>
+	        	<div class="d-flex justify-content-between">
+	        		<div class="ms-5">
+	        			<h5 class="fw-bold">후기 제목 없음</h5>
+	        		</div>
+	        		<div class="me-5">
+	        			<p>&nbsp</p>
+	        		</div>
+	        	</div>
+	        	<div class="fw-bold mx-5 p-1 mb-3" style="height:100px; overflow: hidden;">
+	        		후기 내용 없음
+	        	</div>
+	        	<div class="small mx-5 my-3 text-secondary">
+	        		&nbsp
+	        	</div>
 	        </div>
         </c:if>
         <!-- 판매 이용후기가 있을 때 -->
         <c:if test="${!empty S_relist}">
         <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
-            <div class="table-responsive rounded-4 border border-secondary-subtle">
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <c:if test="${loop.index == 0}">
-                            <tr>
-                                <td colspan="2">
-                                    <div class="d-inline-block border rounded bg-light p-2">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <span class="float-start">
-                                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                                        <small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-1 p-1">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        <strong class="fs-5">${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td colspan="2" class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        [${s_re.mem_id}]
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="me-5 pe-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        <b>${s_re.s_re_content}</b>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="ms-5 ps-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <small class="text-body-secondary">${fn:substring(s_re.s_re_reg, 0, 10)}</small>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:if>
-                    </tbody>
-                </table>
-            </div>
-        </c:forEach>
-      </c:if>
-   </div>
-
-    <div class="container pb-3">
-    	<c:if test="${!empty S_relist}">
-        <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
-            <div class="table-responsive rounded-4 border border-secondary-subtle">
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <c:if test="${loop.index == 1}">
-                            <tr>
-                                <td colspan="2">
-                                    <div class="d-inline-block border rounded bg-light p-2">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <span class="float-start">
-                                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                                        <small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-1 p-1">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        <strong class="fs-5">${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td colspan="2" class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        [${s_re.mem_id}]
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="me-5 pe-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        <b>${s_re.s_re_content}</b>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="ms-5 ps-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <small class="text-body-secondary">${fn:substring(s_re.s_re_reg, 0, 10)}</small>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:if>
-                    </tbody>
-                </table>
-            </div>
-        </c:forEach>
-        </c:if>
-    </div>
-
-    <div class="container pb-5">
-    	<c:if test="${!empty S_relist}">
-        <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
-            <div class="table-responsive rounded-4 border border-secondary-subtle">
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <c:if test="${loop.index == 2}">
-                            <tr>
-                                <td colspan="2">
-                                    <div class="d-inline-block border rounded bg-light p-2">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <span class="float-start">
-                                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                                        <small>${s_re.sell_cname} / ${s_re.sell_maker}</small>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="m-1 p-1">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5">
-                                        <strong class="fs-5">${s_re.s_re_title}</strong>
-                                    </a>
-                                </td>
-                                <td colspan="2" class="text-end">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark me-5">
-                                        [${s_re.mem_id}]
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="me-5 pe-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark ms-5 card-text">
-                                        <b>${s_re.s_re_content}</b>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="ms-5 ps-5">
-                                    <a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">
-                                        <small class="text-body-secondary">${fn:substring(s_re.s_re_reg, 0, 10)}</small>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:if>
-                    </tbody>
-                </table>
-            </div>
+            <div class="border rounded-4 bg-white my-2">
+	        	<div class="d-flex justify-content-start">
+	        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-light p-2" style="font-size:13px;">${s_re.sell_maker} ${s_re.sell_cname}</p>
+	        	</div>
+	        	<div class="d-flex justify-content-between">
+	        		<div class="ms-5">
+	        			<h5 class="fw-bold">${s_re.s_re_title}</h5>
+	        		</div>
+	        		<div class="me-5">
+	        			<p>${s_re.mem_id}</p>
+	        		</div>
+	        	</div>
+	        	<div class="fw-bold mx-5 p-1 mb-3" style="height:100px; overflow: hidden;">
+	        		${s_re.s_re_content}
+	        	</div>
+	        	<div class="small mx-5 my-3 text-secondary">
+	        		${fn:substring(s_re.s_re_reg,0,10)}
+	        	</div>
+	        </div>
         </c:forEach>
         </c:if>
     </div>

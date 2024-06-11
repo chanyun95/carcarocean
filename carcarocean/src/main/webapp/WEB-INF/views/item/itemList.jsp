@@ -26,7 +26,7 @@
 		object-fit: cover; /* 이미지가 부모 div를 덮도록 설정 */
 	}
 	/* 이미지에 마우스 갖다 대면 흑백 */
-	.image-container img:hover{
+	.image-container:hover{
 		filter: brightness(85%);
 	}
 </style>

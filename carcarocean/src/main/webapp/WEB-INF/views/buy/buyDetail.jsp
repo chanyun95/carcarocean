@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<div class="d-flex justify-content-between border rounded-top bg-warning">
-			<div class="p-3 fw-bold fst-italic text-secondary">#${car.car_design_op} #${car.car_con_op} #${car.car_drive_op}</div>
+			<div class="p-3 fw-bold fst-italic text-secondary">#${fn:substring(car.car_design_op,0,25)} #${fn:substring(car.car_con_op,0,25)} #${fn:substring(car.car_drive_op,0,25)}</div>
 			<div class="p-3"><b class="text-danger"><i class="bi bi-telephone-fill"> </i>${checker.checker_phone}</b><div class="vr me-2 ms-2"></div>${checker.checker_name}</div>
 		</div>
 		<!-- 갤러리 사진 옆으로 넘기기 구현해야 함 -->
@@ -341,12 +341,25 @@
 	            	<div class="my-5">
 	            		<h4>구매후기 정보</h4>
 		            	<c:forEach var="b_re" items="${b_reList}">
-		            		<div class="border rounded-3 p-3 my-2">
-    				            <p class="text-start fw-bold m-0 fs-5">${b_re.b_re_title}</p>
-		            			<p class="text-start fw-bold small">${b_re.car_maker} ${b_re.car_name}</p>
-		            			<p class="text-end small text-secondary m-0">${fn:substring(b_re.b_re_reg,0,11)}</p>
-		            			<p class="text-start px-4">${b_re.b_re_content}</p>
-		            		</div>
+		            		<div class="border rounded-4 bg-white my-2">
+					        	<div class="d-flex justify-content-start">
+					        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-light p-2" style="font-size:13px;">${b_re.car_maker} ${b_re.car_name}</p>
+					        	</div>
+					        	<div class="d-flex justify-content-between">
+					        		<div class="ms-5">
+					        			<h5 class="fw-bold">${b_re.b_re_title}</h5>
+					        		</div>
+					        		<div class="me-5">
+					        			<p>${b_re.mem_id}</p>
+					        		</div>
+					        	</div>
+					        	<div class="fw-bold mx-5 p-1 mb-3" style="height:80px; overflow: hidden;">
+					        		${b_re.b_re_content}
+					        	</div>
+					        	<div class="small mx-5 my-3 text-secondary">
+					        		${fn:substring(b_re.b_re_reg,0,11)}
+					        	</div>
+					        </div>
 		            	</c:forEach>
 	            	</div>
 	            </main>

@@ -188,27 +188,27 @@
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP2</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>상담 진행</b></p>
 					<span class="text-secondary">상담원이 전화 상담으로 내용 확인</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP3</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>일정 조율</b></p>
 					<span class="text-secondary">차량 평가사와 전화로 방문 일정 조율</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP4</p><br>
-					<p><b>내차팔기신청</b></p>
-					<span class="text-secondary">K Car 차량 평가사가 방문하여 무료 견적</span>
+					<p><b>검수 진행</b></p>
+					<span class="text-secondary">CarCarOcean 차량 평가사가 방문하여 무료 견적</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP5</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>계약 진행</b></p>
 					<span class="text-secondary">계약서 작성 후 당일 판매대금 입금</span>
 				</div>
 				<div class="col-2 p-2 border rounded-end text-center">
 					<p class="badge text-bg-secondary">STEP6</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>차량 인도</b></p>
 					<span class="text-secondary">차량 인도 및 명의 이전</span>
 				</div>
 			</div>
@@ -240,11 +240,25 @@
 			<h2 class="text-center"><b>판매 후기</b></h2>
 			<div class="p-4">
 				<c:forEach var="s_re" items="${s_reList}" begin="0" end="2">
-					<div class="border rounded m-3 bg-light p-3">
-						<div class="fs-5 mt-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold fs-4">${s_re.sell_maker} ${s_re.sell_cname}</a></div>
-						<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold">${s_re.s_re_title}</a></div>
-						<div class="mt-3" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-secondary">${s_re.s_re_content}</a></div>
-					</div>
+					<div class="border rounded-4 bg-light my-2">
+			        	<div class="d-flex justify-content-start">
+			        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-white p-2" style="font-size:13px;">${s_re.sell_maker} ${s_re.sell_cname}</p>
+			        	</div>
+			        	<div class="d-flex justify-content-between">
+			        		<div class="ms-5">
+			        			<h5 class="fw-bold">${s_re.s_re_title}</h5>
+			        		</div>
+			        		<div class="me-5">
+			        			<p>${s_re.mem_id}</p>
+			        		</div>
+			        	</div>
+			        	<div class="fw-bold mx-5 p-1 mb-3" style="height:100px; overflow: hidden;">
+			        		${s_re.s_re_content}
+			        	</div>
+			        	<div class="small mx-5 my-3 text-secondary">
+			        		${fn:substring(s_re.s_re_reg,0,10)}
+			        	</div>
+			        </div>
 				</c:forEach>
 			</div>
 		</div>

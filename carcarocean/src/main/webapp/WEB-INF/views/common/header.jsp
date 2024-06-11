@@ -55,7 +55,7 @@
 </head>
 <body style="font-family:Noto Sans KR;">
     <!-- continer 기본 padding값 때문에 로그아웃 회원가입이 밀려서 일단 임시조치로 left right 0으로 처리 -->
-    <div class="container-fluid rounded-bottom" style="padding-left:0; padding-right:0; background-color:#000000">
+    <div class="container-fluid rounded-bottom" style="padding-left:0; padding-right:0; background-color:#1C1C1C;">
       <!-- nav태그 상단 고정 -->
       <nav class="navbar navbar-expand-lg" style="height:100px;">
          <div class="container">
