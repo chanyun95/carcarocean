@@ -29,13 +29,7 @@
 							<div class="shadow p-3 bg-light row rounded-3">
 								<div class="col-3 text-center">
 									<h2>${member.mem_name}님</h2>
-									<a
-										href="${pageContext.request.contextPath}/member/modifyUserForm.do">정보수정</a><br>
-									<c:if test="${empty member.mem_photo}">
-										<!-- 이미지가 비어있는 경우 -->
-										<img src="${pageContext.request.contextPath}/images/face.png"
-											width="100" height="100" class="rounded-circle">
-									</c:if>
+									<a class = "text-dark" href="${pageContext.request.contextPath}/member/modifyUserForm.do">정보수정</a><br>
 									<c:if test="${!empty member.mem_photo}">
 										<!-- 이미지가 비어있지 않는 경우 -->
 										<img
@@ -72,7 +66,7 @@
 									<div>
 										<div class="d-flex justify-content-center align-items-center"
 											style="height: 200px;">
-											<img src="${pageContext.request.contextPath}/images/dia.png"
+											<img src="${pageContext.request.contextPath}/upload/dia.png"
 												class="rounded-circle" width="100">
 										</div>
 									</div>

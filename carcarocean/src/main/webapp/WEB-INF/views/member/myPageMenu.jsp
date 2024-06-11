@@ -25,19 +25,19 @@
 			</h2>
 			</li>
 			<li><br><br></li>
-			<li class="nav-item"><a class="nav-link active" href="modifyUserForm.do">회원정보
+			<li class="nav-item"><a class="nav-link active text-dark" href="modifyUserForm.do">회원정보
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="myFavoriteCar.do">관심차량
+			<li class="nav-item"><a class="nav-link text-dark" href="myFavoriteCar.do">관심차량
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="mySellCurrentStatusForm.do">내차팔기신청현황
+			<li class="nav-item"><a class="nav-link text-dark" href="mySellCurrentStatusForm.do">내차팔기신청현황
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="myTransactionalForm.do">거래내역
+			<li class="nav-item"><a class="nav-link text-dark" href="myTransactionalForm.do">거래내역
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="myQnAForm.do">문의내역
+			<li class="nav-item"><a class="nav-link text-dark" href="myQnAForm.do">문의내역
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="myWriteBoardForm.do">내가쓴글
+			<li class="nav-item"><a class="nav-link text-dark" href="myWriteBoardForm.do">내가쓴글
 					</a></li>
-			<li class="nav-item"><a class="nav-link" href="deleteUserForm.do">회원탈퇴
+			<li class="nav-item"><a class="nav-link text-dark" href="deleteUserForm.do">회원탈퇴
 				</a></li>
 		</ul>
 	</nav>
