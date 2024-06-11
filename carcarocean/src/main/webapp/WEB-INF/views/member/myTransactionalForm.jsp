@@ -20,9 +20,10 @@
                 <div class="mypage-div">
                 	<div>
                 	<h2 class = "text-secondary">${member.mem_name}님의 거래내역</h2><br>
-                	<h3>구매내역</h3>
-                	<a href="${pageContext.request.contextPath}/b_re/list.do" class="btn btn-warning text-white">구매후기</a>
-                    </div>
+                	<div>
+					<h3>구매내역 <span style="margin-right: 80%;"></span><a href="${pageContext.request.contextPath}/b_re/list.do" class="btn btn-warning text-white">구매후기</a></h3>
+					</div>
+           			</div>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
@@ -47,10 +48,10 @@
                     <td><h2 class = "text-center">데이터없음</h2></td>
                     </c:if>
                     <br><br><br>
+
                     <div>
-                    <h3>판매내역</h3>
-                    <a href="${pageContext.request.contextPath}/s_re/list.do" class="btn btn-warning text-white">판매후기</a>
-                    </div>
+					<h3>판매내역 <span style="margin-right: 80%;"></span><a href="${pageContext.request.contextPath}/s_re/list.do" class="btn btn-warning text-white">판매후기</a></h3>
+					</div>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
