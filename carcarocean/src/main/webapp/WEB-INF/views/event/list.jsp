@@ -34,13 +34,13 @@
 					<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
 						총 ${count}건의 글이 있습니다.
 					</div>
-					<form id="search_form" action="list.do" method="get">
-					<div class="d-flex justify-content-center">
-					<select name="keyfield" class="form-select" style="width: auto;">
+					<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
+					<div class="d-flex align-items-center ms-4 mt-5 mb-5">
+					<select name="keyfield" class="form-select" style="width: auto; margin-right: 10px;">
 						<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 					</select>
-					<input type="search" size="20" name="keyword" id="keyword" value="${param.keyword}" class="form-control text-center" placeholder="검색할 정보를 입력하세요" style="width:300px;">
+					<input type="search" size="20" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" style="width: 400px;">
 					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
 					<a href="../event/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4">
 						<i class="bi bi-arrow-clockwise"></i>
