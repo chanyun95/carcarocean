@@ -15,15 +15,17 @@
 		<h2 class="pt-5 pb-3">판매후기게시판 목록</h2>
 		<div class="d-flex justify-content-center rounded bg-light p-5">
 			<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
+			<div class="d-flex align-items-center ms-4 mt-5 mb-5">
 				<select name="keyfield" class="form-select me-1" style="width:auto;">
 					<%-- c:if와 selected를 쓰는건 검색을 계속 유지 시키기 위해서 --%>
 					<option value="1" <c:if test="${param.keyfield ==1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield ==2}">selected</c:if>>작성자</option>
 					<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
 				</select>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:=300px;">
-				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg ms-2"><i class="bi bi-search"></i></button>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 				<button class="btn btn-warning fw-bold text-white btn-lg ms-1" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				</div>
 			</form>
 		</div>
 		<div class="d-flex justify-content-end my-3"> 
