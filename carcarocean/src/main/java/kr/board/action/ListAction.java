@@ -28,6 +28,8 @@ public class ListAction implements Action{
 	    
 		BoardDao dao = BoardDao.getDao();
 		int count = dao.getBoardCount(keyfield, keyword);
+		
+		
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"list.do");
 		
 		List<BoardVo> list = null;

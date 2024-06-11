@@ -69,7 +69,7 @@
 			<li class="text-end">
 				<!-- 신고 -->
 				<div class="d-flex justify-content-center align-items-center mb-3">
-				<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+				<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">
 				</div>
 				<p id="report_status_text"></p>
 				<%-- <img id="output_report" data-num="${board.board_num}" src="${pageContext.request.contextPath}/images/report01.png" width="50" data-checkRedirect="${check_redirect}"> --%>
