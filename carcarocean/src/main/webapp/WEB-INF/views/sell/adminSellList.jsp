@@ -31,15 +31,17 @@
 				</div>
 			</div>
 			<div class="d-flex justify-content-center">
-				<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
+				<div class="d-flex align-items-center ms-4 mt-5 mb-5">
+				<select id="keyfield" name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
 					<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>신청자명</option>
 					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
 					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
 				</select>
-				<input type="search" id="keyword" name="keyword" class="form-control rounded"
-				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+				<input type="search" size="20" id="keyword" name="keyword" class="form-control rounded me-2"
+				 placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
 				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				</div>
 			</div>
 		</form>
 		<table class="table table-hover mt-3 text-center fw-bold">

@@ -17,15 +17,17 @@
 		<h1 class="text-center">구매 예약 관리 (관리자)</h1>
 		<div class="d-flex flex-row justify-content-end">
 			<form id="search_form" action="adminBuyList.do" method="get" class="d-flex">
-				<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
+				<div class="d-flex align-items-center ms-4 mt-5 mb-5">
+				<select id="keyfield" name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
 					<option value="0" <c:if test="${keyfield == 0}">selected</c:if>>이름</option>
 					<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>아이디</option>
 					<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>이메일</option>
 					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
 				</select>
-				<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+				<input type="search" size="20" id="keyword" name="keyword" class="form-control rounded me-2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
 				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				</div>
 			</form>
 		</div>
 		<table class="table table-hover text-center align-content-center fw-bold mt-3">
