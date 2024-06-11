@@ -155,8 +155,8 @@ $(function(){
 		modifyUI += '<textarea rows="7" cols="100" name="qa_comm_content" id="mre_content" class="rep-content">'+ qa_comm_content +'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mer_second" class="align-right">';
-		modifyUI += ' <input type="submit" class="btn btn-warning" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="btn btn-warning re-reset">';
+		modifyUI += ' <input type="submit" class="btn btn-warning text-white" value="수정">';
+		modifyUI += ' <input type="button" value="취소" class="btn btn-warning text-white re-reset">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';
