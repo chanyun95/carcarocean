@@ -12,8 +12,8 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <style>
 	#carouselExampleIndicators {
-		width: 100vw;
-		margin-left: calc(-50vw + 50%);
+		width: 100%;
+		align:center: ;
 	}
 	.card-text{
 	overflow:hidden; 
@@ -35,7 +35,7 @@
 	<!-- 메인 컨텐츠 시작 -->
 	<div class="container">
 		<!-- 표지화면 시작 -->
-		<div id="carouselExampleIndicators" class="carousel slide" style="background-color: #FEE500;">
+		<div id="carouselExampleIndicators" class="carousel slide">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" ></button>
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -43,13 +43,13 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="1화면">
+					<img src="${pageContext.request.contextPath}/images/carousel1.png" class="d-block w-20" style="width:100%; height: 450px;" alt="1화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="2화면">
+					<img src="${pageContext.request.contextPath}/images/carousel2.jpg" class="d-block w-20" style="width:100%; height: 450px;" alt="2화면">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/images/logo.png" class="d-block w-20" style="height: 450px;" alt="3화면">
+					<img src="${pageContext.request.contextPath}/images/carousel3.jpg" class="d-block w-20" style="height: 450px;" alt="3화면">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -351,7 +351,7 @@
     <div class="container pb-3">
         <a href="${pageContext.request.contextPath}/s_re/list.do" class="text-decoration-none text-dark">
             <strong class="fs-3">판매이용후기</strong>
-            <span class="float-end">더보기<i class="bi bi-chevron-right"></i></span>
+            <span class="float-end text-warning">더보기<i class="bi bi-chevron-right text-warning"></i></span>
         </a>
         <div class="table-responsive rounded-4 border border-secondary-subtle">
             <table class="table table-borderless mb-0">
