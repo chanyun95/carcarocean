@@ -50,9 +50,10 @@
 			</c:forEach>
 			</div>
 		</c:if>
-		<p class="fs-5">
-			${notice.notice_content}
-		</p>
+		<!-- 내용 줄바꿈 적용 -->
+		<div class="fs-5" style="white-space: pre-line;">
+		    ${notice.notice_content}
+		</div>
 		<div class="text-end mb-5">
 			<input type="button" class="btn btn-warning text-white ms-2" value="목록" onclick="location.href='list.do'">
 			<c:if test="${user_auth == 9 }">
