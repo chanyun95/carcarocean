@@ -147,7 +147,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row justify-content-center">
-			<c:set var="sub_title" value="${member.mem_name}님 회원정보"
+			<c:set var="sub_title" value="회원정보"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">

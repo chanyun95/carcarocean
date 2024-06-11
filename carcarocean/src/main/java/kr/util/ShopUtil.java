@@ -47,7 +47,11 @@ public class ShopUtil {
             case 2: needUp = 4000 - mem_total; break;
             case 3: needUp = 6000 - mem_total; break;
             case 4: needUp = 8000 - mem_total; break;
-            default: needUp = 10000 - mem_total;
+            case 5: 
+            	if(mem_total <= 10000) {
+            		needUp = 10000 - mem_total; break;
+            	}
+            default :needUp = 0;
         }
         return (int)needUp;
     }
