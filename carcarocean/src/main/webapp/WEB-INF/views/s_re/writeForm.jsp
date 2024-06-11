@@ -41,15 +41,14 @@ window.onload=function(){
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<div style="background-color:#f5f6f9;">
 		<div class="container">
-			<h2>글쓰기</h2>
+			<h2 class="mt-5 mb-5">글쓰기</h2>
 			<form id="write_form" action="write.do" method="post" 
 				enctype="mutipart/form-data" >
 				<div class="form-group" class="border border-warning p-3">
 				
-						<label for="s_re_title">제목(필수)</label><br>
-						<input type="text" name="s_re_title" id="s_re_title" maxlength="50" class="input-check form-control">
+						<label for="s_re_title" class="fs-4 mt-2 mb-2">제목(필수)</label><br>
+						<input type="text" name="s_re_title" id="s_re_title" maxlength="50" class="input-check form-control mb-4">
 					</div>
 					<!-- <li>
 						<label for="checker_num">차량 검수자(필수)</label><br>
@@ -57,8 +56,8 @@ window.onload=function(){
 					</li> -->
                   
 					<div class="form-group">
-                    	<label for="sell_num">판매한 차량 식별번호(필수)</label><br>
-                    		<select name="sell_num" id="sell_num" class="form-select" style="width:auto;">
+                    	<label for="sell_num" class="fs-4 mb-2">판매한 차량 식별번호(필수)</label><br>
+                    		<select name="sell_num" id="sell_num" class="btn btn-secondary dropdown-toggle fs-5" style="width:auto;">
 							<option value="">거래 내역을 선택하세요</option>
 							<c:forEach var="sell" items="${sellList}">
 							
@@ -69,17 +68,16 @@ window.onload=function(){
 					</div>
 					
 					<div class="form-group">
-						<label for="s_re_content">내용</label><br>
-						<textarea rows="5" cols="40" name="s_re_content" id="s_re_content" class="form-control" placeholder="Leave a comment here"></textarea>
+						<label for="s_re_content" class="fs-4 mt-3 mb-2">내용</label><br>
+						<textarea rows="20" cols="70" name="s_re_content" id="s_re_content" class="form-control" placeholder="후기를 입력해주세요."></textarea>
 					</div>
 				
-				<div>
+				<div class="mt-3 mb-5 center">
 					<input type="submit" value="등록" class="btn btn-warning text-white">
 					<input type="button" value="목록" class="btn btn-warning text-white" onclick="location.href='list.do'">
 				</div>
 			</form>
 		</div>
-</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

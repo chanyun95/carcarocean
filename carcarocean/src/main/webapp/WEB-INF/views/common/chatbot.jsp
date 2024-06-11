@@ -14,7 +14,7 @@
 	<!-- 챗봇 시작-->
 	<i
 		class="bi bi-chat-dots-fill position-fixed bottom-0 end-0 m-3 pb-5 pe-5"
-		style="font-size: 2rem; color: #000;" data-bs-toggle="modal"
+		style="font-size: 2rem; color: #FFD700;" data-bs-toggle="modal"
 		data-bs-target="#chatbot"> </i>
 
 	<!-- 모달 -->
