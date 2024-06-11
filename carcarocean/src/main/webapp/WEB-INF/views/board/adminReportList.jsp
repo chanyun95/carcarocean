@@ -63,7 +63,7 @@
                            	 	<c:if test="${info.info_board_report >= 10}">
 	                                <tr>
 	                                    <td width = "250px">${info.info_board_num}</td>
-	                                    <td width = "250px"><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${info.info_board_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${info.info_board_title}</a></td>
+	                                    <td width = "250px"><a href="${pageContext.request.contextPath}/info_board/detail.do?info_board_num=${info.info_board_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${info.info_board_title}</a></td>
 	                                   	<td width = "250px">${info.mem_id}</td>
 	                                    <c:if test = "${empty info.info_board_modify}">
 											<td>${fn:substring(info.info_board_reg,0,10)}</td>

@@ -22,7 +22,7 @@
 						<option value="2" <c:if test="${param.keyfield ==2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
 					</select>
-					<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+					<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
 					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg rounded me-2"><i class="bi bi-search"></i></button>
 					<a href="../b_re/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4"><i class="bi bi-arrow-clockwise"></i></a>
 				</div>

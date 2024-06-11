@@ -206,15 +206,17 @@
          <!-- 사이드바 제외 메인 컨텐츠 -->
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
-         	<div class="d-flex justify-content-center rounded bg-light p-5 mb-5">
-				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
-					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-						<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
-						<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
-					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하시는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width:400px; height: 50px;">
-					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
-					<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+         	<div class="d-flex justify-content-center rounded" style="background-color:#f5f6f9;">
+				<form id="search_form" action="mainBuy.do" method="get">
+					<div class="d-flex align-items-center m-5">
+						<select id="keyfield" name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
+							<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
+							<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
+						</select>
+						<input type="search" id="keyword" name="keyword" class="form-control rounded me-2" placeholder="원하시는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+						<button type="submit" class="btn btn-warning fw-bold text-white btn-lg rounded me-2"><i class="bi bi-search"></i></button>
+						<button class="btn btn-warning fw-bold text-white btn-lg me-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+					</div>
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>

@@ -54,9 +54,9 @@
 			${notice.notice_content}
 		</p>
 		<div class="text-end mb-5">
-			<input type="button" class="btn btn-warning ms-2" value="목록" onclick="location.href='list.do'">
+			<input type="button" class="btn btn-warning text-white ms-2" value="목록" onclick="location.href='list.do'">
 			<c:if test="${user_auth == 9 }">
-				<input type="button" class="btn btn-warning ms-2" value="수정" onclick="location.href='modifyForm.do?notice_num=${notice.notice_num}'">
+				<input type="button" class="btn btn-warning text-white ms-2" value="수정" onclick="location.href='modifyForm.do?notice_num=${notice.notice_num}'">
 			</c:if>
 		</div>
 	</div>

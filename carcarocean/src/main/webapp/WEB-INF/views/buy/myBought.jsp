@@ -20,14 +20,16 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<h2 class="pt-5 pb-3">구매 내역</h2>
-		<div class="d-flex flex-row justify-content-center rounded bg-light p-5 my-3">
-			<form id="search_form" action="myBought.do" method="get" class="d-flex">
-				<select id="keyfield" name="keyfield" class="form-select" style="width: auto;">
-					<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
-				</select>
-				<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
-				<button class="btn btn-warning fw-bold text-white btn-lg ms-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+		<div class="d-flex flex-row justify-content-center rounded" style="background-color:#f5f6f9;">
+			<form id="search_form" action="myBought.do" method="get">
+				<div class="d-flex align-items-center m-5">
+					<select id="keyfield" name="keyfield" class="form-select" style="width: auto; margin-right:10px;">
+						<option value="3" <c:if test="${keyfield == 3}">selected</c:if>>차량</option>
+					</select>
+					<input type="search" id="keyword" name="keyword" class="form-control rounded me-2" placeholder="검색할 차량을 입력하세요" aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg rounded me-2"><i class="bi bi-search"></i></button>
+					<button class="btn btn-warning fw-bold text-white btn-lg me-4" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+				</div>
 			</form>
 		</div>
 		<div class="d-flex justify-content-end">
