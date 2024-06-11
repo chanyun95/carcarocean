@@ -30,6 +30,10 @@
   .footer {
     margin-top: -1px; /* 이미지와의 간격을 조절 */
   }
+   /* 스크롤 제거 */
+  body {
+    overflow-x: hidden;
+  }
 </style>
 </head>
 <body>
