@@ -21,14 +21,14 @@ public class WebSocket {
 	@OnOpen
 	public void handleOpen(Session userSession) {
 		//콘솔에 접속 로그를 출력
-		/* System.out.println("client is now connected..."); */
+		System.out.println("client is now connected...");
 		sessionList.add(userSession); // 웹 소켓 연결시 세션리스트에 추가
 	}
 	// WebSocket으로 메시지가 오면 요청되는 함수
 	@OnMessage
 	public void handleMessage(String message) throws IOException {
 		// 메시지 내용을 콘솔에 출력
-		/* System.out.println("receive from client : " + message); */
+		System.out.println("receive from client : " + message);
 		//세션리스트에게 데이터를 보낸다.
 	    Iterator<Session> iterator = sessionList.iterator();
 	    while(iterator.hasNext()){
@@ -40,7 +40,7 @@ public class WebSocket {
 	@OnClose
 	public void handleClose(Session userSession) {
 		// 콘솔에 접속 끊김 로그를 출력
-		/* System.out.println("client is now disconnected..."); */
+		System.out.println("client is now disconnected...");
 		sessionList.remove(userSession);
 	}
 	// WebSocket과 브라우저 간에 통신 에러가 발생하면 요청되는 함수.

@@ -109,7 +109,7 @@
 							if(chat.receiver.mem_num==${user_num}){
 								$('#chatRoom').append('<div class="d-flex justify-content-start">'
 										+'<div class="border rounded-4 bg-warning fw-bold p-2 my-2 fs-5">'
-										+'<img src="'+${pageContext.request.contextPath}+'/upload/'+${param.receiver.mem_photo}+'" class="rounded-circle" width="50px" height="50px">'
+										+'<img src="../upload/'+param.receiver.mem_photo+'" class="rounded-circle me-2" width="35px" height="35px">'
 										+param.receiver.mem_id+'님 : ' + chat.chat_message+'</div>'
 										+'<span class="small align-self-center ms-2 text-secondary fw-bold">'
 										+chat.chat_reg.substring(10,16)+'</span></div>');
@@ -120,11 +120,12 @@
 								$('#chatRoom').append('<div class="d-flex justify-content-end">'
 										+'<span class="small align-self-center me-2 text-secondary fw-bold">'
 										+chat.chat_reg.substring(10,16)+'</span>'
-										+'<div class="border rounded-4 bg-warning fw-bold p-3 my-2 fs-5">'
-										+'<img src="/upload/'+chat.giver.mem_photo+'" class="rounded-circle" width="50px" height="50px">'
+										+'<div class="border rounded-4 bg-warning fw-bold p-2 my-2 fs-5">'
+										+'<img src="../upload/'+param.giver.mem_photo+'" class="rounded-circle me-2" width="35px" height="35px">'
 										+param.giver.mem_id+'님 : ' + chat.chat_message+'</div></div>');
 							}
 						}
+						$('#partner').clear();
 						$('#partner').append(param.receiver.mem_id);
 						// 스크롤을 제일 아래로 이동
 			            $('#chatRoom').scrollTop($('#chatRoom')[0].scrollHeight);
