@@ -14,6 +14,7 @@
 <title>채팅</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/loading.jsp" />
 	<div class="container bg-light my-3 rounded">
 		<div class="container d-flex justify-content-between rounded-top p-3">
 			<div class="float-start align-self-center">

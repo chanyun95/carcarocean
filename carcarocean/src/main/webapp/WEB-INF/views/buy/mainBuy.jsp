@@ -55,7 +55,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
- <div class="container">
+<jsp:include page="/WEB-INF/views/common/loading.jsp" />
+<div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
          <nav class="col-md-2 sidebar mt-5">
