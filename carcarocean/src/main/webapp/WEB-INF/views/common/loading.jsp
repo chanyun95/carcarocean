@@ -34,9 +34,7 @@
 	<script >
 	  const loading_page = document.getElementById("load");
 	  window.onload = function(){
-		  setTimeout(() => {
-			  loading_page.style.display = 'none';
-		}, 1000);
+		  loading_page.style.display = 'none';
 	  };
 	</script>
 </body>

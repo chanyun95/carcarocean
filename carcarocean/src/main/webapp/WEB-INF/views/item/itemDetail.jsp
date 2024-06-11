@@ -83,12 +83,7 @@
 			<div class="d-flex justify-content-between my-3">
 				<div class="d-flex justify-content-start ms-2">
 					<div class="d-flex align-items-center">
-						<c:if test="${!empty item.member.mem_photo}">
-							<img class="rounded-circle mx-2" src="${pageContext.request.contextPath}/upload/${item.member.mem_photo}" width="40px" height="40px">
-						</c:if>
-						<c:if test="${empty item.member.mem_photo}">
-							<img class="rounded-circle mx-2" src="${pageContext.request.contextPath}/images/face.png" width="40px" height="40px">
-						</c:if>
+						<img class="rounded-circle mx-2" src="${pageContext.request.contextPath}/upload/${item.member.mem_photo}" width="40px" height="40px">
 					</div>
 					<div class="col">
 						<div class="row-6 text-center fw-bold">${item.member.mem_id}</div>

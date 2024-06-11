@@ -14,6 +14,7 @@
 <title>나에게 온 채팅 보기</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/loading.jsp" />
 	<div class="container border rounded my-5">
 		<h2 class="text-center p-3">채팅 목록</h2>
 		<c:if test="${empty memberList}">
