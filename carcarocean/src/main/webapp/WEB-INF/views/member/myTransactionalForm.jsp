@@ -13,12 +13,13 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님 거래내역"
+			<c:set var="sub_title" value="마이페이지"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
                 	<div>
+                	<h2 class = "text-secondary">${member.mem_name}님의 거래내역</h2><br>
                 	<h3>구매내역</h3>
                 	<a href="${pageContext.request.contextPath}/b_re/list.do" class="btn btn-warning text-white">구매후기</a>
                     </div>

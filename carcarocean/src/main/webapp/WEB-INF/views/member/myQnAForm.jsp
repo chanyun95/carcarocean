@@ -12,12 +12,13 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님 문의내역"
+			<c:set var="sub_title" value="마이페이지"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
-                	<h2>내 문의내역</h2>
+        
+                	<h2 class = "text-secondary">${member.mem_name}님의 문의내역</h2>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>

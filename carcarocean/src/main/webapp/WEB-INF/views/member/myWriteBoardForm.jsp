@@ -12,10 +12,12 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님 글"
+			<c:set var="sub_title" value="마이페이지"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
+				<h2 class = "text-secondary">${member.mem_name}님이 작성한 글 목록</h2>
+				<br><br>
                 <div class="mypage-div">
              	    <h3>자유게시판</h3>
                     <table class="table text-center align-content-center fw-bold mt-3">

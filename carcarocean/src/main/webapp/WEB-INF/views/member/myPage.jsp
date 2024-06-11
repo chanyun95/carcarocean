@@ -45,10 +45,12 @@
 								</div>
 								<div class="col-4 text-center align-text-middle"
 									style="height: 200px;">
-									<div style="height: 100px">
+									<div class="d-flex justify-content-center align-items-center"
+										style="height: 100px">
 										<h3>${member.mem_name}님의등급</h3>
 									</div>
-									<div style="height: 100px">
+									<div class="d-flex justify-content-center align-items-center"
+										style="height: 100px">
 										<c:if test="${member.mem_grade == 1}">
 											<h3>Member</h3>
 										</c:if>
@@ -68,14 +70,20 @@
 								</div>
 								<div class="col-2">
 									<div>
-										<div style="height: 200px;"><img src = "${pageContext.request.contextPath}/images/diamond.jpeg" class = "rounded-circle" width = "180"></div>
+										<div class="d-flex justify-content-center align-items-center"
+											style="height: 200px;">
+											<img src="${pageContext.request.contextPath}/images/dia.png"
+												class="rounded-circle" width="100">
+										</div>
 									</div>
 								</div>
 								<div class="col-3 text-center align-text-middle">
-									<div style="height: 100px">
+									<div class="d-flex justify-content-center align-items-center"
+										style="height: 100px">
 										<h3>다음 등급까지</h3>
 									</div>
-									<div style="height: 100px">
+									<div class="d-flex justify-content-center align-items-center"
+										style="height: 100px">
 										<h3>${cost}만원</h3>
 									</div>
 								</div>
@@ -128,17 +136,22 @@
 								<c:forEach var="sell" items="${slist}">
 									<tr>
 										<td width="250px">${sell.sell_num}</td>
-										<!-- 링크 추가해야함 -->
-										<td width="250px"><a
-											href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}"
-											class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
 										<c:if test="${sell.sell_check==0}">
+											<td width="250px"><a
+												href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=0&keyfield=1&keyword="
+												class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
 											<td>검수전</td>
 										</c:if>
 										<c:if test="${sell.sell_check==1}">
+											<td width="250px"><a
+												href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=1&keyfield=1&keyword="
+												class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
 											<td>검수중</td>
 										</c:if>
 										<c:if test="${sell.sell_check==2}">
+											<td width="250px"><a
+												href="${pageContext.request.contextPath}/sell/mySellList.do?sell_check=2&keyfield=1&keyword="
+												class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${sell.sell_cname}</a></td>
 											<td>검수완료</td>
 										</c:if>
 										<c:if test="${!empty sell.sell_modify_check}">
