@@ -6,11 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import kr.b_re.dao.B_ReDao;
 import kr.b_re.vo.B_ReVo;
-import kr.car.dao.CarDao;
-import kr.car.vo.CarVO;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
-import kr.member.vo.MemberVo;
 
 public class DetailAction implements Action{
 	@Override

@@ -8,26 +8,32 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>차량 구매 후기</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<h2 class="pt-5 pb-3">차량 구매 후기</h2>
-		<div class="d-flex justify-content-center rounded bg-light p-5">
-			<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
-				<select name="keyfield" class="form-select" style="width:auto; margin-right: 10px;">
-					<%-- c:if와 selected를 쓰는건 검색을 계속 유지 시키기 위해서 --%>
-					<option value="1" <c:if test="${param.keyfield ==1}">selected</c:if>>제목</option>
-					<option value="2" <c:if test="${param.keyfield ==2}">selected</c:if>>작성자</option>
-					<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
-				</select>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
-				<button type="submit" class="btn btn-warning fw-bold text-white btn-lg me-2"><i class="bi bi-search"></i></button>
-				<button class="btn btn-warning fw-bold text-white btn-lg" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+		<div class="d-flex justify-content-center rounded" style="background-color:#f5f6f9;">
+			<form id="search_form" action="list.do" method="get">
+				<div class="d-flex align-items-center m-5">
+					<select name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
+						<%-- c:if와 selected를 쓰는건 검색을 계속 유지 시키기 위해서 --%>
+						<option value="1" <c:if test="${param.keyfield ==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield ==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield ==3}">selected</c:if>>제조사</option>
+					</select>
+					<input type="search" name="keyword" id="keyword" value="${param.keyword}" class="form-control rounded me-2" placeholder="검색할 정보를 입력하세요" aria-label="Search" aria-describedby="search-addon" style="width:300px;">
+					<button type="submit" class="btn btn-warning fw-bold text-white btn-lg rounded me-2"><i class="bi bi-search"></i></button>
+					<a href="../b_re/list.do" class="btn btn-warning fw-bold text-white btn-lg me-4"><i class="bi bi-arrow-clockwise"></i></a>
+				</div>
 			</form>
 		</div>
-			
+		<c:if test="${count == 0}">
+			<div class="text-center border rounded m-5">
+				표시할 게시물이 없습니다.
+			</div>
+		</c:if>
+		<c:if test="${count > 0}">
 		<table class="table table-hover text-center mt-5">
 			<thead class="table-light">
 				<tr>
@@ -66,6 +72,7 @@
 			</tbody>
 		</table>
 		<div class="text-center mb-4">${page}</div>
+		</c:if>
 		<c:if test="${user_num != null}">
 			<div class="text-end mb-4">
 					<input type="button" class="btn btn-warning text-white" value="글 쓰기" onclick="location.href='writeForm.do'">
