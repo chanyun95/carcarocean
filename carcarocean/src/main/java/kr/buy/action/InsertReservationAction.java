@@ -46,7 +46,7 @@ public class InsertReservationAction implements Action{
 			}else {//이미 예약이 된 차량이라면 fail
 				mapAjax.put("result","fail");
 			}
-		}  
+		}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

@@ -33,16 +33,13 @@ public class ItemListAction implements Action{
 		List<ItemVo> itemList = null;
 		if(count>0) {
 			itemList = itemDao.getItemList(page.getStartRow(), page.getEndRow(), keyfield, keyword,0);
-		}
-		
-		ChatDao chatDao = ChatDao.getDao();
-		for(int i=0; i<itemList.size(); i++) {
-			itemList.get(i).setItem_chatCount(chatDao.itemChatCount(itemList.get(i).getItem_num()));
-		}
-		
-		
-		for(ItemVo item : itemList) {
-			item.setItem_reg(DurationFromNow.getTimeDiffLabel(item.getItem_reg()));
+			ChatDao chatDao = ChatDao.getDao();
+			for(int i=0; i<itemList.size(); i++) {
+				itemList.get(i).setItem_chatCount(chatDao.itemChatCount(itemList.get(i).getItem_num()));
+			}
+			for(ItemVo item : itemList) {
+				item.setItem_reg(DurationFromNow.getTimeDiffLabel(item.getItem_reg()));
+			}
 		}
 		
 		request.setAttribute("count", count);

@@ -14,69 +14,127 @@
 <title>채팅</title>
 </head>
 <body>
-	<div class="container">
-		<h2 class="text-center">채팅 연습</h2>
+	<div class="container bg-light my-3 rounded">
+		<div class="container d-flex justify-content-between rounded-top p-3">
+			<div class="float-start align-self-center">
+				<button onclick="history.back()" class="btn btn-warning text-white fw-bold">뒤로가기</button>
+			</div>
+			<div class="align-self-center me-3 fs-3">
+				<span class="fw-bold" id="partner"></span>님과의 채팅
+			</div>
+			<div>
+				<c:if test="${!empty user.mem_photo}">
+					<img class="rounded-circle" width="60px;" height="60px" src="${pageContext.request.contextPath}/upload/${user.mem_photo}">
+				</c:if>
+				<c:if test="${empty user.mem_photo}">
+					<img class="rounded-circle" width="60px;" height="60px" src="${pageContext.request.contextPath}/images/face.png">
+				</c:if>
+			</div>
+		</div>
 		<hr>
 		
-		<div class="border rounded" id="chatRoom">
+		<div id="chatRoom" style="overflow-x:hidden; overflow-y:scroll; height:670px;">
 			
 		</div>
 		
 		<hr>
-		<form id="form">
-			<label for="message">채팅</label>
-			<input type="text" class="form-control" id="message" name="message">
-			<input type="button" class="btn btn-warning btn-lg text-white fw-bold" onclick="submit_btn()" value="전송">
+		<form id="form" class="d-flex justify-content-center rounded-bottom p-3">
+			<input type="text" class="form-control text-center" id="message" name="message" style="width:500px;" placeholder="채팅을 입력하세요">
+			<input type="button" id="submitButton" class="btn btn-warning btn-lg text-white fw-bold" value="전송">
 		</form>
 	</div>
 	<script>
 		window.onload = function(){
-			getChat(${item_num},${chat_receiver},${chat_giver});
-		};
-		
-		function submit_btn(){
-			$.ajax({
-				url:'chatAjax.do',
-				type:'get',
-				data:{item_num:"${item_num}",message:$('#message').val(),chat_receiver:"${chat_receiver}",chat_giver:"${chat_giver}"},
-				dataType:'json',
-				success:function(param){
-					$('#message').val('').focus();
-					getChat(param.item_num, param.chat_receiver, param.chat_giver);
+			let message_socket = new WebSocket("ws://localhost:8080/carcarocean/webSocket");
+			message_socket.onopen = function(evt) {
+					message_socket.send("used");
+			};
+			//서버로부터 메시지를 받으면 호출되는 함수 지정
+			message_socket.onmessage = function(evt) {
+				//메시지 알림
+				let data = evt.data;
+				if (data.substring(0, 4) == "used") {
+					/* console.log('데이터 처리'); */
+					getChat();
+				}
+			};
+			message_socket.onclose = function(evt) {
+				//소켓이 종료된 후 부과적인 작업이 있을 경우 명시
+				//console.log('chat close');
+				//alert('채팅이 종료되었습니다!');
+			};			
+			
+			/* setInterval(function() {
+		        getChat(${item_num}, ${chat_receiver}, ${chat_giver});
+		    }, 3000); */
+			$('#message').keypress(function(key){
+				if(key.keyCode==13){
+ 					key.preventDefault();
+ 					$('#submitButton').trigger('click');
 				}
 			});
-		};
-		function getChat(item_num,chat_receiver,chat_giver){
-			const chatRoom = document.getElementById('chatRoom');
-			$('#chatRoom').empty();
-			$.ajax({
-				url:'getChatAjax.do',
-				type:'get',
-				data:{item_num:item_num,chat_receiver:chat_receiver,chat_giver:chat_giver},
-				dataType:'json',
-				success:function(param){
-					for(let i=0; i<param.chatList.length; i++){
-						const chat = param.chatList[i];
-						//내가 받은 채팅임
-						if(chat.receiver.mem_num==${user_num}){
-							const newDiv = document.createElement('div');
-							newDiv.className = 'border rounded-4 bg-warning text-white fw-bold text-start';
-							const newText = document.createTextNode(param.receiver.mem_id+'님 : ' + chat.chat_message);
-							newDiv.appendChild(newText);
-							chatRoom.appendChild(newDiv);
-						}
-						
-						//내가 보낸 채팅임
-						else if(chat.giver.mem_num==${user_num}){ // 내가 채팅을 보낸 입장일 때
-							const newDiv = document.createElement('div');
-							newDiv.className = 'border rounded-4 bg-warning text-white fw-bold text-end';
-							const newText = document.createTextNode(param.giver.mem_id+'님 : ' + chat.chat_message);
-							newDiv.appendChild(newText);
-							chatRoom.appendChild(newDiv);
-						}
+		    
+		    $('#submitButton').click(function(){
+		    	if($('#message').val()=='' || $('#message').val()==null){
+		    		alert('채팅을 입력하세요');
+		    		return false;
+		    	}
+		    	$.ajax({
+					url:'chatAjax.do',
+					type:'post',
+					data:{item_num:"${item_num}",message:$('#message').val(),chat_receiver:"${chat_receiver}",chat_giver:"${chat_giver}"},
+					dataType:'json',
+					success:function(param){
+						$('#message').val('').focus();
+						message_socket.send('used');
+					},
+					error:function(){
+						message_socket.close();
 					}
-				}
-			});
+					
+				});
+		    });
+		    
+			function getChat(){
+				$('#chatRoom').empty();
+				$.ajax({
+					url:'getChatAjax.do',
+					type:'get',
+					data:{item_num:${item_num},chat_receiver:${chat_receiver},chat_giver:${chat_giver}},
+					dataType:'json',
+					success:function(param){
+						for(let i=0; i<param.chatList.length; i++){
+							const chat = param.chatList[i];
+							//내가 받은 채팅임
+							if(chat.receiver.mem_num==${user_num}){
+								$('#chatRoom').append('<div class="d-flex justify-content-start">'
+										+'<div class="border rounded-4 bg-warning fw-bold p-2 my-2 fs-5">'
+										+'<img src="'+${pageContext.request.contextPath}+'/upload/'+${param.receiver.mem_photo}+'" class="rounded-circle" width="50px" height="50px">'
+										+param.receiver.mem_id+'님 : ' + chat.chat_message+'</div>'
+										+'<span class="small align-self-center ms-2 text-secondary fw-bold">'
+										+chat.chat_reg.substring(10,16)+'</span></div>');
+							}
+							
+							//내가 보낸 채팅임
+							else if(chat.giver.mem_num==${user_num}){ // 내가 채팅을 보낸 입장일 때
+								$('#chatRoom').append('<div class="d-flex justify-content-end">'
+										+'<span class="small align-self-center me-2 text-secondary fw-bold">'
+										+chat.chat_reg.substring(10,16)+'</span>'
+										+'<div class="border rounded-4 bg-warning fw-bold p-3 my-2 fs-5">'
+										+'<img src="/upload/'+chat.giver.mem_photo+'" class="rounded-circle" width="50px" height="50px">'
+										+param.giver.mem_id+'님 : ' + chat.chat_message+'</div></div>');
+							}
+						}
+						$('#partner').append(param.receiver.mem_id);
+						// 스크롤을 제일 아래로 이동
+			            $('#chatRoom').scrollTop($('#chatRoom')[0].scrollHeight);
+					},
+					error:function(){
+						messge_socket.close();
+					}
+				});
+			};
+		    
 		};
 	</script>
 </body>
