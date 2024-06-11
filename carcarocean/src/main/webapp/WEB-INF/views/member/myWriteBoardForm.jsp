@@ -45,6 +45,10 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty list}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
+                    <br>
                 	<h3>판매후기</h3>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
@@ -72,6 +76,10 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty slist}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
+                    <br><br>
                     <h3>구매후기</h3>
                     <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
@@ -98,6 +106,10 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty blist}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
+                    <br>
                 </div>
             </main>
 		</div>

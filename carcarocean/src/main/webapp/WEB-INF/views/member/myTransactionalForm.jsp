@@ -43,6 +43,9 @@
                             </c:forEach>
                         </tbody>
                     </table> 
+                    <c:if test = "${empty buyList}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
                     <br><br><br>
                     <div>
                     <h3>판매내역</h3>
@@ -68,6 +71,9 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty sellList}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
                 </div>
             </main>
 		</div>

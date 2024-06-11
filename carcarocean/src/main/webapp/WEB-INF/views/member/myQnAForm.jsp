@@ -44,6 +44,9 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty list}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
                 </div>
             </main>
 		</div>

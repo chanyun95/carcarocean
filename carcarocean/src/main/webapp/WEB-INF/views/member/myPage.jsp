@@ -113,6 +113,9 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<c:if test = "${empty list}">
+                	  	  <td><h2 class = "text-center">데이터없음</h2></td>
+                 	   </c:if>
 					</div>
 					<br>
 					<div class="p-3 bg-right w-80 mx-auto">
@@ -158,6 +161,9 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<c:if test = "${empty slist}">
+                	  	  <td><h2 class = "text-center">데이터없음</h2></td>
+                 	   </c:if>
 					</div>
 
 				</div>
