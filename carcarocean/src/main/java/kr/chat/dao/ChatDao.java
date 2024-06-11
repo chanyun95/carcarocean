@@ -42,7 +42,8 @@ public class ChatDao {
 	//특정 대상과의 채팅
 	public List<ChatVo> getListChat(int item_num, int chat_receiver, int chat_giver) throws Exception{
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		String sql = null;
 		List<ChatVo> list = null;
@@ -50,13 +51,13 @@ public class ChatDao {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "select * from chat join member_detail on chat.chat_receiver=member_detail.mem_num join member_detail on chat.chat_giver=member_detail.mem_num where item_num=? and ((chat_receiver=? and chat_giver=?)or(chat_receiver=? and chat_giver=?)) order by chat_num";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, item_num);
-			pstmt.setInt(++cnt, chat_receiver);
-			pstmt.setInt(++cnt, chat_giver);
-			pstmt.setInt(++cnt, chat_giver);
-			pstmt.setInt(++cnt, chat_receiver);
-			rs=pstmt.executeQuery();
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(++cnt, item_num);
+			pstmt1.setInt(++cnt, chat_receiver);
+			pstmt1.setInt(++cnt, chat_giver);
+			pstmt1.setInt(++cnt, chat_giver);
+			pstmt1.setInt(++cnt, chat_receiver);
+			rs=pstmt1.executeQuery();
 			list = new ArrayList<>();
 			while(rs.next()) {
 				ChatVo chat = new ChatVo();
@@ -74,12 +75,22 @@ public class ChatDao {
 				chat.setChat_message(rs.getString("chat_message"));
 				chat.setChat_reg(rs.getString("chat_reg"));
 				
+				chat.setChat_check(rs.getInt("chat_check"));
+				
 				list.add(chat);
 			}
+			
+			sql = "update chat set chat_check=1 where item_num=? and chat_receiver=? and chat_giver=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, item_num);
+			pstmt2.setInt(2, chat_receiver);
+			pstmt2.setInt(3, chat_giver);
+			pstmt2.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e);
 		} finally {
-			DBUtil.executeClose(rs, pstmt, conn);
+			DBUtil.executeClose(null, pstmt1, null);
+			DBUtil.executeClose(null, pstmt2, null);
 		}
 		return list;
 	}
@@ -115,6 +126,8 @@ public class ChatDao {
 				chat.setChat_message(rs.getString("chat_message"));
 				chat.setChat_reg(rs.getString("chat_reg"));
 				
+				chat.setChat_check(rs.getInt("chat_check"));
+				
 				list.add(chat);
 			}
 		} catch (Exception e) {
@@ -148,5 +161,31 @@ public class ChatDao {
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
 		return count;
+	}
+	//특정 대상과 대화를 나눈 적이 있는 사람의 리스트
+	public List<Integer> getSpecificList(int item_num, int chat_receiver) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int cnt = 0;
+		List<Integer> list = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "select distinct(chat_giver) from chat where item_num=? and chat_receiver=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(++cnt, item_num);
+			pstmt.setInt(++cnt, chat_receiver);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				list.add(rs.getInt("chat_giver"));
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 }

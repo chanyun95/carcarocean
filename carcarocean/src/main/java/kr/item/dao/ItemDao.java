@@ -40,19 +40,28 @@ public class ItemDao {
 	}
 	public void deleteItem(int item_num) throws Exception{
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 		String sql = null;
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
+			
+			sql = "DELETE FROM CHAT WHERE ITEM_NUM=?";
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(1, item_num);
+			pstmt1.executeUpdate();
+			
 			sql = "DELETE FROM ITEM WHERE ITEM_NUM=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(++cnt, item_num);
-			pstmt.executeUpdate();
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(++cnt, item_num);
+			pstmt2.executeUpdate();
+			
 		} catch (Exception e) {
 			throw new Exception(e);
 		} finally {
-			DBUtil.executeClose(null, pstmt, conn);
+			DBUtil.executeClose(null, pstmt1, null);
+			DBUtil.executeClose(null, pstmt2, conn);
 		}
 	}
 	public void updateItem(ItemVo item) throws Exception{
@@ -64,12 +73,14 @@ public class ItemDao {
 			conn = DBUtil.getConnection();
 			sql = "UPDATE ITEM SET item_name=?, item_price=?, item_detail=?, item_views=?, item_photo=? WHERE ITEM_NUM=?";
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(++cnt, item.getItem_name());
 			pstmt.setInt(++cnt, item.getItem_price());
 			pstmt.setString(++cnt, item.getItem_detail());
 			pstmt.setInt(++cnt, item.getItem_views());
 			pstmt.setString(++cnt, item.getItem_photo());
 			pstmt.setInt(++cnt, item.getItem_num());
+			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e);
