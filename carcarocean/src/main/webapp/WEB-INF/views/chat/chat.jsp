@@ -14,7 +14,7 @@
 <title>채팅</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/loading.jsp" />
+	<%-- <jsp:include page="/WEB-INF/views/common/loading.jsp" /> --%>
 	<div class="container bg-light my-3 rounded">
 		<div class="container d-flex justify-content-between rounded-top p-3">
 			<div class="float-start align-self-center">
@@ -126,7 +126,7 @@
 										+param.giver.mem_id+'님 : ' + chat.chat_message+'</div></div>');
 							}
 						}
-						$('#partner').clear();
+						$('#partner').empty();
 						$('#partner').append(param.receiver.mem_id);
 						// 스크롤을 제일 아래로 이동
 			            $('#chatRoom').scrollTop($('#chatRoom')[0].scrollHeight);

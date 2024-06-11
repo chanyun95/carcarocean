@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>상품 상세</title>
 <style>
 	.carousel-item img{
@@ -22,9 +21,8 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h1>상품 상세</h1>
-		<hr>
-		<div class="text-end">
+		<h2 class="my-3">상품 상세</h2>
+		<div class="text-end my-3">
 			<c:if test="${user_num==item.member.mem_num}">
 				<button class="btn btn-warning fw-bold text-white" onclick="updateStatus_btn()">판매 확정</button>
 				<button class="btn btn-warning fw-bold text-white" onclick="update_btn()">수정</button>
@@ -106,19 +104,19 @@
 					<button class="btn btn-warning btn-lg text-white fw-bold me-3" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item.item_num}'">1:1채팅</button>
 				</c:if>
 			</div>
-			<div class="my-4">
+			<div class="my-4 ms-4">
 				<div class="fw-bold fs-4">${item.item_name}</div>
 				<div class="small text-secondary">${item.item_reg}</div>
 				<div class="fw-bold"><fmt:formatNumber value="${item.item_price}" type="number"/>원</div>
 			</div>
-			<div class="my-4">
+			<div class="my-4 ms-4">
 				${item.item_detail}
 			</div>
-			<div class="my-4 text-secondary small">
+			<div class="my-4 ms-4 text-secondary small">
 				채팅 ${itemChatCount} ∙ 조회 ${item.item_views}
 			</div>
 		</div>
-		<hr>
+		<hr class="my-5">
 		
 		<strong class="fs-3">카카오션 인기중고</strong>
             <a href="${pageContext.request.contextPath}/item/itemList.do" class="text-decoration-none text-warning"><span class="float-end">더 구경하기<i class="bi bi-chevron-right"></i></span></a>
@@ -171,6 +169,7 @@
 			}
 		};
 	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
