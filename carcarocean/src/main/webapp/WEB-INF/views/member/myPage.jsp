@@ -20,11 +20,8 @@
 			<c:set var="sub_title" value="마이페이지" scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
-
 				<div class="mypage-div">
-
 					<div class="menu-container">
-
 						<div class="profile">
 							<div class="shadow p-3 bg-light row rounded-3">
 								<div class="col-3 text-center">

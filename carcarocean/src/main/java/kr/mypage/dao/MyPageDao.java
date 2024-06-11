@@ -305,7 +305,7 @@ public class MyPageDao {
 			//SQL문 작성
 			//화면 가독성 위해 최근 수정일기준 10개의 데이터만 표시
 			sql = "SELECT * FROM (SELECT buy.buy_num,car.car_name,car.car_price,buy.buy_reg,mem_grade FROM "
-					+ "buy JOIN car ON buy.car_num = car.car_num LEFT OUTER JOIN member_detail d ON buy.mem_num=d.mem_num WHERE buy.mem_num = ? "
+					+ "buy JOIN car ON buy.car_num = car.car_num LEFT OUTER JOIN member_detail d ON buy.mem_num=d.mem_num WHERE car.car_status =2 AND buy.mem_num = ? "
 					+ "ORDER BY buy.buy_reg DESC) WHERE ROWNUM <=  10";
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
