@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import kr.controller.Action;
 import kr.item.dao.ItemDao;
+import kr.member.dao.MemberDao;
+import kr.member.vo.MemberVo;
 
 public class ChatAction implements Action{
 	@Override
@@ -23,6 +25,7 @@ public class ChatAction implements Action{
 		int chat_receiver = itemDao.getItem(item_num).getMember().getMem_num();
 		
 		request.setAttribute("item_num", item_num);
+		
 		if(request.getParameter("chat_receiver")!=null && request.getParameter("chat_giver")!=null) {
 			request.setAttribute("chat_receiver", Integer.parseInt(request.getParameter("chat_receiver")));
 			request.setAttribute("chat_giver", Integer.parseInt(request.getParameter("chat_giver")));
@@ -30,6 +33,9 @@ public class ChatAction implements Action{
 			request.setAttribute("chat_receiver", chat_receiver);
 			request.setAttribute("chat_giver", user_num);
 		}
+		MemberDao memberDao = MemberDao.getDao();
+		MemberVo user = memberDao.getMember(user_num);
+		request.setAttribute("user", user);
 		
 		return "/WEB-INF/views/chat/chat.jsp";
 	}
