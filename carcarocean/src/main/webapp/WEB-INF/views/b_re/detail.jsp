@@ -40,16 +40,9 @@
 			<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
 				<!-- 작성자 정보 -->
 				<div class="d-flex align-items-center">
-					<c:if test="${!empty b_re.mem_photo}">
-						<div class="me-3 d-inline">
-						<img src="${pageContext.request.contextPath}/upload/${b_re.mem_photo}" class="rounded-circle me-1" width="30" height="30">
-						</div>
-					</c:if>
-					<c:if test="${empty b_re.mem_photo}">
-						<div class="me-3 d-inline">
-							<img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle me-1" width="30" height="30">
-						</div>
-					</c:if>
+					<div class="me-3 d-inline">
+					<img src="${pageContext.request.contextPath}/upload/${b_re.mem_photo}" class="rounded-circle me-1" width="30" height="30">
+					</div>
 					<div class="me-4 d-inline">${b_re.mem_id}</div>
 				</div>
 				<!-- 작성일 -->

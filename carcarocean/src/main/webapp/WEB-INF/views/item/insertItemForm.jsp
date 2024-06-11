@@ -15,7 +15,7 @@
 	<div class="container">
 		<h1>상품 등록</h1>
 		<hr>
-		<form class="form-control" action="insertItem.do" method="post" enctype="multipart/form-data">
+		<form id="write_form"class="form-control" action="insertItem.do" method="post" enctype="multipart/form-data">
 			<label for="item_name">상품명</label>
 			<input type="text" class="form-control" id="item_name" name="item_name">
 			<label for="item_photo">상품사진</label>
@@ -33,4 +33,32 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+<script type="text/javascript">
+	window.onload=function(){
+		const myForm = document.getElementById('write_form');
+		myForm.onsubmit=function(){
+			const name = document.getElementById('item_name');
+			if(name.value.trim()==''){
+				alert('상품명을 입력하세요!');
+				name.value='';
+				name.focus();
+				return false;
+			}
+			const price = document.getElementById('item_price');
+			if(price.value.trim()==''){
+				alert('가격을 입력하세요!');
+				price.value='';
+				price.focus();
+				return false;
+			}
+			const detail = document.getElementById('item_detail');
+			if(detail.value.trim()==''){
+				alert('내용을 입력하세요!');
+				detail.value='';
+				detail.focus();
+				return false;
+			}
+		};
+	};
+</script>
 </html>

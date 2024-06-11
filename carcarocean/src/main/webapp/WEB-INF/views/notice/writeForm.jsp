@@ -38,10 +38,10 @@
 				</ul>
 				<div class="mt-3 mb-5 row justify-content-center">
 					<div class="col-auto">
-						<input type="submit" class="btn btn-warning" value="글 쓰기">
+						<input type="submit" class="btn btn-warning text-white" value="글 쓰기">
 					</div>		
 					<div class="col-auto">
-						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+						<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">
 					</div>
 				</div>
 			</form>
