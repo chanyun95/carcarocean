@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +76,7 @@
 								<option value="1">제조사</option>
 								<option value="2">차량</option>
 							</select>
-							<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width: 500px;">
+							<input type="search" id="keyword" name="keyword" class="form-control text-center" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
 							<button type="submit" class="btn btn-warning fw-bold text-white btn-lg"><i class="bi bi-search"></i></button>
 						</form>
 					</div>
@@ -349,104 +351,137 @@
 		</section>
 		<!-- 공지사항부터 자유게시판까지 끝 -->
 		<!-- 구매 이용후기 시작 -->
-<section id="b_re">
-    <div class="container p-4 position-relative">
-        <a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark">
-            <strong class="fs-3">구매 이용후기</strong>
-        </a>
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-            <!-- 구매이용후기이 없을 경우 -->
-				<c:if test="${empty list}">
-					<div class="table-responsive rounded-4 border border-secondary-subtle">
-	                <table class="table table-borderless mb-0">
-	                    <tbody>
-	                    	<tr>
-                                <td class="m-1 p-1">
-                                    <a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark ms-5">
-                                        <strong class="fs-5">구매이용 후기가 없습니다</strong>
-                                    </a>
-                                </td>
-                                <td colspan="2" class="text-end">
-                                    <a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark me-5">
-                                        [구매이용 후기 작성자가 없습니다]
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="me-5 pe-5">
-                                    <a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark ms-5 card-text">
-                                        <b>구매이용 후기가 없습니다</b>
-                                    </a>
-                                </td>
-                            </tr>
-	                    </tbody>
-	                </table>
-	        </div>
-				</c:if>
-				<!-- 구매이용후기가 있을 경우 -->
-            	<c:if test="${!empty list}">
-	                <c:forEach var="b_re" items="${list}" varStatus="status">
-	                    <c:if test="${status.index % 3 == 0}">
-	                        <!-- 3개의 카드마다 새로운 슬라이드 시작 -->
-	                        <div class="carousel-item 
-	                        	<c:if test='${status.index == 0}'>active</c:if>">
-	                            <div class="d-flex justify-content-center">
-	                    </c:if>
-	
-	                    <div class="card text-center mb-3 mx-2" style="flex: 1 0 30%;">
-	                        <c:if test="${fn:contains(b_re.car_photo, ',')}">
-	                            <c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
-	                            <c:set var="firstPhoto" value="${photoList[0]}" />
-	                            <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
-	                                <img src="${pageContext.request.contextPath}/upload/${firstPhoto}"
-	                                    class="card-img-top" style="width: 397.81px; height: 200px;">
-	                            </a>
-	                        </c:if>
-	                        <c:if test="${!fn:contains(b_re.car_photo, ',')}">
-	                            <c:set var="firstPhoto" value="${b_re.car_photo}" />
-	                            <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
-	                                <img src="${pageContext.request.contextPath}/upload/${b_re.car_photo}"
-	                                    class="card-img-top" style="width: 397.81px; height: 200px;">
-	                            </a>
-	                        </c:if>
-	                        <div class="card-body" style="height: 160px;">
-	                            <h5 class="card-title text-truncate">
-	                                <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}"
-	                                    class="text-decoration-none text-dark">${b_re.car_name}</a>
-	                            </h5>
-	                            <p class="card-title text-truncate">
-	                                <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}"
-	                                    class="text-decoration-none text-dark">${b_re.b_re_title}</a>
-	                            </p>
-	                            <p class="card-text">
-	                                <a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}"
-	                                    class="btn btn-warning text-white">구매후기</a>
-	                            <p>
-	                            <p class="card-text">
-	                                <small class="text-body-secondary">${fn:substring(b_re.b_re_reg, 0, 10)}</small>
-	                            </p>
-	                        </div>
-	                    </div>
-	                    <c:if test="${status.index % 3 == 2 || status.last}">
-	                     <!-- 슬라이드 종료 조건 -->        
-				        </c:if>
-				        <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button"
-				            data-bs-target="#carouselExample" data-bs-slide="prev" style="left: -10%;">
-				            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-				            <span class="visually-hidden">Previous</span>
-				        </button>
-				        <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button"
-				            data-bs-target="#carouselExample" data-bs-slide="next" style="right: -10%;">
-				            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-				            <span class="visually-hidden">Next</span>
-				        </button>
-	        		</c:forEach>
-        		</c:if>
+		<section id="b_re">
+			<div class="p-4">
+       		<a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark"><strong class="fs-3">구매 이용후기</strong></a>
+          	<!-- 구매이용후기이 없을 경우 -->
+	        <c:if test="${empty list}">
+	        	<div class="px-5 py-3 border rounded-3">구매 후기가 없습니다!</div>
+			</c:if>
+			<!-- 구매이용후기가 있을 경우 -->
+       		<c:if test="${!empty list}">
+       		<%
+			    List<Object> list1 = new ArrayList<>();
+			    List<Object> list2 = new ArrayList<>();
+			    List<Object> list3 = new ArrayList<>();
+			
+			    List<Object> originalList = (List<Object>) request.getAttribute("list");
+			    if (originalList != null) {
+			        for (int i = 0; i < originalList.size(); i++) {
+			            if (i < 3) {
+			                list1.add(originalList.get(i));
+			            } else if (i < 6) {
+			                list2.add(originalList.get(i));
+			            } else {
+			                list3.add(originalList.get(i));
+			            }
+			        }
+			    }
+			    request.setAttribute("list1", list1);
+			    request.setAttribute("list2", list2);
+			    request.setAttribute("list3", list3);
+			%>
+			
+			
+			<!-- 첫번째 캐러셀 -->
+           	<div id="cardCarousel" class="carousel slide row" data-bs-ride="carousel">
+	           		<button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+			            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			            <span class="visually-hidden">Previous</span>
+			        </button>
+	        	<div class="carousel-inner">
+	            	<div class="carousel-item active">
+	                	<div class="row p-2">
+	                		<c:forEach var="b_re" items="${list1}" varStatus="status">
+								<c:if test="${fn:contains(b_re.car_photo, ',')}">
+				 					<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
+					   				<c:set var="firstPhoto" value="${photoList[0]}"/>
+					   			</c:if>
+								<c:if test="${!fn:contains(b_re.car_photo, ',')}">
+									<c:set var="firstPhoto" value="${b_re.car_photo}" />
+								</c:if>
+								<div class="col-md-4">
+		                        	<div class="card" style="width:370px; height: 370px;">
+	                            		<a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
+	                            			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="height:200px; !important">
+	                            		</a>
+		                            	<div class="card-body" style="overflow:hidden;">
+		                                	<h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark fw-bold">${b_re.b_re_title}</a></h5>
+		                                	<div class="card-text" style="height:70px; heiwhite-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark">${b_re.b_re_content }</a></div>
+		                            		<div class="card-text small text-secondary mt-2">${fn:substring(b_re.b_re_reg,0,11)}</div>
+		                            	</div>
+	                        		</div>
+		                    	</div>
+							</c:forEach>
+	                	</div>
+	            	</div>
+	            	
+	            	<!-- 2번째 케러셀 -->
+	            	<c:if test="${count>2}">
+	            	<div class="carousel-item">
+	                	<div class="row p-2">
+	                		<c:forEach var="b_re" items="${list2}" varStatus="status">
+								<c:if test="${fn:contains(b_re.car_photo, ',')}">
+				 					<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
+					   				<c:set var="firstPhoto" value="${photoList[0]}"/>
+					   			</c:if>
+								<c:if test="${!fn:contains(b_re.car_photo, ',')}">
+									<c:set var="firstPhoto" value="${b_re.car_photo}" />
+								</c:if>
+								<div class="col-md-4">
+		                        	<div class="card" style="width:370px; height: 370px;">
+	                            		<a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
+	                            			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="height:200px; !important">
+	                            		</a>
+		                            	<div class="card-body" style="overflow:hidden;">
+		                                	<h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark fw-bold">${b_re.b_re_title}</a></h5>
+		                                	<div class="card-text" style="height:70px; heiwhite-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark">${b_re.b_re_content }</a></div>
+		                            		<div class="card-text small text-secondary mt-2">${fn:substring(b_re.b_re_reg,0,11)}</div>
+		                            	</div>
+	                        		</div>
+		                    	</div>
+							</c:forEach>
+	                	</div>
+	            	</div>
+	            	</c:if>
+	            	
+     		        <!-- 3번째 케러셀 -->
+	            	<c:if test="${count>6}">
+	            	<div class="carousel-item">
+	                	<div class="row p-2">
+	                		<c:forEach var="b_re" items="${list3}" varStatus="status">
+								<c:if test="${fn:contains(b_re.car_photo, ',')}">
+				 					<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
+					   				<c:set var="firstPhoto" value="${photoList[0]}"/>
+					   			</c:if>
+								<c:if test="${!fn:contains(b_re.car_photo, ',')}">
+									<c:set var="firstPhoto" value="${b_re.car_photo}" />
+								</c:if>
+								<div class="col-md-4">
+		                        	<div class="card" style="width:370px; height: 370px;">
+	                            		<a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}">
+	                            			<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" class="card-img-top" style="height:200px; !important">
+	                            		</a>
+		                            	<div class="card-body" style="overflow:hidden;">
+		                                	<h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark fw-bold">${b_re.b_re_title}</a></h5>
+		                                	<div class="card-text" style="height:70px; heiwhite-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="${pageContext.request.contextPath}/b_re/detail.do?b_re_num=${b_re.b_re_num}" class="text-decoration-none text-dark">${b_re.b_re_content }</a></div>
+		                            		<div class="card-text small text-secondary mt-2">${fn:substring(b_re.b_re_reg,0,11)}</div>
+		                            	</div>
+	                        		</div>
+		                    	</div>
+							</c:forEach>
+	                	</div>
+	            	</div>
+	            	</c:if>
+	        	</div>
+		        <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+		            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		            <span class="visually-hidden">Next</span>
+		        </button>
         	</div>
-        </div>
-    </div>
-</section>
+     		</c:if>
+     		</div>
+		</section>
 <!-- 구매 이용후기 끝-->
 
    <!-- 판매 이용후기 시작 -->
@@ -483,18 +518,18 @@
         <c:forEach var="s_re" items="${S_relist}" varStatus="loop">
             <div class="border rounded-4 bg-white my-2">
 	        	<div class="d-flex justify-content-start">
-	        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-light p-2" style="font-size:13px;">${s_re.sell_maker} ${s_re.sell_cname}</p>
+	        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-light p-2" style="font-size:13px;"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-secondary">${s_re.sell_maker} ${s_re.sell_cname}</a></p>
 	        	</div>
 	        	<div class="d-flex justify-content-between">
 	        		<div class="ms-5">
-	        			<h5 class="fw-bold">${s_re.s_re_title}</h5>
+	        			<h5 class="fw-bold"><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold">${s_re.s_re_title}</a></h5>
 	        		</div>
 	        		<div class="me-5">
-	        			<p>${s_re.mem_id}</p>
+	        			<p><a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark">${s_re.mem_id}</a></p>
 	        		</div>
 	        	</div>
 	        	<div class="fw-bold mx-5 p-1 mb-3" style="height:100px; overflow: hidden;">
-	        		${s_re.s_re_content}
+	        		<a href="${pageContext.request.contextPath}/s_re/detail.do?s_re_num=${s_re.s_re_num}" class="text-decoration-none text-dark fw-bold">${s_re.s_re_content}</a>
 	        	</div>
 	        	<div class="small mx-5 my-3 text-secondary">
 	        		${fn:substring(s_re.s_re_reg,0,10)}
@@ -565,10 +600,10 @@
 						<div class="px-3">
 							<div class="float-start"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-secondary fw-bold small">${fn:substring(item.item_reg, 0, 10)}</a></div>
 							<div class="text-end"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold small">${item.member.mem_id}</a></div>
-							<div class="overflow-hidden my-1"><c:if test="${fn:contains(item.item_reg,'초미만') or fn:contains(item.item_reg,'초 전') or fn:contains(item.item_reg,'분 전')}"><span class="badge bg-danger me-2">New</span></c:if><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark">${item.item_name}</a></div>
+							<div class="overflow-hidden my-1" style="height:30px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><c:if test="${fn:contains(item.item_reg,'초미만') or fn:contains(item.item_reg,'초 전') or fn:contains(item.item_reg,'분 전')}"><span class="badge bg-danger me-2">New</span></c:if><a href="itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark overflow-hidden">${item.item_name}</a></div>
 							<div class="my-1"><a href="${pageContext.request.contextPath}/item/itemDetail.do?item_num=${item.item_num}" class="text-decoration-none text-dark fw-bold"><fmt:formatNumber value="${item.item_price}" type="number"/>원</a></div>
 							<div class="small mt-2">${item.member.mem_address1}</div>
-							<div class="small text-secondary">채팅 0 ∙ 조회 ${item.item_views}</div>
+							<div class="small text-secondary">채팅 ${item.item_chatCount} ∙ 조회 ${item.item_views}</div>
 						</div>
 					</div>
 				</c:forEach>

@@ -12,8 +12,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>채팅</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.noto-sans-kr-<uniquifier> {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+</style>
 </head>
-<body>
+<body style="font-family:Noto Sans KR;">
 	<%-- <jsp:include page="/WEB-INF/views/common/loading.jsp" /> --%>
 	<div class="container bg-light my-3 rounded">
 		<div class="container d-flex justify-content-between rounded-top p-3">

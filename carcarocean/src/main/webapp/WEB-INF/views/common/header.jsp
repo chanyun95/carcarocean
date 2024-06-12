@@ -68,20 +68,20 @@
             <div class="collapse navbar-collapse justify-content-between" id="nav">
                <ul class="navbar-nav">
                	  <!-- 첫번째 메뉴 -->
+                  <li class="nav-item dropdown"><a class="nav-link text-white px-3 fs-5 fw" data-toggle="dropdown">차량 판매</a>
+                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mySellList.do">내 판매 현황</a>
+                     </div>
+                  </li>
+                  <!-- 두번째 메뉴 -->
                   <li class="nav-item dropdown"><a class="nav-link text-white px-3 fs-5 fw" data-toggle="dropdown">차량 구매</a>
                      <div class="dropdown-menu">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/mainBuy.do">차량 구매</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/b_re/list.do">차량 구매 후기</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/fav/myFavList.do">내 관심 차량</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/buy/myBought.do">내 구매 목록</a>
-                     </div>
-                  </li>
-                  <!-- 두번째 메뉴 -->
-                  <li class="nav-item dropdown"><a class="nav-link text-white px-3 fs-5 fw" data-toggle="dropdown">차량 판매</a>
-                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mainSell.do">차량 판매</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/s_re/list.do">차량 판매 후기</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/sell/mySellList.do">내 판매 현황</a>
                      </div>
                   </li>
                   <!-- 세번째 메뉴 -->
