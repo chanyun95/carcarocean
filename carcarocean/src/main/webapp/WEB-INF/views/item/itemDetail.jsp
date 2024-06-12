@@ -26,6 +26,8 @@
 			<c:if test="${user_num==item.member.mem_num}">
 				<button class="btn btn-warning fw-bold text-white" onclick="updateStatus_btn()">판매 확정</button>
 				<button class="btn btn-warning fw-bold text-white" onclick="update_btn()">수정</button>
+			</c:if>
+			<c:if test="${user_num==item.member.mem_num or user_auth==9}">
 				<button class="btn btn-warning fw-bold text-white" onclick="delete_btn()">삭제</button>
 			</c:if>
 		</div>

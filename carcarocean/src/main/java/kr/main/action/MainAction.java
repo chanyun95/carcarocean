@@ -50,7 +50,7 @@ public class MainAction implements Action{
 		 
 		//페이지 처리(판매후기)
 		 S_ReDao S_redao = S_ReDao.getDao();
-		 List<S_ReVo> S_relist = S_redao.getListSellReviewMain(1,9);
+		 List<S_ReVo> S_relist = S_redao.getListSellReviewMain(1,3);
 		
 		//페이지 처리(구매후기)
 		B_ReDao dao = B_ReDao.getDao();

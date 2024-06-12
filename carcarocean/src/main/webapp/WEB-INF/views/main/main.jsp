@@ -124,7 +124,7 @@
                         </c:if>
                         <!-- 사진이 없는경우 -->
 						<c:if test="${empty notice.notice_photo}">
-                        	<a href="${pageContext.request.contextPath}/notice/detail.do?event_num=${notice.notice_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        	<a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}" class="d-flex justify-content-center align-items-center" style="height: 200px;">
                         	<i class="bi bi-megaphone" style="font-size: 5rem;"></i>
                         	</a>
                         </c:if>
@@ -352,7 +352,7 @@
 		<!-- 공지사항부터 자유게시판까지 끝 -->
 		<!-- 구매 이용후기 시작 -->
 		<section id="b_re">
-			<div class="p-4">
+			<div class="p-4 mt-4">
        		<a href="${pageContext.request.contextPath}/b_re/list.do" class="text-decoration-none text-dark"><strong class="fs-3">구매 이용후기</strong></a>
           	<!-- 구매이용후기이 없을 경우 -->
 	        <c:if test="${empty list}">
