@@ -11,7 +11,6 @@
 <title>자유게시판 상세</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.report.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/board.reply.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -36,16 +35,9 @@
     	<div class="mt-1 mb-1 d-flex justify-content-between align-items-center">
     	  <!-- 작성자 정보 -->
         <div class="d-flex align-items-center">
-            <c:if test="${!empty board.mem_photo}">
-                <div class="me-3 d-inline">
-                    <img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="30" height="30">
-                </div>
-            </c:if>
-            <c:if test="${empty board.mem_photo}">
-                <div class="me-4 d-inline">
-                    <img src="${pageContext.request.contextPath}/images/face.png" class="rounded-circle" width="30" height="30">
-                </div>
-            </c:if>
+            <div class="me-3 d-inline">
+                <img src="${pageContext.request.contextPath}/upload/${board.mem_photo}" class="rounded-circle" width="30" height="30">
+            </div>
             <div class="me-4 d-inline">${board.mem_id}</div>
         </div>
         <!-- 조회수 -->
@@ -160,12 +152,7 @@ $(function(){
 					let output = '<div class="card mb-3 border-0">';
 			        output += '<div class="card-body">';
 			        output += '<div class="d-flex align-items-center">';
-			        if (item.mem_photo != null) {
-			            output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
-			        } else {
-			            // 만약 mem_photo가 null인 경우, 기본 이미지를 사용
-			            output += '<img class="rounded-circle me-3" width="50" height="50" src="../images/face.png">';
-			        }
+			        output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
 			        output += '<h5 class="card-title mb-0">' + item.mem_id + '</h5>';
 			        output += '</div>';
 			        output += '<p class="card-text mt-2 mb-2">' + item.bor_comm_content + '</p>';
