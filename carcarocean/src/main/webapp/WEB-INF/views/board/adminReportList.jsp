@@ -26,6 +26,7 @@
                                 <th>작성자</th>
                                 <th>작성일</th>
                                 <th>조회수</th>
+                                <th> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,22 @@
 										<td>${fn:substring(board.board_modify,0,10)}</td>
 									</c:if>
 									<td>${board.board_hit}</td>
+									<td>
+										<div class="row justify-content-center">
+										    <div class="col text-center" style="height: 30px; display: flex; align-items: center;">
+										        <input type="button" class="btn btn-danger text-white" value="삭제" id="delete_btn1">
+										    </div>
+										</div>
+										<script type="text/javascript">
+											const delete_btn1 = document.getElementById('delete_btn1');
+											delete_btn1.onclick=function(){
+												let choice = confirm('삭제하시겠습니까?');
+												if(choice){
+													location.replace('delete.do?board_num=${board.board_num}');
+												}
+											};
+										</script>
+									</td>
                                 </tr>
                                </c:if> 
                             </c:forEach>
@@ -56,12 +73,13 @@
                                 <th>작성자</th>
                                 <th>작성일</th>
                                 <th>조회수</th>
+                                <th> </th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="info" items="${list2}">
                            	 	<c:if test="${info.info_board_report >= 10}">
-	                                <tr>
+	                                <tr class="align-content-center">
 	                                    <td width = "250px">${info.info_board_num}</td>
 	                                    <td width = "250px"><a href="${pageContext.request.contextPath}/info_board/detail.do?info_board_num=${info.info_board_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${info.info_board_title}</a></td>
 	                                   	<td width = "250px">${info.mem_id}</td>
@@ -72,6 +90,22 @@
 											<td>${fn:substring(info.info_board_modify,0,10)}</td>
 										</c:if>
 										<td>${info.info_board_hit}</td>
+										<td>
+										<div class="row justify-content-center">
+										    <div class="col text-center" style="height: 30px; display: flex; align-items: center;">
+										        <input type="button" class="btn btn-danger text-white" value="삭제" id="delete_btn2">
+										    </div>
+										</div>
+										<script type="text/javascript">
+											const delete_btn2 = document.getElementById('delete_btn2');
+											delete_btn2.onclick=function(){
+												let choice = confirm('삭제하시겠습니까?');
+												if(choice){
+													location.replace('delete.do?info_board_num=${info.info_board_num}');
+												}
+											};
+										</script>
+									</td>
 	                                </tr>
                                 </c:if>
                             </c:forEach>

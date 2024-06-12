@@ -53,16 +53,15 @@
 						<div class="row justify-content-center">
 							<div class="card card-body" style="width: 300px;">
 								온라인으로 구매하셨을 경우 로그인 후 마이페이지를 확인하세요. 오프라인 구매는 차량을 구매하신 매장 또는 차량평가사에게 문의해주세요.
-								</div>
+							</div>
 						</div>
-						
 					 </div>
                  </li>
                   <li class="my-3 text-left fw-bold">
 					<a data-bs-toggle="collapse" type="button" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-warning text-white">
 						내차 팔기 신청
 					</a>
-						<div class="collapse mt-2" id="collapseExample2">
+					<div class="collapse mt-3" id="collapseExample2">
 						<div class="row justify-content-center">
 							<div class="card card-body" style="width: 300px;">
 								마이페이지 => 거래내역
@@ -101,8 +100,8 @@
                  </ul>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-warning text-white">Save changes</button>
+						data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-warning text-white" onclick="location.href='${pageContext.request.contextPath}/qa/list.do'">문의하기</button>
 				</div>
 			
 			</div>
