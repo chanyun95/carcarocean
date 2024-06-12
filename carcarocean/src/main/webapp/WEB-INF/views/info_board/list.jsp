@@ -31,7 +31,7 @@
 			</div>
 		</form>
 	</div>
-	<table class="table table-hover mt-5">
+	<table class="table table-hover mt-4">
 		<thead class="table-light text-center">
 		<tr>
 			<th>글번호</th>

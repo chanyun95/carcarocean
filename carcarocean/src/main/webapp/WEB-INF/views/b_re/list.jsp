@@ -61,11 +61,11 @@
 					<c:if test="${fn:contains(b_re.car_photo, ',')}">
 						<c:set var="photoList" value="${fn:split(b_re.car_photo, ',')}" />
 						<c:set var="firstPhoto" value="${photoList[0]}"/>
-						<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></a></td>
+						<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded-4"></a></td>
 					</c:if>
 					<c:if test="${!fn:contains(b_re.car_photo, ',')}">
 						<c:set var="firstPhoto" value="${b_re.car_photo}" />
-						<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></a></td>
+						<td><a href="detail.do?b_re_num=${b_re.b_re_num}"><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded-4"></a></td>
 					</c:if>
 				</tr>
 			</c:forEach>

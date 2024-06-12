@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +14,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="text-center">구매 예약 관리 (관리자)</h1>
+		<h1 class="text-center my-5">구매 예약 관리 (관리자)</h1>
 		<div class="d-flex flex-row justify-content-end">
 			<form id="search_form" action="adminBuyList.do" method="get" class="d-flex">
 				<div class="d-flex align-items-center ms-4 mt-5 mb-5">
@@ -30,7 +30,7 @@
 				</div>
 			</form>
 		</div>
-		<table class="table table-hover text-center align-content-center fw-bold mt-3">
+		<table class="table table-hover text-center align-content-center fw-bold mt-3 mb-5">
 			<thead>
 				<tr class="table-light">
 					<th>#</th>
@@ -44,21 +44,27 @@
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${list}">
+					<c:if test="${fn:contains(item.car.car_photo, ',')}">
+           				<c:set var="photoList" value="${fn:split(item.car.car_photo, ',')}" />
+            			<c:set var="firstPhoto" value="${photoList[0]}"/>
+             		</c:if>
+     				<c:if test="${!fn:contains(item.car.car_photo, ',')}">
+     					<c:set var="firstPhoto" value="${item.car.car_photo}" />
+     				</c:if>
 					<tr class="align-middle">
 						<td>${item.buy_num}</td>
 						<td>${item.car.car_maker} ${item.car.car_name}</td>
 						<td>${item.member.mem_name}</td>
 						<td>${item.member.mem_id}</td>
 						<td>${item.member.mem_email}</td>
-						<td><img src="${pageContext.request.contextPath}/upload/${item.car.car_photo}" width="100px" height="100px" class="rounded"></td>
+						<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded-4"></td>
 						<td><button class="btn btn-danger" onclick="insertBuy_btn(this)" data-carnum="${item.car.car_num}" data-memnum="${item.member.mem_num}">구매확정</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-</body>
-<script type="text/javascript">
+	<script type="text/javascript">
 	function insertBuy_btn(button){
 		if(confirm('구매를 확정 하시겠습니까?')){
 			if(confirm('진짜 확정 하시겠습니까?')){
@@ -71,5 +77,7 @@
 	function reset_btn(){
 		location.href='redirect:/buy/adminBuyList.do';
 	};
-</script>
+	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</body>
 </html>
