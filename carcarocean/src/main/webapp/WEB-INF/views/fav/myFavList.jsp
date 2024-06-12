@@ -54,6 +54,10 @@
 	<div class="container">
 		<h2 class="pb-3 pt-5">내 관심차량 목록</h2>
 		<div class="row mb-3 p-4">
+			<c:if test="${empty carList}">
+				<div class="d-flex justify-content-center"><div class="border rounded fw-bold py-3 px-5" style="font-size:20px;">관심차량 없음!</div></div>
+			</c:if>
+			<c:if test="${!empty carList}">
 			<c:forEach var="car" items="${carList}">
 				<c:if test="${fn:contains(car.car_photo, ',')}">
 					<c:set var="photoList" value="${fn:split(car.car_photo, ',')}" />
@@ -95,6 +99,7 @@
 		    		</div>
 				</div>
 			</c:forEach>
+			</c:if>
 		</div>
 	</div>
 	<div class="text-center">${page}</div>

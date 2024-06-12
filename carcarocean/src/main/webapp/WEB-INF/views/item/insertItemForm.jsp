@@ -26,8 +26,8 @@
 			<textarea rows="9" class="form-control" id="item_detail" name="item_detail"></textarea>
 			<hr>
 			<div class="d-flex justify-content-center">
-				<input type="submit" value="등록" class="btn btn-warning">
-				<button class="btn btn-warning" onclick="history.back()">뒤로가기</button>
+				<input type="submit" value="등록" class="btn btn-warning text-white fw-bold">
+				<button class="btn btn-warning mx-3 text-white fw-bold" onclick="history.back()">뒤로가기</button>
 			</div>
 		</form>
 	</div>

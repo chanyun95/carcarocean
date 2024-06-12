@@ -10,6 +10,7 @@ import kr.b_re.dao.B_ReDao;
 import kr.b_re.vo.B_ReVo;
 import kr.board.dao.BoardDao;
 import kr.board.vo.BoardVo;
+import kr.chat.dao.ChatDao;
 import kr.controller.Action;
 import kr.event.dao.EventDao;
 import kr.event.vo.EventVo;
@@ -58,8 +59,12 @@ public class MainAction implements Action{
 		//중고거래 인기매물
 		ItemDao itemDao = ItemDao.getDao();
 		List<ItemVo> itemList =	itemDao.getItemListfavored(1,6,0);
+		ChatDao chatDao = ChatDao.getDao();
+		for(int i=0; i<itemList.size(); i++) {
+			itemList.get(i).setItem_chatCount(chatDao.itemChatCount(itemList.get(i).getItem_num()));
+		}
 		
-		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, 10, 1, "list.do");
+		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum), count, 9, 1, "list.do");
 		List<B_ReVo> list = null;
 		if(count > 0) {
 			list = dao.getListB_re(page.getStartRow(), page.getEndRow());
