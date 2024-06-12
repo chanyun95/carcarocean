@@ -30,7 +30,7 @@ public class ListAction implements Action{
 		int count = dao.getBoardCount(keyfield, keyword);
 		
 		
-		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"list.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,10,10,"list.do");
 		
 		List<BoardVo> list = null;
 		if(count > 0) {

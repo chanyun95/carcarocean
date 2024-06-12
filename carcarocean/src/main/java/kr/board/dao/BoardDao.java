@@ -41,7 +41,7 @@ public class BoardDao {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//총 글의 수, 검색
+	//글의 수, 검색
 	public int getBoardCount(String keyfield, String keyword) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -57,11 +57,13 @@ public class BoardDao {
 				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
 				else if(keyfield.equals("3")) sub_sql += "WHERE board_content LIKE '%' || ? || '%'";
 			}
-			sql = "SELECT COUNT(*) FROM board JOIN member USING(mem_num) " + sub_sql;
-			pstmt = conn.prepareStatement(sql);
-			if(keyword != null && !"".equals(keyword)) {
-				pstmt.setString(++cnt, keyword);
+			if (!sub_sql.isEmpty()) {
+				sql = "SELECT COUNT(*) FROM board JOIN member USING(mem_num) WHERE board_report < 10 AND " + sub_sql;
+			} else {
+				// sub_sql이 비어있다면 WHERE 절을 추가하지 않습니다.
+				sql = "SELECT COUNT(*) FROM board JOIN member USING(mem_num) WHERE board_report < 10";
 			}
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt(1);

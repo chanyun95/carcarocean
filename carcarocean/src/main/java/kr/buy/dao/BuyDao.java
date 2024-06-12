@@ -207,6 +207,7 @@ public class BuyDao {
 			
 			sql = "UPDATE MEMBER_DETAIL set mem_total = mem_total+? where mem_num=?";
 			pstmt2 = conn.prepareStatement(sql);
+			
 			pstmt2.setInt(1, car_price);
 			pstmt2.setInt(2, mem_num);
 			pstmt2.executeUpdate();
@@ -363,7 +364,7 @@ public class BuyDao {
            }
            
            // 내가 구매한 차량 정보 조회 쿼리
-           sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT b.buy_num, c.car_name, c.car_price,md.mem_grade, b.buy_reg "
+           sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT b.buy_num, c.car_name, c.car_price,md.mem_grade, b.buy_reg, c.car_photo "
                    + "FROM buy b JOIN car c ON b.car_num = c.car_num "
                    + "JOIN member_detail md ON b.mem_num = md.mem_num " // member_detail 테이블과 조인
                    + "WHERE b.buy_status = 1 AND b.mem_num = ?"
@@ -382,8 +383,11 @@ public class BuyDao {
                // BuyVo에 데이터 설정
                buy.setBuy_num(rs.getInt("buy_num"));
                buy.setCar_name(rs.getString("car_name"));
-            buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
+               buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
                buy.setBuy_reg(rs.getString("buy_reg"));
+               CarVO car = new CarVO();
+               car.setCar_photo(rs.getString("car_photo"));
+               buy.setCar(car);
                // 나머지 필요한 데이터를 설정합니다.
                buyList.add(buy);
            }

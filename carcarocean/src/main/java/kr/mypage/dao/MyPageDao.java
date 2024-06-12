@@ -315,7 +315,7 @@ public class MyPageDao {
 			rs = pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rs.next()) {
-				BuyVo buy = new BuyVo(); 
+				BuyVo buy = new BuyVo();
 				buy.setBuy_num(rs.getInt("buy_num"));
 				buy.setCar_name(rs.getString("car_name"));
 				buy.setCar_price(ShopUtil.getDiscount(rs.getInt("mem_grade"),rs.getInt("car_price")));
