@@ -28,7 +28,7 @@ public class ListAction implements Action{
 		
 		InfoBoardDao dao = InfoBoardDao.getDao();
 		int count = dao.getInfoCount(keyfield, keyword);
-		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"list.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,10,10,"list.do");
 		
 		List<InfoBoardVo> list = null;
 		if(count > 0) {

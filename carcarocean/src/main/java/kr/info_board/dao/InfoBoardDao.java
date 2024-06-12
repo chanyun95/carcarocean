@@ -53,11 +53,11 @@ public class InfoBoardDao {
 		try {
 			conn = DBUtil.getConnection();
 			if(keyword != null && !"".equals(keyword)) {
-				if(keyfield.equals("1")) sub_sql += "WHERE info_board_title LIKE '%' || ? || '%'";
-				else if(keyfield.equals("2")) sub_sql += "WHERE mem_id LIKE '%' || ? || '%'";
-				else if(keyfield.equals("3")) sub_sql += "WHERE info_board_content LIKE '%' || ? || '%'";
+				if(keyfield.equals("1")) sub_sql += "AND info_board_title LIKE '%' || ? || '%'";
+				else if(keyfield.equals("2")) sub_sql += "AND mem_id LIKE '%' || ? || '%'";
+				else if(keyfield.equals("3")) sub_sql += "AND info_board_content LIKE '%' || ? || '%'";
 			}
-		sql = "SELECT COUNT(*) FROM info_board JOIN member USING (mem_num)" + sub_sql;
+		sql = "SELECT COUNT(*) FROM info_board JOIN member USING (mem_num) WHERE info_board_report < 10 " + sub_sql;
 		pstmt = conn.prepareStatement(sql);
 		if(keyword != null && !"".equals(keyword)) {
 			pstmt.setString(++cnt, keyword);

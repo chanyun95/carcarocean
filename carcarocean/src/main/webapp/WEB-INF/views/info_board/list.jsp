@@ -14,17 +14,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="container">
 	<h2 class="pt-5 pb-3">정보공유 게시판 목록</h2>
-	<!-- 실제 표시할 글의 개수를 계산하기 위한 변수 -->
-	<c:set var="displayCount" value="0" />
-	<!-- 게시글 개수를 업데이트 -->
-	<c:forEach var="info" items="${list}">
-		<c:if test="${info.info_board_report < 10}">
-			<c:set var="displayCount" value="${displayCount + 1}" />
-		</c:if>
-	</c:forEach>
 	<div class="d-flex justify-content-between align-items-center rounded" style="background-color:#f5f6f9;">
 		<div class="text-start ms-4 mt-5 mb-5" style="font-size: 15pt;">
-	        총 ${displayCount}건의 글이 있습니다.
+	        총 ${count}건의 글이 있습니다.
 		</div>
 		<form id="search_form" action="list.do" method="get">
 			<div class="d-flex align-items-center">
@@ -39,7 +31,7 @@
 			</div>
 		</form>
 	</div>
-	<table class="table table-hover">
+	<table class="table table-hover mt-5">
 		<thead class="table-light text-center">
 		<tr>
 			<th>글번호</th>
