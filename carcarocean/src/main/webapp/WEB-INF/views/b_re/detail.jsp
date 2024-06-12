@@ -215,12 +215,7 @@ $(function(){
 			        let output = '<div class="card mb-3 border-0">';
 			        output += '<div class="card-body">';
 			        output += '<div class="d-flex align-items-center">';
-			        if (item.mem_photo != null) {
-			            output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
-			        } else {
-			            // 만약 mem_photo가 null인 경우, 기본 이미지를 사용
-			            output += '<img class="rounded-circle me-3" width="50" height="50" src="../images/face.png">';
-			        }
+			        output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
 			        output += '<h5 class="card-title mb-0">' + item.mem_id + '</h5>';
 			        output += '</div>';
 			        output += '<p class="card-text mt-2 mb-2">' + item.b_re_comm_content + '</p>';
