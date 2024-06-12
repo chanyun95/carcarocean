@@ -55,11 +55,11 @@
 				<c:if test="${fn:contains(item.car.car_photo, ',')}">
 					<c:set var="photoList" value="${fn:split(item.car.car_photo, ',')}" />
 					<c:set var="firstPhoto" value="${photoList[0]}"/>
-					<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></td>
+					<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded-4"></td>
 				</c:if>
 				<c:if test="${!fn:contains(item.car.car_photo, ',')}">
 					<c:set var="firstPhoto" value="${item.car.car_photo}" />
-					<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px"></td>
+					<td><img src="${pageContext.request.contextPath}/upload/${firstPhoto}" width="100px" height="100px" class="rounded-4"></td>
 				</c:if>
 					</tr>
 				</c:forEach>

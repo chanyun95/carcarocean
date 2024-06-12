@@ -12,9 +12,8 @@
 <body>
 	<!-- 헤더 고정 -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<hr size="1" width="100%" noshade>
-		<h1 class="text-center p-4">검수 대기 차량 상세 정보</h1>
+	<div class="container my-5" style="margin-bottom: 100px; !important">
+		<h1 class="text-center p-4 my-5">검수 대기 차량 상세 정보</h1>
 		<span class="fs-3 float-start fw-bold">${sell.sell_maker} ${sell.sell_cname}</span><br>
 		<span class="float-end p-4"><b>${sell.sell_name} | ${sell.sell_reg}</b></span><br>
 		<div class="mt-3 p-4">
@@ -64,7 +63,7 @@
 		</div>
 		<hr size="1" width="100%" noshade>
 		<div class="d-felx justify-content-between m-3">
-			<div class="d-flex flex-row justify-content-middle align-items-center float-start">
+			<div class="d-flex justify-content-between align-items-center text-start">
 				<!-- sell_detail 에서는 검수 상태를 미검수와 검수중으로 밖에 변경하지 못하고 만약 검수중으로 변경 시 차량 정보 등록 버튼이 뜬다. -->
 				<!-- 검수 완료된 차량은 검수 상태 변경 폼이 사라진다. -->
 				<c:if test="${sell.sell_check<2}">
@@ -86,10 +85,10 @@
 					<input type="submit" class="btn btn-primary" value="검수 완료 차량 등록 폼">
 				</form>
 				</c:if>
-			</div>
-			<div class="float-end">
-				<input type="button" class="btn btn-warning" value="목록" onclick="location.href='adminSellList.do'">
-				<input type="button" class="btn btn-danger" value="삭제" onclick="delete_btn()">
+				<div class="text-end">
+					<input type="button" class="btn btn-warning" value="목록" onclick="location.href='adminSellList.do'">
+					<input type="button" class="btn btn-danger" value="삭제" onclick="delete_btn()">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -101,5 +100,6 @@
 		}
 	};
 </script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

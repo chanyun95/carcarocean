@@ -12,10 +12,12 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<hr size="1" noshade width="100%">
-		<h1 class="text-center">검수자 세부정보</h1>
+		<h1 class="text-center my-5">검수자 세부정보</h1>
 		<div>
 			<ul class="list-unstyled">
+				<li>
+					<p class="text-center"><img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250px" height="150px" class="rounded-4"></p>
+				</li>
 				<li>
 					<p class="fs-3 fw-bold">이름 : ${checker.checker_name}</p>
 				</li>
@@ -25,13 +27,10 @@
 				<li>
 					<p class="fs-5 fw-bold">전화번호 : ${checker.checker_phone}</p>
 				</li>
-				<li>
-					<p class="text-center"><img src="${pageContext.request.contextPath}/upload/${checker.checker_photo}" width="250px" height="150px"></p>
-				</li>
 			</ul> 
 		</div>
 		<hr size="1" noshade width="100%">
-		<div class="float-end">
+		<div class="text-end mb-5">
 			<input type="button" value="목록" class="btn btn-warning" onclick="location.href='adminCheckerList.do'">
 			<input type="button" value="수정" class="btn btn-primary" onclick="location.href='adminUpdateCheckerForm.do?checker_num=${checker.checker_num}'">
 			<input type="button" value="삭제" class="btn btn-danger" onclick="delete_btn()" <c:if test="${count>0}">disabled</c:if>>
@@ -45,5 +44,6 @@
 			}
 		}
 	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

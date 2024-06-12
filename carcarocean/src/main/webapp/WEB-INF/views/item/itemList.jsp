@@ -76,7 +76,7 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div class="text-center">${page}</div>
+	<div class="text-center mb-5">${page}</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		function reset_btn(){

@@ -12,9 +12,8 @@
 <body>
 	<!-- 헤더 고정 -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<hr size="1" width="100%" noshade> 
-		<h1 class="text-center mt-3">차량 검수 신청 목록</h1>
+	<div class="container" style="margin-bottom: 100px; !important"> 
+		<h1 class="text-center my-5">차량 검수 신청 목록</h1>
 		<form id="check_form" action="adminSellList.do" method="get" class="d-flex justify-content-between mb-3">
 			<div class="align-self-center">
 				<div class="form-check form-check-inline">
@@ -92,5 +91,6 @@
 			};
 		};
 	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
