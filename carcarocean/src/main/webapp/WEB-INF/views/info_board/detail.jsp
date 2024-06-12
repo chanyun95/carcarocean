@@ -62,7 +62,7 @@
 			<li class="text-end">
 				<!-- 신고 -->
 				<div class="d-flex justify-content-center align-items-center mt-3 mb-3">
-				<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+				<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">
 				</div>
 				<div class="d-flex justify-content-end align-items-center gap-1">
 				<p id="fav_status_text"></p>
