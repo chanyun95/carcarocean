@@ -27,13 +27,16 @@ public class UpdateAction implements Action{
 		BoardVo db_board = dao.getBoard(board_num);
 		
 		if(user_num != db_board.getMem_num()) {
-			return "/WEB-INF/views/common/notice.jsp";
+			request.setAttribute("notice_msg", "잘못된 접근입니다.");
+			request.setAttribute("notice_url", request.getContextPath() + "/main/main.do");
+			
+			return "/WEB-INF/views/common/alert_view.jsp";
 		}
 		BoardVo board = new BoardVo();
 		board.setBoard_num(board_num);
 		board.setBoard_title(request.getParameter("board_title"));
 		board.setBoard_content(request.getParameter("board_content"));
-		board.setBoard_Photo(FileUtil.createFile(request, "board_photo"));
+		board.setBoard_Photo(FileUtil.createFiles(request));
 		
 		dao.updateBoard(board);
 		

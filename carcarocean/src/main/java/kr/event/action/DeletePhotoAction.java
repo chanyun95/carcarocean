@@ -22,13 +22,21 @@ public class DeletePhotoAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		//전송된 데이터 반환
 		int event_num = Integer.parseInt(request.getParameter("event_num"));
+
 		EventDao dao = EventDao.getDao();
 		EventVo db_event = dao.detailEvent(event_num);
-		dao.deletePhoto(event_num);
-		//사진 삭제
-		FileUtil.removeFile(request, db_event.getEvent_photo());
+
+		//db_event에 담긴 event_photo가 NULL이 아닌 경우에만 실행
+		if(db_event.getEvent_photo() != null) {
+			dao.deletePhoto(event_num);
+			//사진 삭제
+			String[] photos = db_event.getEvent_photo().split(",");
+			for(String pho : photos) {
+				FileUtil.removeFile(request, pho);
+			}
+		}
 		mapAjax.put("result", "success");
-		
+
 		//JSON 데이터 생성
 		ObjectMapper mapper = new ObjectMapper();
 		String ajaxData = mapper.writeValueAsString(mapAjax);

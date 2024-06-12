@@ -1,6 +1,5 @@
 package kr.sell.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class AdminSellListAction implements Action{
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		//로그인 안되어 있을 시 로그인 폼으로 이동
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {
@@ -46,14 +45,14 @@ public class AdminSellListAction implements Action{
 		}
 		
 		SellDao dao = SellDao.getDao();
-		int count = dao.getSellListCount(keyfield, keyword, sell_check);
+		int count = dao.getSellListCount(keyfield, keyword, sell_check,null);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum),count,15,10,"adminSellList.do");
 		
 		List<SellVo> list = null;
 		if(count > 0) {
-			list = dao.getSellList(page.getStartRow(), page.getEndRow(), keyfield, keyword, sell_check);
+			list = dao.getSellList(page.getStartRow(), page.getEndRow(), keyfield, keyword, sell_check ,null);
 		}
 		
 		request.setAttribute("count", count);

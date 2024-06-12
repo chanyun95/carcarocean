@@ -11,11 +11,6 @@
 <title>내 차 팔기 메인</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<script>
-    	function openPopup() {
-    		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
-    	}
-	</script>
 	<style>
         .background-image1 {
             background-image: url('../images/logo.png');
@@ -58,7 +53,7 @@
 					<p class="small"><b class="text-danger"><i class="bi bi-exclamation-circle-fill"> </i>당일 판매</b>에 한함</p>
 				</div>
 				<div class="mt-5">
-					<button onclick="openPopup()" class="btn btn-danger" style="padding: 0.8rem 5rem; font-size: 1.75rem;"><b>간편 신청 ></b></button>
+					<button onclick="openPopup()" class="btn btn-warning text-white fw-bold" style="padding: 0.8rem 5rem; font-size: 1.75rem;"><b>간편 신청 ></b></button>
 				</div>
 			</div>
 		</div>
@@ -193,27 +188,27 @@
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP2</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>상담 진행</b></p>
 					<span class="text-secondary">상담원이 전화 상담으로 내용 확인</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP3</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>일정 조율</b></p>
 					<span class="text-secondary">차량 평가사와 전화로 방문 일정 조율</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP4</p><br>
-					<p><b>내차팔기신청</b></p>
-					<span class="text-secondary">K Car 차량 평가사가 방문하여 무료 견적</span>
+					<p><b>검수 진행</b></p>
+					<span class="text-secondary">CarCarOcean 차량 평가사가 방문하여 무료 견적</span>
 				</div>
 				<div class="col-2 p-2 border text-center">
 					<p class="badge text-bg-secondary">STEP5</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>계약 진행</b></p>
 					<span class="text-secondary">계약서 작성 후 당일 판매대금 입금</span>
 				</div>
 				<div class="col-2 p-2 border rounded-end text-center">
 					<p class="badge text-bg-secondary">STEP6</p><br>
-					<p><b>내차팔기신청</b></p>
+					<p><b>차량 인도</b></p>
 					<span class="text-secondary">차량 인도 및 명의 이전</span>
 				</div>
 			</div>
@@ -239,57 +234,40 @@
 			</c:forEach>
 			</div>
 		</div>
+		
 		<!-- 판매 후기 -->
 		<div class="my-5">
 			<h2 class="text-center"><b>판매 후기</b></h2>
-			<div class="row justify-content-between text-center p-4">
-				<div class="border rounded col-3">
-					1<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					2<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					3<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-			</div>
-			<div class="row justify-content-between text-center p-4">
-				<div class="border rounded col-3">
-					4<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					5<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
-				<div class="border rounded col-3">
-					6<br>
-					판매 후기 사진<br>
-					판매 차량<br>
-					판매 후기 제목<br>
-					판매 후기 내용<br>
-				</div>
+			<div class="p-4">
+				<c:forEach var="s_re" items="${s_reList}" begin="0" end="2">
+					<div class="border rounded-4 bg-light my-2">
+			        	<div class="d-flex justify-content-start">
+			        		<p class="border rounded mt-2 ms-2 mb-4 me-4 bg-white p-2" style="font-size:13px;">${s_re.sell_maker} ${s_re.sell_cname}</p>
+			        	</div>
+			        	<div class="d-flex justify-content-between">
+			        		<div class="ms-5">
+			        			<h5 class="fw-bold">${s_re.s_re_title}</h5>
+			        		</div>
+			        		<div class="me-5">
+			        			<p>${s_re.mem_id}</p>
+			        		</div>
+			        	</div>
+			        	<div class="fw-bold mx-5 p-1 mb-3" style="height:100px; overflow: hidden;">
+			        		${s_re.s_re_content}
+			        	</div>
+			        	<div class="small mx-5 my-3 text-secondary">
+			        		${fn:substring(s_re.s_re_reg,0,10)}
+			        	</div>
+			        </div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+    	function openPopup() {
+    		window.open("insertSellForm.do", "판매 신청서", "width=900,height=800,scrollbars=no,resizable=yes");
+    	}
+	</script>
 </body>
 </html>

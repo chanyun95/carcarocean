@@ -35,9 +35,9 @@ public class MyWriteBoardFormAction implements Action {
 		MyPageDao dao = MyPageDao.getDao();
 		//리스트 정보
 
+		List<BoardVo> list = MyPageDao.MyWrite(user_num);
 		List<B_ReVo> blist = MyPageDao.MyB_Re(user_num);
 		List<S_ReVo> slist = MyPageDao.MyS_Re(user_num);
-		List<BoardVo> list = MyPageDao.MyWrite(user_num);
 		request.setAttribute("list", list);
 		request.setAttribute("blist", blist);
 		request.setAttribute("slist", slist);

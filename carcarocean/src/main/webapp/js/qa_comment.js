@@ -54,6 +54,8 @@ $(function(){
 					initForm();
 					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서 첫 번째 페이지의 게시글 목록을 다시 호출함
 					selectList(1);
+					$('#answer').hide();
+					$('#re_form').hide();
 				}else{
 					alert('댓글 등록 오류');
 				}
@@ -103,16 +105,14 @@ $(function(){
 					output += '<p>' + item.qa_comm_content + '</p>';
 					
 					if(item.qa_comm_modify){
-						output += '<span class="modify-date">최근 수정일: ' + item.qa_comm_modify + '</span>';
+						output += '<span class="modify-date mb-5">' + item.qa_comm_modify.substring(0,10) + '</span><br>';
 					}else{
-						output += '<span class="modify-date">최근 등록일: ' + item.qa_comm_reg + '</span>';
+						output += '<span class="modify-date mb-5">' + item.qa_comm_reg.substring(0,10) + '</span><br>';
 					}
 					if(param.auth==9){
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="수정" class="modify-btn btn btn-warning text-white mt-2">';
+						output += ' <input type="button" data-renum="' + item.qa_comm_num + '" value="삭제" class="delete-btn btn btn-warning text-white mt-2">';
 					}	
-					
-					output += '<hr size="1" noshade width="100%">';
 					output += '</div>';
 					output += '</div>';
 					
@@ -152,11 +152,11 @@ $(function(){
 		//댓글 수정폼 UI
 		let modifyUI = '<form id="mre_form">';
 		modifyUI += '<input type="hidden" name="qa_comm_num" id="mre_num" value="'+ qa_comm_num +'">';
-		modifyUI += '<textarea rows="3" cols="50" name="qa_comm_content" id="mre_content" class="rep-content">'+ qa_comm_content +'</textarea>';
+		modifyUI += '<textarea rows="7" cols="100" name="qa_comm_content" id="mre_content" class="rep-content">'+ qa_comm_content +'</textarea>';
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mer_second" class="align-right">';
-		modifyUI += ' <input type="submit" value="수정">';
-		modifyUI += ' <input type="button" value="취소" class="re-reset">';
+		modifyUI += ' <input type="submit" class="btn btn-warning text-white" value="수정">';
+		modifyUI += ' <input type="button" value="취소" class="btn btn-warning text-white re-reset">';
 		modifyUI += '</div>';
 		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';
@@ -246,7 +246,9 @@ $(function(){
 				if(param.result == 'logout'){
 					alert('로그인해야 삭제할 수 있습니다.');
 				}else if(param.result == 'success'){
-					alert('삭제 완료!');
+					alert('답변이 삭제되었습니다.');
+					$('#answer').show();
+					$('#re_form').show();
 					selectList(1);
 				}else if(param.result == 'wrongAccess'){
 					alert('타인의 글을 삭제할 수 없습니다.');

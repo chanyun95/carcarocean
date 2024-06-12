@@ -12,13 +12,14 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<div class="row">
-			<c:set var="sub_title" value="${member.mem_name}님 문의내역"
+			<c:set var="sub_title" value="마이페이지"
 				scope="request" />
 			<jsp:include page="/WEB-INF/views/member/myPageMenu.jsp" />
 			<main class="col-md-10 pt-5 pb-5">
                 <div class="mypage-div">
-                	<h2>내 문의내역</h2>
-                    <table class="table">
+        
+                	<h2 class = "text-secondary">${member.mem_name}님의 문의내역</h2>
+                    <table class="table text-center align-content-center fw-bold mt-3">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -30,8 +31,8 @@
                         <tbody>
                             <c:forEach var="qa" items="${list}">
                                 <tr>
-                                    <td>${qa.qa_num}</td>
-                                    <td><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
+                                    <td width = "250px">${qa.qa_num}</td>
+                                    <td width = "250px"><a href="${pageContext.request.contextPath}/qa/detail.do?qa_num=${qa.qa_num}" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">${qa.qa_title}</a></td>
                                    	<td>${fn:substring(qa.qa_reg,0,10)}</td>
                                     <c:if test = "${!empty qa.qa_modify}">
 									<td>${fn:substring(qa.qa_modify,0,10)}</td>
@@ -43,6 +44,9 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test = "${empty list}">
+                    <td><h2 class = "text-center">데이터없음</h2></td>
+                    </c:if>
                 </div>
             </main>
 		</div>

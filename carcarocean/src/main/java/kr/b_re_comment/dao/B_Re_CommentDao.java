@@ -8,6 +8,7 @@ import java.util.List;
 
 import kr.b_re_comment.vo.B_Re_CommentVo;
 import kr.util.DBUtil;
+import kr.util.DurationFromNow;
 import kr.util.StringUtil;
 
 public class B_Re_CommentDao {
@@ -84,7 +85,9 @@ public class B_Re_CommentDao {
 		conn = DBUtil.getConnection();
 		//SQL문 작성
 		sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
-			+"(SELECT * FROM b_re_comment JOIN member USING(mem_num) "
+			+"(SELECT * FROM b_re_comment c "
+			+"JOIN member m ON c.mem_num = m.mem_num "
+			+"JOIN member_detail d ON m.mem_num = d.mem_num "
 			+"WHERE b_re_num=? ORDER BY b_re_comm_num DESC)a) WHERE rnum >=? AND rnum < ?";
 		//PreparedStatement 객체 생성
 		pstmt = conn.prepareStatement(sql);
@@ -98,24 +101,14 @@ public class B_Re_CommentDao {
 		while(rs.next()) {
 			B_Re_CommentVo comm = new B_Re_CommentVo();
 			comm.setB_re_comm_num(rs.getInt("b_re_comm_num"));
-			//날짜 -> 1분전, 1시간전, 1일전 형식의 문자열로 변환
-			/*
-			reply.setRe_date(
-					DurationFromNow.getTimeDiffLabel(
-					          rs.getString("re_date")));
-			if(rs.getString("re_modifydate")!=null) {
-				reply.setRe_modifydate(
-						DurationFromNow.getTimeDiffLabel(
-						   rs.getString("re_modifydate")));
-			}
-			*/
-			comm.setB_re_comm_content(StringUtil.useBrNoHTML(
-					            rs.getString("b_re_comm_content")));
+			comm.setB_re_comm_content(StringUtil.useBrNoHTML(rs.getString("b_re_comm_content")));
 			comm.setB_re_comm_report(rs.getInt("b_re_comm_report"));
 			comm.setB_re_num(rs.getInt("b_re_num"));
 			comm.setMem_num(rs.getInt("mem_num"));//작성자 회원번호
 			comm.setMem_id(rs.getString("mem_id"));//작성자 아이디
-			comm.setB_re_comm_reg(rs.getString("b_re_comm_reg"));
+			comm.setMem_photo(rs.getString("mem_photo"));//작성자 프로필 사진
+			//날짜 -> 1분전, 1시간전, 1일전 형식의 문자열로 변환
+			comm.setB_re_comm_reg(DurationFromNow.getTimeDiffLabel(rs.getString("b_re_comm_reg")));
 			
 			list.add(comm);
 		}

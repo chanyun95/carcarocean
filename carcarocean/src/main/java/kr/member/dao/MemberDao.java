@@ -100,7 +100,7 @@ public class MemberDao {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			//zmember와 zmember_detail 테이블을 조인할 때
+			//member와 member_detail 테이블을 조인할 때
 			//누락된 데이터가 보여야 id 중복 체크 가능
 			sql = "SELECT * FROM member LEFT OUTER JOIN "
 					+ "member_detail USING(mem_num) WHERE mem_id = ?";
@@ -117,6 +117,7 @@ public class MemberDao {
 				member.setMem_auth(rs.getInt("mem_auth"));
 				member.setMem_passwd(rs.getString("mem_passwd"));
 				member.setMem_photo(rs.getString("mem_photo"));
+				member.setMem_grade(rs.getInt("mem_grade"));
 				member.setMem_email(rs.getString("mem_email"));//회원 탈퇴시 필요
 			}
 		}catch(Exception e) {
@@ -158,6 +159,7 @@ public class MemberDao {
 				member.setMem_id(rs.getString("mem_id"));
 				member.setMem_email(rs.getString("mem_email"));
 				member.setMem_auth(rs.getInt("mem_auth"));
+				member.setMem_grade(rs.getInt("mem_grade"));
 				member.setMem_name(rs.getString("mem_name"));
 				member.setMem_phone(rs.getString("mem_phone"));
 				member.setMem_zipcode(rs.getString("mem_zipcode"));
@@ -415,5 +417,51 @@ public class MemberDao {
 		}
 		return member;
 	}
+	//회원 ID로 회원 정보를 가져오는 메소드
+	public MemberVo getMemberByMemId(String mem_id) throws Exception {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    MemberVo member = null;
+	    String sql = null;
+	    int cnt = 0;
+	    try {
+	        //커넥션풀로부터 커넥션 할당
+	        conn = DBUtil.getConnection();
 
+	        //SQL문 작성
+	        sql = "SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_id=?";
+
+	        //PreparedStatment 객체 생성
+	        pstmt = conn.prepareStatement(sql);
+
+	        //?에 데이터 바인딩
+	        pstmt.setString(1, mem_id);
+
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            member = new MemberVo();
+	            member.setMem_num(rs.getInt("mem_num"));
+	            member.setMem_name(rs.getString("mem_name"));
+	            member.setMem_id(rs.getString("mem_id"));
+	            member.setMem_email(rs.getString("mem_email"));
+	            member.setMem_auth(rs.getInt("mem_auth"));
+	            member.setMem_name(rs.getString("mem_name"));
+	            member.setMem_phone(rs.getString("mem_phone"));
+	            member.setMem_zipcode(rs.getString("mem_zipcode"));
+	            member.setMem_address1(rs.getString("mem_address1"));
+	            member.setMem_address2(rs.getString("mem_address2"));
+	            member.setMem_photo(rs.getString("mem_photo"));
+	            member.setMem_reg(rs.getString("mem_reg"));//가입일
+	            member.setMem_modify(rs.getString("mem_modify"));//수정일
+	        }
+
+	    } catch (Exception e) {
+	        throw new Exception(e);
+	    } finally {
+	        DBUtil.executeClose(rs, pstmt, conn);
+	    }
+	    return member;
+	}
 }

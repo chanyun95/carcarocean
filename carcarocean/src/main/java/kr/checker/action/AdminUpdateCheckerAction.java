@@ -19,7 +19,7 @@ public class AdminUpdateCheckerAction implements Action{
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		//로그인 안되어 있을 시 로그인 폼으로 이동
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {

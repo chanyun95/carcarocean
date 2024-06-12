@@ -1,12 +1,17 @@
 package kr.member.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.board.vo.BoardVo;
 import kr.controller.Action;
 import kr.member.dao.MemberDao;
 import kr.member.vo.MemberVo;
+import kr.mypage.dao.MyPageDao;
+import kr.sell.vo.SellVo;
 
 public class MyPageAction implements Action{
 
@@ -24,8 +29,17 @@ public class MyPageAction implements Action{
 		MemberDao dao = MemberDao.getDao();
 		MemberVo member = dao.getMember(user_num);
 		
-		//관심게시물 정보 넣어야됨.
+
+		MyPageDao dao1 = MyPageDao.getDao();
+		//리스트 정보
 		
+		int cost = dao1.getMyGradeUpCost(user_num);
+		List<BoardVo> list = MyPageDao.MyWrite(user_num);
+		List<SellVo> slist = MyPageDao.getSellCurrent(user_num);
+		
+		request.setAttribute("cost", cost);
+		request.setAttribute("slist", slist);
+		request.setAttribute("list", list);
 		request.setAttribute("member", member);
 		return "/WEB-INF/views/member/myPage.jsp";
 	}

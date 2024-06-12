@@ -12,8 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<hr size="1" width="100%" noshade="noshade">
-		<h1 class="my-3 text-center">검수자 정보 목록</h1>
+		<h1 class="my-5 text-center">검수자 정보 목록</h1>
 		<table class="table table-hover mt-3 text-center fw-bold">
 			<thead class="table-light">
 				<tr>
@@ -34,9 +33,10 @@
 		</table>
 		<div class="text-center">${page}</div>
 		<hr size="1" width="100%" noshade="noshade">
-		<div class="float-end">
-			<input type="button" value="검수자 등록" class="btn btn-primary" onclick="location.href='adminWriteCheckerForm.do'">
+		<div class="text-end mb-5">
+			<input type="button" value="검수자 등록" class="btn btn-warning btn-lg text-lg text-white fw-bold" onclick="location.href='adminWriteCheckerForm.do'">
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글쓰기(관리자)</title>
+<title>공지사항 글 쓰기(관리자)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -38,10 +38,10 @@
 				</ul>
 				<div class="mt-3 mb-5 row justify-content-center">
 					<div class="col-auto">
-						<input type="submit" class="btn btn-warning" value="글 쓰기">
+						<input type="submit" class="btn btn-warning text-white" value="글 쓰기">
 					</div>		
 					<div class="col-auto">
-						<input type="button" class="btn btn-warning" value="목록" onclick="location.href='list.do'">
+						<input type="button" class="btn btn-warning text-white" value="목록" onclick="location.href='list.do'">
 					</div>
 				</div>
 			</form>

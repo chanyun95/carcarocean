@@ -76,7 +76,9 @@ public class Board_commentDao {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
-					+ "(SELECT * FROM board_comment JOIN member USING(mem_num) "
+					+ "(SELECT * FROM board_comment c "
+					+ "JOIN member m ON c.mem_num = m.mem_num "
+					+ "JOIN member_detail d ON m.mem_num = d.mem_num "
 					+ "WHERE board_num=? ORDER BY bor_comm_num DESC)a) "
 					+ "WHERE rnum >= ? AND rnum <= ?";
 			pstmt = conn.prepareStatement(sql);
@@ -94,6 +96,7 @@ public class Board_commentDao {
 				comm.setBoard_num(rs.getInt("board_num"));
 				comm.setMem_num(rs.getInt("mem_num"));
 				comm.setMem_id(rs.getString("mem_id"));
+				comm.setMem_photo(rs.getString("mem_photo"));
 				
 				list.add(comm);
 			}
@@ -104,8 +107,7 @@ public class Board_commentDao {
 		}
 		return list;
 	}
-	//자유게시판 댓글 수정
-	//자유게시판 댓글 삭제
+
 	//자유게시판 댓글 신고 등록
 	//자유게시판 댓글 신고 개수
 }

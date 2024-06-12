@@ -11,7 +11,7 @@ public class QaVo {
 	private String qa_modify;
 	
 	private String mem_id;			
-	private String photo;
+	private String mem_photo;
 	
 	public int getQa_num() {
 		return qa_num;
@@ -67,11 +67,12 @@ public class QaVo {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public String getPhoto() {
-		return photo;
+	public String getMem_photo() {
+		return mem_photo;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
 	}
+	
 	
 }

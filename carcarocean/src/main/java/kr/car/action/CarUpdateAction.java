@@ -10,6 +10,7 @@ import kr.car.dao.CarDao;
 import kr.car.vo.CarVO;
 import kr.controller.Action;
 import kr.util.FileUtil;
+import kr.util.StringUtil;
 
 public class CarUpdateAction implements Action{
 
@@ -21,7 +22,7 @@ public class CarUpdateAction implements Action{
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
 		//로그인 안되어 있을 시 로그인 폼으로 이동
 		if(user_num==null) {
-			return "redirect:/member/loginForm.do";
+			return "/WEB-INF/views/common/logout.jsp";
 		}
 		//관리자아닌데 잘못된 접근시 main.do로 이동
 		if(user_auth!=9) {
@@ -63,7 +64,7 @@ public class CarUpdateAction implements Action{
 		car.setCar_con_op(request.getParameter("car_con_op"));
 		car.setCar_drive_op(request.getParameter("car_drive_op"));
 		car.setChecker_num(Integer.parseInt(request.getParameter("checker_num")));
-		car.setCar_checker_opinion(request.getParameter("car_checker_opinion"));
+		car.setCar_checker_opinion(StringUtil.useBrNoHTML(request.getParameter("car_checker_opinion")));
 		
 		
 		dao.updateCar(car);

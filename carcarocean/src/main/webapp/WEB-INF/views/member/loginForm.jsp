@@ -64,12 +64,12 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
-    <div class="container">
+    <div class="container" style = "margin-bottom:150px;">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mt-5 mb-3">로그인</h2>
+                <h2 class="text-center mt-5 mb-3 text-warning">로그인</h2>
                 <!-- 로그인 폼 -->
-                <form id="login_form" action="login.do" method="post" class="border border-warning p-3">
+                <form id="login_form" action="login.do" method="post" class="p-3 rounded-4 bg-light shadow">
                     <div class="form-group">
                         <label for="mem_id">아이디</label>
                         <input type="text" class="form-control" name="mem_id" id="mem_id" maxlength="12">
@@ -78,12 +78,12 @@
                         <label for="mem_passwd">비밀번호</label>
                         <input type="password" class="form-control" name="mem_passwd" id="mem_passwd">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">로그인</button>
+                    <button type="submit" class="btn btn-warning btn-block text-white">로그인</button>
                 </form>
                 <br>
 	            <div class="d-grid gap-2 d-md-block">
-	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findIdForm.do'">아이디 찾기</button>
-	 				 <button class="btn btn-warning" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findPasswdForm.do'">비밀번호 찾기</button>
+	 				 <button class="btn btn-warning text-white" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findIdForm.do'">아이디 찾기</button>
+	 				 <button class="btn btn-warning text-white" type="button" onclick="location.href='${pageContext.request.contextPath}/member/findPasswdForm.do'">비밀번호 찾기</button>
 				</div>
             </div>
                 <!-- 카카오 로그인 버튼 -->
@@ -99,5 +99,6 @@
                 <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button>
         </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

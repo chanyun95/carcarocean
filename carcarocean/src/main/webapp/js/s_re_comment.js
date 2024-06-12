@@ -27,17 +27,22 @@ $(function(){
 				}
 				
 				$(param.list).each(function(index,item){ //item은 댓글의 하나의 레코드라고 보면된다.
-					let output = '<div class="item">';
-					output +='<h4>' + item.mem_id + '</h4>';
-					output += '<div class="sub-item">';
-					output += '<p>' + item.s_re_comm_content + '</p>';
-					output +=' <input type="button" data-renum="'+ item.s_re_comm_num +'" value="신고" class="report-btn">';
-					output += '<span class="modify-date">최근 등록일 : ' + item.s_re_comm_reg + '</span>';
-					
-					
-					output +='<hr size="1" noshade width="100%">'
+					let output = '<div class="card mb-3 border-0">';
+					output += '<div class="card-body">';
+					output += '<div class="d-flex align-items-center">';
+					if (item.mem_photo != null) {
+			            output += '<img class="rounded-circle me-3" width="50" height="50" src="${pageContext.request.contextPath}/upload/' + item.mem_photo + '">';
+			        } else {
+			            // 만약 mem_photo가 null인 경우, 기본 이미지를 사용
+			            output += '<img class="rounded-circle me-3" width="50" height="50" src="../images/face.png">';
+			        }
+					output +='<h5 class="card-title mb-0">' + item.mem_id + '</h5>';
+					output += '</div>';
+					output += '<p class="card-text mt-2 mb-2">' + item.s_re_comm_content + '</p>';
+					output += '<p class="card-text mb-0"><small class="text-muted">등록일 : ' + item.s_re_comm_reg + '</small></p>';
 					output += '</div>';
 					output += '</div>';
+					output += '<hr>';
 					
 					//문서 객체에 추가
 					$('#output').append(output);

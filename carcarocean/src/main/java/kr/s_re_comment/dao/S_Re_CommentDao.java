@@ -8,6 +8,7 @@ import java.util.List;
 
 import kr.s_re_comment.vo.S_Re_CommentVo;
 import kr.util.DBUtil;
+import kr.util.DurationFromNow;
 
 public class S_Re_CommentDao {
 	//싱글턴 패턴
@@ -81,7 +82,9 @@ public class S_Re_CommentDao {
 			conn = DBUtil.getConnection();
 			//SQL문 작성
 			sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
-				+"(SELECT * FROM s_re_comment JOIN member USING(mem_num) "
+				+"(SELECT * FROM s_re_comment c "
+				+ "JOIN member m ON c.mem_num = m.mem_num "
+				+ "JOIN member_detail d ON m.mem_num = d.mem_num "
 				+"WHERE s_re_num=? ORDER BY s_re_comm_num DESC)a) WHERE rnum >=? AND rnum <?";
 			//PreparedStatment 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -100,7 +103,9 @@ public class S_Re_CommentDao {
 				reply.setS_re_comm_content(rs.getString("s_re_comm_content"));
 				reply.setS_re_num(rs.getInt("s_re_num"));
 				reply.setMem_num(rs.getInt("mem_num"));//작성자 회원번호
+				reply.setMem_photo(rs.getString("mem_photo"));//작성자 프로필 사진
 				reply.setMem_id(rs.getString("mem_id"));//작성자 아이디 (조인했기 때문에 가져올 수 있음)
+				reply.setS_re_comm_reg(DurationFromNow.getTimeDiffLabel(rs.getString("s_re_comm_reg")));
 				list.add(reply);
 			}
 		}catch(Exception e) {

@@ -28,7 +28,9 @@ public class ListAction implements Action{
 	    
 		BoardDao dao = BoardDao.getDao();
 		int count = dao.getBoardCount(keyfield, keyword);
-		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"list.do");
+		
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,10,10,"list.do");
 		
 		List<BoardVo> list = null;
 		if(count > 0) {
@@ -38,6 +40,8 @@ public class ListAction implements Action{
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 		request.setAttribute("board_report", boardReport);
+		request.setAttribute("keyfield", keyfield);
+		
 		
 		return "/WEB-INF/views/board/list.jsp";
 	}

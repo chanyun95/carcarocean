@@ -25,7 +25,7 @@ public class LoginAction implements Action{
 		if(member!=null) {//동일한 id 존재
 			//비밀번호 일치 여부 체크
 			check = member.isCheckedPassword(mem_passwd);
-			//정지회원의 경우 상태 표시
+			//정지,탈퇴 회원의 경우 상태 표시
 			request.setAttribute("mem_auth", member.getMem_auth());
 		}
 		if(check) {//인증 성공
@@ -35,6 +35,7 @@ public class LoginAction implements Action{
 					                   member.getMem_num());
 			session.setAttribute("user_id", member.getMem_id());
 			session.setAttribute("user_auth", member.getMem_auth());
+			session.setAttribute("user_grade", member.getMem_grade());
 			session.setAttribute("user_photo", member.getMem_photo());
 			//메인으로 리다이렉트
 			return "redirect:/main/main.do";

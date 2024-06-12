@@ -15,8 +15,14 @@ public class S_ReVo {
 	private String sell_cname;
 	
 	private String mem_id;			//회원아이디
+	private String mem_photo;		//회원 프로필 사진
 	
-	
+	public String getMem_photo() {
+		return mem_photo;
+	}
+	public void setMem_photo(String mem_photo) {
+		this.mem_photo = mem_photo;
+	}
 	public int getSell_num() {
 		return sell_num;
 	}

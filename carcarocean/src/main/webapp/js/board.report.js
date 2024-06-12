@@ -37,9 +37,10 @@ $(function(){
 					}else if(param.result == 'success'){
 							alert('신고되었습니다.');
 							if(param.count>=10){
-								checkRedirect();
-							}
-							$('#output_report').off('click');
+									alert('신고 수가 10을 넘어가 페이지가 이동합니다.');
+				       	 	location.href = 'list.do';
+				       	 	}
+				       	 	displayReport(param);		
 					}else{
 						alert('신고 등록/삭제 오류 발생');
 					}
@@ -57,15 +58,16 @@ $(function(){
         let output;
         let text;
         if(param.status === 'yesReport'){
-            output = '../images/report01.png';
-            text = '이미 신고된 글입니다.';
-            $('#output_report').off('click');
+            $("#reportIcon").removeClass("bi-exclamation-octagon-fill").addClass("bi-exclamation-octagon");
+            $("#output_report").attr("disabled","disabled");
+            
         } else if(param.status === 'alreadyReport'){
-			output = '../images/report01.png';
-            text = '이미 신고된 글입니다.';
+			
+            $("#reportIcon").removeClass("bi-exclamation-octagon-fill").addClass("bi-exclamation-octagon");
+            $("#output_report").attr("disabled","disabled");
         } else {
-            output = '../images/report01.png';
-            text = '신고하기';
+            
+            $("#reportIcon").removeClass("bi-exclamation-octagon").addClass("bi-exclamation-octagon-fill");
         }
 		//문서 객체에 설정
 		$('#output_report').attr('src',output);
@@ -77,13 +79,7 @@ $(function(){
             });
         }
 	}
-	
-	function checkRedirect() {
 
-        alert('신고 수가 10을 넘어가 페이지가 이동합니다.');
-        location.href = 'list.do';
-
-    }
 
 
 	/*============================

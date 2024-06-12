@@ -8,14 +8,6 @@
 <title>검수자 정보 등록 폼</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<script>
-	function submit_btn() {
-		if(!confirm("등록하시겠습니까?")){
-			return false;
-		}
-		alert('등록되었습니다!');
-	}
-</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container text-center p-5">
@@ -48,5 +40,13 @@
 			</div>
 		</form>
 	</div>
+<script>
+	function submit_btn() {
+		if(!confirm("등록하시겠습니까?")){
+			return false;
+		}
+		alert('등록되었습니다!');
+	}
+</script>
 </body>
 </html>

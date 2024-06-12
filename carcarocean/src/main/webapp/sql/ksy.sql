@@ -16,7 +16,7 @@ CREATE TABLE SELL (
 	sell_modify DATE,
 	mem_num NUMBER NOT NULL,
 	constraint sell_pk primary key (sell_num),
-	constraint sell_fk foreign key (mem_num) references member (mem_num),
+	constraint sell_fk foreign key (mem_num) references member (mem_num)
 );
 CREATE SEQUENCE SELL_SEQ;
  
@@ -41,7 +41,7 @@ CREATE TABLE CHECKER(
 	checker_phone VARCHAR2(11) NOT NULL,
 	CONSTRAINT checker_pk PRIMARY KEY (checker_num)
 );
-CREATE CHECKER_SEQ;
+CREATE SEQUENCE CHECKER_SEQ;
 
 -- 차량 테이블
 CREATE TABLE CAR(
@@ -83,3 +83,31 @@ CREATE TABLE FAVORITE_CAR (
 	CONSTRAINT favorite_car_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 )
 CREATE SEQUENCE FAVORITE_CAR_SEQ;
+
+-- 아이템 테이블
+create table item(
+    item_num NUMBER NOT NULL,
+    mem_num NUMBER NOT NULL,
+    item_name VARCHAR2(150) NOT NULL,
+    item_price NUMBER NOT NULL,
+    item_detail VARCHAR2(500) NOT NULL,
+    item_photo CLOB,
+    item_reg DATE DEFAULT SYSDATE NOT NULL,
+    item_status NUMBER DEFAULT 0 NOT NULL,
+    item_views NUMBER DEFAULT 0 NOT NULL,
+    constraint item_pk primary key (item_num),
+    constraint item_fk foreign key (mem_num) references member (mem_num)
+);
+create sequence item_seq;
+
+-- 아이템 구매 테이블
+create table item_buy(
+    item_buy_num NUMBER NOT NULL,
+    mem_num NUMBER NOT NULL,
+    item_num NUMBER NOT NULL,
+    item_buy_date DATE DEFAULT SYSDATE NOT NULL,
+    constraint item_buy_pk primary key (item_buy_num),
+    constraint item_buy_fk1 foreign key (mem_num) references member (mem_num),
+    constraint item_buy_fk2 foreign key (item_num) references item (item_num)
+);
+create sequence item_buy_seq;

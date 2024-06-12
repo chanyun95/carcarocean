@@ -18,6 +18,7 @@ public class DetailAction implements Action{
 		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
 		
 		NoticeDao dao = NoticeDao.getDao();
+		//조회수 증가
 		dao.updateReadCount(notice_num);
 		
 		NoticeVo notice = dao.getNotice(notice_num);

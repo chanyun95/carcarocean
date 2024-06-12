@@ -13,12 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <title>내 차 구매 메인</title>
 	<style>
-        /* 검색 창의 너비 조절*/
-        #keyword {
-            width: 400px;
-            height: 50px;
-        }
-        /* 판매 완료 차량 사진 흑백 */
+        /* 사진 흑백 */
         .brightness {
         	filter: brightness(50%);
     	}
@@ -60,11 +55,15 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
- <div class="container">
+<jsp:include page="/WEB-INF/views/common/loading.jsp" />
+<div class="container">
      <div class="row">
          <!-- 사이드바 메뉴 -->
          <nav class="col-md-2 sidebar mt-5">
              <ul class="nav flex-column bg-light rounded">
+             	<li>
+             		<hr width="0%">
+             	</li>
              	<!-- 첫번째 토글 -->
                  <li class="my-3 text-center fw-bold">
 					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
@@ -200,19 +199,25 @@
 						</div>
 					 </div>
                  </li>
+                 <li>
+             		<hr width="0%">
+             	</li>
              </ul>
          </nav>
          <!-- 사이드바 제외 메인 컨텐츠 -->
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
-         	<div class="d-flex justify-content-center rounded bg-light p-5 mb-5">
-				<form id="search_form" action="mainBuy.do" method="get" class="d-flex justify-content-center">
-					<select id="keyfield" name="keyfield" class="form-select" style="width:auto;">
-						<option value="1" <c:if test="${keyfield == 0}">selected</c:if>>제조사</option>
-						<option value="2" <c:if test="${keyfield == 1}">selected</c:if>>차명</option>
-					</select>
-					<input type="search" id="keyword" name="keyword" class="form-control rounded" placeholder="원하는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon">
-					<input type="submit" class="btn btn-warning fw-bold" value="검색">
+         	<div class="d-flex justify-content-center rounded" style="background-color:#f5f6f9;">
+				<form id="search_form" action="mainBuy.do" method="get">
+					<div class="d-flex align-items-center m-5">
+						<select id="keyfield" name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
+							<option value="1" <c:if test="${keyfield == 1}">selected</c:if>>제조사</option>
+							<option value="2" <c:if test="${keyfield == 2}">selected</c:if>>차명</option>
+						</select>
+						<input type="search" id="keyword" name="keyword" class="form-control rounded me-2" placeholder="원하시는 제조사/차량을 검색하세요." aria-label="Search" aria-describedby="search-addon" style="width:400px;">
+						<button type="submit" class="btn btn-warning fw-bold text-white btn-lg rounded me-2"><i class="bi bi-search"></i></button>
+						<button class="btn btn-warning fw-bold text-white btn-lg me-2" onclick="reset_btn()"><i class="bi bi-arrow-clockwise"></i></button>
+					</div>
 				</form>
 			</div>
 			<h4><b>총 <span class="text-danger"><fmt:formatNumber value="${count}" type="number"/></span>대</b></h4>
@@ -231,17 +236,11 @@
 		                <div class="p-3 border bg-light">
 		                	<!-- 사진 상자 -->
 		                	<div class="image-container ps-3">
-			                	<!-- 판매중이거나 관리자라면 링크 그대로 이미지 그대로-->
-			                	<c:if test="${car.car_status==0 or user_auth==9}">
 			                	<a href="buyDetail.do?car_num=${car.car_num}">
-			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded img-fluid">
+			                		<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded-4 img-fluid">
 		                		</a>
-			                	</c:if>
-			                	<!-- 판매완료고 관리자가 아니면 이미지가 brightness되면서 링크 사라짐-->
-			                	<c:if test="${car.car_status==1 and user_auth!=9}">
-			                	<img src="${pageContext.request.contextPath}/upload/${firstPhoto}" style="width:270px; height:200px;" class="img-fluid img-thumbnail rounded brightness img-fluid">
-			                	</c:if>
               	     			<c:set var="favIconId" value="fav_icon_${status.index}" />
+              	     			<!-- 관심차량 아이콘 체크 -->
               	     			<c:if test="${!car.fav_check}">
 		                		<i id="${favIconId}" class="bi bi-heart overlay-icon" style="cursor:pointer;" onclick="favCar(${car.car_num},'${favIconId}')"></i>
 		                		</c:if>
@@ -251,18 +250,18 @@
 		                	</div>
 		                	<!-- 설명 -->
 		                	<div>
-		                		<!-- 판매 중 -->
-		                		<c:if test="${car.car_status==0}">
-			                	<p class="fs-5 mt-3 fw-bold"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a></p>
-			                	<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
-			                	</c:if>
-			                	<!-- 판매 완료 -->
+			                	<div class="fs-5 mt-3 fw-bold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name">${car.car_maker} ${car.car_name}</a></div>
 			                	<c:if test="${car.car_status==1}">
-			                	<p class="fs-5 mt-3 fw-bold">${car.car_maker} ${car.car_name}<b class="text-danger"> 예약완료</b></p>
-			                	<p class="mt-3"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></p>
-			                	</c:if>
+		                		<c:if test="${empty car.mem_num or car.mem_num!=user_num}"><span class="text-danger small fw-bold"> 예약완료</span></c:if>
+		                		<c:if test="${!empty car.mem_num and car.mem_num==user_num}"><span class="text-warning small fw-bold"> 내가 예약한 차량</span></c:if>
+          						</c:if>
+          						<c:if test="${car.car_status!=1}">
+		                		<p>&nbsp</p>
+          						</c:if>
+			                	<p class="mt-3"><a href="buyDetail.do?car_num=${car.car_num}" class="menu-name"><b><fmt:formatNumber value="${car.car_price}"/> 만원</b></a></p>
+			                	
 			                	<div class="mt-3" style="font-size:12px;">${fn:substring(car.car_birth,2,4)}년${fn:substring(car.car_birth,5,7)}월식
-			                	<div class="vr mx-1"></div>${car.car_mile}km
+			                	<div class="vr mx-1"></div><fmt:formatNumber value="${car.car_mile}" type="number"/>km
 			                	<div class="vr mx-1"></div>
 				                	<c:if test="${car.car_fuel_type==1}">가솔린</c:if>
 				                	<c:if test="${car.car_fuel_type==2}">디젤</c:if>
@@ -310,6 +309,9 @@
         		alert('네트워크에 오류가 발생했습니다!');
         	}
         });
+    };
+    function reset_btn(){
+    	location.href='redirect:/buy/mainBuy.do';
     };
 </script>
 </body>
