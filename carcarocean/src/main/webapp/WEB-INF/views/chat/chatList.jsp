@@ -33,7 +33,9 @@
 			<c:forEach var="member" items="${memberList}">
 			<div class="d-flex justify-content-between bg-light border rounded my-3 p-3">
 				<div class="align-self-center fw-bold">
-					<span class="badge bg-danger me-2">New</span>${member.mem_id}님의 새로운 채팅
+					<span class="badge bg-danger me-2">New</span>
+					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}"class="rounded-circle" width="50px" height="50px">
+					<span>${member.mem_id}님의 새로운 채팅</span>
 				</div>
 				<div>
 					<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${user_num}&chat_receiver=${member.mem_num}'">대화 참여</button>
