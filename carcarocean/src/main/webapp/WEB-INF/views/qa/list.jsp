@@ -81,7 +81,7 @@
 									</c:if>
 									<c:if test="${qa.qa_status == 2}">
 										<td><a href="detail.do?qa_num=${qa.qa_num}"
-											class="text-decoration-none text-blue fw-bold">처리</a></td>
+											class="text-decoration-none text-danger fw-bold">처리</a></td>
 									</c:if>
 									<td><a href="detail.do?qa_num=${qa.qa_num}"
 										class="text-decoration-none text-dark fw-bold">${qa.qa_title}</a></td>
@@ -102,7 +102,7 @@
 										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><a class="text-decoration-none text-dark fw-bold">미처리</a></td>
 									</c:if>
 									<c:if test="${qa.qa_status == 2}">
-										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><a class="text-decoration-none text-blue fw-bold">처리</a></td>
+										<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><a class="text-decoration-none text-danger fw-bold">처리</a></td>
 									</c:if>
 									<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.qa_title}</b></td>
 									<td onclick="alert('조회할 수 있는 권한이 없습니다.')"><b>${qa.mem_id}</b></td>
