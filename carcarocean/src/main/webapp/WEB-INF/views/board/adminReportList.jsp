@@ -37,7 +37,7 @@
 							<c:if test = "${!empty board.board_modify}">${fn:substring(board.board_modify,0,10)}</c:if>
 						</td>
 						<td>${board.board_hit}</td>
-						<td><input type="button" class="btn btn-danger text-white" value="삭제" onclick="delete_board(this)" data-num="${board.board_num}"></td>
+						<td><input type="button" class="btn btn-danger text-white" value="삭제" onclick="delete_board(this)" data-num1="${board.board_num}"></td>
                       </tr>
 				</c:if>
 			</c:forEach>
@@ -69,7 +69,7 @@
 						<c:if test = "${!empty info.info_board_modify}">${fn:substring(info.info_board_modify,0,10)}</c:if>
 						</td>
 						<td>${info.info_board_hit}</td>
-						<td><input type="button" class="btn btn-danger text-white" value="삭제" onclick="delete_info(this)" data-num="${info.info_board_num}"></td>
+						<td><input type="button" class="btn btn-danger text-white" value="삭제" onclick="delete_info(this)" data-num2="${info.info_board_num}"></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -80,14 +80,14 @@
 	<script>
 		function delete_board(button){
 			if(confirm('신고 누적된 게시글을 삭제하시겠습니까?')){
-				const board_num = button.getAttribute('data-num');
-				location.href='${pageContext.request.contextPath}/board/delete.do?board_num='+data_num;
+				const board_num1 = button.getAttribute('data-num1');
+				location.href='${pageContext.request.contextPath}/board/delete.do?board_num='+board_num1;
 			}
 		};
 		function delete_info(button){
 			if(confirm('신고 누적된 게시글을 삭제하시겠습니까?')){
-				const board_num = button.getAttribute('data-num');
-				location.href='${pageContext.request.contextPath}/info/delete.do?info_board_num='+data_num;
+				const board_num2 = button.getAttribute('data-num2');
+				location.href='${pageContext.request.contextPath}/info/delete.do?info_board_num='+board_num2;
 			}
 		};
 	</script>
