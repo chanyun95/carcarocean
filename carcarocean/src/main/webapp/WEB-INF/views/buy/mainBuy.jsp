@@ -60,27 +60,27 @@
      <div class="row">
          <!-- 사이드바 메뉴 -->
          <nav class="col-md-2 sidebar mt-5">
-             <ul class="nav flex-column bg-light rounded">
+             <ul class="nav flex-column rounded" style="background-color: #696969;">
              	<li>
              		<hr width="0%">
              	</li>
              	<!-- 첫번째 토글 -->
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="text-white fs-5 menu-name">
 						차종
 					</a>
 					 <div class="collapse mt-3" id="collapseExample1">
-						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">경차</button>
-							<button class="col-5 btn btn-outline-secondary">소형차</button>
+						<div class="row justify-content-center mb-2">
+							<button class="col-5 btn btn-dark">경차</button>
+							<button class="col-5 btn btn-dark">소형차</button>
+						</div>
+						<div class="row justify-content-center mb-2">
+							<button class="col-5 btn btn-dark">준중형차</button>
+							<button class="col-5 btn btn-dark">중형차</button>
 						</div>
 						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">준중형차</button>
-							<button class="col-5 btn btn-outline-secondary">중형차</button>
-						</div>
-						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">준대형차</button>
-							<button class="col-5 btn btn-outline-secondary">대형차</button>
+							<button class="col-5 btn btn-dark">준대형차</button>
+							<button class="col-5 btn btn-dark">대형차</button>
 						</div>
 					 </div>
                  </li>
@@ -90,7 +90,7 @@
                  </li>
                  
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="text-white fs-5 menu-name">
 						연식
 					</a>
 					 <div class="collapse mt-3" id="collapseExample2">
@@ -107,7 +107,7 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="text-white fs-5 menu-name">
 						주행거리
 					</a>
 					 <div class="collapse mt-3" id="collapseExample3">
@@ -124,7 +124,7 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="text-white fs-5 menu-name">
 						가격
 					</a>
 					 <div class="collapse mt-3" id="collapseExample4">
@@ -141,7 +141,7 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="text-white fs-5 menu-name">
 						색상
 					</a>
 					 <div class="collapse mt-3" id="collapseExample5">
@@ -156,7 +156,7 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="text-white fs-5 menu-name">
 						옵션
 					</a>
 					 <div class="collapse mt-3" id="collapseExample6">
@@ -171,17 +171,17 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="text-white fs-5 menu-name">
 						연료
 					</a>
 					 <div class="collapse mt-3" id="collapseExample7">
 						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">가솔린</button>
-							<button class="col-5 btn btn-outline-secondary">디젤</button>
+							<button class="col-5 btn btn-dark">가솔린</button>
+							<button class="col-5 btn btn-dark">디젤</button>
 						</div>
 						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">전기</button>
-							<button class="col-5 btn btn-outline-secondary">수소</button>
+							<button class="col-5 btn btn-dark">전기</button>
+							<button class="col-5 btn btn-dark">수소</button>
 						</div>
 					 </div>
                  </li>
@@ -189,13 +189,13 @@
                  	<hr size="1" noshade width="100%">
                  </li>
                  <li class="my-3 text-center fw-bold">
-					<a data-bs-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="text-secondary fs-5 menu-name">
+					<a data-bs-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="text-white fs-5 menu-name">
 						변속기
 					</a>
 					 <div class="collapse mt-3" id="collapseExample8">
 						<div class="row justify-content-center">
-							<button class="col-5 btn btn-outline-secondary">오토</button>
-							<button class="col-5 btn btn-outline-secondary">수동</button>
+							<button class="col-5 btn btn-dark">오토</button>
+							<button class="col-5 btn btn-dark">수동</button>
 						</div>
 					 </div>
                  </li>
@@ -207,7 +207,7 @@
          <!-- 사이드바 제외 메인 컨텐츠 -->
          <main class="col-md-10 pt-5 pb-5">
          	<!-- 검색바 -->
-         	<div class="d-flex justify-content-center rounded" style="background-color:#f5f6f9;">
+         	<div class="d-flex justify-content-center rounded" style="background-color: #A9A9A9;">
 				<form id="search_form" action="mainBuy.do" method="get">
 					<div class="d-flex align-items-center m-5">
 						<select id="keyfield" name="keyfield" class="form-select" style="width:auto; margin-right:10px;">
