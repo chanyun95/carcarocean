@@ -136,7 +136,7 @@ public class BoardDao {
 				
 				sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
 						+ "(SELECT * FROM board JOIN member USING(mem_num) "
-						+ " ORDER BY board_num DESC)a) WHERE rnum >=? AND rnum <=?";
+						+ " WHERE board_report<10 ORDER BY board_num DESC)a) WHERE rnum >=? AND rnum <=?";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(++cnt, start);
