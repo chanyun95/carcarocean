@@ -33,12 +33,7 @@
 				<span class="fw-bold" id="partner"></span>님과의 채팅
 			</div>
 			<div>
-				<c:if test="${!empty user.mem_photo}">
-					<img class="rounded-circle" width="60px;" height="60px" src="${pageContext.request.contextPath}/upload/${user.mem_photo}">
-				</c:if>
-				<c:if test="${empty user.mem_photo}">
-					<img class="rounded-circle" width="60px;" height="60px" src="${pageContext.request.contextPath}/images/face.png">
-				</c:if>
+				<img class="rounded-circle" width="60px;" height="60px" src="${pageContext.request.contextPath}/upload/${user.mem_photo}">
 			</div>
 		</div>
 		<hr>
