@@ -24,7 +24,8 @@ public class DeleteAction implements Action{
 		BoardDao dao = BoardDao.getDao();
 		BoardVo db_board = dao.getBoard(board_num);
 		
-		if(user_num != db_board.getMem_num()) {
+		
+		if(user_num != db_board.getMem_num() || user_auth!=9) {
 			request.setAttribute("notice_msg", "잘못된 접근입니다.");
 			request.setAttribute("notice_url", request.getContextPath() + "/main/main.do");
 			
