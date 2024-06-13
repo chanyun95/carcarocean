@@ -13,7 +13,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<h2 class="pt-5 pb-3">판매후기게시판 목록</h2>
-		<div class="d-flex justify-content-center rounded bg-light p-5">
+		<div class="d-flex justify-content-center rounded bg-light p-2">
 			<form id="search_form" action="list.do" method="get" class="d-flex justify-content-center">
 			<div class="d-flex align-items-center ms-4 mt-5 mb-5">
 				<select name="keyfield" class="form-select me-1" style="width:auto;">
