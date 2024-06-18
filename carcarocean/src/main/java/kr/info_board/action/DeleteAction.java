@@ -16,9 +16,6 @@ public class DeleteAction implements Action{
 		HttpSession session = request.getSession();
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		Integer user_auth = (Integer)session.getAttribute("user_auth");
-		if(user_auth != 9) {
-			return "/WEB-INF/views/common/warningPage.jsp";
-		}
 		int info_board_num = Integer.parseInt(request.getParameter("info_board_num"));
 		InfoBoardDao dao = InfoBoardDao.getDao();
 		InfoBoardVo db_board = dao.getInfo(info_board_num);
