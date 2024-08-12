@@ -1,5 +1,5 @@
 # CarCarOcean
-<img src="https://github.com/chanyun95/CarCarOcean/blob/main/carcarocean/src/main/webapp/images/logo.png?raw=true" width="660px" height="210px">
+<img src="https://github.com/chanyun95/carcarocean/blob/main/carcarocean/src/main/webapp/images/logo.png?raw=true" width="450px" height="250px">
 
 # 팀원
 |      김찬윤       |          김승연         |       윤찬호         |      함종태       |          박근휘         |       구승회         |
@@ -59,7 +59,7 @@
 <br><br>
 
 ## UI 및 기능(발표 자료)
-[CarCarOcean.pdf](https://github.com/chanyun95/CarCarOcean/raw/main/CarCarOcean.pdf)
+[CarCarOcean.pdf](https://github.com/chanyun95/carcarocean/raw/main/CarCarOcean.pdf)
 
 <br><br>
 
